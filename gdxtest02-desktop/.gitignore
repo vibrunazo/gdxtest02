@@ -1,0 +1,16 @@
+# Java gitignore
+# https://github.com/github/gitignore/blob/master/Java.gitignore
+
+*.class
+
+# Package Files #
+#*.jar
+*.war
+*.ear
+
+
+
+
+# generated files
+bin/
+gen/
