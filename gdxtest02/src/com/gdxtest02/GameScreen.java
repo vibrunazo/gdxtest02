@@ -32,9 +32,13 @@ public class GameScreen implements Screen {
                 camera.setToOrtho(false, 800, 480);
                 
                 p1 = new Char("p1");
-                p2 = new Char("p2");
                 p1.setMaxhp(100);
                 p1.setTex("ball02red.png");
+                p1.setPos(50, 200);
+                
+                p2 = new Char("p2");
+                p2.setTex("ball02yell.png");
+                p2.setPos(800-50-256, 200);
 
         }
 
@@ -55,10 +59,13 @@ public class GameScreen implements Screen {
                 game.batch.setProjectionMatrix(camera.combined);
 
                 // begin a new batch and draw the bucket and
-                // all drops
+                // all drops;
                 game.batch.begin();
                 game.font.draw(game.batch, "Test", 0, 480);
-                game.batch.draw(p1.getTex(), 50, 50);
+//                game.batch.draw(p1.getTex(), p1.getPosX(), p1.getPosY());
+//                game.batch.draw(p1.getTex(), p1.getPosX(), p1.getPosY());
+                p1.draw(game.batch);
+                p2.draw(game.batch);
                 game.batch.end();
 
         }

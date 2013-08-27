@@ -2,6 +2,7 @@ package com.gdxtest02;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Char {
@@ -11,17 +12,36 @@ public class Char {
 	private Rectangle box;
 	private Texture tex;
 	private String texname;
+	private int x, y;
 
 	public Char(String name) {
 		this.name = name;
+		this.x = 0;
+		this.y = 0;
 	}
-
+	
+	public void draw(SpriteBatch batch){
+		batch.draw(tex, x, y);
+	}
+	
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public int getPosX() {
+		return x;
+	}
+	public int getPosY() {
+		return y;
+	}
+	
+	public void setPos(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	public int getHp() {
