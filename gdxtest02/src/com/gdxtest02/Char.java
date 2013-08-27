@@ -14,22 +14,40 @@ public class Char {
 	private Rectangle box;
 	private Texture tex;
 	private String texname;
-	private int x, y;
+	private int posX, posY;
 
 	public Char(String name) {
 		this.name = name;
-		this.x = 0;
-		this.y = 0;
+		this.posX = 0;
+		this.posY = 0;
+		this.maxhp = 1000;
+		this.hp = maxhp;
 	}
 	
 	public void draw(SpriteBatch batch){
-		batch.draw(tex, x, y);
+		batch.draw(tex, posX, posY);
 
 	}
 	
+	/**Draw shapes, such as health bars
+	 * @param shapeRenderer
+	 */
 	public void drawShapes(ShapeRenderer shapeRenderer) {
-		shapeRenderer.setColor(1, 1, 0, 1);
-		shapeRenderer.rect(x + 256/2 - 100, y + 256 + 10, 200, 10);
+		int x = posX + 256/2 - 100; // bar start x position
+		int y = posY + 256 + 10; // bar start y position
+		int width = 200; // bar width
+		int height = 10; // bar height
+		// health normalized between 0 and 1
+		float health = (float)hp / (float)maxhp;
+		
+		shapeRenderer.setColor(0.1f, 0.1f, 0f, 1);
+		shapeRenderer.rect(x, y, width, height);
+		
+		shapeRenderer.setColor(1f, 1f * health, 0, 1);
+		shapeRenderer.rect(x, y, width * health, height);
+		
+//		Gdx.app.log("moo", "char: " + name + " hp: " + hp + " maxhp: " + maxhp
+//				+ " health: " + health);
 		
 	}
 	
@@ -46,15 +64,15 @@ public class Char {
 	}
 	
 	public int getPosX() {
-		return x;
+		return posX;
 	}
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 	
 	public void setPos(int x, int y) {
-		this.x = x;
-		this.y = y;
+		this.posX = x;
+		this.posY = y;
 	}
 
 	public int getHp() {
@@ -64,6 +82,26 @@ public class Char {
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
+	
+	/**Incremeants hp by 'delta', returns final hp after change
+	 * @param inc how much to change
+	 * @return
+	 */
+	public int incHp(int delta) {
+		if (delta < 0) {
+			if (-delta < hp) {
+				return hp += delta;
+			}
+			return hp = 0;
+		}
+		else if (delta > 0) {
+			hp += delta;
+			if (hp > maxhp) {
+				return hp = maxhp;
+			}
+		}
+		return hp;
+	}
 
 	public int getMaxhp() {
 		return maxhp;
@@ -71,6 +109,10 @@ public class Char {
 
 	public void setMaxhp(int maxhp) {
 		this.maxhp = maxhp;
+		// hp cannot be more than maxhp, fix that
+		if (hp < maxhp) {
+			hp = maxhp;
+		}
 	}
 
 	public Texture getTex() {

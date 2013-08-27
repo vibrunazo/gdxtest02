@@ -19,93 +19,98 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen implements Screen {
-        final GdxTest02 game;
+	final GdxTest02 game;
 
-        OrthographicCamera camera;
-        ShapeRenderer shapeRenderer;
-        
-        Char p1;
-        Char p2;
+	OrthographicCamera camera;
+	ShapeRenderer shapeRenderer;
 
-        public GameScreen(final GdxTest02 gam) {
-                this.game = gam;
+	Char p1;
+	Char p2;
 
-                // create the camera and the SpriteBatch
-                camera = new OrthographicCamera();
-                camera.setToOrtho(false, 800, 480);
-                
-                shapeRenderer = new ShapeRenderer();
-        		shapeRenderer.setProjectionMatrix(camera.combined);
-                
-                p1 = new Char("p1");
-                p1.setMaxhp(100);
-                p1.setTex("ball02red.png");
-                p1.setPos(50, 150);
-                
-                p2 = new Char("p2");
-                p2.setTex("ball02yell.png");
-                p2.setPos(800-50-256, 150);
+	public GameScreen(final GdxTest02 gam) {
+		this.game = gam;
 
-        }
+		// create the camera and the SpriteBatch
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, 800, 480);
 
-        @Override
-        public void render(float delta) {
-                // clear the screen with a dark blue color. The
-                // arguments to glClearColor are the red, green
-                // blue and alpha component in the range [0,1]
-                // of the color to be used to clear the screen.
-                Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-                Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		shapeRenderer = new ShapeRenderer();
+		shapeRenderer.setProjectionMatrix(camera.combined);
 
-                // tell the camera to update its matrices.
-                camera.update();
+		p1 = new Char("p1");
+		p1.setTex("ball02red.png");
+		p1.setPos(50, 150);
 
-                // tell the SpriteBatch to render in the
-                // coordinate system specified by the camera.
-                game.batch.setProjectionMatrix(camera.combined);
+		p2 = new Char("p2");
+		p2.setTex("ball02yell.png");
+		p2.setPos(800-50-256, 150);
 
-                game.batch.begin();
-                game.font.draw(game.batch, "Test", 0, 480);
-                
-                // tell chars to draw themselves
-                p1.draw(game.batch);
-                p2.draw(game.batch);
-                
-                game.batch.end();
-                
-                // tell chars to draw their shapes (health bars)
-                shapeRenderer.begin(ShapeType.Filled);
-                p1.drawShapes(shapeRenderer);
-                p2.drawShapes(shapeRenderer);
-                shapeRenderer.end();
-                
+	}
 
-        }
+	@Override
+	public void render(float delta) {
+		updateLogic();
 
-        @Override
-        public void resize(int width, int height) {
-        }
+		// clear the screen with a dark blue color. The
+		// arguments to glClearColor are the red, green
+		// blue and alpha component in the range [0,1]
+		// of the color to be used to clear the screen.
+		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-        @Override
-        public void show() {
-        }
+		// tell the camera to update its matrices.
+		camera.update();
 
-        @Override
-        public void hide() {
-        }
+		// tell the SpriteBatch to render in the
+		// coordinate system specified by the camera.
+		game.batch.setProjectionMatrix(camera.combined);
 
-        @Override
-        public void pause() {
-        }
+		game.batch.begin();
+		game.font.draw(game.batch, "Test", 0, 480);
 
-        @Override
-        public void resume() {
-        }
+		// tell chars to draw themselves
+		p1.draw(game.batch);
+		p2.draw(game.batch);
 
-        @Override
-        public void dispose() {
-        	p1.dispose();
-        	p2.dispose();
-        }
+		game.batch.end();
+
+		// tell chars to draw their shapes (health bars)
+		shapeRenderer.begin(ShapeType.Filled);
+		p1.drawShapes(shapeRenderer);
+		p2.drawShapes(shapeRenderer);
+		shapeRenderer.end();
+
+
+	}
+
+	private void updateLogic() {
+		p1.incHp(-1);
+	}
+
+	@Override
+	public void resize(int width, int height) {
+	}
+
+	@Override
+	public void show() {
+	}
+
+	@Override
+	public void hide() {
+	}
+
+	@Override
+	public void pause() {
+	}
+
+	@Override
+	public void resume() {
+	}
+
+	@Override
+	public void dispose() {
+		p1.dispose();
+		p2.dispose();
+	}
 
 }
