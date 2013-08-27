@@ -20,6 +20,9 @@ public class GameScreen implements Screen {
         final GdxTest02 game;
 
         OrthographicCamera camera;
+        
+        Char p1;
+        Char p2;
 
         public GameScreen(final GdxTest02 gam) {
                 this.game = gam;
@@ -27,7 +30,11 @@ public class GameScreen implements Screen {
                 // create the camera and the SpriteBatch
                 camera = new OrthographicCamera();
                 camera.setToOrtho(false, 800, 480);
-
+                
+                p1 = new Char("p1");
+                p2 = new Char("p2");
+                p1.setMaxhp(100);
+                p1.setTex("ball02red.png");
 
         }
 
@@ -51,6 +58,7 @@ public class GameScreen implements Screen {
                 // all drops
                 game.batch.begin();
                 game.font.draw(game.batch, "Test", 0, 480);
+                game.batch.draw(p1.getTex(), 50, 50);
                 game.batch.end();
 
         }
