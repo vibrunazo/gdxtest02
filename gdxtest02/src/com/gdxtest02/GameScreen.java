@@ -10,6 +10,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -20,6 +22,7 @@ public class GameScreen implements Screen {
         final GdxTest02 game;
 
         OrthographicCamera camera;
+        ShapeRenderer shapeRenderer;
         
         Char p1;
         Char p2;
@@ -31,14 +34,17 @@ public class GameScreen implements Screen {
                 camera = new OrthographicCamera();
                 camera.setToOrtho(false, 800, 480);
                 
+                shapeRenderer = new ShapeRenderer();
+        		shapeRenderer.setProjectionMatrix(camera.combined);
+                
                 p1 = new Char("p1");
                 p1.setMaxhp(100);
                 p1.setTex("ball02red.png");
-                p1.setPos(50, 200);
+                p1.setPos(50, 150);
                 
                 p2 = new Char("p2");
                 p2.setTex("ball02yell.png");
-                p2.setPos(800-50-256, 200);
+                p2.setPos(800-50-256, 150);
 
         }
 
@@ -58,15 +64,21 @@ public class GameScreen implements Screen {
                 // coordinate system specified by the camera.
                 game.batch.setProjectionMatrix(camera.combined);
 
-                // begin a new batch and draw the bucket and
-                // all drops;
                 game.batch.begin();
                 game.font.draw(game.batch, "Test", 0, 480);
-//                game.batch.draw(p1.getTex(), p1.getPosX(), p1.getPosY());
-//                game.batch.draw(p1.getTex(), p1.getPosX(), p1.getPosY());
+                
+                // tell chars to draw themselves
                 p1.draw(game.batch);
                 p2.draw(game.batch);
+                
                 game.batch.end();
+                
+                // tell chars to draw their shapes (health bars)
+                shapeRenderer.begin(ShapeType.Filled);
+                p1.drawShapes(shapeRenderer);
+                p2.drawShapes(shapeRenderer);
+                shapeRenderer.end();
+                
 
         }
 
@@ -92,6 +104,8 @@ public class GameScreen implements Screen {
 
         @Override
         public void dispose() {
+        	p1.dispose();
+        	p2.dispose();
         }
 
 }

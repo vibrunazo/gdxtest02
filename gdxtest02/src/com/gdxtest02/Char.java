@@ -3,6 +3,8 @@ package com.gdxtest02;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Char {
@@ -22,6 +24,17 @@ public class Char {
 	
 	public void draw(SpriteBatch batch){
 		batch.draw(tex, x, y);
+
+	}
+	
+	public void drawShapes(ShapeRenderer shapeRenderer) {
+		shapeRenderer.setColor(1, 1, 0, 1);
+		shapeRenderer.rect(x + 256/2 - 100, y + 256 + 10, 200, 10);
+		
+	}
+	
+	public void dispose() {
+		tex.dispose();
 	}
 	
 	public String getName() {
