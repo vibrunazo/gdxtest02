@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,6 +21,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen implements Screen {
 	final GdxTest02 game;
+	
+	FPSLogger fps;
 
 	OrthographicCamera camera;
 	ShapeRenderer shapeRenderer;
@@ -30,6 +33,8 @@ public class GameScreen implements Screen {
 	public GameScreen(final GdxTest02 gam) {
 		this.game = gam;
 
+		fps = new FPSLogger();
+		
 		// create the camera and the SpriteBatch
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
@@ -80,6 +85,7 @@ public class GameScreen implements Screen {
 		p2.drawShapes(shapeRenderer);
 		shapeRenderer.end();
 
+		fps.log();
 
 	}
 
