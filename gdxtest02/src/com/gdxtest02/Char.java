@@ -15,6 +15,10 @@ public class Char {
 	private Texture tex;
 	private String texname;
 	private int posX, posY;
+	/**Number of the current active action
+	 * 
+	 */
+	private int activeAction;
 
 	public Char(String name) {
 		this.name = name;
@@ -22,6 +26,7 @@ public class Char {
 		this.posY = 0;
 		this.maxhp = 1000;
 		this.hp = maxhp;
+		this.activeAction = 0;
 	}
 	
 	public void draw(SpriteBatch batch){
@@ -121,6 +126,14 @@ public class Char {
 
 	public void setTex(String tex) {
 		this.tex = new Texture(Gdx.files.internal(tex));
+	}
+
+	public int getActiveAction() {
+		return activeAction;
+	}
+
+	public void setActiveAction(int activeAction) {
+		this.activeAction = activeAction;
 	}
 
 }

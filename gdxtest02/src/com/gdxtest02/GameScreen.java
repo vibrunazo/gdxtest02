@@ -18,13 +18,17 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.IntMap;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen implements Screen {
@@ -77,19 +81,62 @@ public class GameScreen implements Screen {
 		stage.addActor(table);
 
 		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
-		final TextButton button = new TextButton("Go!", skin);
-		table.add(button);
+		final TextButton gobutton = new TextButton("Go!", skin);
+		table.add(gobutton);
 
-		// Add a listener to the button. ChangeListener is fired when the button's checked state changes, eg when clicked,
-		// Button#setChecked() is called, via a key press, etc. If the event.cancel() is called, the checked state will be reverted.
-		// ClickListener could have been used, but would only fire when clicked. Also, canceling a ClickListener event won't
-		// revert the checked state.
-		ChangeListener l = new ChangeListener() {
-			public void changed (ChangeEvent event, Actor actor) {
-				Gdx.app.log("gdxtest", "le click w " + actor.getWidth());
+		Array<TextButton> buttons1 = new Array<TextButton>(); // group of buttons for p1
+		Array<TextButton> buttons2 = new Array<TextButton>(); // group of buttons for p2
+		final IntMap<Array<TextButton>> buttonGroups = new IntMap<Array<TextButton>>(); // map with both group of buttons to choose from
+		final TextButton buttonp11 = new TextButton("1", skin);
+		final TextButton buttonp12 = new TextButton("2", skin);
+		final TextButton buttonp21 = new TextButton("1", skin);
+		final TextButton buttonp22 = new TextButton("2", skin);
+		buttons1.add(buttonp11); buttons1.add(buttonp12);
+		buttons2.add(buttonp21); buttons2.add(buttonp22);
+		buttonGroups.put(1, buttons1);
+		buttonGroups.put(2, buttons2);
+		
+		// What to do when the Go button was clicked
+		ClickListener clickOnGoButton = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				Actor actor = event.getTarget(); // the label that was clicked
+				actor = actor.getParent(); // the button holding that label
+				
+				Gdx.app.log("gdxtest", "click actor: " + actor.toString());
+				int actionp1 = p1.getActiveAction();
+				int actionp2 = p2.getActiveAction();
+				Gdx.app.log("gdxtest", "p1 uses: " + actionp1 +
+						", p2 uses: " + actionp2 + ". Fight!");
+				
 			}
 		};
-		button.addListener(l);
+		
+		// what to do when the Action button was clicked
+		ClickListener clickOnActionButton = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				Actor actor = event.getTarget(); // the label that was clicked
+				actor = actor.getParent(); // the button holding that label
+				
+				Gdx.app.log("gdxtest", "click actor: " + actor.toString());
+				int groupnumber = Integer.parseInt(actor.getName().substring(1, 2)); // number of the group
+				Gdx.app.log("gdxtest", "le click group: " + groupnumber);
+				
+				for (TextButton b : buttonGroups.get(groupnumber)) { // for all buttons in this group
+					Gdx.app.log("gdxtest", "looping on button: " + b.getName());
+					b.setChecked(false); // uncheck all buttons on this group
+				}
+				((TextButton)actor).setChecked(true); // set this that was just clicked as checked
+				
+				// number of the action
+				int activeAction = Integer.parseInt(actor.getName().substring(2));
+				// set the action number for the appropriate player
+				if (groupnumber == 1) { // it's p1
+					p1.setActiveAction(activeAction);
+				}
+				else p2.setActiveAction(activeAction); 
+			}
+		};
+		gobutton.addListener(clickOnGoButton);
 
 		Table tablep1 = new Table();
 		tablep1.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
@@ -97,12 +144,15 @@ public class GameScreen implements Screen {
 		tablep1.setPosition(50, 50);
 		
 		stage.addActor(tablep1);
-		final TextButton button1 = new TextButton("1", skin);
-		tablep1.add(button1).width(80);
+		
+		tablep1.add(buttonp11).width(80);
+		buttonp11.setName("p11");
+		buttonp11.addListener(clickOnActionButton);
 		tablep1.row();
-		final TextButton button2 = new TextButton("2", skin);
-		tablep1.add(button2).width(80);
-		button2.addListener(l);
+		
+		tablep1.add(buttonp12).width(80);
+		buttonp12.setName("p12");
+		buttonp12.addListener(clickOnActionButton);
 		
 		Table tablep2 = new Table();
 		tablep2.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
@@ -110,14 +160,15 @@ public class GameScreen implements Screen {
 		tablep2.setPosition(480 - 150, 50);
 		
 		stage.addActor(tablep2);
-		final TextButton buttonp21 = new TextButton("1", skin);
-		tablep2.add(buttonp21).width(80);
-		tablep2.row();
-		final TextButton buttonp22 = new TextButton("2", skin);
-		tablep2.add(buttonp22).width(80);
-		buttonp22.addListener(l);
 		
-		Gdx.app.log("gdxtest", "w " + button2.getWidth());
+		tablep2.add(buttonp21).width(80);
+		buttonp21.setName("p21");
+		buttonp21.addListener(clickOnActionButton);
+		tablep2.row();
+		tablep2.add(buttonp22).width(80);
+		buttonp22.setName("p22");
+		buttonp22.addListener(clickOnActionButton);
+		
 	}
 
 	@Override
@@ -155,7 +206,7 @@ public class GameScreen implements Screen {
 
 		ui.draw();
 
-		fps.log();
+//		fps.log();
 
 	}
 
