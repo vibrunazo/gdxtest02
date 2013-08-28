@@ -16,6 +16,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -29,6 +36,8 @@ public class GameScreen implements Screen {
 
 	Char p1;
 	Char p2;
+
+	private UIBuilder ui;
 
 	public GameScreen(final GdxTest02 gam) {
 		this.game = gam;
@@ -50,6 +59,39 @@ public class GameScreen implements Screen {
 		p2.setTex("ball02yell.png");
 		p2.setPos(800-50-256, 150);
 
+		setupUi();
+	}
+	
+	private void setupUi() {
+		ui = new UIBuilder(game);
+		Stage stage = ui.getStage();
+		Skin skin = ui.getSkin();
+		
+		// Create a table that fills the screen. Everything else will go inside this table.
+		Table table = new Table();
+		table.setFillParent(true);
+		//				table.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
+		//				table.setSize(260, 195);
+		//				table.setPosition(190, 142);
+		stage.addActor(table);
+
+		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
+		final TextButton button = new TextButton("Click me!", skin);
+		table.add(button);
+
+		// Add a listener to the button. ChangeListener is fired when the button's checked state changes, eg when clicked,
+		// Button#setChecked() is called, via a key press, etc. If the event.cancel() is called, the checked state will be reverted.
+		// ClickListener could have been used, but would only fire when clicked. Also, canceling a ClickListener event won't
+		// revert the checked state.
+		ChangeListener l = new ChangeListener() {
+			public void changed (ChangeEvent event, Actor actor) {
+				System.out.println("Clicked! Is checked: " + button.isChecked());
+				button.setText("Good job!");
+				game.setScreen(new GameScreen(game));
+				dispose();
+			}
+		};
+		button.addListener(l);
 	}
 
 	@Override
@@ -84,7 +126,9 @@ public class GameScreen implements Screen {
 		p1.drawShapes(shapeRenderer);
 		p2.drawShapes(shapeRenderer);
 		shapeRenderer.end();
-
+		
+		ui.draw();
+		
 		fps.log();
 
 	}
