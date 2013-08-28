@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -28,7 +29,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen implements Screen {
 	final GdxTest02 game;
-	
+
 	FPSLogger fps;
 
 	OrthographicCamera camera;
@@ -43,7 +44,7 @@ public class GameScreen implements Screen {
 		this.game = gam;
 
 		fps = new FPSLogger();
-		
+
 		// create the camera and the SpriteBatch
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
@@ -61,12 +62,12 @@ public class GameScreen implements Screen {
 
 		setupUi();
 	}
-	
+
 	private void setupUi() {
 		ui = new UIBuilder(game);
 		Stage stage = ui.getStage();
 		Skin skin = ui.getSkin();
-		
+
 		// Create a table that fills the screen. Everything else will go inside this table.
 		Table table = new Table();
 		table.setFillParent(true);
@@ -76,7 +77,7 @@ public class GameScreen implements Screen {
 		stage.addActor(table);
 
 		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
-		final TextButton button = new TextButton("Click me!", skin);
+		final TextButton button = new TextButton("Go!", skin);
 		table.add(button);
 
 		// Add a listener to the button. ChangeListener is fired when the button's checked state changes, eg when clicked,
@@ -85,13 +86,38 @@ public class GameScreen implements Screen {
 		// revert the checked state.
 		ChangeListener l = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				System.out.println("Clicked! Is checked: " + button.isChecked());
-				button.setText("Good job!");
-				game.setScreen(new GameScreen(game));
-				dispose();
+				Gdx.app.log("gdxtest", "le click w " + actor.getWidth());
 			}
 		};
 		button.addListener(l);
+
+		Table tablep1 = new Table();
+		tablep1.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
+		tablep1.setSize(100, 100);
+		tablep1.setPosition(50, 50);
+		
+		stage.addActor(tablep1);
+		final TextButton button1 = new TextButton("1", skin);
+		tablep1.add(button1).width(80);
+		tablep1.row();
+		final TextButton button2 = new TextButton("2", skin);
+		tablep1.add(button2).width(80);
+		button2.addListener(l);
+		
+		Table tablep2 = new Table();
+		tablep2.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
+		tablep2.setSize(100, 100);
+		tablep2.setPosition(480 - 150, 50);
+		
+		stage.addActor(tablep2);
+		final TextButton buttonp21 = new TextButton("1", skin);
+		tablep2.add(buttonp21).width(80);
+		tablep2.row();
+		final TextButton buttonp22 = new TextButton("2", skin);
+		tablep2.add(buttonp22).width(80);
+		buttonp22.addListener(l);
+		
+		Gdx.app.log("gdxtest", "w " + button2.getWidth());
 	}
 
 	@Override
@@ -126,9 +152,9 @@ public class GameScreen implements Screen {
 		p1.drawShapes(shapeRenderer);
 		p2.drawShapes(shapeRenderer);
 		shapeRenderer.end();
-		
+
 		ui.draw();
-		
+
 		fps.log();
 
 	}
