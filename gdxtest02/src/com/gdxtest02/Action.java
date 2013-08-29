@@ -1,26 +1,15 @@
 package com.gdxtest02;
 
-public class Action {
-	private String type;
-	
-	public Action() {
-		this.type = "dmg";
-	}
+public interface Action {
 	
 	/**Do whatever is it that you do
 	 * @param self yourself, the char doing the action
 	 * @param target your target
 	 */
-	public void act(Char self, Char target) {
-		target.incHp(-10);
-	}
+	public void act(Char self, Char target);
 	
-	public String getType() {
-		return type;
-	}
+	public String getType();
 	
-	public void setType(String type) {
-		this.type = type;
-	}
+	public void setType(String type);
 
 }

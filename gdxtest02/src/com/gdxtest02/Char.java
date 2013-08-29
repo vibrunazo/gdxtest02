@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.gdxtest02.actions.Dmg;
 
 public class Char {
 	private String name;
@@ -30,8 +31,8 @@ public class Char {
 		this.hp = maxhp;
 		this.activeAction = 0;
 		actions = new Array<Action>();
-		actions.add(new Action());
-		actions.add(new Action());
+		actions.add(new Dmg(100));
+		actions.add(new Dmg());
 	}
 	
 	public void draw(SpriteBatch batch){
@@ -64,7 +65,8 @@ public class Char {
 	 * @param id
 	 */
 	public Action getAction(int id) {
-		return actions.get(0);
+		if (id < 1) return null;
+		return actions.get(id - 1);
 	}
 	
 	public void dispose() {

@@ -32,16 +32,21 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen implements Screen {
-	final GdxTest02 game;
+	final private GdxTest02 game;
 
-	FPSLogger fps;
+	private FPSLogger fps;
 
-	OrthographicCamera camera;
-	ShapeRenderer shapeRenderer;
+	private OrthographicCamera camera;
+	private ShapeRenderer shapeRenderer;
 
-	Char p1;
-	Char p2;
-
+	private Char p1;
+	private Char p2;
+	
+	/**fightstate, is the game paused or running?
+	 * "go" = fight can go on
+	 * "paused" = fight is paused
+	 */
+	private String fightstate; 
 	private UIBuilder ui;
 
 	public GameScreen(final GdxTest02 gam) {
@@ -65,6 +70,8 @@ public class GameScreen implements Screen {
 		p2.setPos(800-50-256, 150);
 
 		setupUi();
+		
+		fightstate = "go";
 	}
 
 	private void setupUi() {
@@ -101,7 +108,7 @@ public class GameScreen implements Screen {
 			public void clicked(InputEvent event, float x, float y)  {
 				Actor actor = event.getTarget(); // the label that was clicked
 				actor = actor.getParent(); // the button holding that label
-				Gdx.app.log("gdxtest", "click actor: " + actor.toString());
+//				Gdx.app.log("gdxtest", "click actor: " + actor.toString());
 
 				go();
 				
@@ -114,9 +121,9 @@ public class GameScreen implements Screen {
 				Actor actor = event.getTarget(); // the label that was clicked
 				actor = actor.getParent(); // the button holding that label
 				
-				Gdx.app.log("gdxtest", "click actor: " + actor.toString());
+//				Gdx.app.log("gdxtest", "click actor: " + actor.toString());
 				int groupnumber = Integer.parseInt(actor.getName().substring(1, 2)); // number of the group
-				Gdx.app.log("gdxtest", "le click group: " + groupnumber);
+//				Gdx.app.log("gdxtest", "le click group: " + groupnumber);
 				
 				for (TextButton b : buttonGroups.get(groupnumber)) { // for all buttons in this group
 					Gdx.app.log("gdxtest", "looping on button: " + b.getName());
@@ -216,15 +223,41 @@ public class GameScreen implements Screen {
 	 * 
 	 */
 	private void go() {
+		if (fightstate.equals("paused")) return;
+		
 		int actionidp1 = p1.getActiveActionId();
 		int actionidp2 = p2.getActiveActionId();
-		Gdx.app.log("gdxtest", "p1 uses: " + actionidp1 +
+		log("p1 uses: " + actionidp1 +
 				", p2 uses: " + actionidp2 + ". Fight!");
 		Action actionp1 = p1.getActiveAction();
 		Action actionp2 = p2.getActiveAction();
-		actionp1.act(p1, p2);
-		actionp2.act(p2, p1);
+		if (actionp1 != null) actionp1.act(p1, p2);
+		if (actionp2 != null) actionp2.act(p2, p1);
 		
+		if (p1.getHp() == 0 || p2.getHp() == 0) {
+			fightstate = "paused";
+			Char winner = null;
+			if (p1.getHp() == 0) {
+				if (p2.getHp() > 0) {
+					winner = p2;
+				}
+			}
+			if (p2.getHp() == 0) {
+				if (p1.getHp() > 0) {
+					winner = p1;
+				}
+			}
+			if (winner == null) log("Fight over. Draw!");
+			else log("Fight over. " + winner.getName() + " wins.");
+		}
+		
+	}
+	
+	/**Logs text to Gdx.app.log()
+	 * @param text
+	 */
+	private void log(String text) {
+		Gdx.app.log("gdxtest", text);
 	}
 	
 	@Override
