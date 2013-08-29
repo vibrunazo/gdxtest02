@@ -27,6 +27,12 @@ public class Char {
 	 */
 	private int activeAction;
 	private Array<Action> actions;
+	private Array<Buff> buffs;
+	/**List of buffs to be added this round, 
+	 * these will be moved to the main buffs list at the end of the round
+	 * so they don't make effect when first applied, only 1 round later
+	 */
+	private Array<Buff> newbuffs;
 
 	public Char(String name) {
 		this.name = name;
@@ -36,9 +42,11 @@ public class Char {
 		this.hp = maxhp;
 		this.activeAction = 0;
 		actions = new Array<Action>();
-		actions.add(new Dmg(100));
-		actions.add(new Dmg());
+		actions.add(new Dmg(50));
+		actions.add(new Dmg(200));
 		dmg = 0;
+		buffs = new Array<Buff>();
+		newbuffs = new Array<Buff>();
 	}
 	
 	public void draw(SpriteBatch batch){
@@ -84,6 +92,30 @@ public class Char {
 		actions.set(id - 1, action);
 	}
 	
+	/**Add buff to new buff list
+	 * @param buff
+	 */
+	public void addBuff(Buff buff) {
+		newbuffs.add(buff);
+	}
+	
+	/**Buffs do whatever they do when this is called.
+	 * Should be called by the game when it's time for buffs to take effect
+	 * such as, every turn
+	 */
+	public void applyBuffs() {
+		// loop through all buffs and make their do their thing
+		for (Buff buff : buffs) {
+			buff.act(this);
+			buff.incDuration(-1);
+			if (buff.getDuration() == 0) buffs.removeValue(buff, true);
+		}
+		
+		// move new buffs to main buffs list
+		buffs.addAll(newbuffs);
+		newbuffs.clear();
+	}
+	
 	public void dispose() {
 		tex.dispose();
 	}
@@ -112,7 +144,13 @@ public class Char {
 		return hp;
 	}
 
-	public void setHp(int hp) {
+	/**Set how much Hit Points I have
+	 * Private so others use incHp instead
+	 * Because settings the HP directly, without using dmg per round,
+	 * could desync the players
+	 * @param hp
+	 */
+	private void setHp(int hp) {
 		this.hp = hp;
 	}
 	

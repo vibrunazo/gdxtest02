@@ -8,7 +8,7 @@ public class Dmg implements Action {
 	private int power;
 
 	public Dmg() {
-		power = 200;
+		power = 100;
 	}
 
 	public Dmg(int value) {

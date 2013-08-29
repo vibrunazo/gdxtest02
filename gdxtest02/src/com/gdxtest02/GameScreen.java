@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gdxtest02.actions.Heal;
+import com.gdxtest02.actions.PutDot;
 
 public class GameScreen implements Screen {
 	final private GdxTest02 game;
@@ -69,7 +70,7 @@ public class GameScreen implements Screen {
 		p2 = new Char("p2");
 		p2.setTex("ball02yell.png");
 		p2.setPos(800-50-256, 150);
-		p2.setAction(2, new Heal(200));
+		p2.setAction(2, new PutDot(100, 5));
 
 		setupUi();
 
@@ -246,6 +247,7 @@ public class GameScreen implements Screen {
 		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
 		if (actionp1 != null) actionp1.act(p1, p2);
 		if (actionp2 != null) actionp2.act(p2, p1);
+		p1.applyBuffs(); p2.applyBuffs(); 
 		// actually applies the damage done this round by all players
 		p1.applyDmg(); p2.applyDmg();
 
