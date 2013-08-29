@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
 
 public class Char {
 	private String name;
@@ -19,6 +20,7 @@ public class Char {
 	 * 
 	 */
 	private int activeAction;
+	private Array<Action> actions;
 
 	public Char(String name) {
 		this.name = name;
@@ -27,11 +29,13 @@ public class Char {
 		this.maxhp = 1000;
 		this.hp = maxhp;
 		this.activeAction = 0;
+		actions = new Array<Action>();
+		actions.add(new Action());
+		actions.add(new Action());
 	}
 	
 	public void draw(SpriteBatch batch){
 		batch.draw(tex, posX, posY);
-
 	}
 	
 	/**Draw shapes, such as health bars
@@ -54,6 +58,13 @@ public class Char {
 //		Gdx.app.log("moo", "char: " + name + " hp: " + hp + " maxhp: " + maxhp
 //				+ " health: " + health);
 		
+	}
+	
+	/**Get the action of specific id, starting from 1
+	 * @param id
+	 */
+	public Action getAction(int id) {
+		return actions.get(0);
 	}
 	
 	public void dispose() {
@@ -128,7 +139,11 @@ public class Char {
 		this.tex = new Texture(Gdx.files.internal(tex));
 	}
 
-	public int getActiveAction() {
+	public Action getActiveAction() {
+		return getAction(getActiveActionId());
+	}
+	
+	public int getActiveActionId() {
 		return activeAction;
 	}
 

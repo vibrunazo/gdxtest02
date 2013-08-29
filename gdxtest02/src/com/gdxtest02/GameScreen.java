@@ -101,12 +101,9 @@ public class GameScreen implements Screen {
 			public void clicked(InputEvent event, float x, float y)  {
 				Actor actor = event.getTarget(); // the label that was clicked
 				actor = actor.getParent(); // the button holding that label
-				
 				Gdx.app.log("gdxtest", "click actor: " + actor.toString());
-				int actionp1 = p1.getActiveAction();
-				int actionp2 = p2.getActiveAction();
-				Gdx.app.log("gdxtest", "p1 uses: " + actionp1 +
-						", p2 uses: " + actionp2 + ". Fight!");
+
+				go();
 				
 			}
 		};
@@ -211,9 +208,25 @@ public class GameScreen implements Screen {
 	}
 
 	private void updateLogic() {
-		p1.incHp(-1);
+//		p1.incHp(-1);
 	}
 
+
+	/**calculate damages
+	 * 
+	 */
+	private void go() {
+		int actionidp1 = p1.getActiveActionId();
+		int actionidp2 = p2.getActiveActionId();
+		Gdx.app.log("gdxtest", "p1 uses: " + actionidp1 +
+				", p2 uses: " + actionidp2 + ". Fight!");
+		Action actionp1 = p1.getActiveAction();
+		Action actionp2 = p2.getActiveAction();
+		actionp1.act(p1, p2);
+		actionp2.act(p2, p1);
+		
+	}
+	
 	@Override
 	public void resize(int width, int height) {
 	}
@@ -239,5 +252,6 @@ public class GameScreen implements Screen {
 		p1.dispose();
 		p2.dispose();
 	}
+
 
 }
