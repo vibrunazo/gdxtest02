@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.gdxtest02.actions.Heal;
 
 public class GameScreen implements Screen {
 	final private GdxTest02 game;
@@ -68,6 +69,7 @@ public class GameScreen implements Screen {
 		p2 = new Char("p2");
 		p2.setTex("ball02yell.png");
 		p2.setPos(800-50-256, 150);
+		p2.setAction(2, new Heal(200));
 
 		setupUi();
 		

@@ -69,6 +69,15 @@ public class Char {
 		return actions.get(id - 1);
 	}
 	
+	/**Set the action of this id, starting from 1
+	 * @param id
+	 * @return
+	 */
+	public void setAction(int id, Action action) {
+		if (id < 1) return;
+		actions.set(id - 1, action);
+	}
+	
 	public void dispose() {
 		tex.dispose();
 	}
