@@ -4,30 +4,35 @@ import com.gdxtest02.Action;
 import com.gdxtest02.Char;
 
 public class Heal implements Action {
-	private String type;
+	private String name;
 	private int power;
+	
+	private int DEFAULT_POWER = 100;
+	private String DEFAULT_NAME = "Direct Heal";
 
 	public Heal() {
-		power = 200;
+		power = DEFAULT_POWER;
+		name = DEFAULT_NAME;
 	}
 
 	public Heal(int value) {
 		power = value;
+		name = DEFAULT_NAME;
 	}
 	
 	@Override
 	public void act(Char self, Char target) {
-		self.incHp(power);
+		target.incHp(-power);
 	}
 
 	@Override
-	public String getType() {
-		return type;
+	public String getName() {
+		return name;
 	}
 
 	@Override
-	public void setType(String type) {
-		this.type = type;
+	public void setType(String name) {
+		this.name = name;
 		
 	}
 

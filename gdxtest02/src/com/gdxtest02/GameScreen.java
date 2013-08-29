@@ -73,7 +73,10 @@ public class GameScreen implements Screen {
 		p2.setAction(2, new PutDot(100, 5));
 
 		setupUi();
-
+		
+		logPlayerStats(p1);
+		logPlayerStats(p2);
+		
 		fightstate = "go";
 	}
 
@@ -133,7 +136,7 @@ public class GameScreen implements Screen {
 				//				Gdx.app.log("gdxtest", "le click group: " + groupnumber);
 
 				for (TextButton b : buttonGroups.get(groupnumber)) { // for all buttons in this group
-					Gdx.app.log("gdxtest", "looping on button: " + b.getName());
+//					Gdx.app.log("gdxtest", "looping on button: " + b.getName());
 					b.setChecked(false); // uncheck all buttons on this group
 				}
 				((TextButton)actor).setChecked(true); // set this that was just clicked as checked
@@ -237,13 +240,15 @@ public class GameScreen implements Screen {
 	 */
 	private void go() {
 		if (fightstate.equals("paused")) return;
-
+		
 		int actionidp1 = p1.getActiveActionId();
 		int actionidp2 = p2.getActiveActionId();
-		log("p1 uses: " + actionidp1 +
-				", p2 uses: " + actionidp2 + ". Fight!");
+		
 		Action actionp1 = p1.getActiveAction();
 		Action actionp2 = p2.getActiveAction();
+		
+		log("p1 uses: " + actionidp1 + ": " + actionp1.getName() +
+				", p2 uses: " + actionidp2 + ": " + actionp2.getName() + ". Fight!");
 		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
 		if (actionp1 != null) actionp1.act(p1, p2);
 		if (actionp2 != null) actionp2.act(p2, p1);
@@ -267,7 +272,13 @@ public class GameScreen implements Screen {
 			if (winner == null) log("Fight over. Draw!");
 			else log("Fight over. " + winner.getName() + " wins.");
 		}
+		
+		logPlayerStats(p1);
+		logPlayerStats(p2);
+	}
 
+	private void logPlayerStats(Char c) {
+		log("Player + " + c.getName() + ": " + c.getHp() + "/" + c.getMaxhp() + "hp. Buffs: " + c.printBuffs());
 	}
 
 	/**Logs text to Gdx.app.log()

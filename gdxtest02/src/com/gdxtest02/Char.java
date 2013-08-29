@@ -116,6 +116,21 @@ public class Char {
 		newbuffs.clear();
 	}
 	
+	/**Returns a string with a description of current buffs
+	 * @return
+	 */
+	public String printBuffs() {
+		String r = "(";
+		Buff b;
+		for (int i = 0; i < buffs.size; i++) {
+			b = buffs.get(i);
+			r += b.getName() + "(" + b.getDuration() + "s)";
+			if (i < buffs.size - 1) r += ", "; 
+		}
+		r += ")";
+		return r;
+	}
+	
 	public void dispose() {
 		tex.dispose();
 	}

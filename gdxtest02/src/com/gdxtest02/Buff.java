@@ -8,8 +8,8 @@ public interface Buff {
 	 */
 	public void act(Char self);
 	
-	public String getType();
-	public void setType(String type);
+	public String getName();
+	public void setName(String name);
 	
 	/**Duration is how long the buff lasts, in seconds or turns
 	 * -1 means it's infinite

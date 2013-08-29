@@ -8,8 +8,8 @@ public interface Action {
 	 */
 	public void act(Char self, Char target);
 	
-	public String getType();
+	public String getName();
 	
-	public void setType(String type);
+	public void setType(String name);
 
 }

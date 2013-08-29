@@ -4,15 +4,20 @@ import com.gdxtest02.Action;
 import com.gdxtest02.Char;
 
 public class Dmg implements Action {
-	private String type;
+	private String name;
 	private int power;
+	
+	private int DEFAULT_POWER = 100;
+	private String DEFAULT_NAME = "Direct Damage";
 
 	public Dmg() {
-		power = 100;
+		power = DEFAULT_POWER;
+		name = DEFAULT_NAME;
 	}
 
 	public Dmg(int value) {
 		power = value;
+		name = DEFAULT_NAME;
 	}
 	
 	@Override
@@ -21,13 +26,13 @@ public class Dmg implements Action {
 	}
 
 	@Override
-	public String getType() {
-		return type;
+	public String getName() {
+		return name;
 	}
 
 	@Override
-	public void setType(String type) {
-		this.type = type;
+	public void setType(String name) {
+		this.name = name;
 		
 	}
 
