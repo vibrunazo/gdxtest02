@@ -42,7 +42,7 @@ public class GameScreen implements Screen {
 
 	private Char p1;
 	private Char p2;
-	
+
 	/**fightstate, is the game paused or running?
 	 * "go" = fight can go on
 	 * "paused" = fight is paused
@@ -72,7 +72,7 @@ public class GameScreen implements Screen {
 		p2.setAction(2, new Heal(200));
 
 		setupUi();
-		
+
 		fightstate = "go";
 	}
 
@@ -91,7 +91,10 @@ public class GameScreen implements Screen {
 
 		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
 		final TextButton gobutton = new TextButton("Go!", skin);
+		final TextButton restartbutton = new TextButton("Restart", skin);
 		table.add(gobutton);
+		table.row();
+		table.add(restartbutton);
 
 		Array<TextButton> buttons1 = new Array<TextButton>(); // group of buttons for p1
 		Array<TextButton> buttons2 = new Array<TextButton>(); // group of buttons for p2
@@ -104,35 +107,36 @@ public class GameScreen implements Screen {
 		buttons2.add(buttonp21); buttons2.add(buttonp22);
 		buttonGroups.put(1, buttons1);
 		buttonGroups.put(2, buttons2);
-		
+
 		// What to do when the Go button was clicked
 		ClickListener clickOnGoButton = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
-				Actor actor = event.getTarget(); // the label that was clicked
-				actor = actor.getParent(); // the button holding that label
-//				Gdx.app.log("gdxtest", "click actor: " + actor.toString());
-
 				go();
-				
 			}
 		};
-		
+		// What to do when the Go button was clicked
+		ClickListener clickOnRestartButton = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				restart();
+			}
+		};
+
 		// what to do when the Action button was clicked
 		ClickListener clickOnActionButton = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				Actor actor = event.getTarget(); // the label that was clicked
 				actor = actor.getParent(); // the button holding that label
-				
-//				Gdx.app.log("gdxtest", "click actor: " + actor.toString());
+
+				//				Gdx.app.log("gdxtest", "click actor: " + actor.toString());
 				int groupnumber = Integer.parseInt(actor.getName().substring(1, 2)); // number of the group
-//				Gdx.app.log("gdxtest", "le click group: " + groupnumber);
-				
+				//				Gdx.app.log("gdxtest", "le click group: " + groupnumber);
+
 				for (TextButton b : buttonGroups.get(groupnumber)) { // for all buttons in this group
 					Gdx.app.log("gdxtest", "looping on button: " + b.getName());
 					b.setChecked(false); // uncheck all buttons on this group
 				}
 				((TextButton)actor).setChecked(true); // set this that was just clicked as checked
-				
+
 				// number of the action
 				int activeAction = Integer.parseInt(actor.getName().substring(2));
 				// set the action number for the appropriate player
@@ -143,30 +147,31 @@ public class GameScreen implements Screen {
 			}
 		};
 		gobutton.addListener(clickOnGoButton);
+		restartbutton.addListener(clickOnRestartButton);
 
 		Table tablep1 = new Table();
 		tablep1.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
 		tablep1.setSize(100, 100);
 		tablep1.setPosition(50, 50);
-		
+
 		stage.addActor(tablep1);
-		
+
 		tablep1.add(buttonp11).width(80);
 		buttonp11.setName("p11");
 		buttonp11.addListener(clickOnActionButton);
 		tablep1.row();
-		
+
 		tablep1.add(buttonp12).width(80);
 		buttonp12.setName("p12");
 		buttonp12.addListener(clickOnActionButton);
-		
+
 		Table tablep2 = new Table();
 		tablep2.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
 		tablep2.setSize(100, 100);
 		tablep2.setPosition(480 - 150, 50);
-		
+
 		stage.addActor(tablep2);
-		
+
 		tablep2.add(buttonp21).width(80);
 		buttonp21.setName("p21");
 		buttonp21.addListener(clickOnActionButton);
@@ -174,7 +179,12 @@ public class GameScreen implements Screen {
 		tablep2.add(buttonp22).width(80);
 		buttonp22.setName("p22");
 		buttonp22.addListener(clickOnActionButton);
-		
+
+	}
+
+	protected void restart() {
+		game.setScreen(new GameScreen(game));
+//		dispose();
 	}
 
 	@Override
@@ -212,12 +222,12 @@ public class GameScreen implements Screen {
 
 		ui.draw();
 
-//		fps.log();
+		//		fps.log();
 
 	}
 
 	private void updateLogic() {
-//		p1.incHp(-1);
+		//		p1.incHp(-1);
 	}
 
 
@@ -226,16 +236,19 @@ public class GameScreen implements Screen {
 	 */
 	private void go() {
 		if (fightstate.equals("paused")) return;
-		
+
 		int actionidp1 = p1.getActiveActionId();
 		int actionidp2 = p2.getActiveActionId();
 		log("p1 uses: " + actionidp1 +
 				", p2 uses: " + actionidp2 + ". Fight!");
 		Action actionp1 = p1.getActiveAction();
 		Action actionp2 = p2.getActiveAction();
+		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
 		if (actionp1 != null) actionp1.act(p1, p2);
 		if (actionp2 != null) actionp2.act(p2, p1);
-		
+		// actually applies the damage done this round by all players
+		p1.applyDmg(); p2.applyDmg();
+
 		if (p1.getHp() == 0 || p2.getHp() == 0) {
 			fightstate = "paused";
 			Char winner = null;
@@ -252,16 +265,16 @@ public class GameScreen implements Screen {
 			if (winner == null) log("Fight over. Draw!");
 			else log("Fight over. " + winner.getName() + " wins.");
 		}
-		
+
 	}
-	
+
 	/**Logs text to Gdx.app.log()
 	 * @param text
 	 */
 	private void log(String text) {
 		Gdx.app.log("gdxtest", text);
 	}
-	
+
 	@Override
 	public void resize(int width, int height) {
 	}

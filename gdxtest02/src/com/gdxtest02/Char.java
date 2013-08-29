@@ -13,6 +13,11 @@ public class Char {
 	private String name;
 	private int hp;
 	private int maxhp;
+	/**Damage to be taken this round. Skills will set this.
+	 * Final damage actually taken will only be decided at the end of the round.
+	 * 
+	 */
+	private int dmg;
 	private Rectangle box;
 	private Texture tex;
 	private String texname;
@@ -33,6 +38,7 @@ public class Char {
 		actions = new Array<Action>();
 		actions.add(new Dmg(100));
 		actions.add(new Dmg());
+		dmg = 0;
 	}
 	
 	public void draw(SpriteBatch batch){
@@ -112,9 +118,20 @@ public class Char {
 	
 	/**Incremeants hp by 'delta', returns final hp after change
 	 * @param inc how much to change
-	 * @return
+	 * @return returns current total amount of dmg to be taken this round
 	 */
 	public int incHp(int delta) {
+		return dmg += delta;
+	}
+	
+	/**Applies the damage to be taken this round. After all the skills used this round are considered.
+	 * Called by the game logic
+	 * 
+	 * @return
+	 */
+	public int applyDmg() {
+		int delta = dmg; // sets current damage to a temporary value
+		dmg = 0; // then reset the current damage
 		if (delta < 0) {
 			if (-delta < hp) {
 				return hp += delta;
