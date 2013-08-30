@@ -2,6 +2,7 @@ package com.gdxtest02.chars;
 
 import com.gdxtest02.Char;
 import com.gdxtest02.actions.Dmg;
+import com.gdxtest02.actions.Drain;
 
 public class Char01 extends Char {
 	
@@ -10,6 +11,7 @@ public class Char01 extends Char {
 		
 		actions.add(new Dmg(100));
 		actions.add(new Dmg(200));
+		actions.add(new Drain(150));
 		
 		setTex("ball02red.png");
 
