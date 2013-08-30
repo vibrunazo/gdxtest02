@@ -42,8 +42,8 @@ public class Char {
 		this.hp = maxhp;
 		this.activeAction = 0;
 		actions = new Array<Action>();
-		actions.add(new Dmg(50));
-		actions.add(new Dmg(200));
+//		actions.add(new Dmg(50));
+//		actions.add(new Dmg(200));
 		dmg = 0;
 		buffs = new Array<Buff>();
 		newbuffs = new Array<Buff>();
