@@ -12,7 +12,7 @@ import com.gdxtest02.actions.Dmg;
 public class Char {
 	private String name;
 	private int hp;
-	private int maxhp;
+	protected int maxhp;
 	/**Damage to be taken this round. Skills will set this.
 	 * Final damage actually taken will only be decided at the end of the round.
 	 * 
@@ -26,7 +26,7 @@ public class Char {
 	 * 
 	 */
 	private int activeAction;
-	private Array<Action> actions;
+	protected Array<Action> actions;
 	private Array<Buff> buffs;
 	/**List of buffs to be added this round, 
 	 * these will be moved to the main buffs list at the end of the round
@@ -79,7 +79,7 @@ public class Char {
 	 * @param id
 	 */
 	public Action getAction(int id) {
-		if (id < 1) return null;
+		if (id < 1 || id > actions.size) return null;
 		return actions.get(id - 1);
 	}
 	
@@ -228,7 +228,7 @@ public class Char {
 		return activeAction;
 	}
 
-	public void setActiveAction(int activeAction) {
+	public void setActiveActionId(int activeAction) {
 		this.activeAction = activeAction;
 	}
 

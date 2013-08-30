@@ -16,10 +16,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 
+/**This is supposed to be ageneric ui class that is suppused to be good for every screen
+ * Screen specific classes could derive from it
+ * 
+ * @author vib
+ *
+ */
 public class UIBuilder {
-	private Skin skin;
-	private Stage stage;
-	private GdxTest02 game;
+	protected Skin skin;
+	protected Stage stage;
+	protected GdxTest02 game;
 	
 	public Skin getSkin() {
 		return skin;
