@@ -15,9 +15,15 @@ public class Dmg extends Action {
 		super(value);
 		setName(name);
 	}
+	
+	public Dmg(int value, int cooldown) {
+		super(value, cooldown);
+		setName(name);
+	}
 
-	@Override
 	public void act(Char self, Char target) {
+		super.act();
+		if (getCurcooldown() > 0) return;
 		target.incHp(-power);
 	}
 }

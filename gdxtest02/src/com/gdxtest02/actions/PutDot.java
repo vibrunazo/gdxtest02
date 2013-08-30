@@ -17,12 +17,17 @@ public class PutDot extends Action {
 		setName(name);
 	}
 	
-	public PutDot(int value, int duration) {
-		super(value, duration);
+	public PutDot(int value, int cooldown) {
+		super(value, cooldown);
 		setName(name);
 	}
 	
-	@Override
+	public PutDot(int value, int cooldown, int duration) {
+		super(value, cooldown);
+		setDuration(duration);
+		setName(name);
+	}
+	
 	public void act(Char self, Char target) {
 		Dot buff = new Dot(power, duration);
 		target.addBuff(buff);

@@ -10,8 +10,8 @@ public class Char01 extends Char {
 		super(name);
 		
 		actions.add(new Dmg(100));
-		actions.add(new Dmg(200));
-		actions.add(new Drain(150));
+		actions.add(new Dmg(200, 2));
+		actions.add(new Drain(150, 2));
 		
 		setTex("ball02red.png");
 

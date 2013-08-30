@@ -12,9 +12,9 @@ public class Char02 extends Char {
 		super(name);
 		
 		actions.add(new Dmg(50));
-		actions.add(new Heal(50));
-		actions.add(new PutDot(50, 10));
-		actions.add(new PutHot(100, 5));
+		actions.add(new Heal(400, 3));
+		actions.add(new PutDot(50, 0, 10));
+		actions.add(new PutHot(100, 0, 5));
 
 		setTex("ball02yell.png");
 	}

@@ -16,7 +16,11 @@ public class Drain extends Action {
 		setName(name);
 	}
 	
-	@Override
+	public Drain(int value, int cooldown) {
+		super(value, cooldown);
+		setName(name);
+	}
+	
 	public void act(Char self, Char target) {
 		target.incHp(-power);
 		self.incHp(power);

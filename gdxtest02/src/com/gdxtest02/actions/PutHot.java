@@ -17,12 +17,17 @@ public class PutHot extends Action {
 		setName(name);
 	}
 	
-	public PutHot(int value, int duration) {
-		super(value, duration);
+	public PutHot(int value, int cooldown) {
+		super(value, cooldown);
 		setName(name);
 	}
 	
-	@Override
+	public PutHot(int value, int cooldown, int duration) {
+		super(value, cooldown);
+		setDuration(duration);
+		setName(name);
+	}
+	
 	public void act(Char self, Char target) {
 		Hot buff = new Hot(power, duration);
 		self.addBuff(buff);

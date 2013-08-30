@@ -30,7 +30,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GdxTest02 extends Game {
-
+	public int VIRTUAL_WIDTH = 800;
+	public int VIRTUAL_HEIGHT = 480;
+	
 	SpriteBatch batch;
 	BitmapFont font;
 

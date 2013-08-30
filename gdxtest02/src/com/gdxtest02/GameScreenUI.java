@@ -49,9 +49,9 @@ public class GameScreenUI extends UIBuilder {
 		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
 		final TextButton gobutton = new TextButton("Go!", skin);
 		final TextButton restartbutton = new TextButton("Restart", skin);
-		table.add(gobutton);
+		table.add(gobutton).width(160).height(40);
 		table.row();
-		table.add(restartbutton);
+		table.add(restartbutton).width(160).height(40);
 
 		buttons1 = new Array<TextButton>();
 		buttons2 = new Array<TextButton>();
@@ -103,14 +103,14 @@ public class GameScreenUI extends UIBuilder {
 
 		Table tablep1 = new Table();
 		tablep1.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
-		tablep1.setSize(100, 100);
+		tablep1.setSize(200, 200);
 		tablep1.setPosition(50, 50);
 		stage.addActor(tablep1);
 
 		Table tablep2 = new Table();
 		tablep2.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
-		tablep2.setSize(100, 100);
-		tablep2.setPosition(480 - 150, 50);
+		tablep2.setSize(200, 200);
+		tablep2.setPosition(800 - 200 - 50, 50);
 		stage.addActor(tablep2);
 
 		addActionButton("1", "p11", tablep1, buttons1);
@@ -128,11 +128,10 @@ public class GameScreenUI extends UIBuilder {
 	private void addActionButton(String label, String name, Table table, Array<TextButton> group) {
 		TextButton button = new TextButton(label, skin);
 		group.add(button);
-		table.add(button).width(80);
+		table.add(button).width(160).height(40);
 		button.setName(name);
 		button.addListener(clickOnActionButton);
 		table.row();
 	}
-
-
+	
 }

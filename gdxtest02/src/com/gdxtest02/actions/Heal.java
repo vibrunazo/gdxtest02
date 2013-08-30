@@ -16,7 +16,11 @@ public class Heal extends Action {
 		setName(name);
 	}
 	
-	@Override
+	public Heal(int value, int cooldown) {
+		super(value, cooldown);
+		setName(name);
+	}
+	
 	public void act(Char self, Char target) {
 		self.incHp(power);
 	}

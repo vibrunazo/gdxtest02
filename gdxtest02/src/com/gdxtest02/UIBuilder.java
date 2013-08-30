@@ -39,6 +39,7 @@ public class UIBuilder {
 		this.game = game;
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
+		stage.setViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, false);
 
 		// A skin can be loaded via JSON or defined programmatically, either is fine. Using a skin is optional but strongly
 		// recommended solely for the convenience of getting a texture, region, etc as a drawable, tinted drawable, etc.
@@ -74,7 +75,7 @@ public class UIBuilder {
 	}
 
 	public void resize(int width, int height) {
-		stage.setViewport(width, height, false);
+		stage.setViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, false);
 	}
 
 	public void draw() {

@@ -60,7 +60,7 @@ public class GameScreen implements Screen {
 
 		// create the camera and the SpriteBatch
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 480);
+		camera.setToOrtho(false, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
 
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
@@ -191,6 +191,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
+		ui.resize(width, height);
 	}
 
 	@Override
