@@ -22,7 +22,7 @@ public class Heal implements Action {
 	
 	@Override
 	public void act(Char self, Char target) {
-		target.incHp(-power);
+		self.incHp(power);
 	}
 
 	@Override

@@ -33,6 +33,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.gdxtest02.actions.Heal;
 import com.gdxtest02.actions.PutDot;
 import com.gdxtest02.chars.Char01;
+import com.gdxtest02.chars.Char02;
 
 public class GameScreen implements Screen {
 	final private GdxTest02 game;
@@ -64,15 +65,11 @@ public class GameScreen implements Screen {
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
 
-//		p1 = new Char("p1");
 		p1 = new Char01("p1");
-//		p1.setTex("ball02red.png");
 		p1.setPos(50, 150);
 
-		p2 = new Char("p2");
-		p2.setTex("ball02yell.png");
+		p2 = new Char02("p2");
 		p2.setPos(800-50-256, 150);
-		p2.setAction(2, new PutDot(100, 5));
 
 		ui = new GameScreenUI(game, this);
 		ui.setupUi();
