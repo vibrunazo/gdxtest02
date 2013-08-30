@@ -3,21 +3,15 @@ package com.gdxtest02.actions;
 import com.gdxtest02.Action;
 import com.gdxtest02.Char;
 
-public class Drain implements Action {
-	private String name;
-	private int power;
-	
-	private int DEFAULT_POWER = 100;
-	private String DEFAULT_NAME = "Drain";
+public class Drain extends Action {
+	protected String DEFAULT_NAME = "Drain";
 
 	public Drain() {
-		power = DEFAULT_POWER;
-		name = DEFAULT_NAME;
+		super();
 	}
 
 	public Drain(int value) {
-		power = value;
-		name = DEFAULT_NAME;
+		super(value);
 	}
 	
 	@Override
@@ -25,16 +19,4 @@ public class Drain implements Action {
 		target.incHp(-power);
 		self.incHp(power);
 	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public void setType(String name) {
-		this.name = name;
-		
-	}
-
 }
