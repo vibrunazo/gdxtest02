@@ -4,15 +4,16 @@ import com.gdxtest02.Action;
 import com.gdxtest02.Char;
 
 public class Dmg extends Action {
-	
-	protected String DEFAULT_NAME = "Direct Damage";
+	protected String name = "DD";
 	
 	public Dmg() {
 		super();
+		setName(name);
 	}
 
 	public Dmg(int value) {
 		super(value);
+		setName(name);
 	}
 
 	@Override

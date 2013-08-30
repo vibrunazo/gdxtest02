@@ -1,33 +1,20 @@
 package com.gdxtest02;
 
 public class Action {
-	protected String name;
-	protected int power;
-	protected int cooldown;
-	protected int duration;
-	
-	protected int DEFAULT_COOLDOWN = 0;
-	protected int DEFAULT_DURATION = 5;
-	protected int DEFAULT_POWER = 100;
-	protected String DEFAULT_NAME = "Action";
-	
+	protected String name = "Action";
+	protected int power = 100;
+	protected int cooldown = 0;
+	protected int duration = 5;
 	
 	public Action() {
-		power = DEFAULT_POWER;
-		name = DEFAULT_NAME;
-		duration = DEFAULT_DURATION;
 	}
 
 	public Action(int value) {
-		power = value;
-		name = DEFAULT_NAME;
-		duration = DEFAULT_DURATION;
 	}
 	
 	public Action(int value, int duration) {
 		power = value;
 		this.duration = duration;
-		name = DEFAULT_NAME;
 	}
 	
 	/**Do whatever is it that you do

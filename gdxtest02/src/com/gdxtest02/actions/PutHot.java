@@ -5,18 +5,21 @@ import com.gdxtest02.Char;
 import com.gdxtest02.buffs.Hot;
 
 public class PutHot extends Action {
-	protected String DEFAULT_NAME = "Put Hot";
+	protected String name = "Put Hot";
 
 	public PutHot() {
 		super();
+		setName(name);
 	}
 
 	public PutHot(int value) {
 		super(value);
+		setName(name);
 	}
 	
 	public PutHot(int value, int duration) {
 		super(value, duration);
+		setName(name);
 	}
 	
 	@Override

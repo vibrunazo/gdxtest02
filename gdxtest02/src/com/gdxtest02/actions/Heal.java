@@ -4,14 +4,16 @@ import com.gdxtest02.Action;
 import com.gdxtest02.Char;
 
 public class Heal extends Action {
-	protected String DEFAULT_NAME = "Direct Heal";
+	protected String name = "Direct Heal";
 
 	public Heal() {
 		super();
+		setName(name);
 	}
 
 	public Heal(int value) {
 		super(value);
+		setName(name);
 	}
 	
 	@Override
