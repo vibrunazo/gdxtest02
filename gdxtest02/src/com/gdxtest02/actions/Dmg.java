@@ -21,9 +21,9 @@ public class Dmg extends Action {
 		setName(name);
 	}
 
-	public void act(Char self, Char target) {
-		super.act();
-		if (getCurcooldown() > 0) return;
+	@Override
+	protected void go(Char self, Char target) {
 		target.incHp(-power);
 	}
+
 }

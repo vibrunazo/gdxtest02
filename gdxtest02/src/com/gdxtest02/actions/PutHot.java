@@ -28,7 +28,8 @@ public class PutHot extends Action {
 		setName(name);
 	}
 	
-	public void act(Char self, Char target) {
+	@Override
+	protected void go(Char self, Char target) {
 		Hot buff = new Hot(power, duration);
 		self.addBuff(buff);
 	}

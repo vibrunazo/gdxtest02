@@ -1,6 +1,6 @@
 package com.gdxtest02;
 
-public class Action {
+public abstract class Action {
 	protected String name = "Action";
 	protected int power = 100;
 	protected int cooldown = 0;
@@ -24,19 +24,32 @@ public class Action {
 	 * @param target your target
 	 */
 	public void act(Char self, Char target) {
-		act();
-	}
-	
-	public void act() {
+//		act();
 		if (curcooldown > 0) {
 			curcooldown -= 1;
 			return;
 		}
+		if (getCurcooldown() > 0) return;
+		go(self, target);
 		if (cooldown > 0) {
 			curcooldown = cooldown;
 		}
 	}
 	
+//	public void act() {
+//		if (curcooldown > 0) {
+//			curcooldown -= 1;
+//			return;
+//		}
+//		if (cooldown > 0) {
+//			curcooldown = cooldown;
+//		}
+//		if (getCurcooldown() > 0) return;
+//		go(self, target);
+//	}
+	
+	abstract protected void go(Char self, Char target);
+
 	public String getName() {
 		return name;
 	}

@@ -20,8 +20,9 @@ public class Heal extends Action {
 		super(value, cooldown);
 		setName(name);
 	}
-	
-	public void act(Char self, Char target) {
+
+	@Override
+	protected void go(Char self, Char target) {
 		self.incHp(power);
 	}
 }

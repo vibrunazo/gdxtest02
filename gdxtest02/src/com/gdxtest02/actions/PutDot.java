@@ -27,10 +27,11 @@ public class PutDot extends Action {
 		setDuration(duration);
 		setName(name);
 	}
-	
-	public void act(Char self, Char target) {
+
+	@Override
+	protected void go(Char self, Char target) {
 		Dot buff = new Dot(power, duration);
 		target.addBuff(buff);
 	}
-
+	
 }
