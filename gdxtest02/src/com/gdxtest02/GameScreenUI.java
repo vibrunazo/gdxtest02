@@ -1,5 +1,6 @@
 package com.gdxtest02;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -122,7 +123,7 @@ public class GameScreenUI extends UIBuilder {
 		addActionButton("2", "p22", tablep2, buttons2);
 		addActionButton("3", "p23", tablep2, buttons2);
 		addActionButton("4", "p24", tablep2, buttons2);
-
+		
 	}
 
 	private void addActionButton(String label, String name, Table table, Array<TextButton> group) {
@@ -132,6 +133,53 @@ public class GameScreenUI extends UIBuilder {
 		button.setName(name);
 		button.addListener(clickOnActionButton);
 		table.row();
+	}
+	
+	/**Returns the group of action buttons for either p1 or p2
+	 * @param group 1 or 2
+	 * @return buttons1 or buttons2
+	 */
+	private Array<TextButton> getButtonGroup(int group) {
+		if (group == 1) return buttons1;
+		if (group == 2) return buttons2;
+		return null;
+	}
+	
+	/**Sets the text of a text button, specified by action group (p1 or p2),
+	 * and button number (starting from button 1)
+	 * @param group
+	 * @param button
+	 * @param text
+	 */
+	private void setButtonText(int group, int button, String text) {
+		TextButton b = getButtonGroup(group).get(button-1);
+		b.setText(text);
+	}
+	
+	/**Update the action button text with the action name and cooldown
+	 * 
+	 * @param player
+	 * @param action
+	 */
+	public void updateActionText(int player, int action) {
+		Char c = screen.getPlayer(player);
+		Action a = c.getAction(action);
+		if (a == null) {
+			log("null on updateAction p: "+ player + " action: " + action);
+			return;
+		}
+		String name = a.getName();
+		int cd = a.getCurcooldown();
+		String text = name;
+		if (cd > 0) text += " - " + Integer.toString(cd);
+		setButtonText(player, action, text);
+	}
+	
+	/**Logs text to Gdx.app.log()
+	 * @param text
+	 */
+	private void log(String text) {
+		Gdx.app.log("gdxtest", text);
 	}
 	
 }

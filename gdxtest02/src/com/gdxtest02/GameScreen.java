@@ -76,6 +76,7 @@ public class GameScreen implements Screen {
 		
 		logPlayerStats(p1);
 		logPlayerStats(p2);
+		updateButtons();
 		
 		fightstate = "go";
 	}
@@ -176,7 +177,21 @@ public class GameScreen implements Screen {
 		
 		logPlayerStats(p1);
 		logPlayerStats(p2);
+		
+		updateButtons();
 	}
+
+	/**Update buttons' text
+	 * 
+	 */
+	private void updateButtons() {
+		for (int player = 1; player <= 2; player++) {
+			for (int action = 1; action <= 4; action++) {
+				ui.updateActionText(player, action);
+			}
+		}
+	}
+
 
 	private void logPlayerStats(Char c) {
 		log("Player + " + c.getName() + ": " + c.getHp() + "/" + c.getMaxhp() + "hp. Buffs: " + c.printBuffs());
@@ -222,6 +237,18 @@ public class GameScreen implements Screen {
 	
 	public Char getP2() {
 		return p2;
+	}
+
+
+	/**Returns the Char object for player 1 or 2
+	 * @param gameScreenUI TODO
+	 * @param player 1 or 2
+	 * @return Char p1 or p2
+	 */
+	public Char getPlayer(int player) {
+		if (player == 1) return p1;
+		if (player == 2) return p2;
+		return null;
 	}
 
 
