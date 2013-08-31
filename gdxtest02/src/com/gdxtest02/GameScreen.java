@@ -74,9 +74,7 @@ public class GameScreen implements Screen {
 		ui = new GameScreenUI(game, this);
 		ui.setupUi();
 		
-		logPlayerStats(p1);
-		logPlayerStats(p2);
-		updateButtons();
+		updateUi();
 		
 		fightstate = "go";
 	}
@@ -149,6 +147,9 @@ public class GameScreen implements Screen {
 		if (actionp1 != null) a1name = actionp1.getName();
 		if (actionp2 != null) a2name = actionp2.getName();
 		
+		p1.updateCooldowns();
+		p2.updateCooldowns();
+		
 		log("p1 uses: " + actionidp1 + ": " + a1name +
 				", p2 uses: " + actionidp2 + ": " + a2name + ". Fight!");
 		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
@@ -175,9 +176,16 @@ public class GameScreen implements Screen {
 			else log("Fight over. " + winner.getName() + " wins.");
 		}
 		
+		updateUi();
+	}
+
+
+	/**Update UI elements
+	 * 
+	 */
+	private void updateUi() {
 		logPlayerStats(p1);
 		logPlayerStats(p2);
-		
 		updateButtons();
 	}
 

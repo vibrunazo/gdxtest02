@@ -199,6 +199,13 @@ public class Char {
 		}
 		return hp;
 	}
+	
+	/**Update cooldowns of all action
+	 * 
+	 */
+	public void updateCooldowns() {
+		for (Action a : actions) a.updateCooldown();
+	}
 
 	public int getMaxhp() {
 		return maxhp;

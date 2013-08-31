@@ -25,15 +25,16 @@ public abstract class Action {
 	 */
 	public void act(Char self, Char target) {
 //		act();
-		if (curcooldown > 0) {
-			curcooldown -= 1;
-			return;
-		}
+		if (curcooldown > 0) return;
 		if (getCurcooldown() > 0) return;
 		go(self, target);
 		if (cooldown > 0) {
 			curcooldown = cooldown;
 		}
+	}
+
+	public void updateCooldown() {
+		curcooldown -= 1;
 	}
 	
 //	public void act() {
