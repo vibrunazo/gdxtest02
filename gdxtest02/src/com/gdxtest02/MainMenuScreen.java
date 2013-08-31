@@ -53,7 +53,8 @@ public class MainMenuScreen implements Screen {
 
 		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
 		final TextButton button = new TextButton("Click me!", skin);
-		table.add(button);
+		table.add(button).width(200).height(50);
+//		button.getLabel().setFontScale(2);
 
 		// Add a listener to the button. ChangeListener is fired when the button's checked state changes, eg when clicked,
 		// Button#setChecked() is called, via a key press, etc. If the event.cancel() is called, the checked state will be reverted.

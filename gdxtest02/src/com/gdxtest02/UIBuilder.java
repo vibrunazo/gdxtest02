@@ -52,7 +52,9 @@ public class UIBuilder {
 		skin.add("white", new Texture(pixmap));
 
 		// Store the default libgdx font under the name "default".
-		skin.add("default", new BitmapFont());
+		BitmapFont f = new BitmapFont();
+		f.setScale(2);
+		skin.add("default", f);
 
 		// Configure a TextButtonStyle and name it "default". Skin resources are stored by type, so this doesn't overwrite the font.
 		TextButtonStyle textButtonStyle = new TextButtonStyle();

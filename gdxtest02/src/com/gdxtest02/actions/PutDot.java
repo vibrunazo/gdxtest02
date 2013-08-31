@@ -33,5 +33,4 @@ public class PutDot extends Action {
 		Dot buff = new Dot(power, duration);
 		target.addBuff(buff);
 	}
-	
 }
