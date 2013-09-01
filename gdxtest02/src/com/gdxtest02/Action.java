@@ -1,5 +1,7 @@
 package com.gdxtest02;
 
+import com.badlogic.gdx.Gdx;
+
 public abstract class Action {
 	protected String name = "Action";
 	protected int power = 100;
@@ -34,7 +36,7 @@ public abstract class Action {
 	}
 
 	public void updateCooldown() {
-		curcooldown -= 1;
+		if (curcooldown > 0) curcooldown -= 1;
 	}
 	
 //	public void act() {
@@ -82,6 +84,22 @@ public abstract class Action {
 	
 	public void incCurcooldown(int delta) {
 		this.curcooldown += delta;
+	}
+	
+	/**Returns if this action is legal or not right
+	 * Checks cooldown, mana, requirements etc
+	 */
+	public boolean isLegal() {
+//		log("islegal name: " + name + " cooldown: " + cooldown + " curcooldown: " + curcooldown);
+		if (curcooldown == 0) return true;
+		return false;
+	}
+	
+	/**Logs text to Gdx.app.log()
+	 * @param text
+	 */
+	private void log(String text) {
+		Gdx.app.log("gdxtest", text);
 	}
 
 }

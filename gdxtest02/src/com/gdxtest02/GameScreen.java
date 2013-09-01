@@ -136,6 +136,8 @@ public class GameScreen implements Screen {
 	public void go() {
 		if (fightstate.equals("paused")) return;
 		
+		//preparing
+		
 		int actionidp1 = p1.getActiveActionId();
 		int actionidp2 = p2.getActiveActionId();
 		
@@ -144,8 +146,23 @@ public class GameScreen implements Screen {
 		
 		String a1name = "null";
 		String a2name = "null";
-		if (actionp1 != null) a1name = actionp1.getName();
-		if (actionp2 != null) a2name = actionp2.getName();
+		if (actionp1 != null) {
+			a1name = actionp1.getName();
+			if (!actionp1.isLegal()) {
+				log("Cannot go because p1 action, " + a1name + " is illegal");
+				return;
+			} 
+		}
+		if (actionp2 != null) {
+			a2name = actionp2.getName();
+			if (!actionp2.isLegal()) {
+				log("Cannot go because p2 action, " + a2name + " is illegal");
+				return;
+			}
+		}
+		
+		
+		// now we know everything is ok, so start actually doing stuff
 		
 		p1.updateCooldowns();
 		p2.updateCooldowns();
