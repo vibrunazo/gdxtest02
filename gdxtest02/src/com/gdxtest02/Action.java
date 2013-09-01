@@ -35,51 +35,79 @@ public abstract class Action {
 		}
 	}
 
+	/**Updates the current cooldown, reduce it by 1
+	 * 
+	 */
 	public void updateCooldown() {
 		if (curcooldown > 0) curcooldown -= 1;
 	}
 	
-//	public void act() {
-//		if (curcooldown > 0) {
-//			curcooldown -= 1;
-//			return;
-//		}
-//		if (cooldown > 0) {
-//			curcooldown = cooldown;
-//		}
-//		if (getCurcooldown() > 0) return;
-//		go(self, target);
-//	}
-	
+	/**The actual action class needs to implement this method to
+	 * do its thing
+	 * @param self the Char doing the action
+	 * @param target the Char being targetted
+	 */
 	abstract protected void go(Char self, Char target);
 
+	/**Gets the action name
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	/**Sets the name, returns self
+	 * @param name
+	 * @return
+	 */
+	public Action setName(String name) {
 		this.name = name;
+		return this;
 	}
 
+	/**Gets the maximum cooldown
+	 * @return
+	 */
 	public int getCooldown() {
 		return cooldown;
 	}
-	public void setCooldown(int cooldown) {
+	/**Sets the maximum cooldown, returns self
+	 * @param cooldown
+	 * @return
+	 */
+	public Action setCooldown(int cooldown) {
 		this.cooldown = cooldown;
+		return this;
 	}
 	
+	/**Get duration
+	 * @return
+	 */
 	public int getDuration() {
 		return duration;
 	}
-	public void setDuration(int duration) {
+	/**Sets duration, returns self
+	 * @param duration
+	 * @return
+	 */
+	public Action setDuration(int duration) {
 		this.duration = duration;
+		return this;
 	}
 
+	/**Returns the current cooldown
+	 * @return
+	 */
 	public int getCurcooldown() {
 		return curcooldown;
 	}
 
-	public void setCurcooldown(int curcooldown) {
+	/**Sets the current cooldown, returns self
+	 * @param curcooldown
+	 * @return
+	 */
+	public Action setCurcooldown(int curcooldown) {
 		this.curcooldown = curcooldown;
+		return this;
 	}
 	
 	public void incCurcooldown(int delta) {
