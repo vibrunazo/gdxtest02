@@ -27,6 +27,14 @@ public class GameScreenUI extends UIBuilder {
 	private Array<TextButton> buttons1;
 	private Array<TextButton> buttons2;
 	
+	private int ACTION_BAR_WIDTH = 160;
+	private int ACTION_BAR_HEIGHT = 160;
+	private int ACTION_BAR_X = 20;
+	private int ACTION_BAR_Y = 20;
+	private ClickListener clickOnGoButton;
+	private ClickListener clickOnRestartButton;
+	private IntMap<Array<TextButton>> buttonGroups;
+	
 	public GameScreenUI(GdxTest02 game, GameScreen gameScreen) {
 		super(game);
 		this.screen = gameScreen;
@@ -35,40 +43,46 @@ public class GameScreenUI extends UIBuilder {
 	}
 
 	public void setupUi() {
-//		uibuilder = new UIBuilder(game);
-//		Stage stage = uibuilder.getStage();
-//		Skin skin = uibuilder.getSkin();
-
-		// Create a table that fills the screen. Everything else will go inside this table.
-		Table table = new Table();
-		table.setFillParent(true);
-		//				table.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
-		//				table.setSize(260, 195);
-		//				table.setPosition(190, 142);
-		stage.addActor(table);
-
-		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
-		final TextButton gobutton = new TextButton("Go!", skin);
-		final TextButton restartbutton = new TextButton("Restart", skin);
-		table.add(gobutton).width(160).height(40);
-		table.row();
-		table.add(restartbutton).width(160).height(40);
 
 		buttons1 = new Array<TextButton>();
 		buttons2 = new Array<TextButton>();
-		final IntMap<Array<TextButton>> buttonGroups = new IntMap<Array<TextButton>>(); // map with both group of buttons to choose from
+		buttonGroups = new IntMap<Array<TextButton>>();
 		
 		buttonGroups.put(1, buttons1);
 		buttonGroups.put(2, buttons2);
 		
-		// What to do when the Go button was clicked
-		ClickListener clickOnGoButton = new ClickListener() {
+		createListeners();
+		createCenterTable();
+		createActionBars();
+	}
+
+	private void createCenterTable() {
+		// Create a table that fills the screen. Everything else will go inside this table.
+		Table centerTable = new Table();
+		centerTable.setFillParent(true);
+		//				table.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
+		//				table.setSize(260, 195);
+		//				table.setPosition(190, 142);
+		stage.addActor(centerTable);
+
+		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
+		final TextButton gobutton = new TextButton("Go!", skin);
+		final TextButton restartbutton = new TextButton("Restart", skin);
+		centerTable.add(gobutton).width(160).height(40);
+		centerTable.row();
+		centerTable.add(restartbutton).width(160).height(40);
+
+		gobutton.addListener(clickOnGoButton);
+		restartbutton.addListener(clickOnRestartButton);
+	}
+
+	private void createListeners() {
+		clickOnGoButton = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				screen.go();
 			}
 		};
-		// What to do when the Go button was clicked
-		ClickListener clickOnRestartButton = new ClickListener() {
+		clickOnRestartButton = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				screen.restart();
 			}
@@ -99,19 +113,19 @@ public class GameScreenUI extends UIBuilder {
 				else p2.setActiveActionId(activeActionId); 
 			}
 		};
-		gobutton.addListener(clickOnGoButton);
-		restartbutton.addListener(clickOnRestartButton);
+	}
 
+	private void createActionBars() {
 		Table tablep1 = new Table();
-		tablep1.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
-		tablep1.setSize(200, 200);
-		tablep1.setPosition(50, 50);
+//		tablep1.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
+		tablep1.setSize(ACTION_BAR_WIDTH, ACTION_BAR_HEIGHT);
+		tablep1.setPosition(ACTION_BAR_X, ACTION_BAR_Y);
 		stage.addActor(tablep1);
 
 		Table tablep2 = new Table();
-		tablep2.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
-		tablep2.setSize(200, 200);
-		tablep2.setPosition(800 - 200 - 50, 50);
+//		tablep2.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
+		tablep2.setSize(ACTION_BAR_WIDTH, ACTION_BAR_HEIGHT);
+		tablep2.setPosition(800 - ACTION_BAR_WIDTH - ACTION_BAR_X, ACTION_BAR_Y);
 		stage.addActor(tablep2);
 
 		addActionButton("1", "p11", tablep1, buttons1);
@@ -123,7 +137,6 @@ public class GameScreenUI extends UIBuilder {
 		addActionButton("2", "p22", tablep2, buttons2);
 		addActionButton("3", "p23", tablep2, buttons2);
 		addActionButton("4", "p24", tablep2, buttons2);
-		
 	}
 
 	private void addActionButton(String label, String name, Table table, Array<TextButton> group) {
