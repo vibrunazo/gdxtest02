@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -31,6 +33,13 @@ public class GameScreenUI extends UIBuilder {
 	private int ACTION_BAR_HEIGHT = 160;
 	private int ACTION_BAR_X = 20;
 	private int ACTION_BAR_Y = 20;
+	
+	private int CONSOLE_WIDTH = 380;
+	private int CONSOLE_HEIGHT = 160;
+//	private int CONSOLE_X = 20;
+	private int CONSOLE_Y = 20;
+	
+	
 	private ClickListener clickOnGoButton;
 	private ClickListener clickOnRestartButton;
 	private IntMap<Array<TextButton>> buttonGroups;
@@ -54,6 +63,27 @@ public class GameScreenUI extends UIBuilder {
 		createListeners();
 		createCenterTable();
 		createActionBars();
+		createConsole();
+	}
+
+	private void createConsole() {
+		Table table = new Table();
+//		table.setFillParent(true);
+		table.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
+		table.setSize(CONSOLE_WIDTH, CONSOLE_HEIGHT);
+		table.setPosition(400 - CONSOLE_WIDTH/2, CONSOLE_Y);
+		stage.addActor(table);
+		
+		String[] listEntries = {"This is a list entry123456789112345678921234567893", "And another one", "The meaning of life", "Is hard to come by",
+				"This is a list entry", "And another one", "The meaning of life", "Is hard to come by", "This is a list entry",
+				"And another one", "The meaning of life", "Is hard to come by", "This is a list entry", "And another one",
+				"The meaning of life", "Is hard to come by", "This is a list entry", "And another one", "The meaning of life",
+				"Is hard to come by"};
+		List list = new List(listEntries, skin);
+//		list.setFillParent(true);
+		ScrollPane scrollPane = new ScrollPane(list, skin);
+		scrollPane.setFillParent(true);
+		table.addActor(scrollPane);
 	}
 
 	private void createCenterTable() {

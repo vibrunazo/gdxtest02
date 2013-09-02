@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -64,6 +66,21 @@ public class UIBuilder {
 		textButtonStyle.over = skin.newDrawable("white", Color.LIGHT_GRAY);
 		textButtonStyle.font = skin.getFont("default");
 		skin.add("default", textButtonStyle);
+		
+		ListStyle listStyle = new ListStyle();
+		listStyle.font = skin.getFont("default");
+		listStyle.selection = skin.newDrawable("white", Color.DARK_GRAY);
+//		listStyle.fontColorSelected = skin.newDrawable("white", Color.DARK_GRAY);
+//		  skin.newDrawable("white", Color.DARK_GRAY);
+		skin.add("default", listStyle);
+		
+		ScrollPaneStyle scrollStyle = new ScrollPaneStyle();
+		scrollStyle.background = skin.newDrawable("white", Color.DARK_GRAY);
+//		.font = skin.getFont("default");
+//		scrollStyle.selection = skin.newDrawable("white", Color.DARK_GRAY);
+//		listStyle.fontColorSelected = skin.newDrawable("white", Color.DARK_GRAY);
+//		  skin.newDrawable("white", Color.DARK_GRAY);
+		skin.add("default", scrollStyle);
 
 		
 
