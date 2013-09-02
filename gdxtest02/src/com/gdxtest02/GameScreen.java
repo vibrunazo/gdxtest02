@@ -149,14 +149,14 @@ public class GameScreen implements Screen {
 		if (actionp1 != null) {
 			a1name = actionp1.getName();
 			if (!actionp1.isLegal()) {
-				log("Cannot go because p1 action, " + a1name + " is illegal");
+				ui.logToConsole("Cannot go because p1 action, " + a1name + " is illegal");
 				return;
 			} 
 		}
 		if (actionp2 != null) {
 			a2name = actionp2.getName();
 			if (!actionp2.isLegal()) {
-				log("Cannot go because p2 action, " + a2name + " is illegal");
+				ui.logToConsole("Cannot go because p2 action, " + a2name + " is illegal");
 				return;
 			}
 		}
@@ -167,7 +167,7 @@ public class GameScreen implements Screen {
 		p1.updateCooldowns();
 		p2.updateCooldowns();
 		
-		log("p1 uses: " + actionidp1 + ": " + a1name +
+		ui.logToConsole("p1 uses: " + actionidp1 + ": " + a1name +
 				", p2 uses: " + actionidp2 + ": " + a2name + ". Fight!");
 		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
 		if (actionp1 != null) actionp1.act(p1, p2);
@@ -189,8 +189,8 @@ public class GameScreen implements Screen {
 					winner = p1;
 				}
 			}
-			if (winner == null) log("Fight over. Draw!");
-			else log("Fight over. " + winner.getName() + " wins.");
+			if (winner == null) ui.logToConsole("Fight over. Draw!");
+			else ui.logToConsole("Fight over. " + winner.getName() + " wins.");
 		}
 		
 		updateUi();
@@ -219,7 +219,7 @@ public class GameScreen implements Screen {
 
 
 	private void logPlayerStats(Char c) {
-		log("Player + " + c.getName() + ": " + c.getHp() + "/" + c.getMaxhp() + "hp. Buffs: " + c.printBuffs());
+		ui.logToConsole("Player " + c.getName() + ": " + c.getHp() + "/" + c.getMaxhp() + "hp. Buffs: " + c.printBuffs());
 	}
 
 	/**Logs text to Gdx.app.log()

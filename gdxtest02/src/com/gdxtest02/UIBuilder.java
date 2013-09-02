@@ -57,6 +57,10 @@ public class UIBuilder {
 		BitmapFont f = new BitmapFont();
 		f.setScale(2);
 		skin.add("default", f);
+		
+		BitmapFont f2 = new BitmapFont();
+//		f2.setScale(2);
+		skin.add("small", f2);
 
 		// Configure a TextButtonStyle and name it "default". Skin resources are stored by type, so this doesn't overwrite the font.
 		TextButtonStyle textButtonStyle = new TextButtonStyle();
@@ -68,7 +72,7 @@ public class UIBuilder {
 		skin.add("default", textButtonStyle);
 		
 		ListStyle listStyle = new ListStyle();
-		listStyle.font = skin.getFont("default");
+		listStyle.font = skin.getFont("small");
 		listStyle.selection = skin.newDrawable("white", Color.DARK_GRAY);
 //		listStyle.fontColorSelected = skin.newDrawable("white", Color.DARK_GRAY);
 //		  skin.newDrawable("white", Color.DARK_GRAY);

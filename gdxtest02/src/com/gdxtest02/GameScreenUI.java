@@ -43,6 +43,9 @@ public class GameScreenUI extends UIBuilder {
 	private ClickListener clickOnGoButton;
 	private ClickListener clickOnRestartButton;
 	private IntMap<Array<TextButton>> buttonGroups;
+	private Array<String> consoleData;
+	private List consoleList;
+	private ScrollPane scroll;
 	
 	public GameScreenUI(GdxTest02 game, GameScreen gameScreen) {
 		super(game);
@@ -74,16 +77,18 @@ public class GameScreenUI extends UIBuilder {
 		table.setPosition(400 - CONSOLE_WIDTH/2, CONSOLE_Y);
 		stage.addActor(table);
 		
-		String[] listEntries = {"This is a list entry123456789112345678921234567893", "And another one", "The meaning of life", "Is hard to come by",
-				"This is a list entry", "And another one", "The meaning of life", "Is hard to come by", "This is a list entry",
-				"And another one", "The meaning of life", "Is hard to come by", "This is a list entry", "And another one",
-				"The meaning of life", "Is hard to come by", "This is a list entry", "And another one", "The meaning of life",
-				"Is hard to come by"};
-		List list = new List(listEntries, skin);
-//		list.setFillParent(true);
-		ScrollPane scrollPane = new ScrollPane(list, skin);
-		scrollPane.setFillParent(true);
-		table.addActor(scrollPane);
+		
+		consoleData = new Array<String>();
+//		String[] consoleItems = (String[])consoleData.items;
+		String[] consoleItems = {};
+		consoleList = new List(consoleItems, skin);
+		scroll = new ScrollPane(consoleList, skin);
+		scroll.setFillParent(true);
+		scroll.setOverscroll(false, false);
+//		scroll.setScrollingDisabled(true, false);
+//		scroll.setFlickScroll(false);
+//		scroll.setClamp(false);
+		table.addActor(scroll);
 	}
 
 	private void createCenterTable() {
@@ -216,6 +221,15 @@ public class GameScreenUI extends UIBuilder {
 		String text = name;
 		if (cd > 0) text += " - " + Integer.toString(cd);
 		setButtonText(player, action, text);
+	}
+	
+	public void logToConsole(String text) {
+		consoleData.add(text);
+//		String[] a = new String[]();
+//		consoleData.toArray();
+		consoleList.setItems(consoleData.toArray());
+		scroll.scrollTo(0, 0, 0, 0);
+		log(text);
 	}
 	
 	/**Logs text to Gdx.app.log()
