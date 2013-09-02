@@ -118,6 +118,7 @@ public class GameScreen implements Screen {
 		p2.drawShapes(shapeRenderer);
 		shapeRenderer.end();
 
+		if(!Gdx.input.isTouched()) ui.updateScroll(Gdx.graphics.getDeltaTime());
 		ui.draw();
 
 		//		fps.log();

@@ -223,13 +223,23 @@ public class GameScreenUI extends UIBuilder {
 		setButtonText(player, action, text);
 	}
 	
+	/**logs text to the console log on screen
+	 * @param text
+	 */
 	public void logToConsole(String text) {
 		consoleData.add(text);
-//		String[] a = new String[]();
-//		consoleData.toArray();
 		consoleList.setItems(consoleData.toArray());
-		scroll.scrollTo(0, 0, 0, 0);
 		log(text);
+	}
+	
+	/**Updates scroll pane of the console log, to scroll smoothly over time
+	 * @param delta
+	 */
+	public void updateScroll(float delta) {
+		float p = scroll.getScrollPercentY();
+		if (p - 10 < 100) p += 0.5*delta;
+		else p = 100;
+		scroll.setScrollPercentY(p);
 	}
 	
 	/**Logs text to Gdx.app.log()
