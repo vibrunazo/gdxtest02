@@ -234,10 +234,12 @@ public class GameScreenUI extends UIBuilder {
 	 * @param delta
 	 */
 	public void updateScroll(float delta) {
-		float p = scroll.getScrollPercentY();
-		if (p - 10 < 100) p += 0.5*delta;
-		else p = 100;
-		scroll.setScrollPercentY(p);
+		float py = scroll.getScrollPercentY();
+		if (py - 10 < 100) py += 0.5*delta;
+		else py = 100;
+		scroll.setScrollPercentY(py);
+		
+		scroll.setScrollPercentX(0);
 	}
 	
 	/**Logs text to Gdx.app.log()
@@ -259,7 +261,7 @@ public class GameScreenUI extends UIBuilder {
 			logToConsole("Action " + activeActionId + " is null. Choose another.");
 			return;
 		}
-		logToConsole(activeActionId + ": " + a.getName() + " - " + a.getDescription());
+		logToConsole(activeActionId + ": " + a.getTooltip());
 	}
 	
 }

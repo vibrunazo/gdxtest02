@@ -9,9 +9,9 @@ public class Char01 extends Char {
 	public Char01(String name) {
 		super(name);
 		
-		actions.add(new Dmg(100).setName("Bazinga!"));
-		actions.add(new Dmg(200, 2));
-		actions.add(new Drain(150, 4));
+		actions.add(new Dmg(120).setName("Tiger"));
+		actions.add(new Dmg(250, 2).setName("Shoryuken"));
+		actions.add(new Drain(300, 4).setName("Death Coil"));
 		
 		setTex("ball02red.png");
 

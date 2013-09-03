@@ -4,25 +4,31 @@ import com.gdxtest02.Action;
 import com.gdxtest02.Char;
 
 public class Heal extends Action {
-	protected String name = "Direct Heal";
 
-	public Heal() {
-		super();
-		setName(name);
-	}
-
-	public Heal(int value) {
-		super(value);
-		setName(name);
+	@Override
+	protected void ini() {
+		setName("Direct Heal");
+		setDescription("Heals " + getPower() + " damage.");
 	}
 	
-	public Heal(int value, int cooldown) {
-		super(value, cooldown);
-		setName(name);
-	}
-
 	@Override
 	protected void go(Char self, Char target) {
 		self.incHp(power);
 	}
+	
+	
+	
+	public Heal() {
+		super();
+	}
+
+	public Heal(int value) {
+		super(value);
+	}
+	
+	public Heal(int value, int cooldown) {
+		super(value, cooldown);
+	}
+
+	
 }

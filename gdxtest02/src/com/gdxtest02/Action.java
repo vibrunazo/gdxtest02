@@ -11,17 +11,27 @@ public abstract class Action {
 	private String description = "This is a skill";
 	
 	public Action() {
+		ini();
 	}
 
 	public Action(int value) {
 		power = value;
+		ini();
 	}
 	
 	public Action(int value, int cooldown) {
 		power = value;
 		this.cooldown = cooldown;
+		ini();
 	}
 	
+	public Action(int value, int cooldown, int duration) {
+		power = value;
+		this.cooldown = cooldown;
+		this.duration = duration;
+		ini();
+	}
+
 	/**Do whatever is it that you do
 	 * @param self yourself, the char doing the action
 	 * @param target your target
@@ -49,6 +59,11 @@ public abstract class Action {
 	 * @param target the Char being targetted
 	 */
 	abstract protected void go(Char self, Char target);
+	
+	/**Do whatever initializatio here
+	 * 
+	 */
+	abstract protected void ini();
 
 	/**Gets the action name
 	 * @return
@@ -65,7 +80,7 @@ public abstract class Action {
 		return this;
 	}
 	
-	/**Gets the action name
+	/**Gets the action description
 	 * @return
 	 */
 	public String getDescription() {
@@ -78,6 +93,14 @@ public abstract class Action {
 	public Action setDescription(String description) {
 		this.description = description;
 		return this;
+	}
+	
+	/**Gets the tooltip description, includes formal description,
+	 * power, cost, cooldown
+	 * @return
+	 */
+	public String getTooltip() {
+		return getName() + " - " + getDescription() + " " + getCooldown() + "sec cooldown.";
 	}
 
 	/**Gets the maximum cooldown
@@ -144,6 +167,20 @@ public abstract class Action {
 	 */
 	private void log(String text) {
 		Gdx.app.log("gdxtest", text);
+	}
+
+	/**
+	 * @return the power
+	 */
+	public int getPower() {
+		return power;
+	}
+
+	/**
+	 * @param power the power to set
+	 */
+	public void setPower(int power) {
+		this.power = power;
 	}
 
 }
