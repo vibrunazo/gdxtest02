@@ -13,10 +13,10 @@ public class PutHot extends Action {
 	}
 
 	@Override
-	protected void ini() {
+	public void ini() {
 		setName("Put Hot");
 		setDescription("Heals " + getPower() + " per sec for " + getDuration() + 
-				"sec.");		
+				"sec.");
 	}
 	
 	

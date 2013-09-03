@@ -60,10 +60,11 @@ public abstract class Action {
 	 */
 	abstract protected void go(Char self, Char target);
 	
-	/**Do whatever initializatio here
+	/**Do whatever initialization and updates here
+	 * call this to update description
 	 * 
 	 */
-	abstract protected void ini();
+	abstract public void ini();
 
 	/**Gets the action name
 	 * @return

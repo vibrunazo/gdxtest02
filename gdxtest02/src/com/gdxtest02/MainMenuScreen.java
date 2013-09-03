@@ -25,7 +25,8 @@ public class MainMenuScreen implements Screen {
 
 	OrthographicCamera camera;
 
-	UIBuilder ui;
+	UIBuilder uibuilder;
+	MainMenuScreenUI ui;
 
 	public MainMenuScreen(final GdxTest02 gam) {
 		game = gam;
@@ -39,9 +40,9 @@ public class MainMenuScreen implements Screen {
 
 
 	private void setupUi() {
-		ui = new UIBuilder(game);
-		Stage stage = ui.getStage();
-		Skin skin = ui.getSkin();
+		uibuilder = new UIBuilder(game);
+		Stage stage = uibuilder.getStage();
+		Skin skin = uibuilder.getSkin();
 		
 		// Create a table that fills the screen. Everything else will go inside this table.
 		Table table = new Table();
@@ -90,7 +91,7 @@ public class MainMenuScreen implements Screen {
 		//			game.setScreen(new GameScreen(game));
 		//			dispose();
 		//		}
-		ui.draw();
+		uibuilder.draw();
 		
 //		Table.drawDebug(stage);
 	}
@@ -98,7 +99,7 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		ui.resize(width, height);
+		uibuilder.resize(width, height);
 		
 	}
 
@@ -134,7 +135,7 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void dispose() {
 //		game.dispose();
-		ui.dispose();
+		uibuilder.dispose();
 
 	}
 

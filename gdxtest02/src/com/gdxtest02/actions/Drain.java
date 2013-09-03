@@ -11,7 +11,7 @@ public class Drain extends Action {
 	}
 
 	@Override
-	protected void ini() {
+	public void ini() {
 		setName("Drain");
 		setDescription("Drains " + getPower() + " damage and heals you.");
 	}

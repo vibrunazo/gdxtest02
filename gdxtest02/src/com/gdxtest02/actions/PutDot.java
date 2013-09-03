@@ -13,7 +13,7 @@ public class PutDot extends Action {
 	}
 
 	@Override
-	protected void ini() {
+	public void ini() {
 		setName("Put Dot");
 		setDescription("Deals " + getPower() + " damage per sec for " + getDuration() + 
 				"sec.");

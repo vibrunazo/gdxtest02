@@ -5,7 +5,7 @@ import com.gdxtest02.Char;
 
 public class Dmg extends Action {
 	
-	protected void ini() {
+	public void ini() {
 		setName("DD");
 		setDescription("Does " + getPower() + " direct damage to the enemy.");
 	}

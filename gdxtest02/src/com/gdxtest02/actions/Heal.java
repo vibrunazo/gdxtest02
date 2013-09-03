@@ -6,7 +6,7 @@ import com.gdxtest02.Char;
 public class Heal extends Action {
 
 	@Override
-	protected void ini() {
+	public void ini() {
 		setName("Direct Heal");
 		setDescription("Heals " + getPower() + " damage.");
 	}
