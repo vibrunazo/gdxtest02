@@ -11,7 +11,7 @@ public class Char01 extends Char {
 		
 		actions.add(new Dmg(120).setName("Tiger"));
 		actions.add(new Dmg(250, 2).setName("Shoryuken"));
-		actions.add(new Drain(240, 4).setName("Death Coil"));
+		actions.add(new Drain(250, 4).setName("Death Coil"));
 		
 		setTex("ball02red.png");
 

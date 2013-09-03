@@ -25,7 +25,7 @@ public class MainMenuScreen implements Screen {
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
-		ui = new MainMenuScreenUI();
+
 		ui.setupUi(this);
 
 	}
@@ -54,7 +54,6 @@ public class MainMenuScreen implements Screen {
 	}
 
 
-	@Override
 	public void resize(int width, int height) {
 		ui.resize(width, height);
 		
@@ -91,7 +90,8 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		ui.dispose();
+//		game.dispose();
+		uibuilder.dispose();
 
 	}
 

@@ -12,8 +12,8 @@ public class MainMenuScreenUI {
 
 	UIBuilder uibuilder;
 
-	void setupUi(final MainMenuScreen screen) {
-		uibuilder = new UIBuilder(screen.game);
+	void setupUi(final MainMenuScreen mainMenuScreen) {
+		uibuilder = new UIBuilder(mainMenuScreen.game);
 		Stage stage = uibuilder.getStage();
 		Skin skin = uibuilder.getSkin();
 		
@@ -38,8 +38,8 @@ public class MainMenuScreenUI {
 			public void changed (ChangeEvent event, Actor actor) {
 				System.out.println("Clicked! Is checked: " + button.isChecked());
 				button.setText("Good job!");
-				screen.game.setScreen(new GameScreen(screen.game));
-				screen.dispose();
+				mainMenuScreen.game.setScreen(new GameScreen(mainMenuScreen.game));
+				mainMenuScreen.dispose();
 			}
 		};
 		button.addListener(l);
@@ -48,14 +48,6 @@ public class MainMenuScreenUI {
 
 	public void draw() {
 		uibuilder.draw();
-	}
-
-	public void resize(int width, int height) {
-		uibuilder.resize(width, height);
-	}
-
-	public void dispose() {
-		uibuilder.dispose();
 	}
 
 }

@@ -18,6 +18,7 @@ public class MainMenuScreen implements Screen {
 
 	OrthographicCamera camera;
 
+	UIBuilder uibuilder;
 	MainMenuScreenUI ui;
 
 	public MainMenuScreen(final GdxTest02 gam) {
@@ -25,7 +26,7 @@ public class MainMenuScreen implements Screen {
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
-		ui = new MainMenuScreenUI();
+
 		ui.setupUi(this);
 
 	}
@@ -48,7 +49,7 @@ public class MainMenuScreen implements Screen {
 		//			game.setScreen(new GameScreen(game));
 		//			dispose();
 		//		}
-		ui.draw();
+		uibuilder.draw();
 		
 //		Table.drawDebug(stage);
 	}
@@ -56,7 +57,7 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		ui.resize(width, height);
+		uibuilder.resize(width, height);
 		
 	}
 
@@ -91,7 +92,8 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		ui.dispose();
+//		game.dispose();
+		uibuilder.dispose();
 
 	}
 
