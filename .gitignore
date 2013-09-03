@@ -22,20 +22,20 @@ local.properties
 # Eclipse gitignore
 # https://github.com/github/gitignore/blob/master/Global/Eclipse.gitignore
 
-*.pydevproject
-.project
-.metadata
-bin/**
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
+#*.pydevproject
+#.project
+#.metadata
+#bin/**
+#tmp/**
+#tmp/**/*
+#*.tmp
+#*.bak
+#*.swp
+#*~.nib
+#local.properties
 #.classpath
 #.settings/
-.loadpath
+#.loadpath
 
 # External tool builders
 .externalToolBuilders/
