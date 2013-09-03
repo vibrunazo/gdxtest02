@@ -141,11 +141,9 @@ public class GameScreenUI extends UIBuilder {
 
 				// number of the action
 				int activeActionId = Integer.parseInt(actor.getName().substring(2));
+				
 				// set the action number for the appropriate player
-				if (groupnumber == 1) { // it's p1
-					p1.setActiveActionId(activeActionId);
-				}
-				else p2.setActiveActionId(activeActionId); 
+				clickedActionButton(groupnumber, activeActionId);
 			}
 		};
 	}
@@ -247,6 +245,21 @@ public class GameScreenUI extends UIBuilder {
 	 */
 	private void log(String text) {
 		Gdx.app.log("gdxtest", text);
+	}
+
+	/**What to do now that I know what action button was clicked and for what player
+	 * @param player
+	 * @param activeActionId
+	 */
+	private void clickedActionButton(int player, int activeActionId) {
+		Char c = screen.getPlayer(player);
+		c.setActiveActionId(activeActionId);
+		Action a = c.getActiveAction();
+		if (a == null) {
+			logToConsole("Action " + activeActionId + " is null. Choose another.");
+			return;
+		}
+		logToConsole(activeActionId + ": " + a.getName() + " - " + a.getDescription());
 	}
 	
 }

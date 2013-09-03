@@ -8,6 +8,7 @@ public abstract class Action {
 	protected int cooldown = 0;
 	private int curcooldown = 0;
 	protected int duration = 5;
+	private String description = "This is a skill";
 	
 	public Action() {
 	}
@@ -61,6 +62,21 @@ public abstract class Action {
 	 */
 	public Action setName(String name) {
 		this.name = name;
+		return this;
+	}
+	
+	/**Gets the action name
+	 * @return
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**Sets the description, returns self
+	 * @param name
+	 * @return
+	 */
+	public Action setDescription(String description) {
+		this.description = description;
 		return this;
 	}
 
