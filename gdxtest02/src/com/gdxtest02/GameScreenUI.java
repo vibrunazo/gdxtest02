@@ -103,6 +103,7 @@ public class GameScreenUI extends UIBuilder {
 
 		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
 		final TextButton gobutton = new TextButton("Go!", skin);
+		gobutton.setDisabled(true);
 		final TextButton restartbutton = new TextButton("Restart", skin);
 		final TextButton backbutton = new TextButton("Back", skin);
 		centerTable.add(gobutton).width(160).height(40);

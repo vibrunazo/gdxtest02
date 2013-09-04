@@ -41,8 +41,8 @@ public class CharSelectScreenUI {
 	private Skin skin;
 	private Table chartable;
 	private ClickListener charlistener;
-	private ChangeListener gobuttonlistener;
-	private ChangeListener selectlistener;
+	private ClickListener gobuttonlistener;
+	private ClickListener selectlistener;
 	private ObjectMap<String, Char> chars;
 	private TextButton p1button;
 	private int turn;
@@ -98,6 +98,7 @@ public class CharSelectScreenUI {
 		stage.addActor(lefttable);		
 		
 		p1button = new TextButton("p1", skin);
+		p1button.setDisabled(true);
 		lefttable.add(p1button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
 	}
 	
@@ -107,6 +108,7 @@ public class CharSelectScreenUI {
 		stage.addActor(righttable);		
 		
 		p2button = new TextButton("p2", skin);
+		p2button.setDisabled(true);
 		righttable.add(p2button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
 	}
 
@@ -126,6 +128,7 @@ public class CharSelectScreenUI {
 		chartable.add(cbutton).width(50).height(50);
 		cbutton.setName(name);
 		cbutton.addListener(charlistener);
+		cbutton.setDisabled(true);
 	}
 
 	private void createMenuTable() {
@@ -141,19 +144,21 @@ public class CharSelectScreenUI {
 		menutable.setY(MENUY);
 		gobutton.addListener(gobuttonlistener);
 		backbutton.addListener(selectlistener);
+		gobutton.setDisabled(true);
+		backbutton.setDisabled(true);
 	}
 
 	private void createListeners() {
-		gobuttonlistener = new ChangeListener() {
-			public void changed (ChangeEvent event, Actor actor) {
+		gobuttonlistener = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
 				System.out.println("Clicked! Is checked: " + gobutton.isChecked());
 				screen.game.setScreen(new GameScreen(screen.game, p1, p2));
 				screen.dispose();
 			}
 		};
 		
-		selectlistener = new ChangeListener() {
-			public void changed (ChangeEvent event, Actor actor) {
+		selectlistener = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
 				screen.game.setScreen(new MainMenuScreen(screen.game));
 				screen.dispose();
 			}
