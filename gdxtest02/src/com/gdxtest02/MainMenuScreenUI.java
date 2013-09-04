@@ -11,11 +11,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 public class MainMenuScreenUI {
 
 	UIBuilder uibuilder;
+	private TextButton gobutton;
+	private TextButton selectbutton;
+	private MainMenuScreen screen;
 
 	void setupUi(final MainMenuScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
 		Stage stage = uibuilder.getStage();
 		Skin skin = uibuilder.getSkin();
+		this.screen = screen;
 		
 		// Create a table that fills the screen. Everything else will go inside this table.
 		Table table = new Table();
@@ -25,25 +29,39 @@ public class MainMenuScreenUI {
 		//				table.setPosition(190, 142);
 		stage.addActor(table);
 	
-		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
-		final TextButton button = new TextButton("Click me!", skin);
-		table.add(button).width(200).height(50);
-	//		button.getLabel().setFontScale(2);
+		gobutton = new TextButton("Click me!", skin);
+		table.add(gobutton).width(300).height(50);
+		table.row();
+		selectbutton = new TextButton("Character select", skin);
+		table.add(selectbutton).width(300).height(50);
 	
+		createListeners();
+		
+		
+	}
+
+	private void createListeners() {
 		// Add a listener to the button. ChangeListener is fired when the button's checked state changes, eg when clicked,
 		// Button#setChecked() is called, via a key press, etc. If the event.cancel() is called, the checked state will be reverted.
 		// ClickListener could have been used, but would only fire when clicked. Also, canceling a ClickListener event won't
 		// revert the checked state.
-		ChangeListener l = new ChangeListener() {
+		ChangeListener gobuttonlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				System.out.println("Clicked! Is checked: " + button.isChecked());
-				button.setText("Good job!");
+				System.out.println("Clicked! Is checked: " + gobutton.isChecked());
+				gobutton.setText("Good job!");
 				screen.game.setScreen(new GameScreen(screen.game));
 				screen.dispose();
 			}
 		};
-		button.addListener(l);
+		gobutton.addListener(gobuttonlistener);
 		
+		ChangeListener selectlistener = new ChangeListener() {
+			public void changed (ChangeEvent event, Actor actor) {
+				screen.game.setScreen(new GameScreen(screen.game));
+				screen.dispose();
+			}
+		};
+		selectbutton.addListener(selectlistener);
 	}
 
 	public void draw() {
