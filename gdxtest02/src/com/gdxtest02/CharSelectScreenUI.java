@@ -21,6 +21,10 @@ import com.gdxtest02.chars.CharYagg01;
 
 public class CharSelectScreenUI {
 
+	private float FACETABLE_X = 50;
+	private float FACETABLE_Y = 300;
+	private float FACETABLE_WIDTH = 150;
+	
 	UIBuilder uibuilder;
 	private TextButton gobutton;
 	private TextButton backbutton;
@@ -37,6 +41,8 @@ public class CharSelectScreenUI {
 	private ChangeListener gobuttonlistener;
 	private ChangeListener selectlistener;
 	private ObjectMap<String, Char> chars;
+	private TextButton p1button;
+	private int turn;
 
 	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
@@ -56,10 +62,22 @@ public class CharSelectScreenUI {
 		
 		createMenuTable();
 		createCharTable();
-	
+		createLeftTable();
+		
 		p1 = new CharYagg01("p1");
 		p2 = new Char05("p2");
+		turn = 1;
 		
+	}
+
+	private void createLeftTable() {
+		Table lefttable = new Table();
+		lefttable.setPosition(FACETABLE_X + FACETABLE_WIDTH/2, FACETABLE_Y);
+		stage.addActor(lefttable);		
+		
+		p1button = new TextButton("p1", skin);
+		lefttable.add(p1button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
+//		p1button.addListener(facelistener);
 	}
 
 	private void createCharTable() {
@@ -115,7 +133,10 @@ public class CharSelectScreenUI {
 			public void clicked(InputEvent event, float x, float y)  {
 				String name = event.getTarget().getParent().getName();
 				Char c = chars.get(name);
-				p1 = c;
+				
+				setCurrentPlayer(c);
+				toggleTurn();
+				p1button.setText(name);
 				log("click char " + name + " : " + c.getFullDescription());
 				
 			}
@@ -134,8 +155,37 @@ public class CharSelectScreenUI {
 		uibuilder.dispose();
 	}
 	
+	/**Returns the Char object for player 1 or 2
+	 * @param gameScreenUI TODO
+	 * @param player 1 or 2
+	 * @return Char p1 or p2
+	 */
+	public Char getPlayer(int player) {
+		if (player == 1) return p1;
+		if (player == 2) return p2;
+		return null;
+	}
+	
+	public void setPlayer(int player, Char c) {
+		if (player == 1) p1 = c;
+		if (player == 2) p2 = c;
+	}
+	public void setCurrentPlayer(Char c) {
+		setPlayer(turn, c);
+	}
+	
+	/**Toggles between 1 and 2 for who is the current player to choose
+	 * 
+	 */
+	private void toggleTurn() {
+		if (turn == 1) turn = 2;
+		else turn = 1; 
+		
+	}
+	
 	private void log(String text) {
 		Gdx.app.log("gdxtest", text);
 	}
 
 }
+ 
