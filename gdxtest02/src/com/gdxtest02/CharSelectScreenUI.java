@@ -47,6 +47,7 @@ public class CharSelectScreenUI {
 	private TextButton p1button;
 	private int turn;
 	private Label titlelabel;
+	private TextButton p2button;
 
 	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
@@ -69,6 +70,7 @@ public class CharSelectScreenUI {
 		createMenuTable();
 		createCharTable();
 		createLeftTable();
+		createRightTable();
 		
 		p1 = new CharYagg01("p1");
 		p2 = new Char05("p2");
@@ -97,7 +99,15 @@ public class CharSelectScreenUI {
 		
 		p1button = new TextButton("p1", skin);
 		lefttable.add(p1button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
-//		p1button.addListener(facelistener);
+	}
+	
+	private void createRightTable() {
+		Table righttable = new Table();
+		righttable.setPosition(800 - FACETABLE_X - FACETABLE_WIDTH/2, FACETABLE_Y);
+		stage.addActor(righttable);		
+		
+		p2button = new TextButton("p2", skin);
+		righttable.add(p2button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
 	}
 
 	private void createCharTable() {
@@ -155,8 +165,10 @@ public class CharSelectScreenUI {
 				Char c = chars.get(name);
 				
 				setCurrentPlayer(c);
+				TextButton a = (TextButton) getCurrentFace();
+				a.setText(name);
 				toggleTurn();
-				p1button.setText(name);
+				
 				log("click char " + name + " : " + c.getFullDescription());
 				
 			}
@@ -180,18 +192,26 @@ public class CharSelectScreenUI {
 	 * @param player 1 or 2
 	 * @return Char p1 or p2
 	 */
-	public Char getPlayer(int player) {
+	private Char getPlayer(int player) {
 		if (player == 1) return p1;
 		if (player == 2) return p2;
 		return null;
 	}
 	
-	public void setPlayer(int player, Char c) {
+	private void setPlayer(int player, Char c) {
 		if (player == 1) p1 = c;
 		if (player == 2) p2 = c;
 	}
-	public void setCurrentPlayer(Char c) {
+	private void setCurrentPlayer(Char c) {
 		setPlayer(turn, c);
+	}
+	
+	/**Get the UI widget that shows the face of the current player
+	 * @return
+	 */
+	private Actor getCurrentFace() {
+		if (turn == 1) return p1button;
+		else return p2button;
 	}
 	
 	/**Toggles between 1 and 2 for who is the current player to choose
