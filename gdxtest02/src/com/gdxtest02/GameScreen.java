@@ -54,7 +54,12 @@ public class GameScreen implements Screen {
 	private String fightstate; 
 	private GameScreenUI ui;
 
-	public GameScreen(final GdxTest02 gam) {
+	public GameScreen(GdxTest02 game) {
+		this(game, new Char01("p1"), new Char02("p2"));
+		
+	}
+	
+	public GameScreen(final GdxTest02 gam, Char player1, Char player2) {
 		this.game = gam;
 
 		fps = new FPSLogger();
@@ -66,10 +71,12 @@ public class GameScreen implements Screen {
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
 
-		p1 = new Char03("p1");
+//		p1 = new Char03("p1");
+		p1 = player1;
 		p1.setPos(50, 150);
 
-		p2 = new Char02("p2");
+//		p2 = new Char02("p2");
+		p2 = player2;
 		p2.setPos(800-50-256, 150);
 
 		ui = new GameScreenUI(game, this);
@@ -82,7 +89,7 @@ public class GameScreen implements Screen {
 
 
 	protected void restart() {
-		game.setScreen(new GameScreen(game));
+		game.setScreen(new GameScreen(game, p1, p2));
 //		dispose();
 	}
 
