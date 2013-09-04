@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -21,6 +23,7 @@ import com.gdxtest02.chars.CharYagg01;
 
 public class CharSelectScreenUI {
 
+	private static final float TITLE_Y = 200;
 	private float FACETABLE_X = 50;
 	private float FACETABLE_Y = 300;
 	private float FACETABLE_WIDTH = 150;
@@ -43,12 +46,14 @@ public class CharSelectScreenUI {
 	private ObjectMap<String, Char> chars;
 	private TextButton p1button;
 	private int turn;
+	private Label titlelabel;
 
 	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
 		stage = uibuilder.getStage();
 		skin = uibuilder.getSkin();
 		this.screen = screen;
+		turn = 1;
 		
 		chars = new ObjectMap<String, Char>();
 		chars.put("c1", new Char01("c1"));
@@ -60,14 +65,29 @@ public class CharSelectScreenUI {
 		
 		createListeners();
 		
+		createTitle();
 		createMenuTable();
 		createCharTable();
 		createLeftTable();
 		
 		p1 = new CharYagg01("p1");
 		p2 = new Char05("p2");
-		turn = 1;
 		
+		
+	}
+
+	private void createTitle() {
+		titlelabel = new Label("", skin);
+		titlelabel.setY(TITLE_Y);
+		titlelabel.setAlignment(Align.center, Align.center);
+		titlelabel.setFillParent(true);
+		stage.addActor(titlelabel);
+		
+		updateTitle();
+	}
+
+	private void updateTitle() {
+		titlelabel.setText("Choose player " + turn);
 	}
 
 	private void createLeftTable() {
@@ -180,7 +200,7 @@ public class CharSelectScreenUI {
 	private void toggleTurn() {
 		if (turn == 1) turn = 2;
 		else turn = 1; 
-		
+		updateTitle();
 	}
 	
 	private void log(String text) {
