@@ -8,6 +8,7 @@ public class Dmg extends Action {
 	public void ini() {
 		setName("DD");
 		setDescription("Does " + getPower() + " direct damage to the enemy.");
+		setAvgDps(power/(cooldown+1));
 	}
 
 	@Override

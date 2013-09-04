@@ -9,6 +9,7 @@ public abstract class Action {
 	private int curcooldown = 0;
 	protected int duration = 5;
 	private String description = "This is a skill";
+	private float avgdps;
 	
 	public Action() {
 		ini();
@@ -182,6 +183,14 @@ public abstract class Action {
 	 */
 	public void setPower(int power) {
 		this.power = power;
+	}
+	
+	public void setAvgDps(float avg) {
+		avgdps =  avg;
+	}
+	
+	public float getAvgDps() {
+		return avgdps;
 	}
 
 }

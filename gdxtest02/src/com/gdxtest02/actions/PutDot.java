@@ -17,6 +17,7 @@ public class PutDot extends Action {
 		setName("Put Dot");
 		setDescription("Deals " + getPower() + " damage per sec for " + getDuration() + 
 				"sec.");
+		setAvgDps((power*duration)/(cooldown+1));
 	}
 	
 

@@ -17,6 +17,7 @@ public class PutHot extends Action {
 		setName("Put Hot");
 		setDescription("Heals " + getPower() + " per sec for " + getDuration() + 
 				"sec.");
+		setAvgDps((power*duration)/(cooldown+1));
 	}
 	
 	

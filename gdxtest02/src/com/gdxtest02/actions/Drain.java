@@ -14,6 +14,7 @@ public class Drain extends Action {
 	public void ini() {
 		setName("Drain");
 		setDescription("Drains " + getPower() + " damage and heals you.");
+		setAvgDps(power*2/(cooldown+1));
 	}
 	
 

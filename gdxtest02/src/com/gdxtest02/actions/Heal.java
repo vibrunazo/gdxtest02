@@ -9,6 +9,7 @@ public class Heal extends Action {
 	public void ini() {
 		setName("Direct Heal");
 		setDescription("Heals " + getPower() + " damage.");
+		setAvgDps(power/(cooldown+1));
 	}
 	
 	@Override

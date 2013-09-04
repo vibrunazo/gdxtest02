@@ -13,6 +13,7 @@ public class Char {
 	private String name;
 	private int hp;
 	protected int maxhp;
+	private String description;
 	/**Damage to be taken this round. Skills will set this.
 	 * Final damage actually taken will only be decided at the end of the round.
 	 * 
@@ -33,6 +34,7 @@ public class Char {
 	 * so they don't make effect when first applied, only 1 round later
 	 */
 	private Array<Buff> newbuffs;
+	private Balance balance;
 
 	public Char(String name) {
 		this.name = name;
@@ -41,12 +43,14 @@ public class Char {
 		this.maxhp = 1000;
 		this.hp = maxhp;
 		this.activeAction = 0;
+		description = "This is a Char";
 		actions = new Array<Action>();
 //		actions.add(new Dmg(50));
 //		actions.add(new Dmg(200));
 		dmg = 0;
 		buffs = new Array<Buff>();
 		newbuffs = new Array<Buff>();
+		balance = new Balance(this);
 	}
 	
 	public void draw(SpriteBatch batch){
@@ -73,6 +77,10 @@ public class Char {
 //		Gdx.app.log("moo", "char: " + name + " hp: " + hp + " maxhp: " + maxhp
 //				+ " health: " + health);
 		
+	}
+	
+	public Balance getBalance() {
+		return balance;
 	}
 	
 	/**Get the action of specific id, starting from 1
@@ -237,6 +245,34 @@ public class Char {
 
 	public void setActiveActionId(int activeAction) {
 		this.activeAction = activeAction;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	/**
+	 * @return the description
+	 */
+	public String getFullDescription() {
+		return description + " avgdps: " + balance.getAvgDps();
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setFullDescription(String description) {
+		this.description = description;
 	}
 
 }
