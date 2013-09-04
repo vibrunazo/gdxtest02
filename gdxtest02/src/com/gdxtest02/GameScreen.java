@@ -92,6 +92,11 @@ public class GameScreen implements Screen {
 		game.setScreen(new GameScreen(game, p1, p2));
 //		dispose();
 	}
+	
+	protected void back() {
+		game.setScreen(new MainMenuScreen(game));
+//		dispose();
+	}
 
 	@Override
 	public void render(float delta) {

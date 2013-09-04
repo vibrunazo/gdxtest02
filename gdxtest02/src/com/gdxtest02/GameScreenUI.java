@@ -46,6 +46,7 @@ public class GameScreenUI extends UIBuilder {
 	private Array<String> consoleData;
 	private List consoleList;
 	private ScrollPane scroll;
+	private ClickListener clickOnBackButton;
 	
 	public GameScreenUI(GdxTest02 game, GameScreen gameScreen) {
 		super(game);
@@ -103,12 +104,16 @@ public class GameScreenUI extends UIBuilder {
 		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
 		final TextButton gobutton = new TextButton("Go!", skin);
 		final TextButton restartbutton = new TextButton("Restart", skin);
+		final TextButton backbutton = new TextButton("Back", skin);
 		centerTable.add(gobutton).width(160).height(40);
 		centerTable.row();
 		centerTable.add(restartbutton).width(160).height(40);
+		centerTable.row();
+		centerTable.add(backbutton).width(160).height(40);
 
 		gobutton.addListener(clickOnGoButton);
 		restartbutton.addListener(clickOnRestartButton);
+		backbutton.addListener(clickOnBackButton);
 	}
 
 	private void createListeners() {
@@ -120,6 +125,11 @@ public class GameScreenUI extends UIBuilder {
 		clickOnRestartButton = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				screen.restart();
+			}
+		};
+		clickOnBackButton = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				screen.back();
 			}
 		};
 
