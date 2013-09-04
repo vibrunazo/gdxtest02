@@ -48,7 +48,6 @@ public class MainMenuScreenUI {
 		ChangeListener gobuttonlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 				System.out.println("Clicked! Is checked: " + gobutton.isChecked());
-				gobutton.setText("Good job!");
 				screen.game.setScreen(new GameScreen(screen.game));
 				screen.dispose();
 			}

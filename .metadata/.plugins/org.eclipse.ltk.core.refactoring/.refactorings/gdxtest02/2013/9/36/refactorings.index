@@ -1,0 +1,21 @@
+1378107616090	Rename local variable 'scrollPane2'
+1378133134050	Rename local variable 'scrollPane'
+1378133855582	Convert local variable 'listEntries' to field
+1378133901364	Rename field 'listEntries'
+1378134456260	Convert local variable 'consoleList' to field
+1378145130982	Convert local variable 'scroll' to field
+1378183389327	Extract method 'clickedActionButton'
+1378184694348	Extract method 'ini'
+1378186102537	Rename local variable 'p'
+1378244037908	Rename field 'ui'
+1378248264372	Move method 'setupUi'
+1378248360421	Move field
+1378248637275	Rename local variable 'mainMenuScreen'
+1378266236631	Rename local variable 'button'
+1378266326147	Extract method 'createListeners'
+1378266368866	Convert local variable 'gobutton' to field
+1378266376081	Convert local variable 'selectbutton' to field
+1378266396792	Rename local variable 'l'
+1378266401735	Convert local variable 'gobuttonlistener' to field
+1378266594380	Rename local variable 'l'
+1378266692638	Rename local variable 'l'

@@ -34,6 +34,7 @@ import com.gdxtest02.actions.Heal;
 import com.gdxtest02.actions.PutDot;
 import com.gdxtest02.chars.Char01;
 import com.gdxtest02.chars.Char02;
+import com.gdxtest02.chars.Char03;
 
 public class GameScreen implements Screen {
 	final private GdxTest02 game;
@@ -65,7 +66,7 @@ public class GameScreen implements Screen {
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
 
-		p1 = new Char01("p1");
+		p1 = new Char03("p1");
 		p1.setPos(50, 150);
 
 		p2 = new Char02("p2");
