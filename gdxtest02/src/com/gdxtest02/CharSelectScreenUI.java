@@ -2,13 +2,16 @@ package com.gdxtest02;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.gdxtest02.chars.Char01;
 import com.gdxtest02.chars.Char02;
 import com.gdxtest02.chars.Char03;
@@ -28,16 +31,22 @@ public class CharSelectScreenUI {
 	private Stage stage;
 	private Skin skin;
 	private Table chartable;
-	private ChangeListener charlistener;
+	private ClickListener charlistener;
 	private ChangeListener gobuttonlistener;
 	private ChangeListener selectlistener;
-	private Array<Char> chars;
+	private ObjectMap<String, Char> chars;
 
 	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
 		stage = uibuilder.getStage();
 		skin = uibuilder.getSkin();
 		this.screen = screen;
+		
+		chars = new ObjectMap<String, Char>();
+		chars.put("c1", new Char01("c1"));
+		chars.put("c2", new Char02("c2"));
+		chars.put("c3", new Char03("c3"));
+		chars.put("y1", new CharYagg01("y1"));
 		
 		createListeners();
 		
@@ -47,10 +56,6 @@ public class CharSelectScreenUI {
 		p1 = new CharYagg01("p1");
 		p2 = new Char03("p2");
 		
-		chars = new Array<Char>();
-		chars.add(new Char01("c1"));
-		
-		
 	}
 
 	private void createCharTable() {
@@ -58,14 +63,16 @@ public class CharSelectScreenUI {
 		chartable.setFillParent(true);
 		stage.addActor(chartable);
 		
-		addCharButton("C1");
-		addCharButton("C2");
-		addCharButton("C3");
+		for (Char c : chars.values()) {
+			addCharButton(c.getName());
+		}
+		
 	}
 
 	private void addCharButton(String name) {
 		TextButton cbutton = new TextButton(name, skin);
 		chartable.add(cbutton).width(50).height(50);
+		cbutton.setName(name);
 		cbutton.addListener(charlistener);
 	}
 
@@ -100,9 +107,12 @@ public class CharSelectScreenUI {
 			}
 		};
 		
-		charlistener = new ChangeListener() {
-			public void changed (ChangeEvent event, Actor actor) {
-				log("click char");
+		charlistener = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				String name = event.getTarget().getParent().getName();
+				log("click char " + name);
+				p1 = chars.get(name);
+				
 			}
 		};
 	}
