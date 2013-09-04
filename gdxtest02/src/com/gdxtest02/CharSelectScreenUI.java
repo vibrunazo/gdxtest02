@@ -8,14 +8,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 
-public class MainMenuScreenUI {
+public class CharSelectScreenUI {
 
 	UIBuilder uibuilder;
 	private TextButton gobutton;
 	private TextButton selectbutton;
-	private MainMenuScreen screen;
+	private CharSelectScreen screen;
 
-	void setupUi(final MainMenuScreen screen) {
+	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
 		Stage stage = uibuilder.getStage();
 		Skin skin = uibuilder.getSkin();
@@ -29,7 +29,7 @@ public class MainMenuScreenUI {
 		//				table.setPosition(190, 142);
 		stage.addActor(table);
 	
-		gobutton = new TextButton("Click me!", skin);
+		gobutton = new TextButton("BAAAAAAAAAAAA", skin);
 		table.add(gobutton).width(300).height(50);
 		table.row();
 		selectbutton = new TextButton("Character select", skin);
@@ -56,7 +56,7 @@ public class MainMenuScreenUI {
 		
 		ChangeListener selectlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				screen.game.setScreen(new CharSelectScreen(screen.game));
+				screen.game.setScreen(new GameScreen(screen.game));
 				screen.dispose();
 			}
 		};

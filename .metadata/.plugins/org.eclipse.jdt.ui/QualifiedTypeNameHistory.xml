@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.List"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.ScrollPane"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.utils.Array"/>
-<fullyQualifiedTypeName name="com.gdxtest02.MainMenuScreenUI"/>
-</qualifiedTypeNameHistroy>
