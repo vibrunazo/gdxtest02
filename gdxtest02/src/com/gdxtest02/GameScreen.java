@@ -81,6 +81,9 @@ public class GameScreen implements Screen {
 		p2.setPos(800-50-256, 150);
 		p2.resetStats();
 		
+		p1.setTarget(p2);
+		p2.setTarget(p1);
+		
 		ui = new GameScreenUI(game, this);
 		ui.setupUi();
 		
@@ -183,14 +186,16 @@ public class GameScreen implements Screen {
 		ui.logToConsole("p1 uses: " + actionidp1 + ": " + a1name +
 				", p2 uses: " + actionidp2 + ": " + a2name + ". Fight!");
 		
-		p1.updateCooldowns();
-		p2.updateCooldowns();
-		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
-		if (actionp1 != null) actionp1.act(p1, p2);
-		if (actionp2 != null) actionp2.act(p2, p1);
-		p1.applyBuffs(); p2.applyBuffs(); 
-		// actually applies the damage done this round by all players
+		p1.updateAll();p2.updateAll();
+//		p1.updateCooldowns();
+//		p2.updateCooldowns();
+//		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
+//		if (actionp1 != null) actionp1.act(p1, p2);
+//		if (actionp2 != null) actionp2.act(p2, p1);
+//		p1.applyBuffs(); p2.applyBuffs(); 
+//		// actually applies the damage done this round by all players
 		p1.applyDmg(); p2.applyDmg();
+		
 
 		if (p1.getHp() == 0 || p2.getHp() == 0) {
 			fightstate = "paused";

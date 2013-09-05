@@ -204,8 +204,8 @@ public class CharSelectScreenUI {
 	}
 	
 	private void setPlayer(int player, Char c) {
-		if (player == 1) p1 = c;
-		if (player == 2) p2 = c;
+		if (player == 1) p1 = c.getClone();
+		if (player == 2) p2 = c.getClone();
 	}
 	private void setCurrentPlayer(Char c) {
 		setPlayer(turn, c);

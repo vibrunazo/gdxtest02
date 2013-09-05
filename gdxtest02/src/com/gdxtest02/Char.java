@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.actions.Dmg;
 
-public class Char {
+public class Char implements Cloneable {
 	private String name;
 	private int hp;
 	protected int maxhp;
@@ -35,6 +35,7 @@ public class Char {
 	 */
 	private Array<Buff> newbuffs;
 	private Balance balance;
+	private Char target;
 
 	public Char(String name) {
 		this.name = name;
@@ -223,6 +224,17 @@ public class Char {
 	public void updateCooldowns() {
 		for (Action a : actions) a.updateCooldown();
 	}
+	
+	/**Update all that needs to be updated every logic tick
+	 * use actions, update cooldowns
+	 */
+	public void updateAll() {
+		updateCooldowns();
+		Action a = getActiveAction();
+		if (a != null) a.act(this, getTarget());
+		applyBuffs(); 
+//		applyDmg();
+	}
 
 	public int getMaxhp() {
 		return maxhp;
@@ -282,6 +294,30 @@ public class Char {
 	 */
 	public void setFullDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the target
+	 */
+	public Char getTarget() {
+		return target;
+	}
+
+	/**
+	 * @param target the target to set
+	 */
+	public void setTarget(Char target) {
+		this.target = target;
+	}
+	
+	public Char getClone() {
+		try {
+			return (Char) this.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
