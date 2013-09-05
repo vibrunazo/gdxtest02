@@ -74,11 +74,13 @@ public class GameScreen implements Screen {
 //		p1 = new Char03("p1");
 		p1 = player1;
 		p1.setPos(50, 150);
+		p1.resetStats();
 
 //		p2 = new Char02("p2");
 		p2 = player2;
 		p2.setPos(800-50-256, 150);
-
+		p2.resetStats();
+		
 		ui = new GameScreenUI(game, this);
 		ui.setupUi();
 		
@@ -178,11 +180,11 @@ public class GameScreen implements Screen {
 		
 		// now we know everything is ok, so start actually doing stuff
 		
-		p1.updateCooldowns();
-		p2.updateCooldowns();
-		
 		ui.logToConsole("p1 uses: " + actionidp1 + ": " + a1name +
 				", p2 uses: " + actionidp2 + ": " + a2name + ". Fight!");
+		
+		p1.updateCooldowns();
+		p2.updateCooldowns();
 		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
 		if (actionp1 != null) actionp1.act(p1, p2);
 		if (actionp2 != null) actionp2.act(p2, p1);

@@ -54,6 +54,13 @@ public abstract class Action {
 		if (curcooldown > 0) curcooldown -= 1;
 	}
 	
+	/**Reset all stats to initial values
+	 * 
+	 */
+	public void reset() {
+		curcooldown = 0;
+	}
+	
 	/**The actual action class needs to implement this method to
 	 * do its thing
 	 * @param self the Char doing the action

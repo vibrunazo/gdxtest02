@@ -11,8 +11,8 @@ public class Char04 extends Char {
 		super(name);
 		
 		actions.add(new Dmg(100).setName("moo"));
-		actions.add(new Dmg(200, 1).setName("meh"));
-		actions.add(new Dmg(400, 3).setName("hihihi"));
+//		actions.add(new Dmg(200, 1).setName("meh"));
+//		actions.add(new Dmg(400, 3).setName("hihihi"));
 		
 		setTex("ball02yell.png");
 

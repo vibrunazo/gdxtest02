@@ -38,19 +38,28 @@ public class Char {
 
 	public Char(String name) {
 		this.name = name;
-		this.posX = 0;
-		this.posY = 0;
-		this.maxhp = 1000;
-		this.hp = maxhp;
-		this.activeAction = 0;
 		description = "This is a Char";
 		actions = new Array<Action>();
-//		actions.add(new Dmg(50));
-//		actions.add(new Dmg(200));
+		balance = new Balance(this);
+		this.maxhp = 1000;
+		this.posX = 0;
+		this.posY = 0;
+		
+		resetStats();
+	}
+
+	/**Reset all stats to initial values
+	 * 
+	 */
+	public void resetStats() {
+		this.hp = maxhp;
+		this.activeAction = 0;
 		dmg = 0;
 		buffs = new Array<Buff>();
 		newbuffs = new Array<Buff>();
-		balance = new Balance(this);
+		
+		//reset all actions
+		for (Action a : actions) a.reset();
 	}
 	
 	public void draw(SpriteBatch batch){

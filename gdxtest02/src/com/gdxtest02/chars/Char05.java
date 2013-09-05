@@ -11,9 +11,10 @@ public class Char05 extends Char {
 	public Char05(String name) {
 		super(name);
 		
-		actions.add(new Dmg(50).setName("dmg"));
-		actions.add(new Heal(300, 1).setName("heal"));
-		actions.add(new Drain(100, 1).setName("drain"));
+		actions.add(new Dmg(50).setName("test1"));
+		actions.add(new Dmg(200, 4).setName("test1"));
+//		actions.add(new Heal(300, 1).setName("test2"));
+//		actions.add(new Drain(100, 1).setName("test3"));
 		
 		setTex("ball02red.png");
 
