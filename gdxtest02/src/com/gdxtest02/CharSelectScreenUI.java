@@ -209,6 +209,7 @@ public class CharSelectScreenUI {
 	}
 	private void setCurrentPlayer(Char c) {
 		setPlayer(turn, c);
+		c.getBalance().testModel1();
 	}
 	
 	/**Get the UI widget that shows the face of the current player

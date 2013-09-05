@@ -311,10 +311,10 @@ public class Char implements Cloneable {
 	}
 	
 	public Char getClone() {
+		// TODO this isn't working, actions are not cloning, so on a mirror match one player uses the cooldown of the other
 		try {
 			return (Char) this.clone();
 		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
