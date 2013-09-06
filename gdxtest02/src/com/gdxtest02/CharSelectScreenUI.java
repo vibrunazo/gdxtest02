@@ -42,12 +42,13 @@ public class CharSelectScreenUI {
 	private Table chartable;
 	private ClickListener charlistener;
 	private ClickListener gobuttonlistener;
-	private ClickListener selectlistener;
+	private ClickListener backlistener;
 	private ObjectMap<String, Char> chars;
 	private TextButton p1button;
 	private int turn;
 	private Label titlelabel;
 	private TextButton p2button;
+	private ClickListener balancelistener;
 
 	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
@@ -138,14 +139,23 @@ public class CharSelectScreenUI {
 	
 		gobutton = new TextButton("Fight!", skin);
 		menutable.add(gobutton).width(300).height(50);
+		gobutton.addListener(gobuttonlistener);
+		gobutton.setDisabled(true);
 		menutable.row();
+		
+		TextButton balancebutton = new TextButton("Balance test", skin);
+		menutable.add(balancebutton).width(300).height(50);
+		balancebutton.addListener(balancelistener);
+		balancebutton.setDisabled(true);
+		menutable.row();
+		
 		backbutton = new TextButton("Back to Menu", skin);
 		menutable.add(backbutton).width(300).height(50);
 		menutable.setY(MENUY);
-		gobutton.addListener(gobuttonlistener);
-		backbutton.addListener(selectlistener);
-		gobutton.setDisabled(true);
+		backbutton.addListener(backlistener);
 		backbutton.setDisabled(true);
+		
+
 	}
 
 	private void createListeners() {
@@ -157,7 +167,16 @@ public class CharSelectScreenUI {
 			}
 		};
 		
-		selectlistener = new ClickListener() {
+		balancelistener = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				Char c = getCurrentPlayer();
+				if (c != null) {
+					c.getBalance().testModel1();
+				}
+			}
+		};
+		
+		backlistener = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				screen.game.setScreen(new MainMenuScreen(screen.game));
 				screen.dispose();
@@ -203,14 +222,20 @@ public class CharSelectScreenUI {
 		return null;
 	}
 	
+	private Char getCurrentPlayer() {
+		return getPlayer(turn);
+	}
+	
 	private void setPlayer(int player, Char c) {
 		if (player == 1) p1 = c.getClone();
 		if (player == 2) p2 = c.getClone();
 	}
 	private void setCurrentPlayer(Char c) {
 		setPlayer(turn, c);
-		c.getBalance().testModel1();
+//		c.getBalance().testModel1();
 	}
+	
+	
 	
 	/**Get the UI widget that shows the face of the current player
 	 * @return

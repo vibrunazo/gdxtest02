@@ -20,11 +20,11 @@ public class Dmg extends Action {
 	public Dmg() {
 		super();
 	}
-	public Dmg(int value) {
+	public Dmg(float value) {
 		super(value);
 	}
 	
-	public Dmg(int value, int cooldown) {
+	public Dmg(float value, int cooldown) {
 		super(value, cooldown);
 	}
 

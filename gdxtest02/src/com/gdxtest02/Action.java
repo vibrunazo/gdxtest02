@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 public abstract class Action {
 	protected String name = "Action";
-	protected int power = 100;
+	protected float power = 100;
 	protected int cooldown = 0;
 	private int curcooldown = 0;
 	protected int duration = 5;
@@ -15,18 +15,18 @@ public abstract class Action {
 		ini();
 	}
 
-	public Action(int value) {
+	public Action(float value) {
 		power = value;
 		ini();
 	}
 	
-	public Action(int value, int cooldown) {
+	public Action(float value, int cooldown) {
 		power = value;
 		this.cooldown = cooldown;
 		ini();
 	}
 	
-	public Action(int value, int cooldown, int duration) {
+	public Action(float value, int cooldown, int duration) {
 		power = value;
 		this.cooldown = cooldown;
 		this.duration = duration;
@@ -181,14 +181,14 @@ public abstract class Action {
 	/**
 	 * @return the power
 	 */
-	public int getPower() {
+	public float getPower() {
 		return power;
 	}
 
 	/**
 	 * @param power the power to set
 	 */
-	public void setPower(int power) {
+	public void setPower(float power) {
 		this.power = power;
 	}
 	

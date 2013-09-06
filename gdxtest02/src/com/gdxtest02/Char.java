@@ -191,7 +191,7 @@ public class Char implements Cloneable {
 	 * @param inc how much to change
 	 * @return returns current total amount of dmg to be taken this round
 	 */
-	public int incHp(int delta) {
+	public float incHp(float delta) {
 		return dmg += delta;
 	}
 	
@@ -286,7 +286,8 @@ public class Char implements Cloneable {
 	 * @return the description
 	 */
 	public String getFullDescription() {
-		return description + " avgdps: " + balance.getAvgDps();
+//		return description + " avgdps: " + balance.getAvgDps();
+		return description + ". " + getActionListString();
 	}
 
 	/**
@@ -294,6 +295,18 @@ public class Char implements Cloneable {
 	 */
 	public void setFullDescription(String description) {
 		this.description = description;
+	}
+	
+	/**A string with the name of every skill
+	 * @return
+	 */
+	public String getActionListString() {
+		String list = "";
+		for (Action a : actions) {
+			list += a.getName() + ", ";
+		}
+		if (list.length()>0) list = list.substring(0, list.length()-2);
+		return list;
 	}
 
 	/**

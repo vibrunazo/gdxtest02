@@ -5,7 +5,7 @@ import com.gdxtest02.Char;
 
 public class Dot implements Buff {
 	private String name;
-	private int power;
+	private float power;
 	private int duration;
 	
 	private int DEFAULT_POWER = 200;
@@ -18,13 +18,13 @@ public class Dot implements Buff {
 		name = DEFAULT_NAME;
 	}
 
-	public Dot(int value) {
+	public Dot(float value) {
 		power = value;
 		duration = DEFAULT_DURATION;
 		name = DEFAULT_NAME;
 	}
 	
-	public Dot(int value, int duration) {
+	public Dot(float value, int duration) {
 		power = value;
 		this.duration = duration;
 		name = DEFAULT_NAME;

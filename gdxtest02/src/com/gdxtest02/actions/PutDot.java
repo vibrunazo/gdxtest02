@@ -25,15 +25,15 @@ public class PutDot extends Action {
 		super();
 	}
 
-	public PutDot(int value) {
+	public PutDot(float value) {
 		super(value);
 	}
 	
-	public PutDot(int value, int cooldown) {
+	public PutDot(float value, int cooldown) {
 		super(value, cooldown);
 	}
 	
-	public PutDot(int value, int cooldown, int duration) {
+	public PutDot(float value, int cooldown, int duration) {
 		super(value, cooldown, duration);
 	}
 }

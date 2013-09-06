@@ -22,11 +22,11 @@ public class Drain extends Action {
 		super();
 	}
 
-	public Drain(int value) {
+	public Drain(float value) {
 		super(value);
 	}
 	
-	public Drain(int value, int cooldown) {
+	public Drain(float value, int cooldown) {
 		super(value, cooldown);
 	}
 }

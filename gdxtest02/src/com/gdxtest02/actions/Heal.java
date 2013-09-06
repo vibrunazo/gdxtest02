@@ -23,11 +23,11 @@ public class Heal extends Action {
 		super();
 	}
 
-	public Heal(int value) {
+	public Heal(float value) {
 		super(value);
 	}
 	
-	public Heal(int value, int cooldown) {
+	public Heal(float value, int cooldown) {
 		super(value, cooldown);
 	}
 

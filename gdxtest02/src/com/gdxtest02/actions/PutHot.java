@@ -25,15 +25,15 @@ public class PutHot extends Action {
 		super();
 	}
 
-	public PutHot(int value) {
+	public PutHot(float value) {
 		super(value);
 	}
 	
-	public PutHot(int value, int cooldown) {
+	public PutHot(float value, int cooldown) {
 		super(value, cooldown);
 	}
 	
-	public PutHot(int value, int cooldown, int duration) {
+	public PutHot(float value, int cooldown, int duration) {
 		super(value, cooldown, duration);
 	}
 
