@@ -19,6 +19,7 @@ import com.gdxtest02.chars.Char02;
 import com.gdxtest02.chars.Char03;
 import com.gdxtest02.chars.Char04;
 import com.gdxtest02.chars.Char05;
+import com.gdxtest02.chars.Char06;
 import com.gdxtest02.chars.CharYagg01;
 
 public class CharSelectScreenUI {
@@ -63,6 +64,7 @@ public class CharSelectScreenUI {
 		chars.put("c3", new Char03("c3"));
 		chars.put("c4", new Char04("c4"));
 		chars.put("c5", new Char05("c5"));
+		chars.put("c6", new Char06("c6"));
 		chars.put("y1", new CharYagg01("y1"));
 		
 		createListeners();
