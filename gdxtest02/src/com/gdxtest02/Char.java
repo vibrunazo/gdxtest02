@@ -229,11 +229,12 @@ public class Char implements Cloneable {
 	 * use actions, update cooldowns
 	 */
 	public void updateAll() {
-		updateCooldowns();
+		
 		Action a = getActiveAction();
 		if (a != null) a.act(this, getTarget());
 		applyBuffs(); 
 //		applyDmg();
+		updateCooldowns();
 	}
 
 	public int getMaxhp() {

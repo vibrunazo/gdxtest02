@@ -11,11 +11,11 @@ public class Char05 extends Char {
 	public Char05(String name) {
 		super(name);
 		
-		float ratio = 0.40816329f;
-		actions.add(new Dmg(50*ratio).setName("test1"));
-		actions.add(new Dmg(100*ratio, 4).setName("test2"));
-		actions.add(new Dmg(200*ratio, 3).setName("test3"));
-		actions.add(new Dmg(400*ratio, 3).setName("test4"));
+		float ratio = 0.47619048f;
+		actions.add(new Dmg((float) Math.ceil(50*ratio)).setName("test1"));
+		actions.add(new Dmg((float) Math.ceil(100*ratio), 4).setName("test2"));
+		actions.add(new Dmg((float) Math.ceil(200*ratio), 3).setName("test3"));
+		actions.add(new Dmg((float) Math.ceil(400*ratio), 3).setName("test4"));
 		
 //		actions.add(new Heal(300, 1).setName("test2"));
 //		actions.add(new Drain(100, 1).setName("test3"));

@@ -52,6 +52,7 @@ public class GameScreen implements Screen {
 	 * "paused" = fight is paused
 	 */
 	private String fightstate; 
+	private int round = 1;
 	private GameScreenUI ui;
 
 	public GameScreen(GdxTest02 game) {
@@ -183,7 +184,7 @@ public class GameScreen implements Screen {
 		
 		// now we know everything is ok, so start actually doing stuff
 		
-		ui.logToConsole("p1 uses: " + actionidp1 + ": " + a1name +
+		ui.logToConsole("Round" + round++ + ", " + "p1 uses: " + actionidp1 + ": " + a1name +
 				", p2 uses: " + actionidp2 + ": " + a2name + ". Fight!");
 		
 		p1.updateAll();p2.updateAll();

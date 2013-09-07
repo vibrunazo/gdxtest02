@@ -43,7 +43,7 @@ public abstract class Action {
 		if (getCurcooldown() > 0) return;
 		go(self, target);
 		if (cooldown > 0) {
-			curcooldown = cooldown;
+			curcooldown = cooldown + 1;
 		}
 	}
 
