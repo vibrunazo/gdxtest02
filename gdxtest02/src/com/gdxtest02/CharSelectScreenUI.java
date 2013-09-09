@@ -173,7 +173,8 @@ public class CharSelectScreenUI {
 			public void clicked(InputEvent event, float x, float y)  {
 				Char c = getCurrentPlayer();
 				if (c != null) {
-					c.getBalance().testModel1();
+//					c.getBalance().testModel1();
+					c.getBalance().testModel2();
 				}
 			}
 		};

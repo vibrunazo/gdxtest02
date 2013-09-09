@@ -18,50 +18,63 @@ public class Balance {
 		return total;
 	}
 
-	// TODO check for abilities with only 1 ability with a large cooldown
 	public void testModel1() {
+		testModelA(10, 1000);
+	}
+
+	public void testModel2() {
+		testModelA(10, 1500);
+	}
+
+	// TODO check for abilities with only 1 ability with a large cooldown
+	public void testModelA(int maxrounds, float targetdamage) {
 		log("testing model 1 on char " + player.getName());
-		int round = 1;
-		int maxrounds = 10;
-		float targetdamage = 1000;
-		Char dummy = new Char("dummy");
-		dummy.setMaxhp(100000);
-		int inihp = dummy.getHp();
-		player.resetStats();
-		player.setTarget(dummy);
 
 		Array<Array<Integer>> listofcombos = new Array<Array<Integer>>();
-		listofcombos = makeCombination();
-//		addCombo1(maxrounds, listofcombos);
-//		addCombo2(maxrounds, listofcombos);
-		Action a = null;
-		int id = 0;
+		listofcombos = makeCombination(maxrounds, 4);
+		//		addCombo1(maxrounds, listofcombos);
+		//		addCombo2(maxrounds, listofcombos);
+
+		
+		TestResult testresult = bruteForceAllCombos(maxrounds, listofcombos);
+		
+		Array<Integer> bestcombo = new Array<Integer>();
+		int bestdmg = testresult.getBestdmg();
+		bestcombo = testresult.getBestcombo();
+		int numberofbests = testresult.getNumberofbests();
+		
+		//		dmg = (inihp - dummy.getHp());
+		//		float dps = dmg/maxrounds;
+		//		log("test over, dmg done in 10 rounds: " + dmg + " total dps: " + dps);
+		log("test over, best dmg: " + bestdmg + " combo: " + bestcombo 
+				+ " number of bests: " + numberofbests);
+		if (bestdmg > 0) {
+
+			float ratio = targetdamage/bestdmg;
+			balanceDmg(player, ratio);
+
+		}
+	}
+
+	private TestResult bruteForceAllCombos(int maxrounds, 
+			Array<Array<Integer>> listofcombos) {
+		
+		Char dummy = new Char("dummy");
+		dummy.setMaxhp(100000);
+		
+		player.resetStats();
+		player.setTarget(dummy);
+		
 		Array<Integer> bestcombo = new Array<Integer>();
 		int bestdmg = 0;
 		int dmg = 0;
 		int numberofbests = 0;
+		
+		TestResult testresult = new TestResult();
 		for (Array<Integer> combo : listofcombos) {
-//			log("testing combo: " + combo.toString());
-			player.resetStats();
-			dummy.resetStats();
-			for (round = 1; round <= maxrounds; round++) {
-				try {id = combo.get(round-1);}
-				catch (Exception e) {log("out of bounds, no action to use this round");}
-				player.setActiveActionId(id);
-				a = player.getActiveAction();
-//				log("round: " + round);
-//				log("hp before: " + dummy.getHp());
-				if (a != null) {
-//					log("using action: " + player.getActiveAction().getName());
-					player.updateAll();
-					dummy.updateAll();
-					dummy.applyDmg();
-				}
-//				else log("action " + player.getActiveActionId() + "is null");
-//				log("hp after: " + dummy.getHp());
-			}
-			dmg = (inihp - dummy.getHp());
 			
+			dmg = getDmgFromCombo(maxrounds, dummy, combo);
+//			log("dmg: " + dmg + " bestdmg: " + bestdmg);
 			if (dmg > bestdmg) {
 				bestdmg = dmg;
 				bestcombo = combo;
@@ -71,20 +84,40 @@ public class Balance {
 				numberofbests++;
 			}
 		}
-//		dmg = (inihp - dummy.getHp());
-//		float dps = dmg/maxrounds;
-//		log("test over, dmg done in 10 rounds: " + dmg + " total dps: " + dps);
-		log("test over, best dmg: " + bestdmg + " combo: " + bestcombo 
-				+ " number of bests: " + numberofbests);
-		if (bestdmg > 0) {
-			
-			float ratio = targetdamage/bestdmg;
-			balanceDmg(player, ratio);
-			
-		}
 		
+		testresult.setBestdmg(bestdmg);
+		testresult.setBestcombo(bestcombo);
+		testresult.setNumberofbests(numberofbests);
+		return testresult;
+	}
 
-		makeCombination();
+	private int getDmgFromCombo(int maxrounds, Char dummy, Array<Integer> combo) {
+		Action a = null;
+		int dmg;
+		int inihp = dummy.getMaxhp();
+		//			log("testing combo: " + combo.toString());
+		int id = 0;
+		player.resetStats();
+		dummy.resetStats();
+		for (int round = 1; round <= maxrounds; round++) {
+
+			try {id = combo.get(round-1);}
+			catch (Exception e) {log("out of bounds, no action to use this round");}
+			player.setActiveActionId(id);
+			a = player.getActiveAction();
+			//				log("round: " + round);
+			//				log("hp before: " + dummy.getHp());
+			if (a != null) {
+				//					log("using action: " + player.getActiveAction().getName());
+				player.updateAll();
+				dummy.updateAll();
+				dummy.applyDmg();
+			}
+			//				else log("action " + player.getActiveActionId() + "is null");
+			//				log("hp after: " + dummy.getHp());
+		}
+		dmg = (inihp - dummy.getHp());
+		return dmg;
 	}
 
 	private void balanceDmg(Char player, float ratio) {
@@ -119,10 +152,10 @@ public class Balance {
 		listofcombos.add(actioncombo);
 	}
 
-	private Array<Array<Integer>> makeCombination() {
+	private Array<Array<Integer>> makeCombination(int sizex, int sizey) {
 		Array<Array<Integer>> list = new Array<Array<Integer>>();
-		int sizex = 10;
-		int sizey = 4;
+		//		int sizex = 10;
+		//		int sizey = 4;
 		int[] loop = new int[sizex];
 		for (int i : loop) {
 			loop[i] = 0;
@@ -130,20 +163,20 @@ public class Balance {
 		int i = 0;
 
 		recb(list, loop, sizex, sizey, i);
-		
+
 		return list;
-//		log("list: " + list);
+		//		log("list: " + list);
 	}
-	
+
 	private void recb(Array<Array<Integer>> list, int[] loop, int sizex, int sizey, int i) {
 		while (i<Math.pow(sizey,sizex)) {
 			Array<Integer> combo = new Array<Integer>();
-			
+
 			for (int p = 0; p < sizex; p++) {
 				combo.add(loop[p]+1);	
 			}
-			
-//			log("combo(" + i + "): " + combo);
+
+			//			log("combo(" + i + "): " + combo);
 			list.add(combo);
 
 			for (int d = 0; d < sizex; d++) {
@@ -153,7 +186,7 @@ public class Balance {
 						for (int a = d; a > 0; a--) {
 							loop[a-1] = 0;
 						}
-						
+
 					}
 					break;
 				}
