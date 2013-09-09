@@ -18,6 +18,7 @@ public class Balance {
 		return total;
 	}
 
+	// TODO check for abilities with only 1 ability with a large cooldown
 	public void testModel1() {
 		log("testing model 1 on char " + player.getName());
 		int round = 1;
