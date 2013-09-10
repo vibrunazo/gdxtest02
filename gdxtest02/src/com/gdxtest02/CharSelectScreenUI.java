@@ -25,6 +25,8 @@ import com.gdxtest02.chars.CharYagg01;
 public class CharSelectScreenUI {
 
 	private static final float TITLE_Y = 200;
+	private static final float CHAR_Y = 50;
+	private static final int CHARS_PER_ROW = 4;
 	private float FACETABLE_X = 50;
 	private float FACETABLE_Y = 300;
 	private float FACETABLE_WIDTH = 150;
@@ -118,10 +120,17 @@ public class CharSelectScreenUI {
 	private void createCharTable() {
 		chartable = new Table();
 		chartable.setFillParent(true);
+		chartable.setY(CHAR_Y);
 		stage.addActor(chartable);
 		
+		int i = 1;
 		for (Char c : chars.values()) {
+			if (i > CHARS_PER_ROW) {
+				chartable.row();
+				i = 1;
+			}
 			addCharButton(c.getName());
+			i++;
 		}
 		
 	}
