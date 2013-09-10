@@ -19,27 +19,33 @@ public class Balance {
 	}
 
 	public void testModel1() {
-		testModelA(10, 1000);
+		testModelA(10, 1000, 0);
 	}
 
 	public void testModel2() {
-		testModelA(10, 1000);
+		testModelA(10, 1000, 0);
+		testModelA(10, 1000, 1);
+
 	}
 
 	// TODO check for abilities with only 1 ability with a large cooldown
-	public void testModelA(int maxrounds, float targetdamage) {
+	public void testModelA(int maxrounds, float targetdamage, int type) {
 		log("testing model 1 on char " + player.getName());
+		TestResult testresult;
+		if (type == 0) {
+			log("doing best combo test");
+			testresult = testBestCombo(maxrounds);
+		}
+		else {
+			log("doing brute force test");
+			testresult = testAllCombinations(maxrounds);
+		}
+		
 
-		TestResult testresult = testBestCombo(maxrounds);
-
-		Array<Integer> bestcombo = new Array<Integer>();
 		int bestdmg = testresult.getBestdmg();
-		bestcombo = testresult.getBestcombo();
+		Array<Integer> bestcombo = testresult.getBestcombo();
 		int numberofbests = testresult.getNumberofbests();
 
-		//		dmg = (inihp - dummy.getHp());
-		//		float dps = dmg/maxrounds;
-		//		log("test over, dmg done in 10 rounds: " + dmg + " total dps: " + dps);
 		log("test over, best dmg: " + bestdmg + " combo: " + bestcombo 
 				+ " number of bests: " + numberofbests);
 		if (bestdmg > 0) {
@@ -67,24 +73,27 @@ public class Balance {
 		player.resetStats();
 		dummy.resetStats();
 		int id = 1;
+		int roundsleft = maxrounds;
 		Action a = null;
 
 		// start simulation
 		for (int round = 1; round <= maxrounds; round++) {
-
+			
+			id = getNextBestSkill(player, roundsleft);
 			combo.add(id);
 			player.setActiveActionId(id);
 			a = player.getActiveAction();
-			log("round: " + round);
-			log("hp before: " + dummy.getHp());
+//			log("round: " + round);
+//			log("hp before: " + dummy.getHp());
 			if (a != null) {
-				log("using action: " + player.getActiveAction().getName());
+//				log("using action: " + player.getActiveAction().getName());
 				player.updateAll();
 				dummy.updateAll();
 				dummy.applyDmg();
 			}
-			else log("action " + player.getActiveActionId() + "is null");
-			log("hp after: " + dummy.getHp());
+//			else log("action " + player.getActiveActionId() + "is null");
+//			log("hp after: " + dummy.getHp());
+			roundsleft--;
 		}
 		// simulation ended
 		// get damage done
@@ -96,6 +105,32 @@ public class Balance {
 		testresult.setBestcombo(combo);
 		testresult.setNumberofbests(1);
 		return testresult;
+	}
+
+	/**Returns what is the id of the best skill Char p can use,
+	 * based on which one does the best damage until game is over
+	 * and is off cooldown
+	 * 
+	 * @param p
+	 * @param roundsleft
+	 * @return
+	 */
+	private int getNextBestSkill(Char p, int roundsleft) {
+		int bestid = 0;
+		Action a;
+		float bestdmg = 0;
+		float dmg = 0;
+		for (int id = 1; id <= 4; id++) {
+			a = p.getAction(id);
+			if (a == null || a.getCurcooldown() > 0) continue;
+			dmg = a.getDmgAfterRounds(roundsleft);
+			if (dmg > bestdmg) {
+				bestdmg = dmg;
+				bestid = id;
+			}
+		}
+		
+		return bestid;
 	}
 
 	/**Build all possible combinations of combos with maxrounds duration,

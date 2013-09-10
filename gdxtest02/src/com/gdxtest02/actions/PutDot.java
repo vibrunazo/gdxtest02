@@ -21,7 +21,7 @@ public class PutDot extends Action {
 	}
 	
 	public float getDmgAfterRounds(int rounds) {
-		return power*Math.min(duration, rounds);
+		return power*Math.min(duration, rounds-1);
 	}
 
 	public PutDot() {
