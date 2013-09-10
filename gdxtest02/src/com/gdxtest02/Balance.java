@@ -30,13 +30,13 @@ public class Balance {
 	public void testModelA(int maxrounds, float targetdamage) {
 		log("testing model 1 on char " + player.getName());
 
-		TestResult testresult = testAllCombinations(maxrounds);
-		
+		TestResult testresult = testBestCombo(maxrounds);
+
 		Array<Integer> bestcombo = new Array<Integer>();
 		int bestdmg = testresult.getBestdmg();
 		bestcombo = testresult.getBestcombo();
 		int numberofbests = testresult.getNumberofbests();
-		
+
 		//		dmg = (inihp - dummy.getHp());
 		//		float dps = dmg/maxrounds;
 		//		log("test over, dmg done in 10 rounds: " + dmg + " total dps: " + dps);
@@ -50,6 +50,60 @@ public class Balance {
 		}
 	}
 
+	/**Will do only 1 simulation trying to use only the best skills available at
+	 * each round, then returns the results
+	 * 
+	 * @param maxrounds
+	 * @return
+	 */
+	private TestResult testBestCombo(int maxrounds) {
+		// prepare for simulation
+		Char dummy = new Char("dummy");
+		dummy.setMaxhp(100000);
+		int inihp = dummy.getMaxhp();
+		player.setTarget(dummy);
+		Array<Integer> combo = new Array<Integer>();
+		int dmg = 0;
+		player.resetStats();
+		dummy.resetStats();
+		int id = 1;
+		Action a = null;
+
+		// start simulation
+		for (int round = 1; round <= maxrounds; round++) {
+
+			combo.add(id);
+			player.setActiveActionId(id);
+			a = player.getActiveAction();
+			log("round: " + round);
+			log("hp before: " + dummy.getHp());
+			if (a != null) {
+				log("using action: " + player.getActiveAction().getName());
+				player.updateAll();
+				dummy.updateAll();
+				dummy.applyDmg();
+			}
+			else log("action " + player.getActiveActionId() + "is null");
+			log("hp after: " + dummy.getHp());
+		}
+		// simulation ended
+		// get damage done
+		dmg = (inihp - dummy.getHp());
+
+		// record results on a TestResult object and return it
+		TestResult testresult = new TestResult();
+		testresult.setBestdmg(dmg);
+		testresult.setBestcombo(combo);
+		testresult.setNumberofbests(1);
+		return testresult;
+	}
+
+	/**Build all possible combinations of combos with maxrounds duration,
+	 * then will simulate all of them, then return the results
+	 * 
+	 * @param maxrounds
+	 * @return TestResult with best combo, dmg and number of bests
+	 */
 	private TestResult testAllCombinations(int maxrounds) {
 		Array<Array<Integer>> listofcombos = new Array<Array<Integer>>();
 		listofcombos = makeCombination(maxrounds, 4);
@@ -57,25 +111,31 @@ public class Balance {
 		return testresult;
 	}
 
+	/**Takes a list of combos, then do simulations of all of them and return results
+	 * 
+	 * @param maxrounds
+	 * @param listofcombos
+	 * @return
+	 */
 	private TestResult bruteForceAllCombos(int maxrounds, 
 			Array<Array<Integer>> listofcombos) {
-		
+
 		Char dummy = new Char("dummy");
 		dummy.setMaxhp(100000);
-		
+
 		player.resetStats();
 		player.setTarget(dummy);
-		
+
 		Array<Integer> bestcombo = new Array<Integer>();
 		int bestdmg = 0;
 		int dmg = 0;
 		int numberofbests = 0;
-		
+
 		TestResult testresult = new TestResult();
 		for (Array<Integer> combo : listofcombos) {
-			
+
 			dmg = getDmgFromCombo(maxrounds, dummy, combo);
-//			log("dmg: " + dmg + " bestdmg: " + bestdmg);
+			//			log("dmg: " + dmg + " bestdmg: " + bestdmg);
 			if (dmg > bestdmg) {
 				bestdmg = dmg;
 				bestcombo = combo;
@@ -85,13 +145,20 @@ public class Balance {
 				numberofbests++;
 			}
 		}
-		
+
 		testresult.setBestdmg(bestdmg);
 		testresult.setBestcombo(bestcombo);
 		testresult.setNumberofbests(numberofbests);
 		return testresult;
 	}
 
+	/**Do one simulation of a fight and return the damage done
+	 * 
+	 * @param maxrounds
+	 * @param dummy
+	 * @param combo
+	 * @return
+	 */
 	private int getDmgFromCombo(int maxrounds, Char dummy, Array<Integer> combo) {
 		Action a = null;
 		int dmg;
