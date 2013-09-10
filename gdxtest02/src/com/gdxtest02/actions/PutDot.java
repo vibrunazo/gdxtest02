@@ -20,6 +20,9 @@ public class PutDot extends Action {
 		setAvgDps((power*duration)/(cooldown+1));
 	}
 	
+	public float getDmgAfterRounds(int rounds) {
+		return power*Math.min(duration, rounds);
+	}
 
 	public PutDot() {
 		super();

@@ -16,6 +16,10 @@ public class Dmg extends Action {
 		target.incHp(-power);
 	}
 	
+	public float getDmgAfterRounds(int rounds) {
+		return power;
+	}
+	
 	
 	public Dmg() {
 		super();

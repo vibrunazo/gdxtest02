@@ -23,20 +23,14 @@ public class Balance {
 	}
 
 	public void testModel2() {
-		testModelA(10, 1500);
+		testModelA(10, 1000);
 	}
 
 	// TODO check for abilities with only 1 ability with a large cooldown
 	public void testModelA(int maxrounds, float targetdamage) {
 		log("testing model 1 on char " + player.getName());
 
-		Array<Array<Integer>> listofcombos = new Array<Array<Integer>>();
-		listofcombos = makeCombination(maxrounds, 4);
-		//		addCombo1(maxrounds, listofcombos);
-		//		addCombo2(maxrounds, listofcombos);
-
-		
-		TestResult testresult = bruteForceAllCombos(maxrounds, listofcombos);
+		TestResult testresult = testAllCombinations(maxrounds);
 		
 		Array<Integer> bestcombo = new Array<Integer>();
 		int bestdmg = testresult.getBestdmg();
@@ -54,6 +48,13 @@ public class Balance {
 			balanceDmg(player, ratio);
 
 		}
+	}
+
+	private TestResult testAllCombinations(int maxrounds) {
+		Array<Array<Integer>> listofcombos = new Array<Array<Integer>>();
+		listofcombos = makeCombination(maxrounds, 4);
+		TestResult testresult = bruteForceAllCombos(maxrounds, listofcombos);
+		return testresult;
 	}
 
 	private TestResult bruteForceAllCombos(int maxrounds, 

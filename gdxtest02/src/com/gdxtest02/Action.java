@@ -199,5 +199,13 @@ public abstract class Action {
 	public float getAvgDps() {
 		return avgdps;
 	}
+	
+	/**How many damage this skill does after X rounds
+	 * @param rounds
+	 * @return
+	 */
+	public float getDmgAfterRounds(int rounds) {
+		return power;
+	}
 
 }
