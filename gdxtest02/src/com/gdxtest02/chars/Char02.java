@@ -13,8 +13,8 @@ public class Char02 extends Char {
 		
 		actions.add(new Dmg(50).setName("Punch"));
 		actions.add(new Heal(250, 3).setName("Heal"));
-		actions.add(new PutDot(50, 5, 10).setName("Death Fart"));
-		actions.add(new PutHot(100, 5, 5).setName("Rejuv"));
+		actions.add(new PutDot(50, 0, 2).setName("Death Fart"));
+//		actions.add(new PutHot(100, 5, 5).setName("Rejuv"));
 
 		setTex("ball02yell.png");
 	}

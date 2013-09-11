@@ -11,11 +11,14 @@ public class Char03 extends Char {
 		super(name);
 		
 
-		float ratio = 0.4347826f;
+//		float ratio = 0.4347826f;
+		float ratio = 0.42553192f;
+//		float ratio = 1f;
 		actions.add(new Dmg((float) Math.ceil(100*ratio)).setName("Yoga Fire"));
 		actions.add(new Dmg((float) Math.ceil(400*ratio), 5).setName("Overpacarai"));
 		actions.add(new PutDot((float) Math.ceil(50*ratio), 0, 5).setName("DotFoda"));
-		
+		// 44, 174, 22
+		// 43, 171, 22
 		setTex("ball02red.png");
 
 	}

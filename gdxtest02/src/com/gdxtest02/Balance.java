@@ -83,16 +83,9 @@ public class Balance {
 			combo.add(id);
 			player.setActiveActionId(id);
 			a = player.getActiveAction();
-//			log("round: " + round);
-//			log("hp before: " + dummy.getHp());
-			if (a != null) {
-//				log("using action: " + player.getActiveAction().getName());
-				player.updateAll();
-				dummy.updateAll();
-				dummy.applyDmg();
-			}
-//			else log("action " + player.getActiveActionId() + "is null");
-//			log("hp after: " + dummy.getHp());
+			player.updateAll();
+			dummy.updateAll();
+			dummy.applyDmg();
 			roundsleft--;
 		}
 		// simulation ended
@@ -210,12 +203,12 @@ public class Balance {
 			a = player.getActiveAction();
 			//				log("round: " + round);
 			//				log("hp before: " + dummy.getHp());
-			if (a != null) {
+//			if (a != null) {
 				//					log("using action: " + player.getActiveAction().getName());
-				player.updateAll();
-				dummy.updateAll();
-				dummy.applyDmg();
-			}
+//			}
+			player.updateAll();
+			dummy.updateAll();
+			dummy.applyDmg();
 			//				else log("action " + player.getActiveActionId() + "is null");
 			//				log("hp after: " + dummy.getHp());
 		}

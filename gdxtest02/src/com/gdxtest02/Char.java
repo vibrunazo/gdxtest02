@@ -122,11 +122,19 @@ public class Char implements Cloneable {
 	 * such as, every turn
 	 */
 	public void applyBuffs() {
+		// list of buffs that will be removed
+		// this is done because you can't remove the items in the middle of a loop
+		Array<Buff> toremove = new Array<Buff>(); 
+		
 		// loop through all buffs and make their do their thing
 		for (Buff buff : buffs) {
 			buff.act(this);
 			buff.incDuration(-1);
-			if (buff.getDuration() == 0) buffs.removeValue(buff, true);
+			if (buff.getDuration() == 0) toremove.add(buff); // this buff will be removed 
+		}
+		// remove buffs from the list of buffs to be removed
+		for (Buff buff : toremove) {
+			buffs.removeValue(buff, true);
 		}
 		
 		// move new buffs to main buffs list

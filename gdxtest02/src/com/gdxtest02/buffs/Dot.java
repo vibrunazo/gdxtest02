@@ -11,23 +11,29 @@ public class Dot implements Buff {
 	private int DEFAULT_POWER = 200;
 	private int DEFAULT_DURATION = 2;
 	private String DEFAULT_NAME = "Dot";
+	
+	private static int id = 0;
+	private int thisid = 0;
 
 	public Dot() {
 		power = DEFAULT_POWER;
 		duration = DEFAULT_DURATION;
 		name = DEFAULT_NAME;
+		thisid = id++;
 	}
 
 	public Dot(float value) {
 		power = value;
 		duration = DEFAULT_DURATION;
 		name = DEFAULT_NAME;
+		thisid = id++;
 	}
 	
 	public Dot(float value, int duration) {
 		power = value;
 		this.duration = duration;
 		name = DEFAULT_NAME;
+		thisid = id++;
 	}
 	
 	@Override
@@ -37,7 +43,7 @@ public class Dot implements Buff {
 
 	@Override
 	public String getName() {
-		return name;
+		return name + thisid;
 	}
 
 	@Override

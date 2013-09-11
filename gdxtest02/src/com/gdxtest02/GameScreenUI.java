@@ -222,7 +222,7 @@ public class GameScreenUI extends UIBuilder {
 		Char c = screen.getPlayer(player);
 		Action a = c.getAction(action);
 		if (a == null) {
-			log("null on updateAction p: "+ player + " action: " + action);
+//			log("null on updateAction p: "+ player + " action: " + action);
 			return;
 		}
 		String name = a.getName();
