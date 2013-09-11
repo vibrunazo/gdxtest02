@@ -207,5 +207,5 @@ public abstract class Action {
 	public float getDmgAfterRounds(int rounds) {
 		return power;
 	}
-
+	
 }

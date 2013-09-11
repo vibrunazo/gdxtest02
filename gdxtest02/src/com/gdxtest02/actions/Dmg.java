@@ -3,7 +3,7 @@ package com.gdxtest02.actions;
 import com.gdxtest02.Action;
 import com.gdxtest02.Char;
 
-public class Dmg extends Action {
+public class Dmg extends Action implements Cloneable {
 	
 	public void ini() {
 		setName("DD");
@@ -30,6 +30,16 @@ public class Dmg extends Action {
 	
 	public Dmg(float value, int cooldown) {
 		super(value, cooldown);
+	}
+	
+	public Action getClone() {
+		try {
+			Action clone = (Action) this.clone(); 
+			return clone;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

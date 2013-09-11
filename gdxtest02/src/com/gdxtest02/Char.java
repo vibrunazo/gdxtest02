@@ -1,5 +1,8 @@
 package com.gdxtest02;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -333,10 +336,21 @@ public class Char implements Cloneable {
 	}
 	
 	public Char getClone() {
-		// TODO this isn't working, actions are not cloning, so on a mirror match one player uses the cooldown of the other
 		try {
-			return (Char) this.clone();
-		} catch (CloneNotSupportedException e) {
+			Constructor<? extends Char> constructor = this.getClass().getConstructor(String.class);
+			Object clone = constructor.newInstance(this.getName());
+			return (Char)clone;
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
 		return null;
