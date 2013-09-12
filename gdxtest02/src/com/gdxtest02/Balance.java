@@ -25,6 +25,7 @@ public class Balance {
 	public void testModel2() {
 		testModelA(10, 1000, 0);
 		testModelA(10, 1000, 1);
+		testModelA(10, 1000, 2);
 
 	}
 
@@ -35,6 +36,10 @@ public class Balance {
 		if (type == 0) {
 			log("doing best combo test");
 			testresult = testBestCombo(maxrounds);
+		}
+		else if (type == 1) {
+			log("doing tree test");
+			testresult = testTree(maxrounds);
 		}
 		else {
 			log("doing brute force test");
@@ -55,7 +60,18 @@ public class Balance {
 
 		}
 	}
-
+	
+	private TestResult testTree(int maxrounds) {
+		// prepare for simulation
+		
+		// record results on a TestResult object and return it
+				TestResult testresult = new TestResult();
+				testresult.setBestdmg(0);
+				testresult.setBestcombo(null);
+				testresult.setNumberofbests(1);
+				return testresult;
+	}
+		
 	/**Will do only 1 simulation trying to use only the best skills available at
 	 * each round, then returns the results
 	 * 
