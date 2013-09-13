@@ -28,9 +28,14 @@ public class Balance {
 	}
 
 	public void testModel2() {
-		//		testModelA(10, 1000, 0);
-		testModelA(6, 1000, 1);
-		//		testModelA(10, 1000, 2);
+		testModelA(10, 1000, 0);
+		testModelA(10, 1000, 1);
+		testModelA(10, 1000, 2);
+////		[2, 3, 3, 3, 3, 3, 3, 1, 1, 2]
+//		Integer[] c = {2, 3, 3, 3, 3, 3, 3, 1, 1, 2};
+//		Array<Integer> combo = new Array<Integer>();
+//		combo.addAll(c);
+//		calculateDmgFromCombo(combo);
 
 	}
 
@@ -72,7 +77,6 @@ public class Balance {
 	 */
 	private TestResult testTree(int maxrounds) {
 		// prepare for calculations
-		int numberofskills = player.actions.size;
 		int round = 1;
 		total = 0;
 		bestdmg = 0;
@@ -82,10 +86,10 @@ public class Balance {
 		loopToNextBranches(maxrounds, round, combo);
 
 		// record results on a TestResult object and return it
-//		TestResult testresult = new TestResult();
-//		testresult.setBestdmg(0);
-//		testresult.setBestcombo(null);
-//		testresult.setNumberofbests(1);
+		//		TestResult testresult = new TestResult();
+		//		testresult.setBestdmg(0);
+		//		testresult.setBestcombo(null);
+		//		testresult.setNumberofbests(1);
 		return testresult;
 	}
 
@@ -100,7 +104,7 @@ public class Balance {
 	 * @param combo 
 	 */
 	private void loopToNextBranches(int maxrounds, int round, Array<Integer> combo) {
-		log("looping on round: " + round + "/" + maxrounds);
+//		log("looping on round: " + round + "/" + maxrounds);
 
 		int numberofskills = player.actions.size;
 
@@ -124,12 +128,12 @@ public class Balance {
 	private void nextBranch(Action a, int maxrounds, int round, Array<Integer> combo) {
 		int id = player.getIdOfAction(a);
 		// Pruning goes here
-//		if (a == null) log("action is null");
-					
+		//		if (a == null) log("action is null");
+
 		combo = new Array<Integer>(combo);
 		combo.add(id);
-		log("branch: " + id + " combo so far: " + combo);
-		
+//		log("branch: " + id + " combo so far: " + combo);
+
 		round++;
 		if (round <= maxrounds) {
 			loopToNextBranches(maxrounds, round, combo);
@@ -137,8 +141,8 @@ public class Balance {
 		else {
 			// finish, success
 			float dmg = calculateDmgFromCombo(combo);
-			log("and it's all over! Total loops: " + ++total + " combo: " + combo + " dmg: " +dmg);
-			
+//			log("and it's all over! Total loops: " + ++total + " combo: " + combo + " dmg: " +dmg);
+
 			if (dmg > bestdmg) {
 				bestdmg = dmg;
 				bestcombo = combo;
@@ -160,16 +164,67 @@ public class Balance {
 	 * @return
 	 */
 	private float calculateDmgFromCombo(Array<Integer> combo) {
-		float dmg = 0;
 		int maxrounds = combo.size;
+		if (maxrounds == 0) return 0;
+		float dmg = 0;
 		int id; Action a = null; int roundsleft;
 		for (int round = 1; round <= maxrounds; round++) {
 			id = combo.get(round-1); 
 			a = player.getAction(id);
-			roundsleft = maxrounds - round;
-			dmg += a.getDmgAfterRounds(roundsleft);
+			roundsleft = maxrounds - round + 1;
+			if (isThisSkillOnCooldown(a, round, combo)) {
+//				log("skill " + id + " is on cd on round " + round);
+			}
+			else {
+//				log("round: " + round + " left: " + roundsleft + " skill: " + id + " dmg: " + a.getDmgAfterRounds(roundsleft));
+				dmg += a.getDmgAfterRounds(roundsleft);
+			}
 		}
+//		log("combo: " + combo + " dmg: " + dmg);
 		return dmg;
+	}
+
+	/**Will check if this skill is on cooldown on this round if this combination
+	 * is used
+	 * 
+	 * @param a
+	 * @param round
+	 * @param combo
+	 * @return
+	 */
+	private boolean isThisSkillOnCooldown(Action a, int round,
+			Array<Integer> combo) {
+//		log("checking if skill " + player.getIdOfAction(a) + " is on cd on round " + round);
+		if (round == 1) return false;
+		int cd = a.getCooldown();
+		int lastuse = lastTimeThisSkillWasUsed(a, round, combo);
+		if (lastuse == 0) return false;
+		int timesincelastuse = round - lastuse;
+		if (timesincelastuse <= cd) {
+//			log("yes");
+			return true;
+		}
+		else {
+//			log("no, cd: " + cd + " lastuse: " + lastuse + " timesince: " + timesincelastuse);
+			return false;
+		}
+	}
+
+	/**The last time this skill was used in this combination, before this 
+	 * specific round
+	 * 
+	 * @param a
+	 * @param round
+	 * @param combo
+	 * @return
+	 */
+	private int lastTimeThisSkillWasUsed(Action a, int round,
+			Array<Integer> combo) {
+		int id = player.getIdOfAction(a);
+		Array<Integer> combobefore = new Array<Integer>(combo);
+		combobefore.truncate(round - 1);
+		return combobefore.lastIndexOf(id, true) + 1;
+//		log("last use of: " + id + " combobefore: " + combobefore + " lastuse: " + lastuse);
 	}
 
 	/**Will do only 1 simulation trying to use only the best skills available at
