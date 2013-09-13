@@ -5,6 +5,11 @@ import com.badlogic.gdx.utils.Array;
 
 public class Balance {
 	Char player;
+	private int total;
+	private float bestdmg;
+	private Array<Integer> bestcombo;
+	private TestResult testresult;
+	private int numberofbests;
 
 	public Balance(Char c) {
 		player = c;
@@ -23,9 +28,9 @@ public class Balance {
 	}
 
 	public void testModel2() {
-		testModelA(10, 1000, 0);
-		testModelA(10, 1000, 1);
-		testModelA(10, 1000, 2);
+		//		testModelA(10, 1000, 0);
+		testModelA(6, 1000, 1);
+		//		testModelA(10, 1000, 2);
 
 	}
 
@@ -45,7 +50,7 @@ public class Balance {
 			log("doing brute force test");
 			testresult = testAllCombinations(maxrounds);
 		}
-		
+
 
 		int bestdmg = testresult.getBestdmg();
 		Array<Integer> bestcombo = testresult.getBestcombo();
@@ -60,18 +65,113 @@ public class Balance {
 
 		}
 	}
-	
+
+	/**Build a game tree to find the best combo
+	 * @param maxrounds
+	 * @return
+	 */
 	private TestResult testTree(int maxrounds) {
-		// prepare for simulation
-		
+		// prepare for calculations
+		int numberofskills = player.actions.size;
+		int round = 1;
+		total = 0;
+		bestdmg = 0;
+		numberofbests = 0;
+		bestcombo = new Array<Integer>(); 
+		Array<Integer> combo = new Array<Integer>();
+		loopToNextBranches(maxrounds, round, combo);
+
 		// record results on a TestResult object and return it
-				TestResult testresult = new TestResult();
-				testresult.setBestdmg(0);
-				testresult.setBestcombo(null);
-				testresult.setNumberofbests(1);
-				return testresult;
+//		TestResult testresult = new TestResult();
+//		testresult.setBestdmg(0);
+//		testresult.setBestcombo(null);
+//		testresult.setNumberofbests(1);
+		return testresult;
 	}
+
+	/**Loop through all next branches
+	 * 	
+	 *    o
+	 * [/ | \] -> You are here
+	 * o  o  o
+	 * 
+	 * @param round 
+	 * @param maxrounds 
+	 * @param combo 
+	 */
+	private void loopToNextBranches(int maxrounds, int round, Array<Integer> combo) {
+		log("looping on round: " + round + "/" + maxrounds);
+
+		int numberofskills = player.actions.size;
+
+		for (int id = 1; id < numberofskills + 1; id++) {
+			Action a = player.getAction(id);
+			nextBranch(a, maxrounds, round, combo);
+		}
+	}
+
+	/**Calculate the next branch on the game tree
+	 * 
+	 *    o
+	 *  / |[\] -> You are here
+	 * o  o  o
+	 * 
+	 * @param a
+	 * @param round 
+	 * @param maxrounds 
+	 * @param combo 
+	 */
+	private void nextBranch(Action a, int maxrounds, int round, Array<Integer> combo) {
+		int id = player.getIdOfAction(a);
+		// Pruning goes here
+//		if (a == null) log("action is null");
+					
+		combo = new Array<Integer>(combo);
+		combo.add(id);
+		log("branch: " + id + " combo so far: " + combo);
 		
+		round++;
+		if (round <= maxrounds) {
+			loopToNextBranches(maxrounds, round, combo);
+		}
+		else {
+			// finish, success
+			float dmg = calculateDmgFromCombo(combo);
+			log("and it's all over! Total loops: " + ++total + " combo: " + combo + " dmg: " +dmg);
+			
+			if (dmg > bestdmg) {
+				bestdmg = dmg;
+				bestcombo = combo;
+				numberofbests = 0;
+			}
+			if (dmg == bestdmg) {
+				numberofbests++;
+			}
+
+			testresult = new TestResult();
+			testresult.setBestdmg((int) bestdmg);
+			testresult.setBestcombo(bestcombo);
+			testresult.setNumberofbests(numberofbests);
+		}
+	}
+
+	/**Calculates how much dmg a combo does
+	 * @param combo
+	 * @return
+	 */
+	private float calculateDmgFromCombo(Array<Integer> combo) {
+		float dmg = 0;
+		int maxrounds = combo.size;
+		int id; Action a = null; int roundsleft;
+		for (int round = 1; round <= maxrounds; round++) {
+			id = combo.get(round-1); 
+			a = player.getAction(id);
+			roundsleft = maxrounds - round;
+			dmg += a.getDmgAfterRounds(roundsleft);
+		}
+		return dmg;
+	}
+
 	/**Will do only 1 simulation trying to use only the best skills available at
 	 * each round, then returns the results
 	 * 
@@ -94,7 +194,7 @@ public class Balance {
 
 		// start simulation
 		for (int round = 1; round <= maxrounds; round++) {
-			
+
 			id = getNextBestSkill(player, roundsleft);
 			combo.add(id);
 			player.setActiveActionId(id);
@@ -138,7 +238,7 @@ public class Balance {
 				bestid = id;
 			}
 		}
-		
+
 		return bestid;
 	}
 
@@ -219,9 +319,9 @@ public class Balance {
 			a = player.getActiveAction();
 			//				log("round: " + round);
 			//				log("hp before: " + dummy.getHp());
-//			if (a != null) {
-				//					log("using action: " + player.getActiveAction().getName());
-//			}
+			//			if (a != null) {
+			//					log("using action: " + player.getActiveAction().getName());
+			//			}
 			player.updateAll();
 			dummy.updateAll();
 			dummy.applyDmg();
@@ -232,6 +332,11 @@ public class Balance {
 		return dmg;
 	}
 
+	/**Suggests a fix to balance the player skills using ratio
+	 * 
+	 * @param player
+	 * @param ratio
+	 */
 	private void balanceDmg(Char player, float ratio) {
 		int id = 1;
 		player.getAction(id);

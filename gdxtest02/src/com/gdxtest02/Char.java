@@ -96,6 +96,14 @@ public class Char implements Cloneable {
 		return balance;
 	}
 	
+	/**Finds the id of the action, returns zero if not found 
+	 * @param a
+	 * @return
+	 */
+	public int getIdOfAction(Action a) {
+		return actions.indexOf(a, true) + 1;
+	}
+	
 	/**Get the action of specific id, starting from 1
 	 * @param id
 	 */
