@@ -28,9 +28,9 @@ public class Balance {
 	}
 
 	public void testModel2() {
-		testModelA(10, 1000, 0);
-		testModelA(10, 1000, 1);
-		testModelA(10, 1000, 2);
+		testModelA(30, 1000, 0);
+		testModelA(30, 1000, 1);
+//		testModelA(10, 1000, 2);
 ////		[2, 3, 3, 3, 3, 3, 3, 1, 1, 2]
 //		Integer[] c = {2, 3, 3, 3, 3, 3, 3, 1, 1, 2};
 //		Array<Integer> combo = new Array<Integer>();
@@ -133,6 +133,11 @@ public class Balance {
 		combo = new Array<Integer>(combo);
 		combo.add(id);
 //		log("branch: " + id + " combo so far: " + combo);
+		
+		if (isThisSkillOnCooldown(a, round, combo)) {
+//			log("yes, skill " + id + " is on cd on combo: " + combo + " prunning");
+			return;
+		}
 
 		round++;
 		if (round <= maxrounds) {
