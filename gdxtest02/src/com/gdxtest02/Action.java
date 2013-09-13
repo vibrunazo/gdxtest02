@@ -208,4 +208,13 @@ public abstract class Action {
 		return power;
 	}
 	
+	/**How much damage this skill can do this round
+	 * @param round
+	 * @param maxrounds
+	 * @return
+	 */
+	public float getDmgThisRound(int round, int maxrounds) {
+		return getDmgAfterRounds(maxrounds - round + 1);
+	}
+	
 }

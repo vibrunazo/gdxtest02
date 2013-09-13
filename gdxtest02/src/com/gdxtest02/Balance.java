@@ -10,6 +10,16 @@ public class Balance {
 	private Array<Integer> bestcombo;
 	private TestResult testresult;
 	private int numberofbests;
+	/**Array of Lists of how much damage each skill does each round
+	 * if there are 4 skills, there will be 4 lists, one for each round
+	 * each list will have how much damage that skill does on each round
+	 * if there are 10 rounds, that list will have 10 items
+	 */
+	private Array<Array<Float>> listsof_damageperskill;
+	/**A list of the difference in damage between the best damage skill
+	 * and the second best, for each round
+	 */
+	private Array<Float> listof_damagediff;
 
 	public Balance(Char c) {
 		player = c;
@@ -28,8 +38,8 @@ public class Balance {
 	}
 
 	public void testModel2() {
-		testModelA(30, 1000, 0);
-		testModelA(30, 1000, 1);
+		testModelA(16, 1000, 0);
+		testModelA(16, 1000, 1);
 //		testModelA(10, 1000, 2);
 ////		[2, 3, 3, 3, 3, 3, 3, 1, 1, 2]
 //		Integer[] c = {2, 3, 3, 3, 3, 3, 3, 1, 1, 2};
@@ -83,6 +93,9 @@ public class Balance {
 		numberofbests = 0;
 		bestcombo = new Array<Integer>(); 
 		Array<Integer> combo = new Array<Integer>();
+		buildListsOfDamagesPerSkill(maxrounds);
+		
+		// Start:
 		loopToNextBranches(maxrounds, round, combo);
 
 		// record results on a TestResult object and return it
@@ -91,6 +104,62 @@ public class Balance {
 		//		testresult.setBestcombo(null);
 		//		testresult.setNumberofbests(1);
 		return testresult;
+	}
+
+	/**Build lists of how much damage each skill does each round
+	 * and a list of the difference between the highest dmg skill
+	 * and the second, records them on listsof_damageperskill
+	 * and listof_damagediff
+	 * @param maxrounds 
+	 */
+	private void buildListsOfDamagesPerSkill(int maxrounds) {
+		listsof_damageperskill = new Array<Array<Float>>();
+		listof_damagediff = new Array<Float>();
+		int numberofskills = player.actions.size;
+		float dmg;
+		for (int id = 1; id <= numberofskills; id++) {
+			Action a = player.getAction(id);
+			Array<Float> damagelist = new Array<Float>();
+			listsof_damageperskill.add(damagelist);
+			for (int round = 1; round <= maxrounds; round++) {
+				dmg = a.getDmgThisRound(round, maxrounds);
+				damagelist.add(dmg);
+				
+			}
+		}
+		log("lists of dmg: " + listsof_damageperskill);
+		
+		// build list of differences
+		float best; float second; float delta;
+		float[] tuple;
+		for (int round = 1; round <= maxrounds; round++) {
+			tuple = getBestDmgThisRound(round);
+			best = tuple[0];
+			second = tuple[1];
+			delta = best - second;
+			listof_damagediff.add(delta);
+		}
+		
+		log("list of delta: " + listof_damagediff);
+		
+	}
+
+	private float[] getBestDmgThisRound(int round) {
+		int numberofskills = player.actions.size;
+//		if (numberofskills == 1) return listsof_damageperskill.get(0).get(round);
+		float best = 0; float second = 0; float dmg;
+		for (int i = 0; i < numberofskills; i++) {
+			dmg = listsof_damageperskill.get(i).get(round-1); 
+			if (dmg > best) {
+				second = best;
+				best = dmg;
+			}
+			else if (dmg > second) {
+				second = dmg;
+			}
+		}
+		float[] tuple = {best, second};
+		return tuple;
 	}
 
 	/**Loop through all next branches
@@ -127,18 +196,25 @@ public class Balance {
 	 */
 	private void nextBranch(Action a, int maxrounds, int round, Array<Integer> combo) {
 		int id = player.getIdOfAction(a);
-		// Pruning goes here
-		//		if (a == null) log("action is null");
 
 		combo = new Array<Integer>(combo);
 		combo.add(id);
 //		log("branch: " + id + " combo so far: " + combo);
 		
+		// Pruning goes here
+		
+		// cooldown prune, stop trying this combo is the ccurrent skill is on cd
 		if (isThisSkillOnCooldown(a, round, combo)) {
 //			log("yes, skill " + id + " is on cd on combo: " + combo + " prunning");
 			return;
 		}
-
+		// obvious best dmg prune
+		if (shouldIPruneForDmg(a, round, combo)) {
+			return;
+		}
+		
+		// Pruning ends here
+		
 		round++;
 		if (round <= maxrounds) {
 			loopToNextBranches(maxrounds, round, combo);
@@ -162,6 +238,26 @@ public class Balance {
 			testresult.setBestcombo(bestcombo);
 			testresult.setNumberofbests(numberofbests);
 		}
+	}
+
+	/**Tests if I should prune this branch for max dmg
+	 * 
+	 * The basic idea here is that you are only not sure if the skill that does
+	 * the most dmg is the best option, if using it later would put this in place
+	 * of another skill that does less on different rounds (example, dots). If
+	 * all skills in the foreseable future (the number of skills, so one doesn't
+	 * get in place of another) do the same damage, then it's safe to
+	 * just use the one with the most damage on this round, and you wouldn't have
+	 * to think too hard about it.
+	 * 
+	 * @param a
+	 * @param round
+	 * @param combo
+	 * @return true if pruning should be done, false otherwise
+	 */
+	private boolean shouldIPruneForDmg(Action a, int round, Array<Integer> combo) {
+		
+		return false;
 	}
 
 	/**Calculates how much dmg a combo does
