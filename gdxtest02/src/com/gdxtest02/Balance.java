@@ -38,8 +38,8 @@ public class Balance {
 	}
 
 	public void testModel2() {
-		testModelA(16, 1000, 0);
-		testModelA(16, 1000, 1);
+		testModelA(10, 1000, 0);
+		testModelA(10, 1000, 1);
 //		testModelA(10, 1000, 2);
 ////		[2, 3, 3, 3, 3, 3, 3, 1, 1, 2]
 //		Integer[] c = {2, 3, 3, 3, 3, 3, 3, 1, 1, 2};
@@ -73,6 +73,10 @@ public class Balance {
 
 		log("test over, best dmg: " + bestdmg + " combo: " + bestcombo 
 				+ " number of bests: " + numberofbests);
+		int numberofskills = player.actions.size;
+		int totalsize = (int)Math.pow(numberofskills, maxrounds);
+		float pct = 100f*total/totalsize;
+		log("total loops: " + total + " of " + totalsize + " (" + pct + "%)");
 		if (bestdmg > 0) {
 
 			float ratio = targetdamage/bestdmg;
@@ -144,6 +148,10 @@ public class Balance {
 		
 	}
 
+	/**Returns 2 values, first is the best dmg this round, second is the second best
+	 * @param round
+	 * @return
+	 */
 	private float[] getBestDmgThisRound(int round) {
 		int numberofskills = player.actions.size;
 //		if (numberofskills == 1) return listsof_damageperskill.get(0).get(round);
@@ -208,8 +216,8 @@ public class Balance {
 //			log("yes, skill " + id + " is on cd on combo: " + combo + " prunning");
 			return;
 		}
-		// obvious best dmg prune
-		if (shouldIPruneForDmg(a, round, combo)) {
+//		// obvious best dmg prune
+		if (shouldIPruneForDmg(a, round, maxrounds, combo)) {
 			return;
 		}
 		
@@ -223,6 +231,7 @@ public class Balance {
 			// finish, success
 			float dmg = calculateDmgFromCombo(combo);
 //			log("and it's all over! Total loops: " + ++total + " combo: " + combo + " dmg: " +dmg);
+			total++;
 
 			if (dmg > bestdmg) {
 				bestdmg = dmg;
@@ -252,15 +261,37 @@ public class Balance {
 	 * 
 	 * @param a
 	 * @param round
+	 * @param maxrounds 
 	 * @param combo
 	 * @return true if pruning should be done, false otherwise
 	 */
-	private boolean shouldIPruneForDmg(Action a, int round, Array<Integer> combo) {
+	private boolean shouldIPruneForDmg(Action a, int round, int maxrounds, Array<Integer> combo) {
+		// am I the strongest skill?
+		int id = player.getIdOfAction(a);
+		float dmg = listsof_damageperskill.get(id-1).get(round-1);
+		float bestdmgthisround = getBestDmgThisRound(round)[0];
+		if (bestdmgthisround > dmg) {
+			return false;
+		}
+		// now I know I'm the strongest one
+		// but does the delta change in the near future?
+		int roundsleft = maxrounds - round + 1;
+		// how long should I look in the future?
+		int lookupsize = player.actions.size;
+		lookupsize = Math.min(lookupsize, roundsleft);
+		float delta = listof_damagediff.get(round-1);
+		float newdelta = 0f;
+		for (int i = 0; i < lookupsize; i++) {
+			newdelta = listof_damagediff.get(round-1 + i);
+			if (newdelta != delta) {
+				return true;
+			}
+		}
 		
 		return false;
 	}
 
-	/**Calculates how much dmg a combo does
+	/**Calculates how much dmg a combshouldIPruneForDmgo does
 	 * @param combo
 	 * @return
 	 */
@@ -346,7 +377,6 @@ public class Balance {
 		dummy.resetStats();
 		int id = 1;
 		int roundsleft = maxrounds;
-		Action a = null;
 
 		// start simulation
 		for (int round = 1; round <= maxrounds; round++) {
@@ -354,7 +384,6 @@ public class Balance {
 			id = getNextBestSkill(player, roundsleft);
 			combo.add(id);
 			player.setActiveActionId(id);
-			a = player.getActiveAction();
 			player.updateAll();
 			dummy.updateAll();
 			dummy.applyDmg();
