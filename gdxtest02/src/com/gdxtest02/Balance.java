@@ -20,6 +20,10 @@ public class Balance {
 	 * and the second best, for each round
 	 */
 	private Array<Float> listof_damagediff;
+	/**List of the ids of the skill that does the most dmg this round
+	 * 
+	 */
+	private Array<Integer> listof_bestdmgid;
 
 	public Balance(Char c) {
 		player = c;
@@ -38,8 +42,8 @@ public class Balance {
 	}
 
 	public void testModel2() {
-		testModelA(10, 1000, 0);
-		testModelA(10, 1000, 1);
+		testModelA(8, 1000, 0);
+		testModelA(8, 1000, 1);
 //		testModelA(10, 1000, 2);
 ////		[2, 3, 3, 3, 3, 3, 3, 1, 1, 2]
 //		Integer[] c = {2, 3, 3, 3, 3, 3, 3, 1, 1, 2};
@@ -52,14 +56,15 @@ public class Balance {
 	// TODO check for abilities with only 1 ability with a large cooldown
 	public void testModelA(int maxrounds, float targetdamage, int type) {
 		log("testing model 1 on char " + player.getName());
-		TestResult testresult;
+		testresult = new TestResult();
 		if (type == 0) {
 			log("doing best combo test");
 			testresult = testBestCombo(maxrounds);
 		}
 		else if (type == 1) {
 			log("doing tree test");
-			testresult = testTree(maxrounds);
+//			testresult = testTree(maxrounds);
+			testTree(maxrounds);
 		}
 		else {
 			log("doing brute force test");
@@ -89,7 +94,7 @@ public class Balance {
 	 * @param maxrounds
 	 * @return
 	 */
-	private TestResult testTree(int maxrounds) {
+	private void testTree(int maxrounds) {
 		// prepare for calculations
 		int round = 1;
 		total = 0;
@@ -107,7 +112,7 @@ public class Balance {
 		//		testresult.setBestdmg(0);
 		//		testresult.setBestcombo(null);
 		//		testresult.setNumberofbests(1);
-		return testresult;
+//		return testresult;
 	}
 
 	/**Build lists of how much damage each skill does each round
@@ -119,6 +124,7 @@ public class Balance {
 	private void buildListsOfDamagesPerSkill(int maxrounds) {
 		listsof_damageperskill = new Array<Array<Float>>();
 		listof_damagediff = new Array<Float>();
+		listof_bestdmgid = new Array<Integer>();
 		int numberofskills = player.actions.size;
 		float dmg;
 		for (int id = 1; id <= numberofskills; id++) {
@@ -134,40 +140,45 @@ public class Balance {
 		log("lists of dmg: " + listsof_damageperskill);
 		
 		// build list of differences
-		float best; float second; float delta;
-		float[] tuple;
+		float best; float second; float delta; int id;
+		float[] array;
 		for (int round = 1; round <= maxrounds; round++) {
-			tuple = getBestDmgThisRound(round);
-			best = tuple[0];
-			second = tuple[1];
+			array = getBestDmgThisRound(round);
+			best = array[0];
+			second = array[1];
+			id = (int) array[2];
 			delta = best - second;
 			listof_damagediff.add(delta);
+			listof_bestdmgid.add(id);
 		}
 		
 		log("list of delta: " + listof_damagediff);
+		log("list of best dmg ids: " + listof_bestdmgid);
 		
 	}
 
-	/**Returns 2 values, first is the best dmg this round, second is the second best
+	/**Returns 3 values, first is the best dmg this round, second is the second best
+	 * third is the best dmg id
 	 * @param round
 	 * @return
 	 */
 	private float[] getBestDmgThisRound(int round) {
 		int numberofskills = player.actions.size;
 //		if (numberofskills == 1) return listsof_damageperskill.get(0).get(round);
-		float best = 0; float second = 0; float dmg;
+		float best = 0; float second = 0; float dmg; int id = 0;
 		for (int i = 0; i < numberofskills; i++) {
 			dmg = listsof_damageperskill.get(i).get(round-1); 
 			if (dmg > best) {
 				second = best;
 				best = dmg;
+				id = i + 1;
 			}
 			else if (dmg > second) {
 				second = dmg;
 			}
 		}
-		float[] tuple = {best, second};
-		return tuple;
+		float[] array = {best, second, id};
+		return array;
 	}
 
 	/**Loop through all next branches
@@ -218,6 +229,7 @@ public class Balance {
 		}
 //		// obvious best dmg prune
 		if (shouldIPruneForDmg(a, round, maxrounds, combo)) {
+			log("pruning for dmg, skill: " + id + " combo: " + combo);
 			return;
 		}
 		
@@ -268,27 +280,37 @@ public class Balance {
 	private boolean shouldIPruneForDmg(Action a, int round, int maxrounds, Array<Integer> combo) {
 		// am I the strongest skill?
 		int id = player.getIdOfAction(a);
-		float dmg = listsof_damageperskill.get(id-1).get(round-1);
+		float mydmg = listsof_damageperskill.get(id-1).get(round-1);
 		float bestdmgthisround = getBestDmgThisRound(round)[0];
-		if (bestdmgthisround > dmg) {
-			return false;
+		if (mydmg < bestdmgthisround) {
+			// is the max dmg skill on cd?
+			Action bestaction = player.getAction(listof_bestdmgid.get(round-1));
+			if (isThisSkillOnCooldown(bestaction, round, combo)) {
+				return false;
+			}
 		}
-		// now I know I'm the strongest one
-		// but does the delta change in the near future?
+		else return false;
+		// now I know I'm not the strongest available
+		//TODO should check if I am the second strongest
+		
+		
+		
+		// does the delta change in the near future?
 		int roundsleft = maxrounds - round + 1;
 		// how long should I look in the future?
-		int lookupsize = player.actions.size;
+		int lookupsize = player.actions.size-1;
 		lookupsize = Math.min(lookupsize, roundsleft);
 		float delta = listof_damagediff.get(round-1);
 		float newdelta = 0f;
 		for (int i = 0; i < lookupsize; i++) {
 			newdelta = listof_damagediff.get(round-1 + i);
 			if (newdelta != delta) {
-				return true;
+				// yes, delta does change in the near future
+				return false;
 			}
 		}
 		
-		return false;
+		return true;
 	}
 
 	/**Calculates how much dmg a combshouldIPruneForDmgo does
@@ -316,7 +338,8 @@ public class Balance {
 		return dmg;
 	}
 
-	/**Will check if this skill is on cooldown on this round if this combination
+	/**Will check if this skill is on cooldown (cannot be used)
+	 * on this round if this combination
 	 * is used
 	 * 
 	 * @param a
