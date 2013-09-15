@@ -60,6 +60,7 @@ local.properties
 #
 # GWT gitignore
 # https://github.com/github/gitignore/blob/master/GWT.gitignore
+.gwt
 
 *.class
 

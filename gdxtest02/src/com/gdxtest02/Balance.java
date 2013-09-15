@@ -42,8 +42,8 @@ public class Balance {
 	}
 
 	public void testModel2() {
-		testModelA(8, 1000, 0);
-		testModelA(8, 1000, 1);
+		testModelA(50, 1000, 0);
+		testModelA(50, 1000, 1);
 //		testModelA(10, 1000, 2);
 ////		[2, 3, 3, 3, 3, 3, 3, 1, 1, 2]
 //		Integer[] c = {2, 3, 3, 3, 3, 3, 3, 1, 1, 2};
@@ -229,7 +229,7 @@ public class Balance {
 		}
 //		// obvious best dmg prune
 		if (shouldIPruneForDmg(a, round, maxrounds, combo)) {
-			log("pruning for dmg, skill: " + id + " combo: " + combo);
+//			log("pruning for dmg, skill: " + id + " combo: " + combo);
 			return;
 		}
 		
@@ -282,15 +282,12 @@ public class Balance {
 		int id = player.getIdOfAction(a);
 		float mydmg = listsof_damageperskill.get(id-1).get(round-1);
 		float bestdmgthisround = getBestDmgThisRound(round)[0];
-		if (mydmg < bestdmgthisround) {
-			// is the max dmg skill on cd?
-			Action bestaction = player.getAction(listof_bestdmgid.get(round-1));
-			if (isThisSkillOnCooldown(bestaction, round, combo)) {
-				return false;
-			}
+		int bestavailable = getBestAvailable(combo, round, maxrounds);
+//		log("combo: " + combo + " round: " + round + " id: " + id + " bestavailable: " + bestavailable);
+		if (id == bestavailable) {
+			return false;
 		}
-		else return false;
-		// now I know I'm not the strongest available
+		// now I know I'm NOT the strongest available
 		//TODO should check if I am the second strongest
 		
 		
@@ -311,6 +308,26 @@ public class Balance {
 		}
 		
 		return true;
+	}
+
+	private int getBestAvailable(Array<Integer> combo, int round, int maxrounds) {
+		int roundsleft = maxrounds - round + 1;
+		
+		int bestid = 0;
+		Action a;
+		float bestdmg = 0;
+		float dmg = 0;
+		for (int id = 1; id <= 4; id++) {
+			a = player.getAction(id);
+			if (a == null || isThisSkillOnCooldown(a, round, combo)) continue;
+			dmg = a.getDmgAfterRounds(roundsleft);
+			if (dmg > bestdmg) {
+				bestdmg = dmg;
+				bestid = id;
+			}
+		}
+
+		return bestid;
 	}
 
 	/**Calculates how much dmg a combshouldIPruneForDmgo does
