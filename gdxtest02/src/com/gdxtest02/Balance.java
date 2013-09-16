@@ -42,8 +42,8 @@ public class Balance {
 	}
 
 	public void testModel2() {
-		testModelA(50, 1000, 0);
-		testModelA(50, 1000, 1);
+		testModelA(10, 1000, 0);
+		testModelA(10, 1000, 1);
 //		testModelA(10, 1000, 2);
 ////		[2, 3, 3, 3, 3, 3, 3, 1, 1, 2]
 //		Integer[] c = {2, 3, 3, 3, 3, 3, 3, 1, 1, 2};
@@ -280,17 +280,12 @@ public class Balance {
 	private boolean shouldIPruneForDmg(Action a, int round, int maxrounds, Array<Integer> combo) {
 		// am I the strongest skill?
 		int id = player.getIdOfAction(a);
-		float mydmg = listsof_damageperskill.get(id-1).get(round-1);
-		float bestdmgthisround = getBestDmgThisRound(round)[0];
 		int bestavailable = getBestAvailable(combo, round, maxrounds);
 //		log("combo: " + combo + " round: " + round + " id: " + id + " bestavailable: " + bestavailable);
 		if (id == bestavailable) {
 			return false;
 		}
 		// now I know I'm NOT the strongest available
-		//TODO should check if I am the second strongest
-		
-		
 		
 		// does the delta change in the near future?
 		int roundsleft = maxrounds - round + 1;
