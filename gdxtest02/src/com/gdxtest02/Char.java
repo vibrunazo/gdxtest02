@@ -39,6 +39,7 @@ public class Char implements Cloneable {
 	private Array<Buff> newbuffs;
 	private Balance balance;
 	private Char target;
+	private boolean canoverheal;
 
 	public Char(String name) {
 		this.name = name;
@@ -48,6 +49,7 @@ public class Char implements Cloneable {
 		this.maxhp = 1000;
 		this.posX = 0;
 		this.posY = 0;
+		canoverheal = true;
 		
 		resetStats();
 	}
@@ -79,7 +81,7 @@ public class Char implements Cloneable {
 		int width = 200; // bar width
 		int height = 10; // bar height
 		// health normalized between 0 and 1
-		float health = (float)hp / (float)maxhp;
+		float health = (float)hp / (float)Math.max(maxhp, hp);
 		
 		shapeRenderer.setColor(0.1f, 0.1f, 0f, 1);
 		shapeRenderer.rect(x, y, width, height);
@@ -230,7 +232,7 @@ public class Char implements Cloneable {
 		}
 		else if (delta > 0) {
 			hp += delta;
-			if (hp > maxhp) {
+			if (hp > maxhp && !canoverheal) {
 				return hp = maxhp;
 			}
 		}
