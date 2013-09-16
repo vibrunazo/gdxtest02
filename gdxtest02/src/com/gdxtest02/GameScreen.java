@@ -187,14 +187,13 @@ public class GameScreen implements Screen {
 		ui.logToConsole("Round" + round++ + ", " + "p1 uses: " + actionidp1 + ": " + a1name +
 				", p2 uses: " + actionidp2 + ": " + a2name + ". Fight!");
 		
-		p1.updateAll();p2.updateAll();
-//		p1.updateCooldowns();
-//		p2.updateCooldowns();
-//		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
-//		if (actionp1 != null) actionp1.act(p1, p2);
-//		if (actionp2 != null) actionp2.act(p2, p1);
-//		p1.applyBuffs(); p2.applyBuffs(); 
-//		// actually applies the damage done this round by all players
+//		p1.updateAll();p2.updateAll();
+		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
+		if (actionp1 != null) actionp1.act(p1, p2);
+		if (actionp2 != null) actionp2.act(p2, p1);
+		p1.applyBuffs(); p2.applyBuffs(); 
+		p1.updateCooldowns();p2.updateCooldowns();
+		// actually applies the damage done this round by all players
 		p1.applyDmg(); p2.applyDmg();
 		
 
