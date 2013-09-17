@@ -183,7 +183,8 @@ public class CharSelectScreenUI {
 				Char c = getCurrentPlayer();
 				if (c != null) {
 //					c.getBalance().testModel1();
-					c.getBalance().testModel2();
+//					c.getBalance().testModel2();
+					c.getBalance().testModel3();
 				}
 			}
 		};

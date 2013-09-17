@@ -24,6 +24,7 @@ public class Balance {
 	 * 
 	 */
 	private Array<Integer> listof_bestdmgid;
+	private int maxrounds;
 
 	public Balance(Char c) {
 		player = c;
@@ -37,25 +38,43 @@ public class Balance {
 		return total;
 	}
 
+	/**Model 1: Dps vs Dps 
+	 * 
+	 * 1000 damage in 10 rounds
+	 */
 	public void testModel1() {
-		testModelA(10, 1000, 0);
+		testDmgModelA(10, 1000, 0);
+		testDmgModelA(10, 1000, 1);
 	}
 
+	/** Model 2: Dps vs Healer
+	 * 
+	 * 1500 in 15 rounds
+	 */
 	public void testModel2() {
-		testModelA(10, 1000, 0);
-		testModelA(10, 1000, 1);
-//		testModelA(10, 1000, 2);
-////		[2, 3, 3, 3, 3, 3, 3, 1, 1, 2]
-//		Integer[] c = {2, 3, 3, 3, 3, 3, 3, 1, 1, 2};
-//		Array<Integer> combo = new Array<Integer>();
-//		combo.addAll(c);
-//		calculateDmgFromCombo(combo);
+		testDmgModelA(15, 1500, 0);
+		testDmgModelA(15, 1500, 1);
+	}
+	
+	/** Model 3: Healer vs Dps if he heals 
+	 * 
+	 * 1000 dmg in 15 rounds, heal 500 in 15 rounds
+	 */
+	public void testModel3() {
+		testDmgAndHeal(5, 1000f, 500f);
+		printTestResults();
+	}
+	
+	
 
+	private void testDmgAndHeal(int maxrounds, float damage, float heal) {
+		testTree(maxrounds);
 	}
 
 	// TODO check for abilities with only 1 ability with a large cooldown
-	public void testModelA(int maxrounds, float targetdamage, int type) {
+	public void testDmgModelA(int maxrounds, float targetdamage, int type) {
 		log("testing model 1 on char " + player.getName());
+		this.maxrounds = maxrounds;
 		testresult = new TestResult();
 		if (type == 0) {
 			log("doing best combo test");
@@ -71,7 +90,23 @@ public class Balance {
 			testresult = testAllCombinations(maxrounds);
 		}
 
+		printTestResults();
+		
+		int bestdmg = testresult.getBestdmg();
+		if (bestdmg > 0) {
 
+			float ratio = targetdamage/bestdmg;
+			balanceDmg(player, ratio);
+
+		}
+	}
+
+	/**Prints test results on log
+	 * 
+	 * @param maxrounds
+	 * @return
+	 */
+	private void printTestResults() {
 		int bestdmg = testresult.getBestdmg();
 		Array<Integer> bestcombo = testresult.getBestcombo();
 		int numberofbests = testresult.getNumberofbests();
@@ -82,12 +117,6 @@ public class Balance {
 		int totalsize = (int)Math.pow(numberofskills, maxrounds);
 		float pct = 100f*total/totalsize;
 		log("total loops: " + total + " of " + totalsize + " (" + pct + "%)");
-		if (bestdmg > 0) {
-
-			float ratio = targetdamage/bestdmg;
-			balanceDmg(player, ratio);
-
-		}
 	}
 
 	/**Build a game tree to find the best combo
@@ -290,6 +319,7 @@ public class Balance {
 		// does the delta change in the near future?
 		int roundsleft = maxrounds - round + 1;
 		// how long should I look in the future?
+		// TODO take skill cooldown into account?
 		int lookupsize = player.actions.size-1;
 		lookupsize = Math.min(lookupsize, roundsleft);
 		float delta = listof_damagediff.get(round-1);
