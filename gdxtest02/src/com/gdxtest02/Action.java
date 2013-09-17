@@ -208,6 +208,14 @@ public abstract class Action {
 		return power;
 	}
 	
+	/**How much heal this skill does after X rounds
+	 * @param rounds
+	 * @return
+	 */
+	public float getHealAfterRounds(int rounds) {
+		return 0;
+	}
+	
 	/**How much damage this skill can do this round
 	 * @param round
 	 * @param maxrounds

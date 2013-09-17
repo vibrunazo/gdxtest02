@@ -17,7 +17,13 @@ public class Heal extends Action {
 		self.incHp(power);
 	}
 	
+	public float getDmgAfterRounds(int rounds) {
+		return 0;
+	}
 	
+	public float getHealAfterRounds(int rounds) {
+		return power;
+	}
 	
 	public Heal() {
 		super();

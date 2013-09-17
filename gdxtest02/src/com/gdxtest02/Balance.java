@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class Balance {
 	Char player;
-	private int total;
+	private int totaldmg;
 	private float bestdmg;
 	private Array<Integer> bestcombo;
 	private TestResult testresult;
@@ -25,6 +25,8 @@ public class Balance {
 	 */
 	private Array<Integer> listof_bestdmgid;
 	private int maxrounds;
+	private float bestheal;
+	private float besttotal;
 
 	public Balance(Char c) {
 		player = c;
@@ -115,8 +117,8 @@ public class Balance {
 				+ " number of bests: " + numberofbests);
 		int numberofskills = player.actions.size;
 		int totalsize = (int)Math.pow(numberofskills, maxrounds);
-		float pct = 100f*total/totalsize;
-		log("total loops: " + total + " of " + totalsize + " (" + pct + "%)");
+		float pct = 100f*totaldmg/totalsize;
+		log("total loops: " + totaldmg + " of " + totalsize + " (" + pct + "%)");
 	}
 
 	/**Build a game tree to find the best combo
@@ -126,22 +128,25 @@ public class Balance {
 	private void testTree(int maxrounds) {
 		// prepare for calculations
 		int round = 1;
-		total = 0;
-		bestdmg = 0;
-		numberofbests = 0;
-		bestcombo = new Array<Integer>(); 
+		prepareTest(); 
 		Array<Integer> combo = new Array<Integer>();
 		buildListsOfDamagesPerSkill(maxrounds);
 		
 		// Start:
 		loopToNextBranches(maxrounds, round, combo);
 
-		// record results on a TestResult object and return it
-		//		TestResult testresult = new TestResult();
-		//		testresult.setBestdmg(0);
-		//		testresult.setBestcombo(null);
-		//		testresult.setNumberofbests(1);
-//		return testresult;
+	}
+
+	/**Initializes and resets the variables common to all tests
+	 * 
+	 */
+	private void prepareTest() {
+		totaldmg = 0;
+		bestdmg = 0;
+		bestheal = 0;
+		besttotal = 0;
+		numberofbests = 0;
+		bestcombo = new Array<Integer>();
 	}
 
 	/**Build lists of how much damage each skill does each round
@@ -272,21 +277,39 @@ public class Balance {
 			// finish, success
 			float dmg = calculateDmgFromCombo(combo);
 //			log("and it's all over! Total loops: " + ++total + " combo: " + combo + " dmg: " +dmg);
-			total++;
+			totaldmg++;
 
-			if (dmg > bestdmg) {
-				bestdmg = dmg;
-				bestcombo = combo;
-				numberofbests = 0;
-			}
-			if (dmg == bestdmg) {
-				numberofbests++;
-			}
+			addDmgToList(combo, dmg);
 
-			testresult = new TestResult();
-			testresult.setBestdmg((int) bestdmg);
-			testresult.setBestcombo(bestcombo);
-			testresult.setNumberofbests(numberofbests);
+			buildTestResult();
+		}
+	}
+
+	/**Build together the test results and store them on the
+	 * testresult object
+	 * 
+	 */
+	private void buildTestResult() {
+		testresult = new TestResult();
+		testresult.setBestdmg((int) bestdmg);
+		testresult.setBestcombo(bestcombo);
+		testresult.setNumberofbests(numberofbests);
+	}
+
+	/**Adds this damage and combo to the list of best ones, if it's one of the 
+	 * best ones
+	 * 
+	 * @param combo
+	 * @param dmg
+	 */
+	private void addDmgToList(Array<Integer> combo, float dmg) {
+		if (dmg > bestdmg) {
+			bestdmg = dmg;
+			bestcombo = combo;
+			numberofbests = 0;
+		}
+		if (dmg == bestdmg) {
+			numberofbests++;
 		}
 	}
 
