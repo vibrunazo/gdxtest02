@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 
 public class Balance {
+	private static final int TEST_DAMAGE = 0;
+	private static final int TEST_HEAL = 1;
+	private static final int TEST_DMGHEAL = 2;
 	Char player;
 	private int totaldmg;
 	private float bestdmg;
@@ -27,6 +30,7 @@ public class Balance {
 	private int maxrounds;
 	private float bestheal;
 	private float besttotal;
+	private int whattotest;
 
 	public Balance(Char c) {
 		player = c;
@@ -64,13 +68,18 @@ public class Balance {
 	 */
 	public void testModel3() {
 		testDmgAndHeal(5, 1000f, 500f);
-		printTestResults();
+		
 	}
 	
 	
 
 	private void testDmgAndHeal(int maxrounds, float damage, float heal) {
-		testTree(maxrounds);
+		testTree(maxrounds, TEST_DAMAGE);
+		printTestResults();
+		testTree(maxrounds, TEST_HEAL);
+		printTestResults();
+		testTree(maxrounds, TEST_DMGHEAL);
+		printTestResults();
 	}
 
 	// TODO check for abilities with only 1 ability with a large cooldown
@@ -85,7 +94,7 @@ public class Balance {
 		else if (type == 1) {
 			log("doing tree test");
 //			testresult = testTree(maxrounds);
-			testTree(maxrounds);
+			testTree(maxrounds, TEST_DAMAGE);
 		}
 		else {
 			log("doing brute force test");
@@ -125,9 +134,10 @@ public class Balance {
 	 * @param maxrounds
 	 * @return
 	 */
-	private void testTree(int maxrounds) {
+	private void testTree(int maxrounds, int whattotest) {
 		// prepare for calculations
 		int round = 1;
+		this.whattotest = whattotest;
 		prepareTest(); 
 		Array<Integer> combo = new Array<Integer>();
 		buildListsOfDamagesPerSkill(maxrounds);
@@ -262,10 +272,10 @@ public class Balance {
 			return;
 		}
 //		// obvious best dmg prune
-		if (shouldIPruneForDmg(a, round, maxrounds, combo)) {
-//			log("pruning for dmg, skill: " + id + " combo: " + combo);
-			return;
-		}
+//		if (shouldIPruneForDmg(a, round, maxrounds, combo)) {
+////			log("pruning for dmg, skill: " + id + " combo: " + combo);
+//			return;
+//		}
 		
 		// Pruning ends here
 		
@@ -396,7 +406,8 @@ public class Balance {
 			}
 			else {
 //				log("round: " + round + " left: " + roundsleft + " skill: " + id + " dmg: " + a.getDmgAfterRounds(roundsleft));
-				dmg += a.getDmgAfterRounds(roundsleft);
+				if (whattotest == TEST_DAMAGE || whattotest == TEST_DMGHEAL) dmg += a.getDmgAfterRounds(roundsleft);
+				if (whattotest == TEST_HEAL || whattotest == TEST_DMGHEAL) dmg += a.getHealAfterRounds(roundsleft);
 			}
 		}
 //		log("combo: " + combo + " dmg: " + dmg);

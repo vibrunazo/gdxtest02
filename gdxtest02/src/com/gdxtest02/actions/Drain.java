@@ -17,6 +17,16 @@ public class Drain extends Action {
 		setAvgDps(power*2/(cooldown+1));
 	}
 	
+	
+	
+	public float getDmgAfterRounds(int rounds) {
+		return power;
+	}
+	
+	public float getHealAfterRounds(int rounds) {
+		return power;
+	}
+	
 
 	public Drain() {
 		super();
