@@ -30,7 +30,7 @@ public class Balance {
 	private int maxrounds;
 	private float bestheal;
 	private float besttotal;
-	private int whattotest;
+//	private int whattotest;
 
 	public Balance(Char c) {
 		player = c;
@@ -122,7 +122,7 @@ public class Balance {
 		Array<Integer> bestcombo = testresult.getBestcombo();
 		int numberofbests = testresult.getNumberofbests();
 
-		log("test over, best dmg: " + bestdmg + " combo: " + bestcombo 
+		log("test over, best dmg: " + bestdmg + " best heal: " + bestheal + " combo: " + bestcombo 
 				+ " number of bests: " + numberofbests);
 		int numberofskills = player.actions.size;
 		int totalsize = (int)Math.pow(numberofskills, maxrounds);
@@ -137,13 +137,13 @@ public class Balance {
 	private void testTree(int maxrounds, int whattotest) {
 		// prepare for calculations
 		int round = 1;
-		this.whattotest = whattotest;
+//		this.whattotest = whattotest;
 		prepareTest(); 
 		Array<Integer> combo = new Array<Integer>();
 		buildListsOfDamagesPerSkill(maxrounds);
 		
 		// Start:
-		loopToNextBranches(maxrounds, round, combo);
+		loopToNextBranches(maxrounds, round, combo, whattotest);
 
 	}
 
@@ -234,15 +234,16 @@ public class Balance {
 	 * @param round 
 	 * @param maxrounds 
 	 * @param combo 
+	 * @param whattotest 
 	 */
-	private void loopToNextBranches(int maxrounds, int round, Array<Integer> combo) {
+	private void loopToNextBranches(int maxrounds, int round, Array<Integer> combo, int whattotest) {
 //		log("looping on round: " + round + "/" + maxrounds);
 
 		int numberofskills = player.actions.size;
 
 		for (int id = 1; id < numberofskills + 1; id++) {
 			Action a = player.getAction(id);
-			nextBranch(a, maxrounds, round, combo);
+			nextBranch(a, maxrounds, round, combo, whattotest);
 		}
 	}
 
@@ -256,8 +257,9 @@ public class Balance {
 	 * @param round 
 	 * @param maxrounds 
 	 * @param combo 
+	 * @param whattotest 
 	 */
-	private void nextBranch(Action a, int maxrounds, int round, Array<Integer> combo) {
+	private void nextBranch(Action a, int maxrounds, int round, Array<Integer> combo, int whattotest) {
 		int id = player.getIdOfAction(a);
 
 		combo = new Array<Integer>(combo);
@@ -281,15 +283,16 @@ public class Balance {
 		
 		round++;
 		if (round <= maxrounds) {
-			loopToNextBranches(maxrounds, round, combo);
+			loopToNextBranches(maxrounds, round, combo, whattotest);
 		}
 		else {
 			// finish, success
-			float dmg = calculateDmgFromCombo(combo);
+			float dmg = calculateDmgFromCombo(combo, whattotest);
+			float heal = calculateDmgFromCombo(combo, TEST_HEAL); 
 //			log("and it's all over! Total loops: " + ++total + " combo: " + combo + " dmg: " +dmg);
 			totaldmg++;
 
-			addDmgToList(combo, dmg);
+			addDmgToList(combo, dmg, heal);
 
 			buildTestResult();
 		}
@@ -312,11 +315,12 @@ public class Balance {
 	 * @param combo
 	 * @param dmg
 	 */
-	private void addDmgToList(Array<Integer> combo, float dmg) {
+	private void addDmgToList(Array<Integer> combo, float dmg, float heal) {
 		if (dmg > bestdmg) {
 			bestdmg = dmg;
 			bestcombo = combo;
 			numberofbests = 0;
+			bestheal = heal;
 		}
 		if (dmg == bestdmg) {
 			numberofbests++;
@@ -390,9 +394,10 @@ public class Balance {
 
 	/**Calculates how much dmg a combshouldIPruneForDmgo does
 	 * @param combo
+	 * @param whattotest 
 	 * @return
 	 */
-	private float calculateDmgFromCombo(Array<Integer> combo) {
+	private float calculateDmgFromCombo(Array<Integer> combo, int whattotest) {
 		int maxrounds = combo.size;
 		if (maxrounds == 0) return 0;
 		float dmg = 0;
