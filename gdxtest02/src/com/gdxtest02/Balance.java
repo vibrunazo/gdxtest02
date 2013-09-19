@@ -67,7 +67,7 @@ public class Balance {
 	 * 1000 dmg in 15 rounds, heal 500 in 15 rounds
 	 */
 	public void testModel3() {
-		testDmgAndHeal(5, 1000f, 500f);
+		testDmgAndHeal(15, 1000f, 500f);
 		
 	}
 	
@@ -140,7 +140,7 @@ public class Balance {
 //		this.whattotest = whattotest;
 		prepareTest(); 
 		Array<Integer> combo = new Array<Integer>();
-		buildListsOfDamagesPerSkill(maxrounds);
+		buildListsOfDamagesPerSkill(maxrounds, whattotest);
 		
 		// Start:
 		loopToNextBranches(maxrounds, round, combo, whattotest);
@@ -164,8 +164,9 @@ public class Balance {
 	 * and the second, records them on listsof_damageperskill
 	 * and listof_damagediff
 	 * @param maxrounds 
+	 * @param whattotest 
 	 */
-	private void buildListsOfDamagesPerSkill(int maxrounds) {
+	private void buildListsOfDamagesPerSkill(int maxrounds, int whattotest) {
 		listsof_damageperskill = new Array<Array<Float>>();
 		listof_damagediff = new Array<Float>();
 		listof_bestdmgid = new Array<Integer>();
@@ -176,7 +177,7 @@ public class Balance {
 			Array<Float> damagelist = new Array<Float>();
 			listsof_damageperskill.add(damagelist);
 			for (int round = 1; round <= maxrounds; round++) {
-				dmg = a.getDmgThisRound(round, maxrounds);
+				dmg = getOutputOfAction(a, round, maxrounds, whattotest);
 				damagelist.add(dmg);
 				
 			}
@@ -199,6 +200,13 @@ public class Balance {
 		log("list of delta: " + listof_damagediff);
 		log("list of best dmg ids: " + listof_bestdmgid);
 		
+	}
+
+	private float getOutputOfAction(Action a, int round, int maxrounds, int whattotest) {
+		float total = 0;
+		if (whattotest == TEST_DAMAGE || whattotest == TEST_DMGHEAL) total += a.getDmgThisRound(round, maxrounds);
+		if (whattotest == TEST_HEAL || whattotest == TEST_DMGHEAL) total += a.getHealThisRound(round, maxrounds);
+		return total;
 	}
 
 	/**Returns 3 values, first is the best dmg this round, second is the second best
@@ -274,10 +282,10 @@ public class Balance {
 			return;
 		}
 //		// obvious best dmg prune
-//		if (shouldIPruneForDmg(a, round, maxrounds, combo)) {
-////			log("pruning for dmg, skill: " + id + " combo: " + combo);
-//			return;
-//		}
+		if (shouldIPruneForDmg(a, round, maxrounds, combo, whattotest)) {
+//			log("pruning for dmg, skill: " + id + " combo: " + combo);
+			return;
+		}
 		
 		// Pruning ends here
 		
@@ -343,12 +351,13 @@ public class Balance {
 	 * @param round
 	 * @param maxrounds 
 	 * @param combo
+	 * @param whattotest 
 	 * @return true if pruning should be done, false otherwise
 	 */
-	private boolean shouldIPruneForDmg(Action a, int round, int maxrounds, Array<Integer> combo) {
+	private boolean shouldIPruneForDmg(Action a, int round, int maxrounds, Array<Integer> combo, int whattotest) {
 		// am I the strongest skill?
 		int id = player.getIdOfAction(a);
-		int bestavailable = getBestAvailable(combo, round, maxrounds);
+		int bestavailable = getBestAvailable(combo, round, maxrounds, whattotest);
 //		log("combo: " + combo + " round: " + round + " id: " + id + " bestavailable: " + bestavailable);
 		if (id == bestavailable) {
 			return false;
@@ -374,7 +383,7 @@ public class Balance {
 		return true;
 	}
 
-	private int getBestAvailable(Array<Integer> combo, int round, int maxrounds) {
+	private int getBestAvailable(Array<Integer> combo, int round, int maxrounds, int whattotest) {
 		int roundsleft = maxrounds - round + 1;
 		
 		int bestid = 0;
@@ -385,6 +394,7 @@ public class Balance {
 			a = player.getAction(id);
 			if (a == null || isThisSkillOnCooldown(a, round, combo)) continue;
 			dmg = a.getDmgAfterRounds(roundsleft);
+			dmg = getOutputOfAction(a, roundsleft, maxrounds, whattotest);
 			if (dmg > bestdmg) {
 				bestdmg = dmg;
 				bestid = id;

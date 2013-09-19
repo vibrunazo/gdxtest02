@@ -225,4 +225,13 @@ public abstract class Action {
 		return getDmgAfterRounds(maxrounds - round + 1);
 	}
 	
+	/**How much heal this skill can do this round
+	 * @param round
+	 * @param maxrounds
+	 * @return
+	 */
+	public float getHealThisRound(int round, int maxrounds) {
+		return getHealAfterRounds(maxrounds - round + 1);
+	}
+	
 }
