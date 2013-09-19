@@ -29,7 +29,7 @@ public class Balance {
 	private Array<Integer> listof_bestdmgid;
 	private int maxrounds;
 	private float bestheal;
-	private float besttotal;
+	private float bestdmgheal;
 //	private int whattotest;
 
 	public Balance(Char c) {
@@ -122,7 +122,7 @@ public class Balance {
 		Array<Integer> bestcombo = testresult.getBestcombo();
 		int numberofbests = testresult.getNumberofbests();
 
-		log("test over, best dmg: " + bestdmg + " best heal: " + bestheal + " combo: " + bestcombo 
+		log("test over, best dmgheal: " + bestdmgheal + " best dmg: " + bestdmg + " best heal: " + bestheal + " combo: " + bestcombo 
 				+ " number of bests: " + numberofbests);
 		int numberofskills = player.actions.size;
 		int totalsize = (int)Math.pow(numberofskills, maxrounds);
@@ -154,7 +154,7 @@ public class Balance {
 		totaldmg = 0;
 		bestdmg = 0;
 		bestheal = 0;
-		besttotal = 0;
+		bestdmgheal = 0;
 		numberofbests = 0;
 		bestcombo = new Array<Integer>();
 	}
@@ -287,12 +287,13 @@ public class Balance {
 		}
 		else {
 			// finish, success
-			float dmg = calculateDmgFromCombo(combo, whattotest);
+			float dmgheal = calculateDmgFromCombo(combo, whattotest);
+			float dmg = calculateDmgFromCombo(combo, TEST_DAMAGE);
 			float heal = calculateDmgFromCombo(combo, TEST_HEAL); 
 //			log("and it's all over! Total loops: " + ++total + " combo: " + combo + " dmg: " +dmg);
 			totaldmg++;
 
-			addDmgToList(combo, dmg, heal);
+			addDmgToList(combo, dmgheal, dmg, heal);
 
 			buildTestResult();
 		}
@@ -313,16 +314,17 @@ public class Balance {
 	 * best ones
 	 * 
 	 * @param combo
-	 * @param dmg
+	 * @param dmgheal
 	 */
-	private void addDmgToList(Array<Integer> combo, float dmg, float heal) {
-		if (dmg > bestdmg) {
-			bestdmg = dmg;
+	private void addDmgToList(Array<Integer> combo, float dmgheal, float dmg, float heal) {
+		if (dmgheal > bestdmgheal) {
+			bestdmgheal = dmgheal;
 			bestcombo = combo;
 			numberofbests = 0;
 			bestheal = heal;
+			bestdmg = dmg;
 		}
-		if (dmg == bestdmg) {
+		if (dmgheal == bestdmgheal) {
 			numberofbests++;
 		}
 	}
