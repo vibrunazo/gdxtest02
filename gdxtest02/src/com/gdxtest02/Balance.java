@@ -74,12 +74,27 @@ public class Balance {
 	
 
 	private void testDmgAndHeal(int maxrounds, float damage, float heal) {
-		testTree(maxrounds, TEST_DAMAGE);
-		printTestResults();
-		testTree(maxrounds, TEST_HEAL);
-		printTestResults();
+//		testTree(maxrounds, TEST_DAMAGE);
+//		printTestResults();
+//		testTree(maxrounds, TEST_HEAL);
+//		printTestResults();
 		testTree(maxrounds, TEST_DMGHEAL);
 		printTestResults();
+		
+		Array<Integer> skillsthatdodmg = new Array<Integer>();
+		Array<Integer> skillsthatheal = new Array<Integer>();
+		
+		skillsthatdodmg = getSkillsThatDoDmg();
+	}
+
+	private Array<Integer> getSkillsThatDoDmg() {
+		Array<Integer> list = new Array<Integer>(); 
+		for (Action a : player.actions) {
+			if (a.getDmgAfterRounds(10) > 0) {
+				list.add(player.getIdOfAction(a));
+			}
+		}
+		return null;
 	}
 
 	// TODO check for abilities with only 1 ability with a large cooldown
@@ -107,7 +122,7 @@ public class Balance {
 		if (bestdmg > 0) {
 
 			float ratio = targetdamage/bestdmg;
-			balanceDmg(player, ratio);
+			fixDmgByRatio(player, ratio);
 
 		}
 	}
@@ -394,7 +409,7 @@ public class Balance {
 			a = player.getAction(id);
 			if (a == null || isThisSkillOnCooldown(a, round, combo)) continue;
 			dmg = a.getDmgAfterRounds(roundsleft);
-			dmg = getOutputOfAction(a, roundsleft, maxrounds, whattotest);
+			dmg = getOutputOfAction(a, round, maxrounds, whattotest);
 			if (dmg > bestdmg) {
 				bestdmg = dmg;
 				bestid = id;
@@ -638,7 +653,7 @@ public class Balance {
 	 * @param player
 	 * @param ratio
 	 */
-	private void balanceDmg(Char player, float ratio) {
+	private void fixDmgByRatio(Char player, float ratio) {
 		int id = 1;
 		player.getAction(id);
 		Array<Float> skillsdmg = new Array<Float>(); 
