@@ -74,10 +74,10 @@ public class Balance {
 	
 
 	private void testDmgAndHeal(int maxrounds, float damage, float heal) {
-//		testTree(maxrounds, TEST_DAMAGE);
-//		printTestResults();
-//		testTree(maxrounds, TEST_HEAL);
-//		printTestResults();
+		testTree(maxrounds, TEST_DAMAGE);
+		printTestResults();
+		testTree(maxrounds, TEST_HEAL);
+		printTestResults();
 		testTree(maxrounds, TEST_DMGHEAL);
 		printTestResults();
 		
@@ -374,7 +374,7 @@ public class Balance {
 		int id = player.getIdOfAction(a);
 		int bestavailable = getBestAvailable(combo, round, maxrounds, whattotest);
 //		log("combo: " + combo + " round: " + round + " id: " + id + " bestavailable: " + bestavailable);
-		if (id == bestavailable) {
+		if (id == bestavailable || bestavailable == 0) {
 			return false;
 		}
 		// now I know I'm NOT the strongest available
@@ -408,7 +408,7 @@ public class Balance {
 		for (int id = 1; id <= 4; id++) {
 			a = player.getAction(id);
 			if (a == null || isThisSkillOnCooldown(a, round, combo)) continue;
-			dmg = a.getDmgAfterRounds(roundsleft);
+//			dmg = a.getDmgAfterRounds(roundsleft);
 			dmg = getOutputOfAction(a, round, maxrounds, whattotest);
 			if (dmg > bestdmg) {
 				bestdmg = dmg;
