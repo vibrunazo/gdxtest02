@@ -14,3 +14,5 @@
 # generated files
 bin/
 gen/
+
+*.log

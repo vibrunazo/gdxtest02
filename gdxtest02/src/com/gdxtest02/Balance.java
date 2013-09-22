@@ -74,27 +74,41 @@ public class Balance {
 	
 
 	private void testDmgAndHeal(int maxrounds, float damage, float heal) {
-		testTree(maxrounds, TEST_DAMAGE);
-		printTestResults();
-		testTree(maxrounds, TEST_HEAL);
-		printTestResults();
+//		testTree(maxrounds, TEST_DAMAGE);
+//		printTestResults();
+//		testTree(maxrounds, TEST_HEAL);
+//		printTestResults();
 		testTree(maxrounds, TEST_DMGHEAL);
 		printTestResults();
 		
-		Array<Integer> skillsthatdodmg = new Array<Integer>();
-		Array<Integer> skillsthatheal = new Array<Integer>();
+		Array<Integer> skillsthatdodmg;
+		Array<Integer> skillsthatheal;
 		
-		skillsthatdodmg = getSkillsThatDoDmg();
+		skillsthatdodmg = getSkillsThatDoDmg(TEST_DAMAGE);
+		skillsthatheal = getSkillsThatDoDmg(TEST_HEAL);
+		
+		log("skills that do dmg: " + skillsthatdodmg);
+		log("skills that do heal: " + skillsthatheal);
+		
+		// check if balanced
+		
+		
+		// fix if unbalanced
+		
+		
 	}
 
-	private Array<Integer> getSkillsThatDoDmg() {
+	private Array<Integer> getSkillsThatDoDmg(int whattotest) {
 		Array<Integer> list = new Array<Integer>(); 
 		for (Action a : player.actions) {
-			if (a.getDmgAfterRounds(10) > 0) {
+			if (whattotest == TEST_DAMAGE && a.getDmgAfterRounds(10) > 0) {
+				list.add(player.getIdOfAction(a));
+			}
+			if (whattotest == TEST_HEAL && a.getHealAfterRounds(10) > 0) {
 				list.add(player.getIdOfAction(a));
 			}
 		}
-		return null;
+		return list;
 	}
 
 	// TODO check for abilities with only 1 ability with a large cooldown
