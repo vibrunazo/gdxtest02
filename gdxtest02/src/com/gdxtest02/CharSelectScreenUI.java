@@ -30,9 +30,13 @@ public class CharSelectScreenUI {
 	private static final int CHARS_PER_ROW = 4;
 	private static final int CHARBUTTON_WIDTH = 50;
 	private static final int AIBUTTON_WIDTH = 50;
+	protected static final int CONTROL_AI = 0;
+	protected static final int CONTROL_PLAYER = 1;
 	private float FACETABLE_X = 50;
 	private float FACETABLE_Y = 300;
 	private float FACETABLE_WIDTH = 150;
+	private int p1control;
+	private int p2control;
 	
 	UIBuilder uibuilder;
 	private TextButton gobutton;
@@ -57,6 +61,7 @@ public class CharSelectScreenUI {
 	private ClickListener balancelistener;
 	private TextButton p1aibutton;
 	private TextButton p2aibutton;
+	private ClickListener ailistener;
 
 	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
@@ -85,6 +90,9 @@ public class CharSelectScreenUI {
 		p1 = new CharYagg01("p1");
 		p2 = new Char05("p2");
 		
+		setControl("p1", CONTROL_PLAYER);
+		setControl("p2", CONTROL_AI);
+		
 		
 	}
 
@@ -111,6 +119,8 @@ public class CharSelectScreenUI {
 		p1button.setDisabled(true);
 		lefttable.add(p1button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
 		p1aibutton = new TextButton("AI", skin); 
+		p1aibutton.setName("p1");
+		p1aibutton.addListener(ailistener);
 		lefttable.row();
 		lefttable.add(p1aibutton).width(AIBUTTON_WIDTH).height(AIBUTTON_WIDTH);
 	}
@@ -124,6 +134,8 @@ public class CharSelectScreenUI {
 		p2button.setDisabled(true);
 		righttable.add(p2button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
 		p2aibutton = new TextButton("AI", skin); 
+		p2aibutton.setName("p2");
+		p2aibutton.addListener(ailistener);
 		righttable.row();
 		righttable.add(p2aibutton).width(AIBUTTON_WIDTH).height(AIBUTTON_WIDTH);
 	}
@@ -200,6 +212,18 @@ public class CharSelectScreenUI {
 			}
 		};
 		
+		ailistener = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				Actor actor = event.getTarget(); // the label that was clicked
+				TextButton b = (TextButton)actor.getParent(); // the button holding that label
+				String name = b.getName();
+//				log("clicked ai, name: " + name);
+				toggleControl(name);
+//				log("p1control: " + p1control + " p2control: " + p2control);
+				
+			}
+		};
+		
 		backlistener = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				screen.game.setScreen(new MainMenuScreen(screen.game));
@@ -221,6 +245,51 @@ public class CharSelectScreenUI {
 				
 			}
 		};
+	}
+	
+	/**Sets the control of this player (ai or player)
+	 * string must be p1 or p2
+	 * 
+	 * @param player
+	 * @param control CONTROL_PLAYER or CONTROL_AI
+	 */
+	private void setControl(String player, int control) {
+		if (player.equals("p1")) {
+			p1control = control;
+			TextButton b = p1aibutton;
+			checkAiButton(b, control);
+		}
+		if (player.equals("p2")) {
+			p2control = control;
+			TextButton b = p2aibutton;
+			checkAiButton(b, control);
+		}
+	}
+	
+	/**Toggles control between ai and player for this playername
+	 * @param player
+	 */
+	private void toggleControl(String playername) {
+		if (playername.equals("p1")) {
+			if (p1control == CONTROL_PLAYER) setControl(playername, CONTROL_AI);
+			else setControl(playername, CONTROL_PLAYER);
+		}
+		if (playername.equals("p2")) {
+			if (p2control == CONTROL_PLAYER) setControl(playername, CONTROL_AI);
+			else setControl(playername, CONTROL_PLAYER);
+		}
+	}
+	
+	/**Checks or uncheck the ai button if the control is AI or Player
+	 * @param button
+	 */
+	private void checkAiButton(TextButton button, int control) {
+		if (control == CONTROL_AI) {
+			button.setChecked(true);
+		}
+		if (control == CONTROL_PLAYER) {
+			button.setChecked(false);
+		}
 	}
 
 	public void draw() {
