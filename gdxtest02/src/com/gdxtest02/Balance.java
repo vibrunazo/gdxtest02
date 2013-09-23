@@ -73,7 +73,7 @@ public class Balance {
 	
 	
 
-	private void testDmgAndHeal(int maxrounds, float damage, float heal) {
+	private void testDmgAndHeal(int maxrounds, float targetdamage, float targetheal) {
 //		testTree(maxrounds, TEST_DAMAGE);
 //		printTestResults();
 //		testTree(maxrounds, TEST_HEAL);
@@ -91,10 +91,27 @@ public class Balance {
 		log("skills that do heal: " + skillsthatheal);
 		
 		// check if balanced
+		if (bestdmg != targetdamage) {
+			fixDamageWithRatio(skillsthatdodmg, bestdmg, targetdamage);
+		}
 		
+		if (bestheal != targetheal) {
+			fixDamageWithRatio(skillsthatdodmg, bestheal, targetheal);
+		}
 		
 		// fix if unbalanced
 		
+		
+	}
+
+	private void fixDamageWithRatio(Array<Integer> skillsthatdodmg,
+			float bestdmg, float targetdamage) {
+		if (bestdmg > 0) {
+
+			float ratio = targetdamage/bestdmg;
+			fixDmgByRatio(player, ratio);
+
+		}
 		
 	}
 

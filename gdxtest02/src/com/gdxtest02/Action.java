@@ -16,18 +16,18 @@ public abstract class Action {
 	}
 
 	public Action(float value) {
-		power = value;
+		power = (float) Math.ceil(value);
 		ini();
 	}
 	
 	public Action(float value, int cooldown) {
-		power = value;
+		power = (float) Math.ceil(value);
 		this.cooldown = cooldown;
 		ini();
 	}
 	
 	public Action(float value, int cooldown, int duration) {
-		power = value;
+		power = (float) Math.ceil(value);
 		this.cooldown = cooldown;
 		this.duration = duration;
 		ini();
