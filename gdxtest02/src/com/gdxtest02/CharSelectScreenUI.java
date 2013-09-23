@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.esotericsoftware.tablelayout.Value;
 import com.gdxtest02.chars.Char01;
 import com.gdxtest02.chars.Char02;
 import com.gdxtest02.chars.Char03;
@@ -27,6 +28,8 @@ public class CharSelectScreenUI {
 	private static final float TITLE_Y = 200;
 	private static final float CHAR_Y = 50;
 	private static final int CHARS_PER_ROW = 4;
+	private static final int CHARBUTTON_WIDTH = 50;
+	private static final int AIBUTTON_WIDTH = 50;
 	private float FACETABLE_X = 50;
 	private float FACETABLE_Y = 300;
 	private float FACETABLE_WIDTH = 150;
@@ -52,6 +55,8 @@ public class CharSelectScreenUI {
 	private Label titlelabel;
 	private TextButton p2button;
 	private ClickListener balancelistener;
+	private TextButton p1aibutton;
+	private TextButton p2aibutton;
 
 	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
@@ -105,6 +110,9 @@ public class CharSelectScreenUI {
 		p1button = new TextButton("p1", skin);
 		p1button.setDisabled(true);
 		lefttable.add(p1button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
+		p1aibutton = new TextButton("AI", skin); 
+		lefttable.row();
+		lefttable.add(p1aibutton).width(AIBUTTON_WIDTH).height(AIBUTTON_WIDTH);
 	}
 	
 	private void createRightTable() {
@@ -115,6 +123,9 @@ public class CharSelectScreenUI {
 		p2button = new TextButton("p2", skin);
 		p2button.setDisabled(true);
 		righttable.add(p2button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
+		p2aibutton = new TextButton("AI", skin); 
+		righttable.row();
+		righttable.add(p2aibutton).width(AIBUTTON_WIDTH).height(AIBUTTON_WIDTH);
 	}
 
 	private void createCharTable() {
@@ -137,7 +148,7 @@ public class CharSelectScreenUI {
 
 	private void addCharButton(String name) {
 		TextButton cbutton = new TextButton(name, skin);
-		chartable.add(cbutton).width(50).height(50);
+		chartable.add(cbutton).width(CHARBUTTON_WIDTH).height(CHARBUTTON_WIDTH);
 		cbutton.setName(name);
 		cbutton.addListener(charlistener);
 		cbutton.setDisabled(true);
