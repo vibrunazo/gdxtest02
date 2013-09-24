@@ -37,6 +37,11 @@ import com.gdxtest02.chars.Char02;
 import com.gdxtest02.chars.Char03;
 
 public class GameScreen implements Screen {
+
+
+	private static final int CONTROL_AI = 0;
+	private static final int CONTROL_PLAYER = 1;
+
 	final private GdxTest02 game;
 
 	private FPSLogger fps;
@@ -55,6 +60,8 @@ public class GameScreen implements Screen {
 	private int round = 1;
 	private GameScreenUI ui;
 
+	private int p2Control;
+
 	public GameScreen(GdxTest02 game) {
 		this(game, new Char01("p1"), new Char02("p2"));
 		
@@ -62,7 +69,7 @@ public class GameScreen implements Screen {
 	
 	public GameScreen(final GdxTest02 gam, Char player1, Char player2) {
 		this.game = gam;
-
+		p2Control = CONTROL_AI;
 		fps = new FPSLogger();
 
 		// create the camera and the SpriteBatch
@@ -162,7 +169,15 @@ public class GameScreen implements Screen {
 		int actionidp2 = p2.getActiveActionId();
 		
 		Action actionp1 = p1.getActiveAction();
-		Action actionp2 = p2.getActiveAction();
+		Action actionp2 = null;
+		int a = p2Control;
+		if (a == CONTROL_AI){
+			actionp2 = p2.getAction(metodoOverDoAi());	
+		}
+		if (a == CONTROL_PLAYER){
+			actionp2 = p2.getActiveAction();
+		}
+		
 		
 		String a1name = "null";
 		String a2name = "null";
@@ -217,6 +232,11 @@ public class GameScreen implements Screen {
 		updateUi();
 	}
 
+
+	private int metodoOverDoAi() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
 
 	/**Update UI elements
 	 * 
