@@ -30,8 +30,8 @@ public class CharSelectScreenUI {
 	private static final int CHARS_PER_ROW = 4;
 	private static final int CHARBUTTON_WIDTH = 50;
 	private static final int AIBUTTON_WIDTH = 50;
-	protected static final int CONTROL_AI = 0;
-	protected static final int CONTROL_HUMAN = 1;
+	protected static final int CONTROL_AI = GameScreen.CONTROL_AI;
+	protected static final int CONTROL_HUMAN = GameScreen.CONTROL_HUMAN;
 	private float FACETABLE_X = 50;
 	private float FACETABLE_Y = 300;
 	private float FACETABLE_WIDTH = 150;
@@ -196,7 +196,7 @@ public class CharSelectScreenUI {
 		gobuttonlistener = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				System.out.println("Clicked! Is checked: " + gobutton.isChecked());
-				screen.game.setScreen(new GameScreen(screen.game, p1, p2));
+				screen.game.setScreen(new GameScreen(screen.game, p1, p2, p1control, p2control));
 				screen.dispose();
 			}
 		};

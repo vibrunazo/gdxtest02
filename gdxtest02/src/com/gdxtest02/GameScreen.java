@@ -39,8 +39,8 @@ import com.gdxtest02.chars.Char03;
 public class GameScreen implements Screen {
 
 
-	private static final int CONTROL_AI = 0;
-	private static final int CONTROL_HUMAN = 1;
+	public static final int CONTROL_AI = 0;
+	public static final int CONTROL_HUMAN = 1;
 
 	final private GdxTest02 game;
 
@@ -60,18 +60,24 @@ public class GameScreen implements Screen {
 	private int round = 1;
 	private GameScreenUI ui;
 
-	private int p1Control;
-	private int p2Control;
+	private int p1control;
+	private int p2control;
 
 	public GameScreen(GdxTest02 game) {
 		this(game, new Char01("p1"), new Char02("p2"));
 		
 	}
 	
-	public GameScreen(final GdxTest02 gam, Char player1, Char player2) {
-		this.game = gam;
-		p1Control = CONTROL_HUMAN;
-		p2Control = CONTROL_AI;
+	public GameScreen(final GdxTest02 game, Char player1, Char player2) {
+		this(game, player1, player2,
+				CONTROL_HUMAN, CONTROL_AI);
+	}
+	
+	public GameScreen(final GdxTest02 game, Char player1, Char player2,
+			int p1control, int p2control) {
+		this.game = game;
+		this.p1control = p1control;
+		this.p2control = p2control;
 		fps = new FPSLogger();
 
 		// create the camera and the SpriteBatch
@@ -166,10 +172,10 @@ public class GameScreen implements Screen {
 		if (fightstate.equals("paused")) return;
 		
 		//preparing
-		if (p1Control == CONTROL_AI){
+		if (p1control == CONTROL_AI){
 			p1.setActiveActionId(getAiSkill());	
 		}
-		if (p2Control == CONTROL_AI){
+		if (p2control == CONTROL_AI){
 			p2.setActiveActionId(getAiSkill());	
 		}
 		
