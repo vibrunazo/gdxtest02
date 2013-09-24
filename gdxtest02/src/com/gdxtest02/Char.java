@@ -280,6 +280,7 @@ public class Char implements Cloneable {
 
 	public Action getActiveAction() {
 		return getAction(getActiveActionId());
+		
 	}
 	
 	public int getActiveActionId() {
