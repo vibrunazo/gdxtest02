@@ -40,7 +40,7 @@ public class GameScreen implements Screen {
 
 
 	private static final int CONTROL_AI = 0;
-	private static final int CONTROL_PLAYER = 1;
+	private static final int CONTROL_HUMAN = 1;
 
 	final private GdxTest02 game;
 
@@ -174,7 +174,7 @@ public class GameScreen implements Screen {
 		if (a == CONTROL_AI){
 			actionp2 = p2.getAction(metodoOverDoAi());	
 		}
-		if (a == CONTROL_PLAYER){
+		if (a == CONTROL_HUMAN){
 			actionp2 = p2.getActiveAction();
 		}
 		
