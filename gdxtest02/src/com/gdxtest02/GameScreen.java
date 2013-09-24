@@ -60,6 +60,7 @@ public class GameScreen implements Screen {
 	private int round = 1;
 	private GameScreenUI ui;
 
+	private int p1Control;
 	private int p2Control;
 
 	public GameScreen(GdxTest02 game) {
@@ -69,6 +70,7 @@ public class GameScreen implements Screen {
 	
 	public GameScreen(final GdxTest02 gam, Char player1, Char player2) {
 		this.game = gam;
+		p1Control = CONTROL_HUMAN;
 		p2Control = CONTROL_AI;
 		fps = new FPSLogger();
 
@@ -164,19 +166,25 @@ public class GameScreen implements Screen {
 		if (fightstate.equals("paused")) return;
 		
 		//preparing
+		if (p1Control == CONTROL_AI){
+			p1.setActiveActionId(getAiSkill());	
+		}
+		if (p2Control == CONTROL_AI){
+			p2.setActiveActionId(getAiSkill());	
+		}
 		
 		int actionidp1 = p1.getActiveActionId();
 		int actionidp2 = p2.getActiveActionId();
 		
 		Action actionp1 = p1.getActiveAction();
-		Action actionp2 = null;
-		int a = p2Control;
-		if (a == CONTROL_AI){
-			actionp2 = p2.getAction(metodoOverDoAi());	
-		}
-		if (a == CONTROL_HUMAN){
-			actionp2 = p2.getActiveAction();
-		}
+		Action actionp2 = p2.getActiveAction();
+//		int a = p2Control;
+//		if (a == CONTROL_AI){
+//			actionp2 = p2.getAction(getAiSkill());	
+//		}
+//		if (a == CONTROL_HUMAN){
+//			actionp2 = p2.getActiveAction();
+//		}
 		
 		
 		String a1name = "null";
@@ -233,8 +241,10 @@ public class GameScreen implements Screen {
 	}
 
 
-	private int metodoOverDoAi() {
-		// TODO Auto-generated method stub
+	/**do AI stuff here
+	 * @return
+	 */
+	private int getAiSkill() {
 		return 1;
 	}
 

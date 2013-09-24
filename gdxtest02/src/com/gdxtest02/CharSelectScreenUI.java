@@ -31,7 +31,7 @@ public class CharSelectScreenUI {
 	private static final int CHARBUTTON_WIDTH = 50;
 	private static final int AIBUTTON_WIDTH = 50;
 	protected static final int CONTROL_AI = 0;
-	protected static final int CONTROL_PLAYER = 1;
+	protected static final int CONTROL_HUMAN = 1;
 	private float FACETABLE_X = 50;
 	private float FACETABLE_Y = 300;
 	private float FACETABLE_WIDTH = 150;
@@ -90,7 +90,7 @@ public class CharSelectScreenUI {
 		p1 = new CharYagg01("p1");
 		p2 = new Char05("p2");
 		
-		setControl("p1", CONTROL_PLAYER);
+		setControl("p1", CONTROL_HUMAN);
 		setControl("p2", CONTROL_AI);
 		
 		
@@ -271,12 +271,12 @@ public class CharSelectScreenUI {
 	 */
 	private void toggleControl(String playername) {
 		if (playername.equals("p1")) {
-			if (p1control == CONTROL_PLAYER) setControl(playername, CONTROL_AI);
-			else setControl(playername, CONTROL_PLAYER);
+			if (p1control == CONTROL_HUMAN) setControl(playername, CONTROL_AI);
+			else setControl(playername, CONTROL_HUMAN);
 		}
 		if (playername.equals("p2")) {
-			if (p2control == CONTROL_PLAYER) setControl(playername, CONTROL_AI);
-			else setControl(playername, CONTROL_PLAYER);
+			if (p2control == CONTROL_HUMAN) setControl(playername, CONTROL_AI);
+			else setControl(playername, CONTROL_HUMAN);
 		}
 	}
 	
@@ -287,7 +287,7 @@ public class CharSelectScreenUI {
 		if (control == CONTROL_AI) {
 			button.setChecked(true);
 		}
-		if (control == CONTROL_PLAYER) {
+		if (control == CONTROL_HUMAN) {
 			button.setChecked(false);
 		}
 	}
