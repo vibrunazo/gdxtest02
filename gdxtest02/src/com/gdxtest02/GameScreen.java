@@ -242,8 +242,9 @@ public class GameScreen implements Screen {
 			
 			LevelScreen clone = null;
 			try {
-				Constructor<? extends LevelScreen> constructor = LevelScreen.class.getConstructor(GdxTest02.class);
-				clone = constructor.newInstance(game);
+				Constructor<? extends LevelScreen> constructor = nextLevel.getConstructor(GdxTest02.class);
+				clone = (LevelScreen)constructor.newInstance(game);
+//				clone = nextLevel.newInstance();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

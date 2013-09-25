@@ -1,16 +1,12 @@
 package com.gdxtest02;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 public class LevelScreen implements Screen {
 
@@ -20,9 +16,6 @@ public class LevelScreen implements Screen {
 
 	LevelScreenUI ui;
 
-	public LevelScreen() {
-		
-	}
 	public LevelScreen(GdxTest02 game) {
 		this.game = game;
 
@@ -32,8 +25,7 @@ public class LevelScreen implements Screen {
 		ui.setupUi(this);
 
 	}
-
-
+	
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1);

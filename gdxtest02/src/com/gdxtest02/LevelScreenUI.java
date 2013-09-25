@@ -6,13 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 
 public class LevelScreenUI {
 
 	UIBuilder uibuilder;
 	private TextButton gobutton;
-	private TextButton selectbutton;
 	private LevelScreen screen;
 
 	void setupUi(final LevelScreen levelScreen) {
@@ -46,8 +44,6 @@ public class LevelScreenUI {
 				GameScreen gameScreen = new GameScreen(screen.game);
 //				gameScreen.setNextLevel(new LevelScreen(screen.game));
 				gameScreen.setNextLevel(screen.getClass());
-//				screen.hide();
-//				screen.pause();
 				screen.game.setScreen(gameScreen);
 				screen.dispose();
 				
