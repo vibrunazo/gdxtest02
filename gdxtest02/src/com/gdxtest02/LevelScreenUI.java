@@ -40,7 +40,7 @@ public class LevelScreenUI {
 		// revert the checked state.
 		ChangeListener gobuttonlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				Char p1 = screen.game.getGameState().getPlayer();
+				Char p1 = screen.game.getGameState().getPlayer().getClone();
 				Char p2 = screen.getCurrentChar();
 				if (p2 == null) {
 					screen.endLevel();
