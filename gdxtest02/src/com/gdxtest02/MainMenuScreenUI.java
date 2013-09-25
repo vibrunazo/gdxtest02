@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.gdxtest02.levels.Level01;
+import com.gdxtest02.levels.Level02;
 
 public class MainMenuScreenUI {
 
@@ -49,7 +50,7 @@ public class MainMenuScreenUI {
 		// revert the checked state.
 		ChangeListener storylistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				screen.game.setScreen(new Level01(screen.game));
+				screen.game.setScreen(new Level02(screen.game));
 				screen.dispose();
 			}
 		};

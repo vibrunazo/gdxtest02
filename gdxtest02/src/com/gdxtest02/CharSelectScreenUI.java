@@ -21,7 +21,8 @@ import com.gdxtest02.chars.Char03;
 import com.gdxtest02.chars.Char04;
 import com.gdxtest02.chars.Char05;
 import com.gdxtest02.chars.Char06;
-import com.gdxtest02.chars.CharYagg01;
+import com.gdxtest02.chars.Char07;
+import static com.gdxtest02.CharBuilder.*;
 
 public class CharSelectScreenUI {
 
@@ -71,13 +72,14 @@ public class CharSelectScreenUI {
 		turn = 1;
 		
 		chars = new ObjectMap<String, Char>();
-		chars.put("c1", new Char01("c1"));
-		chars.put("c2", new Char02("c2"));
-		chars.put("c3", new Char03("c3"));
-		chars.put("c4", new Char04("c4"));
-		chars.put("c5", new Char05("c5"));
-		chars.put("c6", new Char06("c6"));
-		chars.put("y1", new CharYagg01("y1"));
+//		chars.put("c4", new Char04("c4"));
+		chars.put("c1", build(CHAR_01));
+		chars.put("c2", build(CHAR_02));
+		chars.put("c3", build(CHAR_03));
+		chars.put("c4", build(CHAR_04));
+		chars.put("c5", build(CHAR_05));
+		chars.put("c6", build(CHAR_06));
+		chars.put("c7", build(CHAR_07));
 		
 		createListeners();
 		
@@ -87,7 +89,7 @@ public class CharSelectScreenUI {
 		createLeftTable();
 		createRightTable();
 		
-		p1 = new CharYagg01("p1");
+		p1 = new Char07("p1");
 		p2 = new Char05("p2");
 		
 		setControl("p1", CONTROL_HUMAN);

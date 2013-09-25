@@ -6,9 +6,9 @@ import com.gdxtest02.actions.Drain;
 import com.gdxtest02.actions.PutDot;
 import com.gdxtest02.actions.PutHot;
 
-public class CharYagg01 extends Char {
+public class Char07 extends Char {
 	
-	public CharYagg01(String name) {
+	public Char07(String name) {
 		super(name);
 		
 		actions.add(new PutDot(50).setName("Vorpal Bite"));
