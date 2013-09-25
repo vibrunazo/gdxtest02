@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.gdxtest02.chars.Char01;
 
 public class GdxTest02 extends Game {
 	public int VIRTUAL_WIDTH = 800;
@@ -35,8 +36,12 @@ public class GdxTest02 extends Game {
 	
 	SpriteBatch batch;
 	BitmapFont font;
+	private GameState gamestate;
 
 	public void create() {
+		gamestate = new GameState();
+		gamestate.setPlayer(new Char01("p1"));
+		
 		batch = new SpriteBatch();
 		//Use LibGDX's default Arial font.
 		font = new BitmapFont();
@@ -51,6 +56,13 @@ public class GdxTest02 extends Game {
 	public void dispose() {
 		batch.dispose();
 		font.dispose();
+	}
+
+	/**
+	 * @return the game state
+	 */
+	public GameState getGameState() {
+		return gamestate;
 	}
 
 }

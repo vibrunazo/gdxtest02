@@ -40,11 +40,17 @@ public class LevelScreenUI {
 		// revert the checked state.
 		ChangeListener gobuttonlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				System.out.println("Clicked! Is checked: " + gobutton.isChecked());
-				GameScreen gameScreen = new GameScreen(screen.game);
+				Char p1 = screen.game.getGameState().getPlayer();
+				Char p2 = screen.getCurrentChar();
+				if (p2 == null) {
+					screen.endLevel();
+					return;
+				}
+				GameScreen gameScreen = new GameScreen(screen.game, p1, p2);
 //				gameScreen.setNextLevel(new LevelScreen(screen.game));
 				gameScreen.setNextLevel(screen.getClass());
 				screen.game.setScreen(gameScreen);
+				screen.game.getGameState().incCurenemy();
 				screen.dispose();
 				
 			}
