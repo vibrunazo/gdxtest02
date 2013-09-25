@@ -2,6 +2,7 @@ package com.gdxtest02;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -344,6 +345,19 @@ public class Char implements Cloneable {
 	 */
 	public void setTarget(Char target) {
 		this.target = target;
+	}
+	
+	public int getAiSkill(){
+		int Min = 1;
+		int Max = 4;
+		int x = Min + (int)(Math.random() * ((Max - Min) + 1));
+		if (getAction(x) == null || getAction(x).isLegal() != true)
+		{
+			do{
+				x = Min + (int)(Math.random() * ((Max - Min) + 1));
+			} while (getAction(x) == null || getAction(x).isLegal() != true);
+		}
+		return x;
 	}
 	
 	public Char getClone() {

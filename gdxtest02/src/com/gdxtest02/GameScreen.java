@@ -159,10 +159,10 @@ public class GameScreen implements Screen {
 		
 		//preparing
 		if (p1control == CONTROL_AI){
-			p1.setActiveActionId(getAiSkill());	
+			p1.setActiveActionId(p1.getAiSkill());	
 		}
 		if (p2control == CONTROL_AI){
-			p2.setActiveActionId(getAiSkill());	
+			p2.setActiveActionId(p2.getAiSkill());	
 		}
 		
 		int actionidp1 = p1.getActiveActionId();
@@ -258,9 +258,9 @@ public class GameScreen implements Screen {
 	/**do AI stuff here
 	 * @return
 	 */
-	private int getAiSkill() {
-		return 1;
-	}
+//	private int getAiSkill() {
+//		return 1;
+//	}
 
 	/**Update UI elements
 	 * 
