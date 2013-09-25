@@ -1,40 +1,19 @@
 package com.gdxtest02;
 
-import java.util.Iterator;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.IntMap;
-import com.badlogic.gdx.utils.ObjectMap;
-import com.badlogic.gdx.utils.TimeUtils;
-import com.gdxtest02.actions.Heal;
-import com.gdxtest02.actions.PutDot;
 import com.gdxtest02.chars.Char01;
 import com.gdxtest02.chars.Char02;
-import com.gdxtest02.chars.Char03;
 
 public class GameScreen implements Screen {
 
@@ -59,6 +38,7 @@ public class GameScreen implements Screen {
 	private String fightstate; 
 	private int round = 1;
 	private GameScreenUI ui;
+	private Class<? extends LevelScreen> nextLevel;
 
 	private int p1control;
 	private int p2control;
@@ -108,7 +88,13 @@ public class GameScreen implements Screen {
 		fightstate = "go";
 	}
 
-
+	/**Will change to this level after fight is over
+	 * @param next_level
+	 */
+	public void setNextLevel(Class<? extends LevelScreen> next_level) {
+		this.nextLevel = next_level;
+	}
+	
 	protected void restart() {
 		game.setScreen(new GameScreen(game, p1, p2));
 //		dispose();
@@ -239,13 +225,34 @@ public class GameScreen implements Screen {
 					winner = p1;
 				}
 			}
-			if (winner == null) ui.logToConsole("Fight over. Draw!");
-			else ui.logToConsole("Fight over. " + winner.getName() + " wins.");
+			
+			fightOver(winner);
 		}
 		
 		updateUi();
 	}
 
+
+	private void fightOver(Char winner) {
+		if (winner == null) ui.logToConsole("Fight over. Draw!");
+		else ui.logToConsole("Fight over. " + winner.getName() + " wins.");
+		
+		if (nextLevel != null) {
+			
+			
+			LevelScreen clone = null;
+			try {
+				Constructor<? extends LevelScreen> constructor = LevelScreen.class.getConstructor(GdxTest02.class);
+				clone = constructor.newInstance(game);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			game.setScreen(clone);
+//			game.setScreen(new LevelScreen(game));
+//			nextLevel.resume();
+			this.dispose();
+		}
+	}
 
 	/**do AI stuff here
 	 * @return

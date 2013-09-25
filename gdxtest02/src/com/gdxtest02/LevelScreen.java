@@ -12,20 +12,23 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
-public class MainMenuScreen implements Screen {
+public class LevelScreen implements Screen {
 
-	final GdxTest02 game;
+	GdxTest02 game;
 
 	OrthographicCamera camera;
 
-	MainMenuScreenUI ui;
+	LevelScreenUI ui;
 
-	public MainMenuScreen(final GdxTest02 game) {
+	public LevelScreen() {
+		
+	}
+	public LevelScreen(GdxTest02 game) {
 		this.game = game;
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
-		ui = new MainMenuScreenUI();
+		ui = new LevelScreenUI();
 		ui.setupUi(this);
 
 	}
@@ -37,20 +40,7 @@ public class MainMenuScreen implements Screen {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
 		camera.update();
-//		game.batch.setProjectionMatrix(camera.combined);
-
-//		game.batch.begin();
-//		game.font.draw(game.batch, "Welcome to Drop!!! ", 100, 150);
-//		game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
-//		game.batch.end();
-
-		//		if (Gdx.input.isTouched()) {
-		//			game.setScreen(new GameScreen(game));
-		//			dispose();
-		//		}
 		ui.draw();
-		
-//		Table.drawDebug(stage);
 	}
 
 
