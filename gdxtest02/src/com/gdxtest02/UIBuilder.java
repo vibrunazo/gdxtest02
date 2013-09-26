@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
@@ -86,6 +87,10 @@ public class UIBuilder {
 //		listStyle.fontColorSelected = skin.newDrawable("white", Color.DARK_GRAY);
 //		  skin.newDrawable("white", Color.DARK_GRAY);
 		skin.add("default", scrollStyle);
+		
+		ImageButtonStyle imagebuttonStyle = new ImageButtonStyle();
+//		imagebuttonStyle.
+		skin.add("default", imagebuttonStyle);
 		
 		LabelStyle labelStyle = new LabelStyle();
 		labelStyle.font = skin.getFont("default");
