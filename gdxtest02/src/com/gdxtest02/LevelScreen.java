@@ -10,11 +10,12 @@ public class LevelScreen implements Screen {
 
 	GdxTest02 game;
 
-	OrthographicCamera camera;
+	private OrthographicCamera camera;
 
-	LevelScreenUI ui;
+	protected LevelScreenUI ui;
 	
-	Array<Char> charSequence;
+	private Array<Char> charSequence;
+	private String level_name;
 
 	public LevelScreen(GdxTest02 game) {
 		this.game = game;
@@ -23,7 +24,7 @@ public class LevelScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
 		ui = new LevelScreenUI();
-		ui.setupUi(this);
+//		ui.setupUi(this);
 
 	}
 	
@@ -123,6 +124,20 @@ public class LevelScreen implements Screen {
 	 */
 	private void log(String text) {
 		Gdx.app.log("gdxtest", text);
+	}
+
+	/**
+	 * @return the level_name
+	 */
+	public String getLevel_name() {
+		return level_name;
+	}
+
+	/**
+	 * @param level_name the level_name to set
+	 */
+	public void setLevel_name(String level_name) {
+		this.level_name = level_name;
 	}
 
 }

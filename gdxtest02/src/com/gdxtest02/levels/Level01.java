@@ -12,6 +12,9 @@ public class Level01 extends LevelScreen {
 		addChar(new Char02("c2"));
 		addChar(new Char02("c22"));
 		addChar(new Char03("c3"));
+		
+		setLevel_name("level 1");
+		ui.setupUi(this);
 	}
 
 }
