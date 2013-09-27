@@ -1,22 +1,17 @@
 package com.gdxtest02;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
-import com.esotericsoftware.tablelayout.Value;
+
+import static com.gdxtest02.gamestate.LevelState.*;
 
 public class LevelScreenUI {
 
@@ -39,6 +34,7 @@ public class LevelScreenUI {
 	private Skin skin;
 	private Table chartable;
 	private TextButton p1button;
+	private Label statuslabel;
 
 	public void setupUi(final LevelScreen levelScreen) {
 		uibuilder = new UIBuilder(levelScreen.game);
@@ -85,6 +81,7 @@ public class LevelScreenUI {
 			}
 			TextButton b = addCharButton(c.getName());
 			if (screen.game.getGameState().getCurenemy() == n) {
+				log("curenemy: " + screen.game.getGameState().getCurenemy());
 				b.setChecked(true);
 			}
 			i++;n++;
@@ -110,9 +107,25 @@ public class LevelScreenUI {
 		lvllabel = new Label(screen.getLevel_name(), skin);
 		table.add(lvllabel).width(MAINLABEL_WIDTH).height(MAINLABEL_HEIGHT);
 		table.row();
+		
+		statuslabel = new Label(getFightStatus(), skin);
+		table.add(statuslabel).width(MAINLABEL_WIDTH).height(MAINLABEL_HEIGHT);
+		table.row();
+		
 		gobutton = new TextButton("Fight next enemy", skin);
 		table.add(gobutton).width(MAINLABEL_WIDTH).height(MAINLABEL_HEIGHT);
 		table.row();
+	}
+
+	private String getFightStatus() {
+		int status = screen.game.getGameState().getLevel().getFightState();
+		switch (status) {
+		case FIGHT: return "Fight!";
+		case WIN: return "You Win!";
+		case LOSE: return "You Lose!";
+
+		default:return null;
+		}
 	}
 
 	private void createListeners() {
@@ -132,7 +145,7 @@ public class LevelScreenUI {
 				//				gameScreen.setNextLevel(new LevelScreen(screen.game));
 				gameScreen.setNextLevel(screen.getClass());
 				screen.game.setScreen(gameScreen);
-				screen.game.getGameState().incCurenemy();
+//				screen.game.getGameState().incCurenemy();
 				screen.dispose();
 
 			}
@@ -151,6 +164,13 @@ public class LevelScreenUI {
 
 	public void dispose() {
 		uibuilder.dispose();
+	}
+	
+	/**Logs text to Gdx.app.log()
+	 * @param text
+	 */
+	private void log(String text) {
+		Gdx.app.log("gdxtest", text);
 	}
 
 }

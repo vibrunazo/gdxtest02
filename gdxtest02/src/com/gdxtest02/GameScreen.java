@@ -14,12 +14,17 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.gdxtest02.chars.Char01;
 import com.gdxtest02.chars.Char02;
+import com.gdxtest02.gamestate.LevelState;
+
+import static com.gdxtest02.gamestate.LevelState.*;
 
 public class GameScreen implements Screen {
 
 
 	public static final int CONTROL_AI = 0;
 	public static final int CONTROL_HUMAN = 1;
+	
+	
 
 	final private GdxTest02 game;
 
@@ -170,14 +175,6 @@ public class GameScreen implements Screen {
 		
 		Action actionp1 = p1.getActiveAction();
 		Action actionp2 = p2.getActiveAction();
-//		int a = p2Control;
-//		if (a == CONTROL_AI){
-//			actionp2 = p2.getAction(getAiSkill());	
-//		}
-//		if (a == CONTROL_HUMAN){
-//			actionp2 = p2.getActiveAction();
-//		}
-		
 		
 		String a1name = "null";
 		String a2name = "null";
@@ -238,19 +235,24 @@ public class GameScreen implements Screen {
 		else ui.logToConsole("Fight over. " + winner.getName() + " wins.");
 		
 		if (nextLevel != null) {
-			
+			LevelState levelState = game.getGameState().getLevel();
+			if (winner == p1) {
+				game.getGameState().incCurenemy();
+				levelState.setFightState(WIN);
+			}
+			else {
+				levelState.setFightState(LOSE);
+			}
 			
 			LevelScreen clone = null;
 			try {
 				Constructor<? extends LevelScreen> constructor = nextLevel.getConstructor(GdxTest02.class);
 				clone = (LevelScreen)constructor.newInstance(game);
-//				clone = nextLevel.newInstance();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
 			game.setScreen(clone);
-//			game.setScreen(new LevelScreen(game));
-//			nextLevel.resume();
 			this.dispose();
 		}
 	}

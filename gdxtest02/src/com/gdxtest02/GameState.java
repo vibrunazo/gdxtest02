@@ -1,32 +1,35 @@
 package com.gdxtest02;
 
+import com.gdxtest02.gamestate.*;
+
 public class GameState {
 	
 		private Char player;
-		private int curenemy;
+		private LevelState level;
+		
 	
 		public GameState() {
-			curenemy = 0;
+			level = new LevelState();
 		}
 
 		/**
 		 * @return the curenemy
 		 */
 		public int getCurenemy() {
-			return curenemy;
+			return level.getCurenemy();
 		}
 
 		/**
 		 * @param curenemy the curenemy to set
 		 */
 		public void setCurenemy(int curenemy) {
-			this.curenemy = curenemy;
+			level.setCurenemy(curenemy);
 		}
 		
 		/**inc curenemy by 1
 		 */
 		public void incCurenemy() {
-			this.curenemy += 1;
+			level.incCurenemy();
 		}
 
 		/**
@@ -41,5 +44,12 @@ public class GameState {
 		 */
 		public void setPlayer(Char player) {
 			this.player = player;
+		}
+
+		/**
+		 * @return the level
+		 */
+		public LevelState getLevel() {
+			return level;
 		}
 }
