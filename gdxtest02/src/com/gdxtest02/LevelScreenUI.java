@@ -137,7 +137,9 @@ public class LevelScreenUI {
 			public void changed (ChangeEvent event, Actor actor) {
 				Char p1 = screen.game.getGameState().getPlayer().getClone();
 				Char p2 = screen.getCurrentChar();
-				if (p2 == null) {
+				int status = screen.game.getGameState().getLevel().getFightState();
+				// if there are no more enemies left, or you lost a fight:
+				if (p2 == null || status == LOSE) {
 					screen.endLevel();
 					return;
 				}
