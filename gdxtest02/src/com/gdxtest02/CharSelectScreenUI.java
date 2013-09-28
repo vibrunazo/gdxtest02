@@ -22,7 +22,10 @@ import com.gdxtest02.chars.Char04;
 import com.gdxtest02.chars.Char05;
 import com.gdxtest02.chars.Char06;
 import com.gdxtest02.chars.Char07;
+import com.gdxtest02.levels.Level02;
+
 import static com.gdxtest02.CharBuilder.*;
+import static com.gdxtest02.gamestate.GameState.*;
 
 public class CharSelectScreenUI {
 
@@ -63,6 +66,7 @@ public class CharSelectScreenUI {
 	private TextButton p1aibutton;
 	private TextButton p2aibutton;
 	private ClickListener ailistener;
+	private int gamemode;
 
 	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
@@ -81,13 +85,15 @@ public class CharSelectScreenUI {
 		chars.put("c6", build(CHAR_06));
 		chars.put("c7", build(CHAR_07));
 		
+		gamemode = screen.game.getGameState().getGameMode();
+		
 		createListeners();
 		
 		createTitle();
 		createMenuTable();
 		createCharTable();
 		createLeftTable();
-		createRightTable();
+		if (gamemode != MODE_STORY) createRightTable();
 		
 		p1 = new Char07("p1");
 		p2 = new Char05("p2");
@@ -120,9 +126,13 @@ public class CharSelectScreenUI {
 		p1button = new TextButton("p1", skin);
 		p1button.setDisabled(true);
 		lefttable.add(p1button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
-		p1aibutton = new TextButton("AI", skin); 
-		p1aibutton.setName("p1");
-		p1aibutton.addListener(ailistener);
+
+		if (gamemode != MODE_STORY) {
+			p1aibutton = new TextButton("AI", skin); 
+			p1aibutton.setName("p1");
+			p1aibutton.addListener(ailistener);
+		}
+		
 		lefttable.row();
 		lefttable.add(p1aibutton).width(AIBUTTON_WIDTH).height(AIBUTTON_WIDTH);
 	}
@@ -197,8 +207,13 @@ public class CharSelectScreenUI {
 	private void createListeners() {
 		gobuttonlistener = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
-				System.out.println("Clicked! Is checked: " + gobutton.isChecked());
-				screen.game.setScreen(new GameScreen(screen.game, p1, p2, p1control, p2control));
+				if (gamemode == MODE_STORY) {
+					screen.game.getGameState().setPlayer(p1);
+					screen.game.setScreen(new Level02(screen.game));
+				}
+				else {
+					screen.game.setScreen(new GameScreen(screen.game, p1, p2, p1control, p2control));
+				}
 				screen.dispose();
 			}
 		};
@@ -286,6 +301,7 @@ public class CharSelectScreenUI {
 	 * @param button
 	 */
 	private void checkAiButton(TextButton button, int control) {
+		if (button == null) return;
 		if (control == CONTROL_AI) {
 			button.setChecked(true);
 		}
@@ -336,7 +352,7 @@ public class CharSelectScreenUI {
 	 * @return
 	 */
 	private Actor getCurrentFace() {
-		if (turn == 1) return p1button;
+		if (turn == 1 || gamemode == MODE_STORY) return p1button;
 		else return p2button;
 	}
 	
@@ -344,7 +360,7 @@ public class CharSelectScreenUI {
 	 * 
 	 */
 	private void toggleTurn() {
-		if (turn == 1) turn = 2;
+		if (turn == 1 && gamemode != MODE_STORY) turn = 2;
 		else turn = 1; 
 		updateTitle();
 	}

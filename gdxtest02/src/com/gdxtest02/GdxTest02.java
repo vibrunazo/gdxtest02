@@ -29,6 +29,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gdxtest02.chars.Char01;
+import com.gdxtest02.gamestate.GameState;
 
 public class GdxTest02 extends Game {
 	public int VIRTUAL_WIDTH = 800;

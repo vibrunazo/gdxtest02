@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.gdxtest02.levels.Level01;
 import com.gdxtest02.levels.Level02;
 
+import static com.gdxtest02.gamestate.GameState.*;
+
 public class MainMenuScreenUI {
 
 	UIBuilder uibuilder;
@@ -32,7 +34,7 @@ public class MainMenuScreenUI {
 		storybutton = new TextButton("Story mode", skin);
 		table.add(storybutton).width(300).height(50);
 		table.row();
-		gobutton = new TextButton("1v1", skin);
+		gobutton = new TextButton("versus", skin);
 		table.add(gobutton).width(300).height(50);
 		table.row();
 		selectbutton = new TextButton("Character select", skin);
@@ -50,7 +52,9 @@ public class MainMenuScreenUI {
 		// revert the checked state.
 		ChangeListener storylistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				screen.game.setScreen(new Level02(screen.game));
+//				screen.game.setScreen(new Level02(screen.game));
+				screen.game.getGameState().setGameMode(MODE_STORY);
+				screen.game.setScreen(new CharSelectScreen(screen.game));
 				screen.dispose();
 			}
 		};

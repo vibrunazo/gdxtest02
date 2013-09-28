@@ -1,11 +1,15 @@
-package com.gdxtest02;
+package com.gdxtest02.gamestate;
 
+import com.gdxtest02.Char;
 import com.gdxtest02.gamestate.*;
 
 public class GameState {
 	
+		public static final int MODE_STORY = 0;
+		public static final int MODE_VERSUS = 1;
 		private Char player;
 		private LevelState level;
+		private int gameMode;
 		
 	
 		public GameState() {
@@ -51,5 +55,19 @@ public class GameState {
 		 */
 		public LevelState getLevel() {
 			return level;
+		}
+
+		/**
+		 * @return the gameMode
+		 */
+		public int getGameMode() {
+			return gameMode;
+		}
+
+		/**
+		 * @param gameMode the gameMode to set
+		 */
+		public void setGameMode(int gameMode) {
+			this.gameMode = gameMode;
 		}
 }
