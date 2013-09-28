@@ -2,6 +2,7 @@ package com.gdxtest02;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 
 import static com.gdxtest02.gamestate.LevelState.*;
@@ -35,6 +37,8 @@ public class LevelScreenUI {
 	private Table chartable;
 	private TextButton p1button;
 	private Label statuslabel;
+	private TextButton backbutton;
+	private ClickListener backlistener;
 
 	public void setupUi(final LevelScreen levelScreen) {
 		uibuilder = new UIBuilder(levelScreen.game);
@@ -65,6 +69,7 @@ public class LevelScreenUI {
 		p1button.setDisabled(true);
 		lefttable.add(p1button).width(FACETABLE_WIDTH).height((float) (FACETABLE_WIDTH*1.2));
 	}
+	
 	private void createCharTable() {
 		chartable = new Table();
 		chartable.setFillParent(true);
@@ -115,6 +120,10 @@ public class LevelScreenUI {
 		gobutton = new TextButton("Fight next enemy", skin);
 		table.add(gobutton).width(MAINLABEL_WIDTH).height(MAINLABEL_HEIGHT);
 		table.row();
+		
+		backbutton = new TextButton("Back to Menu", skin);
+		table.add(backbutton).width(300).height(50);
+		backbutton.setDisabled(true);
 	}
 
 	private String getFightStatus() {
@@ -153,6 +162,13 @@ public class LevelScreenUI {
 			}
 		};
 		gobutton.addListener(gobuttonlistener);
+		
+		backlistener = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				screen.back();
+			}
+		};
+		backbutton.addListener(backlistener);
 
 	}
 

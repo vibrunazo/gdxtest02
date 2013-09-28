@@ -140,4 +140,11 @@ public class LevelScreen implements Screen {
 		this.level_name = level_name;
 	}
 
+	/**go back to main menu
+	 * 
+	 */
+	public void back() {
+		game.setScreen(new MainMenuScreen(game));
+	}
+
 }
