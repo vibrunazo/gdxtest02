@@ -161,26 +161,25 @@ public class GameScreenUI extends UIBuilder {
 
 	private void createActionBars() {
 		Table tablep1 = new Table();
-//		tablep1.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
-		tablep1.setSize(ACTION_BAR_WIDTH, ACTION_BAR_HEIGHT);
-		tablep1.setPosition(ACTION_BAR_X, ACTION_BAR_Y);
-		stage.addActor(tablep1);
+		createActionBar(tablep1, "p1", buttons1, ACTION_BAR_X, ACTION_BAR_Y);
 
-		Table tablep2 = new Table();
-//		tablep2.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
-		tablep2.setSize(ACTION_BAR_WIDTH, ACTION_BAR_HEIGHT);
-		tablep2.setPosition(800 - ACTION_BAR_WIDTH - ACTION_BAR_X, ACTION_BAR_Y);
-		stage.addActor(tablep2);
+		if (screen.p2control != GameScreen.CONTROL_AI) {
+			Table tablep2 = new Table();
+			createActionBar(tablep2, "p2", buttons2, 800 - ACTION_BAR_WIDTH - ACTION_BAR_X,
+					ACTION_BAR_Y);
+		}
+	}
 
-		addActionButton("1", "p11", tablep1, buttons1);
-		addActionButton("2", "p12", tablep1, buttons1);
-		addActionButton("3", "p13", tablep1, buttons1);
-		addActionButton("4", "p14", tablep1, buttons1);
+	private void createActionBar(Table table, String name, Array<TextButton> buttongroup,
+			int x, int y) {
+		table.setSize(ACTION_BAR_WIDTH, ACTION_BAR_HEIGHT);
+		table.setPosition(x, y);
+		stage.addActor(table);
 		
-		addActionButton("1", "p21", tablep2, buttons2);
-		addActionButton("2", "p22", tablep2, buttons2);
-		addActionButton("3", "p23", tablep2, buttons2);
-		addActionButton("4", "p24", tablep2, buttons2);
+		addActionButton("1", name + "1", table, buttongroup);
+		addActionButton("2", name + "2", table, buttongroup);
+		addActionButton("3", name + "3", table, buttongroup);
+		addActionButton("4", name + "4", table, buttongroup);
 	}
 
 	private void addActionButton(String label, String name, Table table, Array<TextButton> group) {
@@ -209,6 +208,7 @@ public class GameScreenUI extends UIBuilder {
 	 * @param text
 	 */
 	private void setButtonText(int group, int button, String text) {
+		if (screen.p2control == GameScreen.CONTROL_AI && group > 1) return;
 		TextButton b = getButtonGroup(group).get(button-1);
 		b.setText(text);
 	}

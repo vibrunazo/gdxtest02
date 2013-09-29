@@ -62,7 +62,7 @@ public class MainMenuScreenUI {
 		
 		ChangeListener gobuttonlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				System.out.println("Clicked! Is checked: " + gobutton.isChecked());
+				screen.game.getGameState().setGameMode(MODE_VERSUS);
 				screen.game.setScreen(new GameScreen(screen.game));
 				screen.dispose();
 			}
@@ -71,6 +71,7 @@ public class MainMenuScreenUI {
 		
 		ChangeListener selectlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
+				screen.game.getGameState().setGameMode(MODE_VERSUS);
 				screen.game.setScreen(new CharSelectScreen(screen.game));
 				screen.dispose();
 			}

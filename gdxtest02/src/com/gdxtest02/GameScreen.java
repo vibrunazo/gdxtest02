@@ -45,8 +45,8 @@ public class GameScreen implements Screen {
 	private GameScreenUI ui;
 	private Class<? extends LevelScreen> nextLevel;
 
-	private int p1control;
-	private int p2control;
+	public int p1control;
+	public int p2control;
 
 	public GameScreen(GdxTest02 game) {
 		this(game, new Char01("p1"), new Char02("p2"));
