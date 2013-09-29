@@ -209,7 +209,8 @@ public class CharSelectScreenUI {
 			public void clicked(InputEvent event, float x, float y)  {
 				if (gamemode == MODE_STORY) {
 					screen.game.getGameState().setPlayer(p1);
-					screen.game.setScreen(new Level02(screen.game));
+					screen.game.setScreen(new LevelSelectScreen(screen.game));
+//					screen.game.setScreen(new Level02(screen.game));
 				}
 				else {
 					screen.game.setScreen(new GameScreen(screen.game, p1, p2, p1control, p2control));
