@@ -38,6 +38,7 @@ public class GdxTest02 extends Game {
 	SpriteBatch batch;
 	BitmapFont font;
 	private GameState gamestate;
+	private static GdxTest02 game;
 
 	public void create() {
 		gamestate = new GameState();
@@ -47,7 +48,12 @@ public class GdxTest02 extends Game {
 		//Use LibGDX's default Arial font.
 		font = new BitmapFont();
 		this.setScreen(new MainMenuScreen(this));
+		game = this;
 		
+	}
+	
+	public static GdxTest02 getInstance() {
+		return game;
 	}
 
 	public void render() {

@@ -23,6 +23,7 @@ public class LevelSelectScreen implements Screen {
 	public LevelSelectScreen(final GdxTest02 game) {
 		this.game = game;
 
+		game.getGameState().getLevel().reset();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
 		ui = new LevelSelectScreenUI();

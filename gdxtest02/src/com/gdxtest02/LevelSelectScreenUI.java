@@ -11,7 +11,7 @@ import com.gdxtest02.levels.Level01;
 import com.gdxtest02.levels.Level02;
 import com.gdxtest02.levels.Level03;
 
-import static com.gdxtest02.gamestate.GameState.*;
+import static com.gdxtest02.LevelBuilder.*;
 
 public class LevelSelectScreenUI {
 
@@ -53,15 +53,16 @@ public class LevelSelectScreenUI {
 		// revert the checked state.
 		ChangeListener level1listener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				screen.game.setScreen(new Level01(screen.game));
+				setScreen(LEVEL_01);
 				screen.dispose();
 			}
+
 		};
 		level1button.addListener(level1listener);
 		
 		ChangeListener level2listener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				screen.game.setScreen(new Level02(screen.game));
+				setScreen(LEVEL_02);
 				screen.dispose();
 			}
 		};
@@ -69,11 +70,15 @@ public class LevelSelectScreenUI {
 		
 		ChangeListener level3listener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				screen.game.setScreen(new Level03(screen.game));
+				setScreen(LEVEL_03);
 				screen.dispose();
 			}
 		};
 		level3button.addListener(level3listener);
+	}
+	
+	private void setScreen(int level) {
+		screen.game.setScreen(LevelBuilder.build(level));
 	}
 
 	public void draw() {
