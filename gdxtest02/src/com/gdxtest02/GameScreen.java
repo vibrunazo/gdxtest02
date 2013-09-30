@@ -101,7 +101,9 @@ public class GameScreen implements Screen {
 	}
 	
 	protected void restart() {
-		game.setScreen(new GameScreen(game, p1, p2));
+		GameScreen newgame = new GameScreen(game, p1, p2, p1control, p2control);
+		newgame.setNextLevel(nextLevel);
+		game.setScreen(newgame);
 //		dispose();
 	}
 	
