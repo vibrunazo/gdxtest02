@@ -41,7 +41,7 @@ public class GdxTest02 extends Game {
 	private static GdxTest02 game;
 
 	public void create() {
-		gamestate = new GameState();
+		gamestate = new GameState(this);
 		gamestate.setPlayer(new Char01("p1"));
 		
 		batch = new SpriteBatch();

@@ -75,15 +75,7 @@ public class CharSelectScreenUI {
 		this.screen = screen;
 		turn = 1;
 		
-		chars = new ObjectMap<String, Char>();
-//		chars.put("c4", new Char04("c4"));
-		chars.put("c1", build(CHAR_01));
-		chars.put("c2", build(CHAR_02));
-		chars.put("c3", build(CHAR_03));
-		chars.put("c4", build(CHAR_04));
-		chars.put("c5", build(CHAR_05));
-		chars.put("c6", build(CHAR_06));
-		chars.put("c7", build(CHAR_07));
+		chars = buildMapOfUnlockedChars();
 		
 		gamemode = screen.game.getGameState().getGameMode();
 		
