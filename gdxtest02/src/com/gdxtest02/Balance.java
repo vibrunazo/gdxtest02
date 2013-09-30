@@ -38,7 +38,7 @@ public class Balance {
 
 	public float getAvgDps() {
 		float total = 0;
-		for (Action a : player.actions) {
+		for (Action a : player.getActions()) {
 			total += a.getAvgDps();
 		}
 		return total;
@@ -117,7 +117,7 @@ public class Balance {
 
 	private Array<Integer> getSkillsThatDoDmg(int whattotest) {
 		Array<Integer> list = new Array<Integer>(); 
-		for (Action a : player.actions) {
+		for (Action a : player.getActions()) {
 			if (whattotest == TEST_DAMAGE && a.getDmgAfterRounds(10) > 0) {
 				list.add(player.getIdOfAction(a));
 			}
@@ -170,7 +170,7 @@ public class Balance {
 
 		log("test over, best dmgheal: " + bestdmgheal + " best dmg: " + bestdmg + " best heal: " + bestheal + " combo: " + bestcombo 
 				+ " number of bests: " + numberofbests);
-		int numberofskills = player.actions.size;
+		int numberofskills = player.getNumOfActions();
 		int totalsize = (int)Math.pow(numberofskills, maxrounds);
 		float pct = 100f*totaldmg/totalsize;
 		log("total loops: " + totaldmg + " of " + totalsize + " (" + pct + "%)");
@@ -216,7 +216,7 @@ public class Balance {
 		listsof_damageperskill = new Array<Array<Float>>();
 		listof_damagediff = new Array<Float>();
 		listof_bestdmgid = new Array<Integer>();
-		int numberofskills = player.actions.size;
+		int numberofskills = player.getNumOfActions();
 		float dmg;
 		for (int id = 1; id <= numberofskills; id++) {
 			Action a = player.getAction(id);
@@ -261,7 +261,7 @@ public class Balance {
 	 * @return
 	 */
 	private float[] getBestDmgThisRound(int round) {
-		int numberofskills = player.actions.size;
+		int numberofskills = player.getNumOfActions();
 //		if (numberofskills == 1) return listsof_damageperskill.get(0).get(round);
 		float best = 0; float second = 0; float dmg; int id = 0;
 		for (int i = 0; i < numberofskills; i++) {
@@ -293,7 +293,7 @@ public class Balance {
 	private void loopToNextBranches(int maxrounds, int round, Array<Integer> combo, int whattotest) {
 //		log("looping on round: " + round + "/" + maxrounds);
 
-		int numberofskills = player.actions.size;
+		int numberofskills = player.getNumOfActions();
 
 		for (int id = 1; id < numberofskills + 1; id++) {
 			Action a = player.getAction(id);
@@ -414,7 +414,7 @@ public class Balance {
 		int roundsleft = maxrounds - round + 1;
 		// how long should I look in the future?
 		// TODO take skill cooldown into account?
-		int lookupsize = player.actions.size-1;
+		int lookupsize = player.getNumOfActions()-1;
 		lookupsize = Math.min(lookupsize, roundsleft);
 		float delta = listof_damagediff.get(round-1);
 		float newdelta = 0f;

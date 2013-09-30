@@ -14,9 +14,9 @@ public class Char02 extends Char {
 		float ratio = 0.95238096f;
 		float hratio = 0.5f;
 		
-		actions.add(new Dmg(50*ratio).setName("Punch"));
-		actions.add(new Heal(250*hratio, 3).setName("Heal"));
-		actions.add(new PutDot(50*ratio, 0, 2).setName("Death Fart"));
+		addAction(new Dmg(50*ratio).setName("Punch"));
+		addAction(new Heal(250*hratio, 3).setName("Heal"));
+		addAction(new PutDot(50*ratio, 0, 2).setName("Death Fart"));
 //		actions.add(new PutHot(100, 5, 5).setName("Rejuv"));
 
 		setTex("ball02yell.png");

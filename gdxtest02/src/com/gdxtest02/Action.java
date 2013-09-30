@@ -11,6 +11,8 @@ public abstract class Action {
 	private String description = "This is a skill";
 	private float avgdps;
 	
+	private Char owner;
+	
 	public Action() {
 		ini();
 	}
@@ -31,6 +33,10 @@ public abstract class Action {
 		this.cooldown = cooldown;
 		this.duration = duration;
 		ini();
+	}
+	
+	public void setOwner(Char character) {
+		owner = character;
 	}
 
 	/**Do whatever is it that you do

@@ -11,8 +11,8 @@ public class Char04 extends Char {
 		super(name);
 		
 		float ratio = 0.6666667f;
-		actions.add(new Dmg((float) Math.ceil(100*ratio)).setName("moo"));
-		actions.add(new Dmg((float) Math.ceil(200*ratio), 1).setName("meh"));
+		addAction(new Dmg((float) Math.ceil(100*ratio)).setName("moo"));
+		addAction(new Dmg((float) Math.ceil(200*ratio), 1).setName("meh"));
 //		actions.add(new Dmg(400, 3).setName("hihihi"));
 		
 		setTex("ball02yell.png");

@@ -11,6 +11,8 @@ import com.gdxtest02.chars.Char04;
 import com.gdxtest02.chars.Char05;
 import com.gdxtest02.chars.Char06;
 import com.gdxtest02.gamestate.GameState;
+import com.gdxtest02.gamestate.LevelState;
+
 import static com.gdxtest02.CharBuilder.*;
 
 public class Level03 extends LevelScreen {
@@ -30,7 +32,9 @@ public class Level03 extends LevelScreen {
 	public void endLevel() {
 		super.endLevel();
 		GameState gstate = GameState.getInstance();
-		gstate.unlockChar(CHAR_07);
+		if (gstate.getLevel().getFightState() == LevelState.WIN) {
+			gstate.unlockChar(CHAR_07);
+		}
 	}
 
 }

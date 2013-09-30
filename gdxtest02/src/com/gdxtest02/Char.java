@@ -31,7 +31,7 @@ public class Char implements Cloneable {
 	 * 
 	 */
 	private int activeAction;
-	protected Array<Action> actions;
+	private Array<Action> actions;
 	private Array<Buff> buffs;
 	/**List of buffs to be added this round, 
 	 * these will be moved to the main buffs list at the end of the round
@@ -122,6 +122,12 @@ public class Char implements Cloneable {
 	public void setAction(int id, Action action) {
 		if (id < 1) return;
 		actions.set(id - 1, action);
+		action.setOwner(this);
+	}
+	
+	public void addAction(Action action) {
+		actions.add(action);
+		action.setOwner(this);
 	}
 	
 	/**Add buff to new buff list
@@ -290,6 +296,20 @@ public class Char implements Cloneable {
 
 	public void setActiveActionId(int activeAction) {
 		this.activeAction = activeAction;
+	}
+	
+	/**Gets how many actions I have
+	 * @return
+	 */
+	public int getNumOfActions() {
+		return actions.size;
+	}
+	
+	/**gets the list of actions
+	 * @return
+	 */
+	public Array<Action> getActions() {
+		return actions;
 	}
 
 	/**

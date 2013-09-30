@@ -12,13 +12,13 @@ public class Char05 extends Char {
 		super(name);
 		
 		float ratio = 0.47619048f;
-		actions.add(new Dmg((float) Math.ceil(50*ratio)).setName("test1"));
-		actions.add(new Dmg((float) Math.ceil(100*ratio), 4).setName("test2"));
-		actions.add(new Dmg((float) Math.ceil(200*ratio), 3).setName("test3"));
-		actions.add(new Dmg((float) Math.ceil(400*ratio), 3).setName("test4"));
+		addAction(new Dmg((float) Math.ceil(50*ratio)).setName("test1"));
+		addAction(new Dmg((float) Math.ceil(100*ratio), 4).setName("test2"));
+		addAction(new Dmg((float) Math.ceil(200*ratio), 3).setName("test3"));
+		addAction(new Dmg((float) Math.ceil(400*ratio), 3).setName("test4"));
 		
-//		actions.add(new Heal(300, 1).setName("test2"));
-//		actions.add(new Drain(100, 1).setName("test3"));
+//		addAction(new Heal(300, 1).setName("test2"));
+//		addAction(new Drain(100, 1).setName("test3"));
 		
 		setTex("ball02red.png");
 

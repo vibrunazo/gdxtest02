@@ -11,10 +11,10 @@ public class Char07 extends Char {
 	public Char07(String name) {
 		super(name);
 		
-		actions.add(new PutDot(50).setName("Vorpal Bite"));
-		actions.add(new PutHot(20).setName("Shrubbery"));
-		actions.add(new PutDot(1000, 3, 2).setName("Holy Hand Grenade"));
-		actions.add(new PutHot(500, 3, 2).setName("Just a Flesh Wound"));
+		addAction(new PutDot(50).setName("Vorpal Bite"));
+		addAction(new PutHot(20).setName("Shrubbery"));
+		addAction(new PutDot(1000, 3, 2).setName("Holy Hand Grenade"));
+		addAction(new PutHot(500, 3, 2).setName("Just a Flesh Wound"));
 		
 		setTex("ball02red.png");
 
