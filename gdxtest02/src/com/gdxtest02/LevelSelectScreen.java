@@ -30,8 +30,7 @@ public class LevelSelectScreen implements Screen {
 		ui.setupUi(this);
 
 	}
-
-
+	
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1);

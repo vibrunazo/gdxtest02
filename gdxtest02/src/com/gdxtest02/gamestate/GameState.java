@@ -3,7 +3,6 @@ package com.gdxtest02.gamestate;
 import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Char;
 import com.gdxtest02.GdxTest02;
-import com.gdxtest02.chars.Char01;
 
 import static com.gdxtest02.CharBuilder.*;
 
@@ -27,7 +26,7 @@ public class GameState {
 			level = new LevelState();
 			unlockedChars = new Array<Integer>();
 			
-			unlockChar(CHAR_01);
+			unlockChar(CHAR_04);
 			unlockChar(CHAR_02);
 			unlockChar(CHAR_03);
 		}
