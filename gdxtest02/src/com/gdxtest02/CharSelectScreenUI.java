@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.ObjectMap.Values;
 import com.esotericsoftware.tablelayout.Value;
 import com.gdxtest02.chars.Char01;
 import com.gdxtest02.chars.Char02;
@@ -22,6 +23,7 @@ import com.gdxtest02.chars.Char04;
 import com.gdxtest02.chars.Char05;
 import com.gdxtest02.chars.Char06;
 import com.gdxtest02.chars.Char07;
+import com.gdxtest02.gamestate.GameState;
 import com.gdxtest02.levels.Level02;
 
 import static com.gdxtest02.CharBuilder.*;
@@ -57,7 +59,7 @@ public class CharSelectScreenUI {
 	private ClickListener charlistener;
 	private ClickListener gobuttonlistener;
 	private ClickListener backlistener;
-	private ObjectMap<String, Char> chars;
+	private ObjectMap<String, Char> unlockedchars;
 	private TextButton p1button;
 	private int turn;
 	private Label titlelabel;
@@ -67,6 +69,8 @@ public class CharSelectScreenUI {
 	private TextButton p2aibutton;
 	private ClickListener ailistener;
 	private int gamemode;
+	private GameState gstate;
+	private Array<Char> charlist;
 
 	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
@@ -75,9 +79,12 @@ public class CharSelectScreenUI {
 		this.screen = screen;
 		turn = 1;
 		
-		chars = buildMapOfUnlockedChars();
+		gstate = GameState.getInstance();
 		
-		gamemode = screen.game.getGameState().getGameMode();
+//		unlockedchars = buildMapOfUnlockedChars();
+		charlist = gstate.getChars();
+		
+		gamemode = gstate.getGameMode();
 		
 		createListeners();
 		
@@ -149,23 +156,26 @@ public class CharSelectScreenUI {
 		chartable.setFillParent(true);
 		chartable.setY(CHAR_Y);
 		stage.addActor(chartable);
-		
+		Array<Char> list;
+//		list = unlockedchars.values().toArray();
+		list = charlist;
 		int i = 1;
-		for (Char c : chars.values()) {
+		int n = 0;
+		for (Char c : list) {
 			if (i > CHARS_PER_ROW) {
 				chartable.row();
 				i = 1;
 			}
-			addCharButton(c.getName());
-			i++;
+			addCharButton(c.getName(), n);
+			i++;n++;
 		}
 		
 	}
 
-	private void addCharButton(String name) {
+	private void addCharButton(String name, int id) {
 		TextButton cbutton = new TextButton(name, skin);
 		chartable.add(cbutton).width(CHARBUTTON_WIDTH).height(CHARBUTTON_WIDTH);
-		cbutton.setName(name);
+		cbutton.setName(""+id);
 		cbutton.addListener(charlistener);
 		cbutton.setDisabled(true);
 	}
@@ -246,7 +256,8 @@ public class CharSelectScreenUI {
 		charlistener = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				String name = event.getTarget().getParent().getName();
-				Char c = chars.get(name);
+//				Char c = unlockedchars.get(name);
+				Char c = getCharFromId(name);
 				
 				setCurrentPlayer(c);
 				TextButton a = (TextButton) getCurrentFace();
@@ -259,6 +270,15 @@ public class CharSelectScreenUI {
 		};
 	}
 	
+	/**Gets the character with the coresponding id on the char array
+	 * @param name
+	 * @return
+	 */
+	protected Char getCharFromId(String name) {
+		int id = Integer.parseInt(name);
+		return charlist.get(id);
+	}
+
 	/**Sets the control of this player (ai or player)
 	 * string must be p1 or p2
 	 * 
@@ -333,8 +353,8 @@ public class CharSelectScreenUI {
 	}
 	
 	private void setPlayer(int player, Char c) {
-		if (player == 1) p1 = c.getClone();
-		if (player == 2) p2 = c.getClone();
+		if (player == 1) p1 = c;
+		if (player == 2) p2 = c;
 	}
 	private void setCurrentPlayer(Char c) {
 		setPlayer(turn, c);

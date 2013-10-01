@@ -465,5 +465,10 @@ public class Char implements Cloneable {
 		setPowerMultiplier(1f + (level - 1f)*0.1f);
 		log(name + " leveled up, level: " + level + " pmult: " + powerMultiplier);
 	}
+	
+	public String toString() {
+		return getFullDescription();
+		
+	}
 
 }

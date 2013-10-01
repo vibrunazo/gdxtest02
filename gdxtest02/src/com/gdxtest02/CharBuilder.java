@@ -1,5 +1,6 @@
 package com.gdxtest02;
 
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.gdxtest02.chars.Char01;
 import com.gdxtest02.chars.Char02;
@@ -53,6 +54,15 @@ public class CharBuilder {
 		if (gstate.isCharUnlocked(CHAR_06))	chars.put("c6", build(CHAR_06));
 		if (gstate.isCharUnlocked(CHAR_07))	chars.put("c7", build(CHAR_07));
 		
+		return chars;
+	}
+	
+	public static Array<Char> buildListOfChars() {
+		Array<Char> chars = new Array<Char>();
+		chars.add(build(CHAR_01));
+		chars.add(build(CHAR_02));
+		chars.add(build(CHAR_03));
+		chars.add(build(CHAR_04));
 		return chars;
 	}
 }

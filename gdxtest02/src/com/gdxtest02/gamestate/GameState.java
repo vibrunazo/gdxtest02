@@ -2,9 +2,11 @@ package com.gdxtest02.gamestate;
 
 import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Char;
+import com.gdxtest02.CharBuilder;
 import com.gdxtest02.GdxTest02;
 
 import static com.gdxtest02.CharBuilder.*;
+import static com.gdxtest02.GdxTest02.log;
 
 public class GameState {
 	
@@ -15,6 +17,7 @@ public class GameState {
 		private LevelState level;
 		private int gameMode;
 		private Array<Integer> unlockedChars;
+		private Array<Char> chars;
 		
 		private GdxTest02 game;
 		private static GameState gameState;
@@ -29,8 +32,17 @@ public class GameState {
 			unlockChar(CHAR_04);
 			unlockChar(CHAR_02);
 			unlockChar(CHAR_03);
+			
+			buildCharsList();
 		}
 		
+		/**Builds the list of characters
+		 * 
+		 */
+		private void buildCharsList() {
+			chars = CharBuilder.buildListOfChars();
+		}
+
 		public static GameState getInstance() {
 			return gameState;
 		}
@@ -96,5 +108,13 @@ public class GameState {
 		 */
 		public void setGameMode(int gameMode) {
 			this.gameMode = gameMode;
+		}
+
+		/**
+		 * @return the chars
+		 */
+		public Array<Char> getChars() {
+			log("chars: " + chars);
+			return chars;
 		}
 }
