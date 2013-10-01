@@ -50,11 +50,7 @@ public class LevelScreenUI {
 		createCharTable();
 		createLeftTable();
 
-
-
 		createListeners();
-
-
 	}
 	
 	private void createLeftTable() {

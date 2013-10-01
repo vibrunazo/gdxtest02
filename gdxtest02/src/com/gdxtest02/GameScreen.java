@@ -88,9 +88,15 @@ public class GameScreen implements Screen {
 		ui = new GameScreenUI(game, this);
 		ui.setupUi();
 		
+		logPlayerDescriptions();
 		updateUi();
 		
 		fightstate = "go";
+	}
+
+	private void logPlayerDescriptions() {
+		ui.logToConsole("p1: " + p1.getFullDescription());
+		ui.logToConsole("p2: " + p2.getFullDescription());
 	}
 
 	/**Will change to this level after fight is over

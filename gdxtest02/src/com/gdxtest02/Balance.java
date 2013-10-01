@@ -530,7 +530,7 @@ public class Balance {
 	private TestResult testBestCombo(int maxrounds) {
 		// prepare for simulation
 		Char dummy = new Char("dummy");
-		dummy.setMaxhp(100000);
+		dummy.setMaxBasehp(100000);
 		int inihp = dummy.getMaxhp();
 		player.setTarget(dummy);
 		Array<Integer> combo = new Array<Integer>();
@@ -612,7 +612,7 @@ public class Balance {
 			Array<Array<Integer>> listofcombos) {
 
 		Char dummy = new Char("dummy");
-		dummy.setMaxhp(100000);
+		dummy.setMaxBasehp(100000);
 
 		player.resetStats();
 		player.setTarget(dummy);

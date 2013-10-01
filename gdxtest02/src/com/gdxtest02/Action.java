@@ -12,6 +12,7 @@ public abstract class Action {
 	private float avgdps;
 	
 	private Char owner;
+	private float basepower;
 	
 	public Action() {
 		ini();
@@ -19,22 +20,29 @@ public abstract class Action {
 
 	public Action(float value) {
 		power = (float) Math.ceil(value);
+		basepower = power;
 		ini();
 	}
 	
 	public Action(float value, int cooldown) {
 		power = (float) Math.ceil(value);
+		basepower = power;
 		this.cooldown = cooldown;
 		ini();
 	}
 	
 	public Action(float value, int cooldown, int duration) {
 		power = (float) Math.ceil(value);
+		basepower = power;
 		this.cooldown = cooldown;
 		this.duration = duration;
 		ini();
 	}
 	
+	public void updatePower() {
+		if (owner == null) return;
+		power = (float) Math.ceil(basepower) * owner.getPowerMultiplier();
+	}
 	public void setOwner(Char character) {
 		owner = character;
 	}
@@ -74,11 +82,17 @@ public abstract class Action {
 	 */
 	abstract protected void go(Char self, Char target);
 	
-	/**Do whatever initialization and updates here
-	 * call this to update description
+	/**Do whatever initialization here, only called once
 	 * 
 	 */
 	abstract public void ini();
+	
+	/**Do whatever updates here, called every time the action needs
+	 * to be updated
+	 * call this to update description
+	 * 
+	 */
+	abstract public void update();
 
 	/**Gets the action name
 	 * @return

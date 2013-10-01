@@ -13,10 +13,10 @@ public class Drain extends Action {
 	@Override
 	public void ini() {
 		setName("Drain");
-		setDescription("Drains " + getPower() + " damage and heals you.");
-		setAvgDps(power*2/(cooldown+1));
 	}
-	
+	public void update() {
+		setDescription("Drains " + getPower() + " damage and heals you.");
+	}
 	
 	
 	public float getDmgAfterRounds(int rounds) {

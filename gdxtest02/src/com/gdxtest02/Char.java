@@ -2,21 +2,20 @@ package com.gdxtest02;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import com.gdxtest02.actions.Dmg;
+import static com.gdxtest02.GdxTest02.log;
 
 public class Char implements Cloneable {
 	private String name;
 	private int hp;
 	protected int maxhp;
+	private int basehp;
 	private String description;
 	/**Damage to be taken this round. Skills will set this.
 	 * Final damage actually taken will only be decided at the end of the round.
@@ -41,6 +40,10 @@ public class Char implements Cloneable {
 	private Balance balance;
 	private Char target;
 	private boolean canoverheal;
+	
+	private float powerMultiplier;
+	private int level;
+	private int exp;
 
 	public Char(String name) {
 		this.name = name;
@@ -50,7 +53,11 @@ public class Char implements Cloneable {
 		this.maxhp = 1000;
 		this.posX = 0;
 		this.posY = 0;
+		basehp = maxhp;
 		canoverheal = true;
+		
+		level = 1;
+		powerMultiplier = 1;
 		
 		resetStats();
 	}
@@ -128,6 +135,7 @@ public class Char implements Cloneable {
 	public void addAction(Action action) {
 		actions.add(action);
 		action.setOwner(this);
+		action.updatePower();
 	}
 	
 	/**Add buff to new buff list
@@ -269,8 +277,9 @@ public class Char implements Cloneable {
 		return maxhp;
 	}
 
-	public void setMaxhp(int maxhp) {
-		this.maxhp = maxhp;
+	public void setMaxBasehp(int basehp) {
+		this.basehp = basehp;
+		updateHp();
 		// hp cannot be more than maxhp, fix that
 		if (hp < maxhp) {
 			hp = maxhp;
@@ -306,6 +315,9 @@ public class Char implements Cloneable {
 	}
 	
 	/**gets the list of actions
+	 * 
+	 * Avoid using this unless there's no other way
+	 * 
 	 * @return
 	 */
 	public Array<Action> getActions() {
@@ -331,7 +343,7 @@ public class Char implements Cloneable {
 	 */
 	public String getFullDescription() {
 //		return description + " avgdps: " + balance.getAvgDps();
-		return description + ". " + getActionListString();
+		return description + " level " + level  + " (k: " + powerMultiplier + ") " + getActionListString();
 	}
 
 	/**
@@ -399,6 +411,52 @@ public class Char implements Cloneable {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * @return the powerMultiplier
+	 */
+	public float getPowerMultiplier() {
+		return powerMultiplier;
+	}
+
+	/**
+	 * @param powerMultiplier the powerMultiplier to set
+	 */
+	public void setPowerMultiplier(float powerMultiplier) {
+		this.powerMultiplier = powerMultiplier;
+		updateAllActions();
+		updateHp();
+	}
+
+	/**Updates max hp with multiplier
+	 */
+	private void updateHp() {
+		float pct = ((float) hp)/((float) maxhp); // get current heal %
+		maxhp = (int) (basehp * powerMultiplier);
+		hp = (int) Math.ceil(pct*hp); // keep health % the same
+		
+	}
+
+	/**Update power of all actions, remultiply base power by power
+	 * multipliers
+	 * 
+	 */
+	private void updateAllActions() {
+		for (Action a : actions) {
+			a.updatePower();
+			a.update(); // updates descriptions
+		}
+	}
+	
+	/**Increases current level by 1 and updates
+	 * everything that needs it
+	 * 
+	 */
+	public void levelUp() {
+		level++;
+		setPowerMultiplier(1f + (level - 1f)*0.1f);
+		log(name + " leveled up, level: " + level + " pmult: " + powerMultiplier);
 	}
 
 }

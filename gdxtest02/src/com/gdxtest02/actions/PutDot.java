@@ -15,9 +15,10 @@ public class PutDot extends Action {
 	@Override
 	public void ini() {
 		setName("Put Dot");
+	}
+	public void update() {
 		setDescription("Deals " + getPower() + " damage per sec for " + getDuration() + 
 				"sec.");
-		setAvgDps((power*duration)/(cooldown+1));
 	}
 	
 	public float getDmgAfterRounds(int rounds) {

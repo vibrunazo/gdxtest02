@@ -115,7 +115,7 @@ public class LevelScreen implements Screen {
 	public void endLevel() {
 		log("end level");
 		game.setScreen(new MainMenuScreen(game));
-		game.getGameState().setCurenemy(0);
+//		game.getGameState().setCurenemy(0);
 		dispose();
 	}
 	

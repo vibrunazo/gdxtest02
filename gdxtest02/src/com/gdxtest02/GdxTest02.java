@@ -71,5 +71,9 @@ public class GdxTest02 extends Game {
 	public GameState getGameState() {
 		return gamestate;
 	}
+	
+	public static void log(String text) {
+		Gdx.app.log("gdxtest", text);
+	}
 
 }
