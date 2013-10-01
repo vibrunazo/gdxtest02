@@ -21,7 +21,7 @@ public class Char03 extends Char {
 		// 43, 171, 22
 		setTex("ball02red.png");
 		
-		levelUp();levelUp();levelUp();levelUp();levelUp();levelUp();
+//		levelUp();levelUp();levelUp();levelUp();levelUp();levelUp();
 
 	}
 

@@ -60,6 +60,13 @@ public class Char implements Cloneable {
 		powerMultiplier = 1;
 		
 		resetStats();
+//		resetAssets();
+	}
+
+	/**Reloads textures and assets
+	 * 
+	 */
+	private void resetAssets() {
 	}
 
 	/**Reset all stats to initial values

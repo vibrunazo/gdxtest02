@@ -140,7 +140,8 @@ public class LevelScreenUI {
 		// revert the checked state.
 		ChangeListener gobuttonlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				Char p1 = screen.game.getGameState().getPlayer().getClone();
+//				Char p1 = screen.game.getGameState().getPlayer().getClone();
+				Char p1 = screen.game.getGameState().getPlayer();
 				Char p2 = screen.getCurrentChar();
 				int status = screen.game.getGameState().getLevel().getFightState();
 				// if there are no more enemies left, or you lost a fight:

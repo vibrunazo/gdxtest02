@@ -200,6 +200,8 @@ public class CharSelectScreenUI {
 		gobuttonlistener = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				if (gamemode == MODE_STORY) {
+					p1.levelUp();p1.levelUp();p1.levelUp();
+					p1.levelUp();p1.levelUp();p1.levelUp();
 					screen.game.getGameState().setPlayer(p1);
 					screen.game.setScreen(new LevelSelectScreen(screen.game));
 //					screen.game.setScreen(new Level02(screen.game));

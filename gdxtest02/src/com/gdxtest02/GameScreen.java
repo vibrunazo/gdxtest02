@@ -327,8 +327,8 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		p1.dispose();
-		p2.dispose();
+//		p1.dispose();
+//		p2.dispose();
 	}
 
 	public Char getP1() {
