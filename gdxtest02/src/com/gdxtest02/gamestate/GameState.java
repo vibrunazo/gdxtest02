@@ -125,10 +125,41 @@ public class GameState {
 			charsInventory.add(c);
 		}
 		
+		/**Adds char to inventory only if another of this
+		 * same class doesn't alread exists
+		 * @param c
+		 */
+		public void addCharToInvOnce(Char c) {
+			if (isThisCharOnInv(c)) return;
+			else addCharToInv(c);
+		}
+
+		/**Checks if a char of this class exists on the inventory
+		 * @param c
+		 */
+		private boolean isThisCharOnInv(Char c) {
+			for (Char i : charsInventory) {
+				if (i.getClass() == c.getClass()) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
 		/**Adds a new char of this type to inventory
 		 * @param char_type
 		 */
 		public void addCharToInv(int char_type) {
 			charsInventory.add(CharBuilder.build(char_type));
+		}
+		
+		/**Adds char to inventory only if another of this
+		 * same class doesn't alread exists
+		 * @param char_type
+		 */
+		public void addCharToInvOnce(int char_type) {
+			Char c = CharBuilder.build(char_type);
+			if (isThisCharOnInv(c)) return;
+			else addCharToInv(c);
 		}
 }

@@ -13,6 +13,7 @@ import static com.gdxtest02.GdxTest02.log;
 
 public class Char implements Cloneable {
 	private String name;
+	private String type;
 	private int hp;
 	protected int maxhp;
 	private int basehp;

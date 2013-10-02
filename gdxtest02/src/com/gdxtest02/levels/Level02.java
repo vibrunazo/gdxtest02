@@ -36,7 +36,7 @@ public class Level02 extends LevelScreen {
 		GameState gstate = GameState.getInstance();
 		if (gstate.getLevel().getFightState() == LevelState.WIN) {
 //			gstate.unlockChar(CHAR_05);
-			gstate.addCharToInv(CHAR_05);
+			gstate.addCharToInvOnce(CHAR_05);
 			Char c = game.getGameState().getPlayer();
 			c.levelUp();c.levelUp();
 		}
