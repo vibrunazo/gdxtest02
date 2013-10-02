@@ -14,9 +14,9 @@ public class Level01 extends LevelScreen {
 
 	public Level01(GdxTest02 game) {
 		super(game);
-		addChar(new Char02("c2"));
-		addChar(new Char02("c22"));
-		addChar(new Char03("c3"));
+		addChar(build(CHAR_02));
+		addChar(build(CHAR_02));
+		addChar(build(CHAR_03));
 		
 		setLevel_name("level 1");
 		ui.setupUi(this);

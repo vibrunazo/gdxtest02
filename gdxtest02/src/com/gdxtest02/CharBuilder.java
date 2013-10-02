@@ -45,7 +45,7 @@ public class CharBuilder {
 		for (int i = 0; i < level; i++) {
 			c.levelUp();
 		}
-		return null;
+		return c;
 	}
 	/**Builds a list of available chars
 	 * @return

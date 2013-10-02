@@ -1,6 +1,8 @@
 package com.gdxtest02.levels;
 
 import static com.gdxtest02.CharBuilder.CHAR_01;
+import static com.gdxtest02.CharBuilder.CHAR_02;
+import static com.gdxtest02.CharBuilder.build;
 
 import com.gdxtest02.Char;
 import com.gdxtest02.GdxTest02;
@@ -19,11 +21,11 @@ public class Level02 extends LevelScreen {
 
 	public Level02(GdxTest02 game) {
 		super(game);
-		addChar(new Char03("c3"));
-		addChar(new Char04("c4"));
-		addChar(new Char05("c5"));
-		addChar(new Char05("c5"));
-		addChar(new Char06("c6"));
+		addChar(build(CHAR_03));
+		addChar(build(CHAR_04));
+		addChar(build(CHAR_05));
+		addChar(build(CHAR_05));
+		addChar(build(CHAR_06));
 		
 		setLevel_name("level 2");
 		ui.setupUi(this);

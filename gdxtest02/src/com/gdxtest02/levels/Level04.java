@@ -1,7 +1,5 @@
 package com.gdxtest02.levels;
 
-import static com.gdxtest02.CharBuilder.CHAR_01;
-
 import com.gdxtest02.Char;
 import com.gdxtest02.CharBuilder;
 import com.gdxtest02.GdxTest02;
