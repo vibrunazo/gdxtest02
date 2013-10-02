@@ -20,6 +20,7 @@ public class LevelSelectScreenUI {
 	private TextButton level3button;
 	private LevelSelectScreen screen;
 	private TextButton level1button;
+	private TextButton level4button;
 
 	void setupUi(final LevelSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
@@ -40,6 +41,9 @@ public class LevelSelectScreenUI {
 		table.row();
 		level3button = new TextButton("Level 3", skin);
 		table.add(level3button).width(300).height(50);
+		table.row();
+		level4button = new TextButton("Level 4", skin);
+		table.add(level4button).width(300).height(50);
 	
 		createListeners();
 		
@@ -75,6 +79,14 @@ public class LevelSelectScreenUI {
 			}
 		};
 		level3button.addListener(level3listener);
+		
+		ChangeListener level4listener = new ChangeListener() {
+			public void changed (ChangeEvent event, Actor actor) {
+				setScreen(LEVEL_04);
+				screen.dispose();
+			}
+		};
+		level4button.addListener(level4listener);
 	}
 	
 	private void setScreen(int level) {

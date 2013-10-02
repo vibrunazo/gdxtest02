@@ -3,6 +3,7 @@ package com.gdxtest02;
 import com.gdxtest02.levels.Level01;
 import com.gdxtest02.levels.Level02;
 import com.gdxtest02.levels.Level03;
+import com.gdxtest02.levels.Level04;
 
 
 /**Creates instances of Chars
@@ -25,7 +26,7 @@ public class LevelBuilder {
 		case LEVEL_01: level = new Level01(game);break;
 		case LEVEL_02: level = new Level02(game);break;
 		case LEVEL_03: level = new Level03(game);break;
-//		case LEVEL_04: level = new Level04(game);break;
+		case LEVEL_04: level = new Level04(game);break;
 //		case LEVEL_05: level = new Level05(game);break;
 //		case LEVEL_06: level = new Level06(game);break;
 //		case LEVEL_07: level = new Level07(game);break;

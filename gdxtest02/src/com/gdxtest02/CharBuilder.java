@@ -40,6 +40,13 @@ public class CharBuilder {
 		return c;
 	}
 	
+	public static Char build(int name, int level) {
+		Char c = build(name);
+		for (int i = 0; i < level; i++) {
+			c.levelUp();
+		}
+		return null;
+	}
 	/**Builds a list of available chars
 	 * @return
 	 */
@@ -59,7 +66,7 @@ public class CharBuilder {
 	
 	public static Array<Char> buildListOfChars() {
 		Array<Char> chars = new Array<Char>();
-		chars.add(build(CHAR_01));
+//		chars.add(build(CHAR_01));
 		chars.add(build(CHAR_02));
 		chars.add(build(CHAR_03));
 		chars.add(build(CHAR_04));

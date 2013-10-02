@@ -1,5 +1,6 @@
 package com.gdxtest02.levels;
 
+import com.gdxtest02.Char;
 import com.gdxtest02.GdxTest02;
 import com.gdxtest02.LevelScreen;
 import com.gdxtest02.chars.Char02;
@@ -25,7 +26,10 @@ public class Level01 extends LevelScreen {
 		super.endLevel();
 		GameState gstate = GameState.getInstance();
 		if (gstate.getLevel().getFightState() == LevelState.WIN) {
-			gstate.unlockChar(CHAR_01);
+//			gstate.unlockChar(CHAR_01);
+			gstate.addCharToInv(CHAR_06);
+			Char c = game.getGameState().getPlayer();
+			c.levelUp();
 		}
 	}
 

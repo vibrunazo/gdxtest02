@@ -17,7 +17,7 @@ public class GameState {
 		private LevelState level;
 		private int gameMode;
 		private Array<Integer> unlockedChars;
-		private Array<Char> chars;
+		private Array<Char> charsInventory;
 		
 		private GdxTest02 game;
 		private static GameState gameState;
@@ -29,9 +29,9 @@ public class GameState {
 			level = new LevelState();
 			unlockedChars = new Array<Integer>();
 			
-			unlockChar(CHAR_04);
-			unlockChar(CHAR_02);
-			unlockChar(CHAR_03);
+//			unlockChar(CHAR_04);
+//			unlockChar(CHAR_02);
+//			unlockChar(CHAR_03);
 			
 			buildCharsList();
 		}
@@ -40,7 +40,7 @@ public class GameState {
 		 * 
 		 */
 		private void buildCharsList() {
-			chars = CharBuilder.buildListOfChars();
+			charsInventory = CharBuilder.buildListOfChars();
 		}
 
 		public static GameState getInstance() {
@@ -114,7 +114,21 @@ public class GameState {
 		 * @return the chars
 		 */
 		public Array<Char> getChars() {
-			log("chars: " + chars);
-			return chars;
+//			log("chars: " + charsInventory);
+			return charsInventory;
+		}
+		
+		/**Adds this char to inventory
+		 * @param c
+		 */
+		public void addCharToInv(Char c) {
+			charsInventory.add(c);
+		}
+		
+		/**Adds a new char of this type to inventory
+		 * @param char_type
+		 */
+		public void addCharToInv(int char_type) {
+			charsInventory.add(CharBuilder.build(char_type));
 		}
 }

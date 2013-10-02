@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class LevelScreen implements Screen {
 
-	GdxTest02 game;
+	protected GdxTest02 game;
 
 	private OrthographicCamera camera;
 
