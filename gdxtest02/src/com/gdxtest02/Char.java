@@ -335,7 +335,7 @@ public class Char implements Cloneable {
 	 * 
 	 * @return
 	 */
-	public Array<Action> getActions() {
+	public Array<Action> getActionBar() {
 		return actionBar;
 	}
 
@@ -477,6 +477,13 @@ public class Char implements Cloneable {
 	public String toString() {
 		return getFullDescription();
 		
+	}
+
+	/**
+	 * @return the actionsInventory
+	 */
+	public Array<Action> getActionsInventory() {
+		return actionsInventory;
 	}
 
 }

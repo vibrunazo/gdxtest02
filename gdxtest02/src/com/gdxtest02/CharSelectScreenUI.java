@@ -71,6 +71,7 @@ public class CharSelectScreenUI {
 	private int gamemode;
 	private GameState gstate;
 	private Array<Char> charlist;
+	private ClickListener editlistener;
 
 	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
@@ -130,10 +131,16 @@ public class CharSelectScreenUI {
 			p1aibutton = new TextButton("AI", skin); 
 			p1aibutton.setName("p1");
 			p1aibutton.addListener(ailistener);
+			lefttable.row();
+			lefttable.add(p1aibutton).width(AIBUTTON_WIDTH).height(AIBUTTON_WIDTH);
 		}
-		
+		TextButton editbutton = new TextButton("edit", skin); 
+		editbutton.setDisabled(true);
+		editbutton.setName("p1");
+		editbutton.addListener(editlistener);
 		lefttable.row();
-		lefttable.add(p1aibutton).width(AIBUTTON_WIDTH).height(AIBUTTON_WIDTH);
+		lefttable.add(editbutton).width(AIBUTTON_WIDTH).height(AIBUTTON_WIDTH);
+		
 	}
 	
 	private void createRightTable() {
@@ -149,6 +156,13 @@ public class CharSelectScreenUI {
 		p2aibutton.addListener(ailistener);
 		righttable.row();
 		righttable.add(p2aibutton).width(AIBUTTON_WIDTH).height(AIBUTTON_WIDTH);
+		
+		TextButton editbutton = new TextButton("edit", skin); 
+		editbutton.setDisabled(true);
+		editbutton.setName("p2");
+		editbutton.addListener(editlistener);
+		righttable.row();
+		righttable.add(editbutton).width(AIBUTTON_WIDTH).height(AIBUTTON_WIDTH);
 	}
 
 	private void createCharTable() {
@@ -246,6 +260,16 @@ public class CharSelectScreenUI {
 			}
 		};
 		
+		editlistener = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				Actor actor = event.getTarget(); // the label that was clicked
+				TextButton b = (TextButton)actor.getParent(); // the button holding that label
+				String name = b.getName();
+				Char c = getPlayerByName(name);
+				screen.game.setScreen(new CharEditScreen(screen.game, c));
+			}
+		};
+		
 		backlistener = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				screen.game.setScreen(new MainMenuScreen(screen.game));
@@ -270,6 +294,12 @@ public class CharSelectScreenUI {
 		};
 	}
 	
+	protected Char getPlayerByName(String name) {
+		if (name.equals("p1")) return p1;
+		if (name.equals("p2")) return p2;
+		return null;
+	}
+
 	/**Gets the character with the coresponding id on the char array
 	 * @param name
 	 * @return

@@ -38,7 +38,7 @@ public class Balance {
 
 	public float getAvgDps() {
 		float total = 0;
-		for (Action a : player.getActions()) {
+		for (Action a : player.getActionBar()) {
 			total += a.getAvgDps();
 		}
 		return total;
@@ -117,7 +117,7 @@ public class Balance {
 
 	private Array<Integer> getSkillsThatDoDmg(int whattotest) {
 		Array<Integer> list = new Array<Integer>(); 
-		for (Action a : player.getActions()) {
+		for (Action a : player.getActionBar()) {
 			if (whattotest == TEST_DAMAGE && a.getDmgAfterRounds(10) > 0) {
 				list.add(player.getIdOfAction(a));
 			}
