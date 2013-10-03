@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.gdxtest02.util.ActionBar;
 
 import static com.gdxtest02.gamestate.LevelState.*;
 
@@ -56,12 +57,19 @@ public class CharEditScreenUI {
 		
 		createCenterTable();
 		createLeftTable();
+//		createActionBarOld();
 		createActionBar();
 
 		
 	}
 	
 	private void createActionBar() {
+		ActionBar bar = new ActionBar(player, skin);
+		bar.setPosition(ACTIONBAR_X + ACTIONBAR_WIDTH/2, ACTIONBAR_Y);
+		stage.addActor(bar);
+	}
+
+	private void createActionBarOld() {
 		Table table = new Table();
 		table.setPosition(ACTIONBAR_X + ACTIONBAR_WIDTH/2, ACTIONBAR_Y);
 		stage.addActor(table);
