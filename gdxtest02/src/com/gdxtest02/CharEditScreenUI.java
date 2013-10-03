@@ -39,8 +39,10 @@ public class CharEditScreenUI {
 	private TextButton p1button;
 	private TextButton backbutton;
 	private ClickListener backlistener;
-	private Array<TextButton> ActionButtons;
+	private Array<TextButton> actionButtons;
 	private Char player;
+	private ClickListener actionbuttonlistener;
+	private ChangeListener gobuttonlistener;
 
 	public void setupUi(final CharEditScreen screen, Char player) {
 		uibuilder = new UIBuilder(screen.game);
@@ -50,11 +52,13 @@ public class CharEditScreenUI {
 		this.player = player; 
 //				screen.game.getGameState().getPlayer();
 
+		createListeners();
+		
 		createCenterTable();
 		createLeftTable();
 		createActionBar();
 
-		createListeners();
+		
 	}
 	
 	private void createActionBar() {
@@ -63,8 +67,8 @@ public class CharEditScreenUI {
 		stage.addActor(table);
 		
 //		int size = player.getNumOfActions();
+		actionButtons = new Array<TextButton>();
 		for (Action a : player.getActionBar()) {
-			ActionButtons = new Array<TextButton>();
 			addActionButton(table, a);
 		}
 		
@@ -72,7 +76,8 @@ public class CharEditScreenUI {
 
 	private void addActionButton(Table table, Action a) {
 		TextButton button = new TextButton(a.getName(), skin);
-		ActionButtons.add(button);
+		button.addListener(actionbuttonlistener);
+		actionButtons.add(button);
 		table.add(button).width(ACTIONBUTTON_WIDTH).height(ACTIONBUTTON_HEIGHT);
 		table.row();
 	}
@@ -96,11 +101,13 @@ public class CharEditScreenUI {
 		table.setFillParent(true);
 		stage.addActor(table);
 
-		gobutton = new TextButton("Fight next enemy", skin);
+		gobutton = new TextButton("OK", skin);
+		gobutton.addListener(gobuttonlistener);
 		table.add(gobutton).width(MAINLABEL_WIDTH).height(MAINLABEL_HEIGHT);
 		table.row();
 		
 		backbutton = new TextButton("Back to Menu", skin);
+		backbutton.addListener(backlistener);
 		table.add(backbutton).width(300).height(50);
 		backbutton.setDisabled(true);
 	}
@@ -111,21 +118,38 @@ public class CharEditScreenUI {
 		// Button#setChecked() is called, via a key press, etc. If the event.cancel() is called, the checked state will be reverted.
 		// ClickListener could have been used, but would only fire when clicked. Also, canceling a ClickListener event won't
 		// revert the checked state.
-		ChangeListener gobuttonlistener = new ChangeListener() {
+		actionbuttonlistener = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				Actor actor = event.getTarget(); // the label that was clicked
+				actor = actor.getParent(); // the button holding that label
+				
+				toggleButtonFromGroup(actionButtons, actor);
+			}
+		};
+		
+		gobuttonlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 //				screen.dispose();
 
 			}
 		};
-		gobutton.addListener(gobuttonlistener);
 		
 		backlistener = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				screen.back();
 			}
 		};
-		backbutton.addListener(backlistener);
+		
 
+	}
+
+	protected void toggleButtonFromGroup(Array<TextButton> group,
+			Actor actor) {
+		log("group: " + actionButtons);
+		for (TextButton b : group) {
+			b.setChecked(false);
+		}
+		((TextButton) actor).setChecked(true);
 	}
 
 	public void draw() {
