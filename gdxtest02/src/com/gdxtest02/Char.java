@@ -31,7 +31,9 @@ public class Char implements Cloneable {
 	 * 
 	 */
 	private int activeAction;
-	private Array<Action> actions;
+	private Array<Action> actionBar;
+	private Array<Action> actionsInventory;
+	private int maxActionBarSize = 4;
 	private Array<Buff> buffs;
 	/**List of buffs to be added this round, 
 	 * these will be moved to the main buffs list at the end of the round
@@ -49,7 +51,8 @@ public class Char implements Cloneable {
 	public Char(String name) {
 		this.name = name;
 		description = "This is a Char";
-		actions = new Array<Action>();
+		actionBar = new Array<Action>();
+		actionsInventory = new Array<Action>();
 		balance = new Balance(this);
 		this.maxhp = 1000;
 		this.posX = 0;
@@ -80,8 +83,9 @@ public class Char implements Cloneable {
 		buffs = new Array<Buff>();
 		newbuffs = new Array<Buff>();
 		
+		updateAllActions();
 		//reset all actions
-		for (Action a : actions) a.reset();
+		for (Action a : actionBar) a.reset();
 	}
 	
 	public void draw(SpriteBatch batch){
@@ -119,15 +123,15 @@ public class Char implements Cloneable {
 	 * @return
 	 */
 	public int getIdOfAction(Action a) {
-		return actions.indexOf(a, true) + 1;
+		return actionBar.indexOf(a, true) + 1;
 	}
 	
 	/**Get the action of specific id, starting from 1
 	 * @param id
 	 */
 	public Action getAction(int id) {
-		if (id < 1 || id > actions.size) return null;
-		return actions.get(id - 1);
+		if (id < 1 || id > actionBar.size) return null;
+		return actionBar.get(id - 1);
 	}
 	
 	/**Set the action of this id, starting from 1
@@ -136,12 +140,15 @@ public class Char implements Cloneable {
 	 */
 	public void setAction(int id, Action action) {
 		if (id < 1) return;
-		actions.set(id - 1, action);
+		actionBar.set(id - 1, action);
 		action.setOwner(this);
 	}
 	
 	public void addAction(Action action) {
-		actions.add(action);
+		actionsInventory.add(action);
+		if (actionBar.size < maxActionBarSize) {
+			actionBar.add(action);
+		}
 		action.setOwner(this);
 		action.updatePower();
 	}
@@ -266,7 +273,7 @@ public class Char implements Cloneable {
 	 * 
 	 */
 	public void updateCooldowns() {
-		for (Action a : actions) a.updateCooldown();
+		for (Action a : actionBar) a.updateCooldown();
 	}
 	
 	/**Update all that needs to be updated every logic tick
@@ -319,7 +326,7 @@ public class Char implements Cloneable {
 	 * @return
 	 */
 	public int getNumOfActions() {
-		return actions.size;
+		return actionBar.size;
 	}
 	
 	/**gets the list of actions
@@ -329,7 +336,7 @@ public class Char implements Cloneable {
 	 * @return
 	 */
 	public Array<Action> getActions() {
-		return actions;
+		return actionBar;
 	}
 
 	/**
@@ -366,7 +373,7 @@ public class Char implements Cloneable {
 	 */
 	public String getActionListString() {
 		String list = "";
-		for (Action a : actions) {
+		for (Action a : actionBar) {
 			list += a.getName() + ", ";
 		}
 		if (list.length()>0) list = list.substring(0, list.length()-2);
@@ -451,7 +458,7 @@ public class Char implements Cloneable {
 	 * 
 	 */
 	private void updateAllActions() {
-		for (Action a : actions) {
+		for (Action a : actionBar) {
 			a.updatePower();
 			a.update(); // updates descriptions
 		}

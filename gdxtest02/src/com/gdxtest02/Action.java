@@ -39,10 +39,18 @@ public abstract class Action {
 		ini();
 	}
 	
+	/**Updates the power of this action based on the level multiplier
+	 * 
+	 */
 	public void updatePower() {
 		if (owner == null) return;
 		power = (float) Math.ceil(basepower) * owner.getPowerMultiplier();
 	}
+	
+	/**Sets the owner of this action, will be used to calculate level and
+	 * power multiplier
+	 * @param character
+	 */
 	public void setOwner(Char character) {
 		owner = character;
 	}

@@ -9,6 +9,7 @@ import com.gdxtest02.chars.Char04;
 import com.gdxtest02.chars.Char05;
 import com.gdxtest02.chars.Char06;
 import com.gdxtest02.chars.Char07;
+import com.gdxtest02.chars.Char08;
 import com.gdxtest02.gamestate.GameState;
 
 /**Creates instances of Chars
@@ -23,6 +24,7 @@ public class CharBuilder {
 	public static final int CHAR_05 = 5;
 	public static final int CHAR_06 = 6;
 	public static final int CHAR_07 = 7;
+	public static final int CHAR_08 = 8;
 
 	public static Char build(int name) {
 		Char c = null;
@@ -34,6 +36,7 @@ public class CharBuilder {
 		case CHAR_05: c = new Char05("c5");break;
 		case CHAR_06: c = new Char06("c6");break;
 		case CHAR_07: c = new Char07("c7");break;
+		case CHAR_08: c = new Char08("c8");break;
 
 		default:break;
 		}
@@ -61,6 +64,7 @@ public class CharBuilder {
 		if (gstate.isCharUnlocked(CHAR_06))	chars.put("c6", build(CHAR_06));
 		if (gstate.isCharUnlocked(CHAR_07))	chars.put("c7", build(CHAR_07));
 		
+		
 		return chars;
 	}
 	
@@ -70,6 +74,7 @@ public class CharBuilder {
 		chars.add(build(CHAR_02));
 		chars.add(build(CHAR_03));
 		chars.add(build(CHAR_04));
+		chars.add(build(CHAR_08));
 		return chars;
 	}
 }
