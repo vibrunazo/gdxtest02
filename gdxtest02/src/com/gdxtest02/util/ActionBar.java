@@ -27,6 +27,29 @@ public class ActionBar extends Table {
 		createListeners();
 		createButtons();
 	}
+	
+
+	/**Creates the buttons of the action bar
+	 * 
+	 */
+	private void createButtons() {
+		actionButtons = new Array<TextButton>();
+		for (Action a : player.getActionBar()) {
+			addActionButton(a);
+			log("adding to table: " + a.getName());
+		}
+	}
+	
+	/**Adds one action button
+	 * @param a
+	 */
+	private void addActionButton(Action a) {
+		TextButton button = new TextButton(a.getName(), skin);
+		button.addListener(actionbuttonlistener);
+		actionButtons.add(button);
+		add(button).width(ACTIONBUTTON_WIDTH).height(ACTIONBUTTON_HEIGHT);
+		row();
+	}
 
 	private void createListeners() {
 		actionbuttonlistener = new ClickListener() {
@@ -39,30 +62,16 @@ public class ActionBar extends Table {
 		};
 	}
 
-	protected void toggleButtonFromGroup(Array<TextButton> actionButtons2,
+	/**Sets only the actor button as checked on this grop
+	 * @param group
+	 * @param actor
+	 */
+	protected void toggleButtonFromGroup(Array<TextButton> group,
 			Actor actor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void createButtons() {
-//		Table table = new Table();
-//		table.setPosition(ACTIONBAR_X + ACTIONBAR_WIDTH/2, ACTIONBAR_Y);
-//		add(table);
-		
-		actionButtons = new Array<TextButton>();
-		for (Action a : player.getActionBar()) {
-			addActionButton(a);
-			log("adding to table: " + a.getName());
+		for (TextButton b : group) {
+			b.setChecked(false);
 		}
-	}
-	
-	private void addActionButton(Action a) {
-		TextButton button = new TextButton(a.getName(), skin);
-		button.addListener(actionbuttonlistener);
-		actionButtons.add(button);
-		add(button).width(ACTIONBUTTON_WIDTH).height(ACTIONBUTTON_HEIGHT);
-		row();
+		((TextButton) actor).setChecked(true);
 	}
 
 }

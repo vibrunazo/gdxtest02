@@ -57,7 +57,6 @@ public class CharEditScreenUI {
 		
 		createCenterTable();
 		createLeftTable();
-//		createActionBarOld();
 		createActionBar();
 
 		
@@ -67,27 +66,6 @@ public class CharEditScreenUI {
 		ActionBar bar = new ActionBar(player, skin);
 		bar.setPosition(ACTIONBAR_X + ACTIONBAR_WIDTH/2, ACTIONBAR_Y);
 		stage.addActor(bar);
-	}
-
-	private void createActionBarOld() {
-		Table table = new Table();
-		table.setPosition(ACTIONBAR_X + ACTIONBAR_WIDTH/2, ACTIONBAR_Y);
-		stage.addActor(table);
-		
-//		int size = player.getNumOfActions();
-		actionButtons = new Array<TextButton>();
-		for (Action a : player.getActionBar()) {
-			addActionButton(table, a);
-		}
-		
-	}
-
-	private void addActionButton(Table table, Action a) {
-		TextButton button = new TextButton(a.getName(), skin);
-		button.addListener(actionbuttonlistener);
-		actionButtons.add(button);
-		table.add(button).width(ACTIONBUTTON_WIDTH).height(ACTIONBUTTON_HEIGHT);
-		table.row();
 	}
 
 	private void createLeftTable() {
@@ -122,19 +100,6 @@ public class CharEditScreenUI {
 
 
 	private void createListeners() {
-		// Add a listener to the button. ChangeListener is fired when the button's checked state changes, eg when clicked,
-		// Button#setChecked() is called, via a key press, etc. If the event.cancel() is called, the checked state will be reverted.
-		// ClickListener could have been used, but would only fire when clicked. Also, canceling a ClickListener event won't
-		// revert the checked state.
-		actionbuttonlistener = new ClickListener() {
-			public void clicked(InputEvent event, float x, float y)  {
-				Actor actor = event.getTarget(); // the label that was clicked
-				actor = actor.getParent(); // the button holding that label
-				
-				toggleButtonFromGroup(actionButtons, actor);
-			}
-		};
-		
 		gobuttonlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 //				screen.dispose();
@@ -147,17 +112,7 @@ public class CharEditScreenUI {
 				screen.back();
 			}
 		};
-		
 
-	}
-
-	protected void toggleButtonFromGroup(Array<TextButton> group,
-			Actor actor) {
-		log("group: " + actionButtons);
-		for (TextButton b : group) {
-			b.setChecked(false);
-		}
-		((TextButton) actor).setChecked(true);
 	}
 
 	public void draw() {
