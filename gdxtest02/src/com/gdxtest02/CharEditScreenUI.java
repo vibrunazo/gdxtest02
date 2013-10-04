@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -14,12 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.util.ActionBar;
 
-import static com.gdxtest02.gamestate.LevelState.*;
-
 public class CharEditScreenUI {
 
-	private static final int MAINLABEL_HEIGHT = 50;
-	private static final int MAINLABEL_WIDTH = 300;
+	private static final int MENU_HEIGHT = 50;
+	private static final int MENU_WIDTH = 200;
+	private static final int MENU_X = 250;
+	private static final int MENU_Y = -100;
 
 	private static final int FACETABLE_X = 50;
 	private static final int FACETABLE_Y = 300;
@@ -29,9 +28,10 @@ public class CharEditScreenUI {
 	private static final int ACTIONBAR_Y = 100;
 	private static final int ACTIONBAR_WIDTH = 150;
 	
-	private static final int ACTIONBUTTON_WIDTH = 160;
-	private static final int ACTIONBUTTON_HEIGHT = 40;
-
+	private static final int ACTIONINV_X = 300;
+	private static final int ACTIONINV_Y = 300;
+	private static final int ACTIONINV_WIDTH = 150;
+	
 	UIBuilder uibuilder;
 	private TextButton gobutton;
 	private CharEditScreen screen;
@@ -40,9 +40,7 @@ public class CharEditScreenUI {
 	private TextButton p1button;
 	private TextButton backbutton;
 	private ClickListener backlistener;
-	private Array<TextButton> actionButtons;
 	private Char player;
-	private ClickListener actionbuttonlistener;
 	private ChangeListener gobuttonlistener;
 
 	public void setupUi(final CharEditScreen screen, Char player) {
@@ -51,17 +49,22 @@ public class CharEditScreenUI {
 		skin = uibuilder.getSkin();
 		this.screen = screen;
 		this.player = player; 
-//				screen.game.getGameState().getPlayer();
 
 		createListeners();
 		
 		createCenterTable();
 		createLeftTable();
 		createActionBar();
-
-		
+		createActionInv();
 	}
 	
+	private void createActionInv() {
+		Array<Action> list = player.getActionsInventory();
+		ActionBar bar = new ActionBar(list, skin);
+		bar.setPosition(ACTIONINV_X + ACTIONINV_WIDTH/2, ACTIONINV_Y);
+		stage.addActor(bar);
+	}
+
 	private void createActionBar() {
 		ActionBar bar = new ActionBar(player, skin);
 		bar.setPosition(ACTIONBAR_X + ACTIONBAR_WIDTH/2, ACTIONBAR_Y);
@@ -85,16 +88,18 @@ public class CharEditScreenUI {
 		// Create a table that fills the screen. Everything else will go inside this table.
 		Table table = new Table();
 		table.setFillParent(true);
+		table.setX(MENU_X);
+		table.setY(MENU_Y);
 		stage.addActor(table);
 
 		gobutton = new TextButton("OK", skin);
 		gobutton.addListener(gobuttonlistener);
-		table.add(gobutton).width(MAINLABEL_WIDTH).height(MAINLABEL_HEIGHT);
+		table.add(gobutton).width(MENU_WIDTH).height(MENU_HEIGHT);
 		table.row();
 		
 		backbutton = new TextButton("Back to Menu", skin);
 		backbutton.addListener(backlistener);
-		table.add(backbutton).width(300).height(50);
+		table.add(backbutton).width(MENU_WIDTH).height(MENU_HEIGHT);
 		backbutton.setDisabled(true);
 	}
 

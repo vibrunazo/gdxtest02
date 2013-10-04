@@ -12,29 +12,34 @@ import com.gdxtest02.Char;
 import static com.gdxtest02.GdxTest02.log;
 
 public class ActionBar extends Table {
-	private Char player;
 	private Array<TextButton> actionButtons;
 	private ClickListener actionbuttonlistener;
 	private Skin skin;
+	private Array<Action> actionlist;
 
 
 	private static final int ACTIONBUTTON_WIDTH = 160;
 	private static final int ACTIONBUTTON_HEIGHT = 40;
 	
 	public ActionBar(Char player, Skin skin) {
-		this.player = player;
+		this(player.getActionBar(), skin);
+	}
+	
+
+	public ActionBar(Array<Action> list, Skin skin) {
+		actionlist = list;
 		this.skin = skin;
 		createListeners();
 		createButtons();
 	}
-	
+
 
 	/**Creates the buttons of the action bar
 	 * 
 	 */
 	private void createButtons() {
 		actionButtons = new Array<TextButton>();
-		for (Action a : player.getActionBar()) {
+		for (Action a : actionlist) {
 			addActionButton(a);
 			log("adding to table: " + a.getName());
 		}
