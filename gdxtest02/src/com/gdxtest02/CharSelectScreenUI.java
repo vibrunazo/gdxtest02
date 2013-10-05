@@ -226,12 +226,12 @@ public class CharSelectScreenUI {
 				if (gamemode == MODE_STORY) {
 //					p1.levelUp();p1.levelUp();p1.levelUp();
 //					p1.levelUp();p1.levelUp();p1.levelUp();
-					screen.game.getGameState().setPlayer(p1);
+					screen.game.getGameState().setPlayer(getP1());
 					screen.game.setScreen(new LevelSelectScreen(screen.game));
 //					screen.game.setScreen(new Level02(screen.game));
 				}
 				else {
-					screen.game.setScreen(new GameScreen(screen.game, p1, p2, p1control, p2control));
+					screen.game.setScreen(new GameScreen(screen.game, getP1(), getP2(), p1control, p2control));
 				}
 				screen.dispose();
 			}
@@ -295,9 +295,19 @@ public class CharSelectScreenUI {
 	}
 	
 	protected Char getPlayerByName(String name) {
-		if (name.equals("p1")) return p1;
-		if (name.equals("p2")) return p2;
+		if (name.equals("p1")) return getP1();
+		if (name.equals("p2")) return getP2();
 		return null;
+	}
+
+	private Char getP2() {
+		if (gamemode == MODE_STORY) return p2;
+		return p2.getClone();
+	}
+
+	private Char getP1() {
+		if (gamemode == MODE_STORY) return p1;
+		return p1.getClone();
 	}
 
 	/**Gets the character with the coresponding id on the char array
@@ -373,8 +383,8 @@ public class CharSelectScreenUI {
 	 * @return Char p1 or p2
 	 */
 	private Char getPlayer(int player) {
-		if (player == 1) return p1;
-		if (player == 2) return p2;
+		if (player == 1) return getP1();
+		if (player == 2) return getP2();
 		return null;
 	}
 	
