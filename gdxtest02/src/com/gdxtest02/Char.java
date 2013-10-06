@@ -41,11 +41,26 @@ public class Char implements Cloneable {
 	private Balance balance;
 	private Char target;
 	private boolean canoverheal;
+<<<<<<< Updated upstream
+=======
+	
+	private float powerMultiplier;
+	private int level;
+	private int exp;
+	private Array<Integer> aiSkillList;
+	private int round;
+>>>>>>> Stashed changes
 
 	public Char(String name) {
 		this.name = name;
 		description = "This is a Char";
+<<<<<<< Updated upstream
 		actions = new Array<Action>();
+=======
+		aiSkillList = new Array<Integer>();
+		actionBar = new Array<Action>();
+		actionsInventory = new Array<Action>();
+>>>>>>> Stashed changes
 		balance = new Balance(this);
 		this.maxhp = 1000;
 		this.posX = 0;
@@ -347,17 +362,26 @@ public class Char implements Cloneable {
 		this.target = target;
 	}
 	
-	public int getAiSkill(){
-		int Min = 1;
-		int Max = 4;
-		int x = Min + (int)(Math.random() * ((Max - Min) + 1));
-		if (getAction(x) == null || getAction(x).isLegal() != true)
-		{
-			do{
-				x = Min + (int)(Math.random() * ((Max - Min) + 1));
-			} while (getAction(x) == null || getAction(x).isLegal() != true);
+	public int getAiSkill(int round){
+		log(aiSkillList.toString());
+		if (aiSkillList != null && aiSkillList.size >= round){
+			
+			 return aiSkillList.get(round - 1);
+			
+			
 		}
-		return x;
+		else {
+			int Min = 1;
+			int Max = 4;
+			int x = Min + (int)(Math.random() * ((Max - Min) + 1));
+			if (getAction(x) == null || getAction(x).isLegal() != true)
+			{
+				do{
+					x = Min + (int)(Math.random() * ((Max - Min) + 1));
+				} while (getAction(x) == null || getAction(x).isLegal() != true);
+			}
+			return x;
+		}
 	}
 	
 	public Char getClone() {
@@ -381,4 +405,71 @@ public class Char implements Cloneable {
 		return null;
 	}
 
+<<<<<<< Updated upstream
+=======
+	/**
+	 * @return the powerMultiplier
+	 */
+	public float getPowerMultiplier() {
+		return powerMultiplier;
+	}
+
+	/**
+	 * @param powerMultiplier the powerMultiplier to set
+	 */
+	public void setPowerMultiplier(float powerMultiplier) {
+		this.powerMultiplier = powerMultiplier;
+		updateAllActions();
+		updateHp();
+	}
+
+	/**Updates max hp with multiplier
+	 */
+	private void updateHp() {
+		float pct = ((float) hp)/((float) maxhp); // get current heal %
+		maxhp = (int) (basehp * powerMultiplier);
+		hp = (int) Math.ceil(pct*hp); // keep health % the same
+		
+	}
+
+	/**Update power of all actions, remultiply base power by power
+	 * multipliers
+	 * 
+	 */
+	private void updateAllActions() {
+		for (Action a : actionBar) {
+			a.updatePower();
+			a.update(); // updates descriptions
+		}
+	}
+	
+	/**Increases current level by 1 and updates
+	 * everything that needs it
+	 * 
+	 */
+	public void levelUp() {
+		level++;
+		setPowerMultiplier(1f + (level - 1f)*0.1f);
+		log(name + " leveled up, level: " + level + " pmult: " + powerMultiplier);
+	}
+	
+	public String toString() {
+		return getFullDescription();
+		
+	}
+
+	/**
+	 * @return the actionsInventory
+	 */
+	public Array<Action> getActionsInventory() {
+		return actionsInventory;
+	}
+	
+	public void setAiSkillList(Array<Integer> x)
+	{
+		aiSkillList.addAll(x);
+		
+	}
+
+>>>>>>> Stashed changes
 }
