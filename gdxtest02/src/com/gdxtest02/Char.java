@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
+
 import static com.gdxtest02.GdxTest02.log;
 
 public class Char implements Cloneable {
@@ -33,6 +35,7 @@ public class Char implements Cloneable {
 	private int activeAction;
 	private Array<Action> actionBar;
 	private Array<Action> actionsInventory;
+	private ArrayMap<Integer, Action> actionUnlockedPerLevel;
 	private int maxActionBarSize = 4;
 	private Array<Buff> buffs;
 	/**List of buffs to be added this round, 
@@ -53,6 +56,7 @@ public class Char implements Cloneable {
 		description = "This is a Char";
 		actionBar = new Array<Action>();
 		actionsInventory = new Array<Action>();
+		actionUnlockedPerLevel = new ArrayMap<Integer, Action>();
 		balance = new Balance(this);
 		this.maxhp = 1000;
 		this.posX = 0;
@@ -471,9 +475,20 @@ public class Char implements Cloneable {
 	public void levelUp() {
 		level++;
 		setPowerMultiplier(1f + (level - 1f)*0.1f);
+		unlockSkillsForLevel(level);
 		log(name + " leveled up, level: " + level + " pmult: " + powerMultiplier);
 	}
 	
+	private void unlockSkillsForLevel(int level) {
+		if (actionUnlockedPerLevel.containsKey(level)) {
+			Action a = actionUnlockedPerLevel.get(level);
+			if (a != null) {
+				addAction(a);
+				log(this.getName() + " unlocks a new skill: " + a.getName());
+			}
+		}
+	}
+
 	public String toString() {
 		return getFullDescription();
 	}
@@ -500,6 +515,22 @@ public class Char implements Cloneable {
 		Action actionToAdd = actionsInventory.get(id);
 		if (getIdOfAction(actionToAdd) != 0) return;
 		actionBar.add(actionToAdd);
+	}
+	
+	/**adds an action to be unlocked this level
+	 * 
+	 * @param a
+	 */
+	public void addActionForLevel(int level, Action a) {
+		actionUnlockedPerLevel.put(level, a);
+	}
+	
+	/**Gets the action to be unlocked on this level
+	 * @param level
+	 * @return
+	 */
+	public Action getActionForLevel(int level) {
+		return actionUnlockedPerLevel.get(level);
 	}
 
 }
