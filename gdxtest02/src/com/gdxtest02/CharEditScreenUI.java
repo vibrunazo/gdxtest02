@@ -16,19 +16,23 @@ import com.gdxtest02.util.ActionBar;
 public class CharEditScreenUI {
 
 	private static final int MENU_HEIGHT = 50;
-	private static final int MENU_WIDTH = 200;
-	private static final int MENU_X = 250;
+	private static final int MENU_WIDTH = 180;
+	private static final int MENU_X = 300;
 	private static final int MENU_Y = -100;
 
 	private static final int FACETABLE_X = 50;
 	private static final int FACETABLE_Y = 300;
 	private static final int FACETABLE_WIDTH = 150;
 	
+	private static final int SWAPTABLE_X = 250;
+	private static final int SWAPTABLE_Y = 100;
+	private static final int SWAPTABLE_WIDTH = 50;
+	
 	private static final int ACTIONBAR_X = 50;
 	private static final int ACTIONBAR_Y = 100;
 	private static final int ACTIONBAR_WIDTH = 150;
 	
-	private static final int ACTIONINV_X = 300;
+	private static final int ACTIONINV_X = 350;
 	private static final int ACTIONINV_Y = 300;
 	private static final int ACTIONINV_WIDTH = 150;
 	
@@ -42,6 +46,10 @@ public class CharEditScreenUI {
 	private ClickListener backlistener;
 	private Char player;
 	private ChangeListener gobuttonlistener;
+	private ClickListener addlistener;
+	private ClickListener removelistener;
+	private ActionBar invBar;
+	private ActionBar aBar;
 
 	public void setupUi(final CharEditScreen screen, Char player) {
 		uibuilder = new UIBuilder(screen.game);
@@ -56,19 +64,36 @@ public class CharEditScreenUI {
 		createLeftTable();
 		createActionBar();
 		createActionInv();
+		createSwapButtons();
 	}
 	
+	private void createSwapButtons() {
+		Table table = new Table();
+		table.setPosition(SWAPTABLE_X + SWAPTABLE_WIDTH/2, SWAPTABLE_Y);
+		stage.addActor(table);		
+
+		TextButton addbutton = new TextButton("<-", skin);
+		addbutton.setDisabled(true);
+		table.add(addbutton).width(SWAPTABLE_WIDTH).height(SWAPTABLE_WIDTH);
+		addbutton.addListener(addlistener);
+		
+		TextButton removebutton = new TextButton("->", skin);
+		removebutton.setDisabled(true);
+		table.add(removebutton).width(SWAPTABLE_WIDTH).height(SWAPTABLE_WIDTH);
+		removebutton.addListener(removelistener);
+	}
+
 	private void createActionInv() {
 		Array<Action> list = player.getActionsInventory();
-		ActionBar bar = new ActionBar(list, skin);
-		bar.setPosition(ACTIONINV_X + ACTIONINV_WIDTH/2, ACTIONINV_Y);
-		stage.addActor(bar);
+		invBar = new ActionBar(list, skin);
+		invBar.setPosition(ACTIONINV_X + ACTIONINV_WIDTH/2, ACTIONINV_Y);
+		stage.addActor(invBar);
 	}
 
 	private void createActionBar() {
-		ActionBar bar = new ActionBar(player, skin);
-		bar.setPosition(ACTIONBAR_X + ACTIONBAR_WIDTH/2, ACTIONBAR_Y);
-		stage.addActor(bar);
+		aBar = new ActionBar(player, skin);
+		aBar.setPosition(ACTIONBAR_X + ACTIONBAR_WIDTH/2, ACTIONBAR_Y);
+		stage.addActor(aBar);
 	}
 
 	private void createLeftTable() {
@@ -108,13 +133,27 @@ public class CharEditScreenUI {
 		gobuttonlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 //				screen.dispose();
-
 			}
 		};
 		
 		backlistener = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				screen.back();
+			}
+		};
+		
+		addlistener = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				player.addActionFromInv(invBar.getSelected());
+				invBar.update();
+				aBar.update();
+			}
+		};
+		
+		removelistener = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				player.removeActionFromBar(aBar.getSelected());
+				aBar.update();
 			}
 		};
 

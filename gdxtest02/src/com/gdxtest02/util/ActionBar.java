@@ -16,6 +16,7 @@ public class ActionBar extends Table {
 	private ClickListener actionbuttonlistener;
 	private Skin skin;
 	private Array<Action> actionlist;
+	private int selected;
 
 
 	private static final int ACTIONBUTTON_WIDTH = 160;
@@ -39,17 +40,21 @@ public class ActionBar extends Table {
 	 */
 	private void createButtons() {
 		actionButtons = new Array<TextButton>();
-		for (Action a : actionlist) {
-			addActionButton(a);
-			log("adding to table: " + a.getName());
+		int size = actionlist.size;
+		Action a = null;
+		for (int id = 0; id < size; id++) {
+			a = actionlist.get(id);
+			addActionButton(a, id);
+//			log("adding to table: " + a.getName());
 		}
 	}
 	
 	/**Adds one action button
 	 * @param a
 	 */
-	private void addActionButton(Action a) {
+	private void addActionButton(Action a, int id) {
 		TextButton button = new TextButton(a.getName(), skin);
+		button.setName(Integer.toString(id));
 		button.addListener(actionbuttonlistener);
 		actionButtons.add(button);
 		add(button).width(ACTIONBUTTON_WIDTH).height(ACTIONBUTTON_HEIGHT);
@@ -67,7 +72,7 @@ public class ActionBar extends Table {
 		};
 	}
 
-	/**Sets only the actor button as checked on this grop
+	/**Sets only the actor button as checked on this group
 	 * @param group
 	 * @param actor
 	 */
@@ -76,7 +81,35 @@ public class ActionBar extends Table {
 		for (TextButton b : group) {
 			b.setChecked(false);
 		}
-		((TextButton) actor).setChecked(true);
+		TextButton b = ((TextButton) actor);
+		b.setChecked(true);
+		selected = getId(b);
+	}
+	
+	/**Gets an integer of the id from this button,
+	 * which is a string on its name
+	 * @param b
+	 * @return
+	 */
+	private int getId(TextButton b) {
+		return Integer.parseInt(b.getName());
+	}
+
+
+	/**Returns the index of the selection
+	 * @return
+	 */
+	public int getSelected() {
+		return selected;
+	}
+
+
+	/**Updates the buttons of the action bar if the list changed
+	 * 
+	 */
+	public void update() {
+		reset();
+		createButtons();
 	}
 
 }

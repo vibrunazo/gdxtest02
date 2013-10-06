@@ -476,7 +476,6 @@ public class Char implements Cloneable {
 	
 	public String toString() {
 		return getFullDescription();
-		
 	}
 
 	/**
@@ -484,6 +483,23 @@ public class Char implements Cloneable {
 	 */
 	public Array<Action> getActionsInventory() {
 		return actionsInventory;
+	}
+
+	/**Remove the action with this id from the action bar
+	 * @param selected
+	 */
+	public void removeActionFromBar(int id) {
+		actionBar.removeIndex(id);
+	}
+
+	/**Adds this action from the inventory to the action bar
+	 * @param id
+	 */
+	public void addActionFromInv(int id) {
+		if (actionBar.size >= maxActionBarSize) return;
+		Action actionToAdd = actionsInventory.get(id);
+		if (getIdOfAction(actionToAdd) != 0) return;
+		actionBar.add(actionToAdd);
 	}
 
 }
