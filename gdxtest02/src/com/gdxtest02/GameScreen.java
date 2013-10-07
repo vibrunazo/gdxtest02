@@ -172,10 +172,10 @@ public class GameScreen implements Screen {
 		
 		//preparing
 		if (p1control == CONTROL_AI){
-			p1.setActiveActionId(p1.getAiSkill());	
+			p1.setActiveActionId(p1.getAiSkill(round));	
 		}
 		if (p2control == CONTROL_AI){
-			p2.setActiveActionId(p2.getAiSkill());	
+			p2.setActiveActionId(p2.getAiSkill(round));	
 		}
 		
 		int actionidp1 = p1.getActiveActionId();

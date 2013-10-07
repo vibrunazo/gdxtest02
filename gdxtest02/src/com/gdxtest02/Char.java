@@ -2,11 +2,13 @@ package com.gdxtest02;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -50,6 +52,7 @@ public class Char implements Cloneable {
 	private float powerMultiplier;
 	private int level;
 	private int exp;
+	private Array<Integer> aiSkillList;
 
 	public Char(String name) {
 		this.name = name;
@@ -398,17 +401,26 @@ public class Char implements Cloneable {
 		this.target = target;
 	}
 	
-	public int getAiSkill(){
-		int Min = 1;
-		int Max = 4;
-		int x = Min + (int)(Math.random() * ((Max - Min) + 1));
-		if (getAction(x) == null || getAction(x).isLegal() != true)
-		{
-			do{
-				x = Min + (int)(Math.random() * ((Max - Min) + 1));
-			} while (getAction(x) == null || getAction(x).isLegal() != true);
+	public int getAiSkill(int round){
+		log(aiSkillList.toString());
+		if (aiSkillList != null && aiSkillList.size >= round){
+			
+			 return aiSkillList.get(round - 1);
+			
+			
 		}
-		return x;
+		else {
+			int Min = 1;
+			int Max = 4;
+			int x = Min + (int)(Math.random() * ((Max - Min) + 1));
+			if (getAction(x) == null || getAction(x).isLegal() != true)
+			{
+				do{
+					x = Min + (int)(Math.random() * ((Max - Min) + 1));
+				} while (getAction(x) == null || getAction(x).isLegal() != true);
+			}
+			return x;
+		}
 	}
 	
 	public Char getClone() {
@@ -515,6 +527,12 @@ public class Char implements Cloneable {
 		Action actionToAdd = actionsInventory.get(id);
 		if (getIdOfAction(actionToAdd) != 0) return;
 		actionBar.add(actionToAdd);
+	}
+
+	public void setAiSkillList(Array<Integer> x)
+	{
+		aiSkillList.addAll(x);
+		
 	}
 	
 	/**adds an action to be unlocked this level
