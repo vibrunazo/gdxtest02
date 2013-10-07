@@ -60,6 +60,7 @@ public class Char implements Cloneable {
 		actionBar = new Array<Action>();
 		actionsInventory = new Array<Action>();
 		actionUnlockedPerLevel = new ArrayMap<Integer, Action>();
+		aiSkillList = new Array<Integer>();
 		balance = new Balance(this);
 		this.maxhp = 1000;
 		this.posX = 0;
@@ -529,10 +530,8 @@ public class Char implements Cloneable {
 		actionBar.add(actionToAdd);
 	}
 
-	public void setAiSkillList(Array<Integer> x)
-	{
+	public void setAiSkillList(Array<Integer> x) {
 		aiSkillList.addAll(x);
-		
 	}
 	
 	/**adds an action to be unlocked this level
