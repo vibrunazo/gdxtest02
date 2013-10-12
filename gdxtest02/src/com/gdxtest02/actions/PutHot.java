@@ -9,7 +9,7 @@ public class PutHot extends Action {
 	@Override
 	protected void go(Char self, Char target) {
 		Hot buff = new Hot(power, duration);
-		self.addBuff(buff);
+		self.addBuff(buff.setName("Hot"));
 	}
 
 	@Override

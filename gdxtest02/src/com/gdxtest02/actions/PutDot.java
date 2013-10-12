@@ -9,13 +9,14 @@ public class PutDot extends Action {
 	@Override
 	protected void go(Char self, Char target) {
 		Dot buff = new Dot(power, duration);
-		target.addBuff(buff);
+		target.addBuff(buff.setName("Dot"));
 	}
 
 	@Override
 	public void ini() {
 		setName("Put Dot");
 	}
+	
 	public void update() {
 		setDescription("Deals " + getPower() + " damage per sec for " + getDuration() + 
 				"sec.");
