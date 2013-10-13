@@ -32,8 +32,8 @@ import com.gdxtest02.chars.Char01;
 import com.gdxtest02.gamestate.GameState;
 
 public class GdxTest02 extends Game {
-	public int VIRTUAL_WIDTH = 800;
-	public int VIRTUAL_HEIGHT = 480;
+	public static int VIRTUAL_WIDTH = 800;
+	public static int VIRTUAL_HEIGHT = 480;
 	
 	SpriteBatch batch;
 	BitmapFont font;

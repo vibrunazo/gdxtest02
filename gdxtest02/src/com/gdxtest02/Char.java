@@ -53,6 +53,8 @@ public class Char implements Cloneable {
 	private int level;
 	private int exp;
 	private Array<Integer> aiSkillList;
+	
+	private CharAnim charAnim;
 
 	public Char(String name) {
 		this.name = name;
@@ -67,6 +69,7 @@ public class Char implements Cloneable {
 		this.posY = 0;
 		basehp = maxhp;
 		canoverheal = true;
+		charAnim = new CharAnim();
 		
 		level = 1;
 		powerMultiplier = 1;
@@ -97,15 +100,18 @@ public class Char implements Cloneable {
 	}
 	
 	public void draw(SpriteBatch batch){
-		batch.draw(tex, posX, posY);
+//		batch.draw(tex, posX, posY);
+		charAnim.draw(batch, posX, posY);
 	}
 	
 	/**Draw shapes, such as health bars
 	 * @param shapeRenderer
 	 */
 	public void drawShapes(ShapeRenderer shapeRenderer) {
-		int x = posX + 256/2 - 100; // bar start x position
-		int y = posY + 256 + 10; // bar start y position
+//		int x = posX + 256/2 - 100; // bar start x position
+//		int y = posY + 256 + 10; // bar start y position
+		int x = posX - 100; // bar start x position
+		int y = posY + 256 - 20; // bar start y position
 		int width = 200; // bar width
 		int height = 10; // bar height
 		// health normalized between 0 and 1
@@ -550,4 +556,25 @@ public class Char implements Cloneable {
 		return actionUnlockedPerLevel.get(level);
 	}
 
+	/**Sets scale
+	 * @param x
+	 * @param y
+	 */
+	public void setScale(float x, float y) {
+		charAnim.setScale(x, y);
+	}
+	
+	/**Get scale X
+	 * @return
+	 */
+	public float getScaleX() {
+		return charAnim.getScaleX();
+	}
+	
+	/**Get scale Y
+	 * @return
+	 */
+	public float getScaleY() {
+		return charAnim.getScaleY();
+	}
 }

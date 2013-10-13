@@ -74,12 +74,14 @@ public class GameScreen implements Screen {
 
 //		p1 = new Char03("p1");
 		p1 = player1;
-		p1.setPos(50, 150);
+		p1.setPos(50 + 128, 200);
+		p1.setScale(0.8f, 0.8f);
 		p1.resetStats();
 
 //		p2 = new Char02("p2");
 		p2 = player2;
-		p2.setPos(800-50-256, 150);
+		p2.setPos(800-50-256 + 128, 200);
+		p2.setScale(0.8f, -0.8f);
 		p2.resetStats();
 		
 		p1.setTarget(p2);
