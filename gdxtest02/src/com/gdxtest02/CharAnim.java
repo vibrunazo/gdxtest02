@@ -1,6 +1,7 @@
 package com.gdxtest02;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.esotericsoftware.spine.Animation;
@@ -10,10 +11,13 @@ import com.esotericsoftware.spine.SkeletonBinary;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonJson;
 import com.esotericsoftware.spine.SkeletonRenderer;
+import com.esotericsoftware.spine.SlotData;
+
 import static com.gdxtest02.GdxTest02.log;
 import static com.gdxtest02.GdxTest02.VIRTUAL_WIDTH;
 
 public class CharAnim {
+	private AnimData animData;
 	private float delta;
 	private TextureAtlas atlas;
 	private SkeletonBinary sb;
@@ -30,6 +34,8 @@ public class CharAnim {
 	
 	float scalex = 1;
 	float scaley = 1;
+	private Animation blueAnimation;
+	private Animation redAnimation;
 
 	public CharAnim() {
 
@@ -37,6 +43,7 @@ public class CharAnim {
 	}
 
 	private void ini() {
+		animData = new AnimData();
 		// "data/spine/spineboy.atlas"
 		// "data/spine/spineboy.skel"
 
@@ -58,10 +65,20 @@ public class CharAnim {
 		//			walkAnimation = sd.findAnimation("walk");
 		walkAnimation = sd.findAnimation("stand01");
 		winkAnimation = sd.findAnimation("wink");
+		blueAnimation = sd.findAnimation("blue");
+		redAnimation = sd.findAnimation("red");
 		animationTime = 0;
 		winkTime = 0;
 		renderer = new SkeletonRenderer();
-
+		SlotData s = sd.findSlot("ballbase01");
+//		s.setAdditiveBlending(true);
+		Color c = s.getColor();
+//		s.setAttachmentName(null);
+//		log("c: " + c);
+//		c.r = 0;
+//		c.g = 1;
+//		c.b = 1;
+		log("c: " + c);
 		root = skeleton.getRootBone();
 		root.setX(120);
 		root.setY(20);
@@ -79,6 +96,10 @@ public class CharAnim {
 		if (winkTime > 1.5) {
 			log("A winkTime: " + winkTime + " last: " + lastWinkTime + " delta: " + delta);
 			winkTime = 0;
+			
+			SlotData s = sd.findSlot("ballbase01");
+			Color c = s.getColor();
+			log("c: " + c);
 		}
 		lastWinkTime = winkTime;
 		winkTime += delta;
@@ -92,6 +113,10 @@ public class CharAnim {
 		//		walkAnimation.apply(skeleton, animationTime, true); // true is for loop
 		walkAnimation.apply(skeleton, lastTime, animationTime, true, null);
 		winkAnimation.apply(skeleton, lastWinkTime*10, winkTime*10, false, null);
+//		redAnimation.apply(skeleton, 0, 0, false, null);
+//		blueAnimation.apply(skeleton, 0, 0, false, null);
+//		blueAnimation.mix(skeleton, 0, 0, false, null, 0);
+		
 		//		winkAnimation.apply(skeleton, lastTime*10, animationTime*10, true, null);
 		winkAnimation.getDuration();
 		skeleton.updateWorldTransform();
@@ -100,7 +125,9 @@ public class CharAnim {
 
 		//        sprite.setPosition(-40, -40);
 		//        sprite.setScale(10);
+		batch.setColor(Color.BLUE);
 		renderer.draw(batch, skeleton);
+		batch.setColor(Color.BLUE);
 	}
 
 	public void setScale(float x, float y) {
@@ -117,4 +144,19 @@ public class CharAnim {
 	public float getScaleY() {
 		return scaley;
 	}
+	
+	public void setColor(String color) {
+		animData.setBaseColor(color);
+		applyColor();
+	}
+
+	private void applyColor() {
+		if (animData.getBaseColor().equals("red")) {
+			redAnimation.apply(skeleton, 0, 0, false, null);
+		}
+		if (animData.getBaseColor().equals("blue")) {
+			blueAnimation.apply(skeleton, 0, 0, false, null);
+		}
+	}
 }
+

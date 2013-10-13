@@ -24,6 +24,7 @@ public class Char08 extends Char {
 		addActionForLevel(4, new Heal(300*ratio, 3).setName("f"));
 		
 		setTex("ball02yell.png");
+		setColor("blue");
 
 	}
 

@@ -577,4 +577,8 @@ public class Char implements Cloneable {
 	public float getScaleY() {
 		return charAnim.getScaleY();
 	}
+	
+	public void setColor(String color) {
+		charAnim.setColor(color);
+	}
 }
