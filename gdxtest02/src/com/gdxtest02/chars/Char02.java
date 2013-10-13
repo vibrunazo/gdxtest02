@@ -22,6 +22,9 @@ public class Char02 extends Char {
 //		actions.add(new PutHot(100, 5, 5).setName("Rejuv"));
 
 		setTex("ball02yell.png");
+		
+		setColor(1, 1f, 0.4f, 1);
+		
 		Array<Integer> skillList = new Array<Integer>();
 		skillList.add(3);
 		skillList.add(3);

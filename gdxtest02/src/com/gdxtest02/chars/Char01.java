@@ -14,6 +14,8 @@ public class Char01 extends Char {
 		addAction(new Drain(240, 4).setName("Death Coil"));
 		
 		setTex("ball02red.png");
+		
+		setColor(0.2f, 0.2f, 0.8f, 1);
 
 	}
 

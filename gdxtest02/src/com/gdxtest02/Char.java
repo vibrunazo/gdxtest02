@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -578,7 +579,12 @@ public class Char implements Cloneable {
 		return charAnim.getScaleY();
 	}
 	
-	public void setColor(String color) {
+	public void setColor(Color color) {
 		charAnim.setColor(color);
+	}
+	
+	public void setColor(float r, float g, float b, float alpha) {
+		Color color = new Color(r, g, b, alpha);
+		setColor(color);
 	}
 }

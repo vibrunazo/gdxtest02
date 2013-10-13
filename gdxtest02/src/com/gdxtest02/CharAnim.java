@@ -11,6 +11,7 @@ import com.esotericsoftware.spine.SkeletonBinary;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonJson;
 import com.esotericsoftware.spine.SkeletonRenderer;
+import com.esotericsoftware.spine.Slot;
 import com.esotericsoftware.spine.SlotData;
 
 import static com.gdxtest02.GdxTest02.log;
@@ -36,6 +37,8 @@ public class CharAnim {
 	float scaley = 1;
 	private Animation blueAnimation;
 	private Animation redAnimation;
+	private Color color;
+	private Slot base;
 
 	public CharAnim() {
 
@@ -70,15 +73,19 @@ public class CharAnim {
 		animationTime = 0;
 		winkTime = 0;
 		renderer = new SkeletonRenderer();
-		SlotData s = sd.findSlot("ballbase01");
+		base = skeleton.findSlot("ballbase01");
 //		s.setAdditiveBlending(true);
-		Color c = s.getColor();
+//		slot = skeleton.findSlot("ballbase01");
+//		color = slot.getColor();
+//		color.set(1, 0, 0, 1);
+		color = base.getColor();
+//		color.set(1, 1, 0, 1);
 //		s.setAttachmentName(null);
-//		log("c: " + c);
+		log("after c: " + color);
 //		c.r = 0;
 //		c.g = 1;
 //		c.b = 1;
-		log("c: " + c);
+		log("c: " + color);
 		root = skeleton.getRootBone();
 		root.setX(120);
 		root.setY(20);
@@ -145,9 +152,11 @@ public class CharAnim {
 		return scaley;
 	}
 	
-	public void setColor(String color) {
-		animData.setBaseColor(color);
-		applyColor();
+	public void setColor(Color color) {
+//		animData.setBaseColor(color);
+		this.color = base.getColor();
+		this.color.set(color);
+//		applyColor();
 	}
 
 	private void applyColor() {

@@ -14,8 +14,8 @@ public class Char08 extends Char {
 //		float ratio = 0.6666667f;
 		float ratio = 1f;
 		addAction(new Dmg(100*ratio).setName("a"));
-		addAction(new Dmg(200*ratio, 2).setName("b"));
-		addAction(new PutDot(20*ratio, 4, 10).setName("c"));
+		addAction(new Dmg(220*ratio, 2).setName("b"));
+		addAction(new PutDot(50*ratio, 4, 10).setName("c"));
 //		addAction(new Drain(60*ratio, 1).setName("d"));
 //		addAction(new Dmg(120*ratio, 1).setName("e"));
 //		addAction(new Heal(300*ratio, 3).setName("f"));
@@ -24,7 +24,7 @@ public class Char08 extends Char {
 		addActionForLevel(4, new Heal(300*ratio, 3).setName("f"));
 		
 		setTex("ball02yell.png");
-		setColor("blue");
+		setColor(0, 0, 1, 1);
 
 	}
 

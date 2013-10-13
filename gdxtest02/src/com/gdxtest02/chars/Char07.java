@@ -17,7 +17,8 @@ public class Char07 extends Char {
 		addAction(new PutHot(500, 3, 2).setName("Just a Flesh Wound"));
 		
 		setTex("ball02red.png");
-
+		
+		setColor(0.15f, 0.15f, 0.15f, 1);
 	}
 
 }

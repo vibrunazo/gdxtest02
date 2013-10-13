@@ -21,6 +21,8 @@ public class Char06 extends Char {
 //		addAction(new Drain(100, 1).setName("test3"));
 		
 		setTex("ball02red.png");
+		
+		setColor(0.6f, 0.9f, 0.1f, 1);
 
 	}
 

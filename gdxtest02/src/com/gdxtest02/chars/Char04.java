@@ -19,6 +19,8 @@ public class Char04 extends Char {
 //		actions.add(new Dmg(400, 3).setName("hihihi"));
 		
 		setTex("ball02yell.png");
+		
+		setColor(1, 0.7f, 0.1f, 1);
 
 	}
 
