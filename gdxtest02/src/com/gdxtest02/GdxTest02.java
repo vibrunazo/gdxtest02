@@ -35,8 +35,8 @@ public class GdxTest02 extends Game {
 	public static int VIRTUAL_WIDTH = 800;
 	public static int VIRTUAL_HEIGHT = 480;
 	
-	SpriteBatch batch;
-	BitmapFont font;
+	public SpriteBatch batch;
+	public BitmapFont font;
 	private GameState gamestate;
 	private static GdxTest02 game;
 

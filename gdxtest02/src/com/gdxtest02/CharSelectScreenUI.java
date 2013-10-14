@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -25,6 +26,7 @@ import com.gdxtest02.chars.Char06;
 import com.gdxtest02.chars.Char07;
 import com.gdxtest02.gamestate.GameState;
 import com.gdxtest02.levels.Level02;
+import com.gdxtest02.util.CharActor;
 
 import static com.gdxtest02.CharBuilder.*;
 import static com.gdxtest02.gamestate.GameState.*;
@@ -72,6 +74,8 @@ public class CharSelectScreenUI {
 	private GameState gstate;
 	private Array<Char> charlist;
 	private ClickListener editlistener;
+	private CharActor charactorp1;
+	private CharActor charactorp2;
 
 	void setupUi(final CharSelectScreen screen) {
 		uibuilder = new UIBuilder(screen.game);
@@ -86,6 +90,8 @@ public class CharSelectScreenUI {
 		charlist = gstate.getChars();
 		
 		gamemode = gstate.getGameMode();
+		p1 = new Char07("p1");
+		p2 = new Char05("p2");
 		
 		createListeners();
 		
@@ -95,8 +101,7 @@ public class CharSelectScreenUI {
 		createLeftTable();
 		if (gamemode != MODE_STORY) createRightTable();
 		
-		p1 = new Char07("p1");
-		p2 = new Char05("p2");
+		
 		
 		setControl("p1", CONTROL_HUMAN);
 		setControl("p2", CONTROL_AI);
@@ -125,8 +130,13 @@ public class CharSelectScreenUI {
 		
 		p1button = new TextButton("p1", skin);
 		p1button.setDisabled(true);
-		lefttable.add(p1button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
-
+		lefttable.add(p1button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH*1.2f);
+		
+		charactorp1 = new CharActor(p1); 
+		p1button.add(charactorp1).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
+//		Image image = new Image(p1.getTex());
+//		p1button.add(image);
+		
 		if (gamemode != MODE_STORY) {
 			p1aibutton = new TextButton("AI", skin); 
 			p1aibutton.setName("p1");
@@ -151,6 +161,11 @@ public class CharSelectScreenUI {
 		p2button = new TextButton("p2", skin);
 		p2button.setDisabled(true);
 		righttable.add(p2button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
+		
+		charactorp2 = new CharActor(p2); 
+		p2button.add(charactorp2).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
+		charactorp2.flipX(true);
+		
 		p2aibutton = new TextButton("AI", skin); 
 		p2aibutton.setName("p2");
 		p2aibutton.addListener(ailistener);
@@ -286,6 +301,7 @@ public class CharSelectScreenUI {
 				setCurrentPlayer(c);
 				TextButton a = (TextButton) getCurrentFace();
 				a.setText(name);
+				getCurrentCharFace().setChar(c);
 				toggleTurn();
 				
 				log("click char " + name + " : " + c.getFullDescription());
@@ -409,6 +425,11 @@ public class CharSelectScreenUI {
 	private Actor getCurrentFace() {
 		if (turn == 1 || gamemode == MODE_STORY) return p1button;
 		else return p2button;
+	}
+	
+	private CharActor getCurrentCharFace() {
+		if (turn == 1 || gamemode == MODE_STORY) return charactorp1;
+		else return charactorp2;
 	}
 	
 	/**Toggles between 1 and 2 for who is the current player to choose

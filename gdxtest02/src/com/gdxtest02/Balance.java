@@ -67,6 +67,8 @@ public class Balance {
 	 * 1000 dmg in 15 rounds, heal 500 in 15 rounds
 	 */
 	public void testModel3() {
+		testDmgModelA(15, 1500, 0);
+		
 		testDmgAndHeal(15, 1000f, 500f);
 		
 	}

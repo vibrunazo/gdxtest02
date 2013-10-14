@@ -17,6 +17,8 @@ public class LevelScreen implements Screen {
 	private Array<Char> charSequence;
 	private String level_name;
 
+	private Char p1;
+
 	public LevelScreen(GdxTest02 game) {
 		this.game = game;
 		charSequence = new Array<Char>();
@@ -24,6 +26,7 @@ public class LevelScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
 		ui = new LevelScreenUI();
+		p1 = p1 = game.getGameState().getPlayer();
 //		ui.setupUi(this);
 
 	}
@@ -32,9 +35,17 @@ public class LevelScreen implements Screen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-
-		camera.update();
+		
 		ui.draw();
+		
+		game.batch.setProjectionMatrix(camera.combined);
+
+		game.batch.begin();
+		camera.update();
+		p1.draw(game.batch);
+		game.batch.end();
+		
+		
 	}
 
 

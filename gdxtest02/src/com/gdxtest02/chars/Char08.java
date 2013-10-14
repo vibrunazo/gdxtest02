@@ -13,7 +13,7 @@ public class Char08 extends Char {
 		
 //		float ratio = 0.6666667f;
 		float ratio = 1f;
-		addAction(new Dmg(100*ratio).setName("a"));
+		addAction(new Dmg(150*ratio).setName("a"));
 		addAction(new Dmg(220*ratio, 2).setName("b"));
 		addAction(new PutDot(50*ratio, 4, 10).setName("c"));
 //		addAction(new Drain(60*ratio, 1).setName("d"));

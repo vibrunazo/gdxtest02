@@ -42,13 +42,13 @@ public class CharAnim {
 	private Animation redAnimation;
 	private Array<Slot> slotsToChangeColor;
 
-	public CharAnim() {
+	public CharAnim(AnimData data) {
 
-		ini();
+		ini(data);
 	}
 
-	private void ini() {
-		animData = new AnimData();
+	private void ini(AnimData data) {
+		animData = data;
 		slotsToChangeColor = new Array<Slot>();
 		// "data/spine/spineboy.atlas"
 		// "data/spine/spineboy.skel"
@@ -99,6 +99,8 @@ public class CharAnim {
 //		c.b = 1;
 //		log("c: " + color);
 		root = skeleton.getRootBone();
+		
+		applyColor();
 
 		skeleton.updateWorldTransform();
 		
@@ -119,6 +121,9 @@ public class CharAnim {
 		slotsToChangeColor.add(skeleton.findSlot("hand_R"));
 	}
 
+	public void draw(SpriteBatch batch, float x, float y) {
+		draw(batch, (int) x, (int) y);
+	}
 	public void draw(SpriteBatch batch, int posX, int posY) {
 		if (skeleton.getFlipX()) posX *= -1;
 		if (skeleton.getFlipY()) posY *= -1;
@@ -182,10 +187,16 @@ public class CharAnim {
 
 	private void applyColor() {
 		Color color = animData.getBaseColor();
+		if (color == null) return;
 		for (Slot slot : slotsToChangeColor) {
 			Color c = slot.getColor();
 			c.set(color);
 		}
+	}
+	
+	public void setData(AnimData data) {
+		animData = data;
+		applyColor();
 	}
 
 	public void flipY(boolean flip) {
@@ -195,5 +206,10 @@ public class CharAnim {
 	public void flipX(boolean flip) {
 		skeleton.setFlipX(flip);
 	}
+	
+	public boolean getFlipX() {
+		return skeleton.getFlipX();
+	}
+
 }
 

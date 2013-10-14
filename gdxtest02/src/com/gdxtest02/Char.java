@@ -56,6 +56,7 @@ public class Char implements Cloneable {
 	private Array<Integer> aiSkillList;
 	
 	private CharAnim charAnim;
+	private AnimData animData;
 
 	public Char(String name) {
 		this.name = name;
@@ -70,7 +71,8 @@ public class Char implements Cloneable {
 		this.posY = 0;
 		basehp = maxhp;
 		canoverheal = true;
-		charAnim = new CharAnim();
+		animData = new AnimData();
+		charAnim = new CharAnim(animData);
 		
 		level = 1;
 		powerMultiplier = 1;
@@ -103,6 +105,10 @@ public class Char implements Cloneable {
 	public void draw(SpriteBatch batch){
 //		batch.draw(tex, posX, posY);
 		charAnim.draw(batch, posX, posY);
+	}
+	
+	public void draw(SpriteBatch batch, float x, float y) {
+		charAnim.draw(batch, (int)x, (int)y);
 	}
 	
 	/**Draw shapes, such as health bars
@@ -588,6 +594,10 @@ public class Char implements Cloneable {
 		setColor(color);
 	}
 
+	public boolean getFlipX() {
+		return charAnim.getFlipX();
+	}
+	
 	public void flipX(boolean flip) {
 		charAnim.flipX(flip);
 	}
@@ -595,4 +605,13 @@ public class Char implements Cloneable {
 	public void flipY(boolean flip) {
 		charAnim.flipY(flip);
 	}
+
+	public void setPos(float x, float y) {
+		setPos((int)x, (int)y);
+	}
+
+	public AnimData getAnimData() {
+		return animData;
+	}
+
 }

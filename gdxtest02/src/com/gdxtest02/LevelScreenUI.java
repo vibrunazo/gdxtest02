@@ -1,6 +1,7 @@
 package com.gdxtest02;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -25,8 +26,11 @@ public class LevelScreenUI {
 	private static final int CHARBUTTON_WIDTH = 50;
 	
 	private static final float FACETABLE_X = 50;
-	private static final  float FACETABLE_Y = 300;
+	private static final  float FACETABLE_Y = 200;
+	private static final  float FACETABLE_CHARY = 220;
+	private static final  float FACETABLE_CHARSIZE = 0.4f;
 	private static final  float FACETABLE_WIDTH = 150;
+	private static final  float FACETABLE_HEIGHT = 40;
 
 	UIBuilder uibuilder;
 	private TextButton gobutton;
@@ -58,12 +62,14 @@ public class LevelScreenUI {
 		lefttable.setPosition(FACETABLE_X + FACETABLE_WIDTH/2, FACETABLE_Y);
 		stage.addActor(lefttable);		
 
-		Char c = screen.game.getGameState().getPlayer();
-		p1button = new TextButton(c.getName(), skin);
-		Image image = new Image(c.getTex());
-		p1button.add(image);
+		Char p1 = screen.game.getGameState().getPlayer();
+		p1.setPos(FACETABLE_X + FACETABLE_WIDTH/2, FACETABLE_CHARY);
+		p1.setScale(FACETABLE_CHARSIZE, FACETABLE_CHARSIZE);
+		p1button = new TextButton(p1.getName(), skin);
+//		Image image = new Image(p1.getTex());
+//		p1button.add(image);
 		p1button.setDisabled(true);
-		lefttable.add(p1button).width(FACETABLE_WIDTH).height((float) (FACETABLE_WIDTH*1.2));
+		lefttable.add(p1button).width(FACETABLE_WIDTH).height((float) (FACETABLE_HEIGHT));
 	}
 	
 	private void createCharTable() {
@@ -171,6 +177,7 @@ public class LevelScreenUI {
 
 	public void draw() {
 		uibuilder.draw();
+		
 	}
 
 	public void resize(int width, int height) {
