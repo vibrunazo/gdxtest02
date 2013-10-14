@@ -1,7 +1,9 @@
 package com.gdxtest02;
 
+import com.badlogic.gdx.graphics.Color;
+
 public class AnimData {
-	String baseColor;
+	Color baseColor;
 	
 	public AnimData() {
 		
@@ -10,14 +12,14 @@ public class AnimData {
 	/**
 	 * @return the baseColor
 	 */
-	public String getBaseColor() {
+	public Color getBaseColor() {
 		return baseColor;
 	}
 
 	/**
 	 * @param baseColor the baseColor to set
 	 */
-	public void setBaseColor(String baseColor) {
+	public void setBaseColor(Color baseColor) {
 		this.baseColor = baseColor;
 	}
 

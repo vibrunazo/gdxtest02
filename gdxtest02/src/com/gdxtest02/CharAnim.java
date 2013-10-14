@@ -160,22 +160,15 @@ public class CharAnim {
 	}
 	
 	public void setColor(Color color) {
-//		animData.setBaseColor(color);
-//		this.color = base.getColor();
-//		this.color.set(color);
-//		applyColor();
-		for (Slot slot : slotsToChangeColor) {
-			Color c = slot.getColor();
-			c.set(color);
-		}
+		animData.setBaseColor(color);
+		applyColor();
 	}
 
 	private void applyColor() {
-		if (animData.getBaseColor().equals("red")) {
-			redAnimation.apply(skeleton, 0, 0, false, null);
-		}
-		if (animData.getBaseColor().equals("blue")) {
-			blueAnimation.apply(skeleton, 0, 0, false, null);
+		Color color = animData.getBaseColor();
+		for (Slot slot : slotsToChangeColor) {
+			Color c = slot.getColor();
+			c.set(color);
 		}
 	}
 }
