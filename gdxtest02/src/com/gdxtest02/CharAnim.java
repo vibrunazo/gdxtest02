@@ -12,8 +12,10 @@ import com.esotericsoftware.spine.SkeletonBinary;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonJson;
 import com.esotericsoftware.spine.SkeletonRenderer;
+import com.esotericsoftware.spine.Skin;
 import com.esotericsoftware.spine.Slot;
 import com.esotericsoftware.spine.SlotData;
+import com.esotericsoftware.spine.attachments.Attachment;
 
 import static com.gdxtest02.GdxTest02.log;
 import static com.gdxtest02.GdxTest02.VIRTUAL_WIDTH;
@@ -54,35 +56,38 @@ public class CharAnim {
 		// "data/spine/ball/skeleton.atlas"
 		// "data/spine/ball/skeleton.skel"
 		String atlasfile =  "data/spine/ball/skeleton.atlas";
-//		String skfile = "data/spine/ball/skeleton.skel";
+		String skfile = "data/spine/ball/skeleton.skel";
 		String jsonfile = "data/spine/ball/skeleton.json";
 
 		atlas = new TextureAtlas(Gdx.files.internal(atlasfile));
 		sb = new SkeletonBinary(atlas);
-		//			sd = sb.readSkeletonData(Gdx.files
-		//	                .internal(skfile));
+//		sd = sb.readSkeletonData(Gdx.files
+//				.internal(skfile));
 		SkeletonJson json = new SkeletonJson(atlas);
-		sd = json.readSkeletonData(Gdx.files.internal(jsonfile)); //.readSkeletonData("mySkeleton.json");
+		sd = json.readSkeletonData(Gdx.files.internal(jsonfile));
 
 		skeleton = new Skeleton(sd);
+//		skeleton.setFlipX(true);
 		skeleton.setSkin("eyes01");
+		skeleton.setSlotsToSetupPose();
 		//			walkAnimation = sd.findAnimation("walk");
 		walkAnimation = sd.findAnimation("stand01");
 		winkAnimation = sd.findAnimation("wink");
-		blueAnimation = sd.findAnimation("blue");
-		redAnimation = sd.findAnimation("red");
+//		blueAnimation = sd.findAnimation("blue");
+//		redAnimation = sd.findAnimation("red");
 		animationTime = 0;
 		winkTime = 0;
 		renderer = new SkeletonRenderer();
 //		Slot base = skeleton.findSlot("ballbase01");
 		
-		slotsToChangeColor.add(skeleton.findSlot("ballbase01"));
-		slotsToChangeColor.add(skeleton.findSlot("leyelid_L"));
-		slotsToChangeColor.add(skeleton.findSlot("ueyelid_L"));
-		slotsToChangeColor.add(skeleton.findSlot("leyelid_R"));
-		slotsToChangeColor.add(skeleton.findSlot("ueyelid_R"));
+		setBaseColorSlots();
 //		s.setAdditiveBlending(true);
-//		slot = skeleton.findSlot("ballbase01");
+		Slot slot = skeleton.findSlot("arm_R");
+		Slot base = skeleton.findSlot("ballbase01");
+		Attachment att = base.getAttachment();
+//		slot.setAttachment(att);
+		Skin skin = skeleton.getSkin();
+		log("slot: " + slot + " att: " + att + " skin: " + skin);
 //		color = slot.getColor();
 //		color.set(1, 0, 0, 1);
 //		color = base.getColor();
@@ -94,15 +99,29 @@ public class CharAnim {
 //		c.b = 1;
 //		log("c: " + color);
 		root = skeleton.getRootBone();
-		root.setX(120);
-		root.setY(20);
 
 		skeleton.updateWorldTransform();
 		
 		log("ini");
 	}
 
+	private void setBaseColorSlots() {
+		slotsToChangeColor.add(skeleton.findSlot("ballbase01"));
+		slotsToChangeColor.add(skeleton.findSlot("leyelid_L"));
+		slotsToChangeColor.add(skeleton.findSlot("ueyelid_L"));
+		slotsToChangeColor.add(skeleton.findSlot("leyelid_R"));
+		slotsToChangeColor.add(skeleton.findSlot("ueyelid_R"));
+		slotsToChangeColor.add(skeleton.findSlot("arm_L"));
+		slotsToChangeColor.add(skeleton.findSlot("forearm_L"));
+		slotsToChangeColor.add(skeleton.findSlot("hand_L"));
+		slotsToChangeColor.add(skeleton.findSlot("arm_R"));
+		slotsToChangeColor.add(skeleton.findSlot("forearm_R"));
+		slotsToChangeColor.add(skeleton.findSlot("hand_R"));
+	}
+
 	public void draw(SpriteBatch batch, int posX, int posY) {
+		if (skeleton.getFlipX()) posX *= -1;
+		if (skeleton.getFlipY()) posY *= -1;
 		delta = Gdx.graphics.getDeltaTime();
 		lastTime = animationTime;
 		animationTime += delta;
@@ -132,16 +151,13 @@ public class CharAnim {
 //		blueAnimation.mix(skeleton, 0, 0, false, null, 0);
 		
 		//		winkAnimation.apply(skeleton, lastTime*10, animationTime*10, true, null);
-		winkAnimation.getDuration();
 		skeleton.updateWorldTransform();
 		skeleton.update(delta);
 		//		renderSkeleton(skeleton);
 
 		//        sprite.setPosition(-40, -40);
 		//        sprite.setScale(10);
-		batch.setColor(Color.BLUE);
 		renderer.draw(batch, skeleton);
-		batch.setColor(Color.BLUE);
 	}
 
 	public void setScale(float x, float y) {
@@ -170,6 +186,14 @@ public class CharAnim {
 			Color c = slot.getColor();
 			c.set(color);
 		}
+	}
+
+	public void flipY(boolean flip) {
+		skeleton.setFlipY(flip);
+	}
+
+	public void flipX(boolean flip) {
+		skeleton.setFlipX(flip);
 	}
 }
 

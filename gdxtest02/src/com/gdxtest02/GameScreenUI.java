@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
+import com.esotericsoftware.tablelayout.Value;
 
 /**class that specifically defines the ui for the Game Screen
  * 
@@ -21,6 +22,8 @@ import com.badlogic.gdx.utils.IntMap;
  */
 public class GameScreenUI extends UIBuilder {
 	
+	private static final int CENTERBUTTON_WIDTH = 140;
+	private static final int CENTERBUTTON_HEIGHT = 40;
 	private GameScreen screen;
 	private Char p1;
 	private Char p2;
@@ -106,11 +109,11 @@ public class GameScreenUI extends UIBuilder {
 		gobutton.setDisabled(true);
 		final TextButton restartbutton = new TextButton("Restart", skin);
 		final TextButton backbutton = new TextButton("Back", skin);
-		centerTable.add(gobutton).width(160).height(40);
+		centerTable.add(gobutton).width(CENTERBUTTON_WIDTH).height(CENTERBUTTON_HEIGHT);
 		centerTable.row();
-		centerTable.add(restartbutton).width(160).height(40);
+		centerTable.add(restartbutton).width(CENTERBUTTON_WIDTH).height(CENTERBUTTON_HEIGHT);
 		centerTable.row();
-		centerTable.add(backbutton).width(160).height(40);
+		centerTable.add(backbutton).width(CENTERBUTTON_WIDTH).height(CENTERBUTTON_HEIGHT);
 
 		gobutton.addListener(clickOnGoButton);
 		restartbutton.addListener(clickOnRestartButton);

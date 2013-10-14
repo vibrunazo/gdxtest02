@@ -587,4 +587,12 @@ public class Char implements Cloneable {
 		Color color = new Color(r, g, b, alpha);
 		setColor(color);
 	}
+
+	public void flipX(boolean flip) {
+		charAnim.flipX(flip);
+	}
+	
+	public void flipY(boolean flip) {
+		charAnim.flipY(flip);
+	}
 }
