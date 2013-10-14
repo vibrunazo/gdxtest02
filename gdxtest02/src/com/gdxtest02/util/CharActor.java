@@ -2,6 +2,7 @@ package com.gdxtest02.util;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.gdxtest02.AnimData;
@@ -20,7 +21,7 @@ public class CharActor extends Image {
 	public CharActor(Char player) {
 		this.player = player;
 		charAnim = new CharAnim(player.getAnimData());
-		
+		setTouchable(Touchable.disabled);
 	}
 	
 	public void draw(SpriteBatch batch, float parentAlpha) {

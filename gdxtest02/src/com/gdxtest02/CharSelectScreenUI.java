@@ -27,6 +27,7 @@ import com.gdxtest02.chars.Char07;
 import com.gdxtest02.gamestate.GameState;
 import com.gdxtest02.levels.Level02;
 import com.gdxtest02.util.CharActor;
+import com.gdxtest02.util.LinkedListener;
 
 import static com.gdxtest02.CharBuilder.*;
 import static com.gdxtest02.gamestate.GameState.*;
@@ -195,18 +196,20 @@ public class CharSelectScreenUI {
 				chartable.row();
 				i = 1;
 			}
-			addCharButton(c.getName(), n);
+			addCharButton(c, n);
 			i++;n++;
 		}
 		
 	}
 
-	private void addCharButton(String name, int id) {
-		TextButton cbutton = new TextButton(name, skin);
+	private void addCharButton(Char c, int id) {
+		TextButton cbutton = new TextButton(c.getName(), skin);
 		chartable.add(cbutton).width(CHARBUTTON_WIDTH).height(CHARBUTTON_WIDTH);
 		cbutton.setName(""+id);
-		cbutton.addListener(charlistener);
+		cbutton.addListener(getCharListener().setOwner(cbutton));
 		cbutton.setDisabled(true);
+		CharActor charactor = new CharActor(c); 
+		cbutton.add(charactor).width(CHARBUTTON_WIDTH*.8f).height(CHARBUTTON_WIDTH*.8f);
 	}
 
 	private void createMenuTable() {
@@ -296,6 +299,7 @@ public class CharSelectScreenUI {
 			public void clicked(InputEvent event, float x, float y)  {
 				String name = event.getTarget().getParent().getName();
 //				Char c = unlockedchars.get(name);
+				log("clicked on: " + event.getTarget());
 				Char c = getCharFromId(name);
 				
 				setCurrentPlayer(c);
@@ -308,6 +312,30 @@ public class CharSelectScreenUI {
 				
 			}
 		};
+	}
+	
+	public LinkedListener getCharListener() {
+		LinkedListener linkedlistener = new LinkedListener() {
+			
+			
+			public void clicked(InputEvent event, float x, float y)  {
+//				String name = event.getTarget().getParent().getName();
+				String name = owner.getName();
+//				Char c = unlockedchars.get(name);
+				log("clicked on: " + event.getTarget());
+				Char c = getCharFromId(name);
+				
+				setCurrentPlayer(c);
+				TextButton a = (TextButton) getCurrentFace();
+				a.setText(name);
+				getCurrentCharFace().setChar(c);
+				toggleTurn();
+				
+				log("click char " + name + " : " + c.getFullDescription());
+				
+			}
+		};
+		return linkedlistener;
 	}
 	
 	protected Char getPlayerByName(String name) {
