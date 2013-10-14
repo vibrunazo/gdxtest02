@@ -22,7 +22,7 @@ public class Char06 extends Char {
 		
 		setTex("ball02red.png");
 		
-		setColor(0.6f, 0.9f, 0.1f, 1);
+		setColor(0.8f, 0f, 1f, 1);
 
 	}
 

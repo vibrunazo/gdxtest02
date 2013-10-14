@@ -91,8 +91,8 @@ public class CharSelectScreenUI {
 		charlist = gstate.getChars();
 		
 		gamemode = gstate.getGameMode();
-		p1 = new Char07("p1");
-		p2 = new Char05("p2");
+		p1 = charlist.get(0);
+		p2 = charlist.get(1);
 		
 		createListeners();
 		
@@ -294,29 +294,10 @@ public class CharSelectScreenUI {
 				screen.dispose();
 			}
 		};
-		
-		charlistener = new ClickListener() {
-			public void clicked(InputEvent event, float x, float y)  {
-				String name = event.getTarget().getParent().getName();
-//				Char c = unlockedchars.get(name);
-				log("clicked on: " + event.getTarget());
-				Char c = getCharFromId(name);
-				
-				setCurrentPlayer(c);
-				TextButton a = (TextButton) getCurrentFace();
-				a.setText(name);
-				getCurrentCharFace().setChar(c);
-				toggleTurn();
-				
-				log("click char " + name + " : " + c.getFullDescription());
-				
-			}
-		};
 	}
 	
 	public LinkedListener getCharListener() {
 		LinkedListener linkedlistener = new LinkedListener() {
-			
 			
 			public void clicked(InputEvent event, float x, float y)  {
 //				String name = event.getTarget().getParent().getName();

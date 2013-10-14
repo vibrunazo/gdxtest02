@@ -71,10 +71,11 @@ public class CharBuilder {
 	public static Array<Char> buildListOfChars() {
 		Array<Char> chars = new Array<Char>();
 //		chars.add(build(CHAR_01));
-		chars.add(build(CHAR_02));
-		chars.add(build(CHAR_03));
-		chars.add(build(CHAR_04));
-		chars.add(build(CHAR_08));
+		chars.add(build(CHAR_02, 3));
+		chars.add(build(CHAR_03, 3));
+		chars.add(build(CHAR_04, 3));
+		chars.add(build(CHAR_06, 4));
+		chars.add(build(CHAR_08, 3));
 		return chars;
 	}
 }

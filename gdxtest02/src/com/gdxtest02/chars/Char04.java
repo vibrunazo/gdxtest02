@@ -11,16 +11,17 @@ public class Char04 extends Char {
 	public Char04(String name) {
 		super(name);
 		
-		float ratio = 0.6666667f;
+//		float ratio = 0.6666667f;
+		float ratio = 0.4f;
 		addAction(new Dmg(100*ratio).setName("moo"));
 		addAction(new Dmg(200*ratio, 1).setName("meh"));
 		addAction(new PutDot(50*ratio, 1, 6).setName("a dot"));
-		addAction(new PutHot(50*ratio, 1, 6).setName("a hot"));
+		addAction(new PutHot(30*ratio, 3, 6).setName("a hot"));
 //		actions.add(new Dmg(400, 3).setName("hihihi"));
 		
 		setTex("ball02yell.png");
 		
-		setColor(1, 0.7f, 0.1f, 1);
+		setColor(1, 1f, 0f, 1);
 
 	}
 
