@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.Bone;
 import com.esotericsoftware.spine.Skeleton;
@@ -37,8 +38,7 @@ public class CharAnim {
 	float scaley = 1;
 	private Animation blueAnimation;
 	private Animation redAnimation;
-	private Color color;
-	private Slot base;
+	private Array<Slot> slotsToChangeColor;
 
 	public CharAnim() {
 
@@ -47,6 +47,7 @@ public class CharAnim {
 
 	private void ini() {
 		animData = new AnimData();
+		slotsToChangeColor = new Array<Slot>();
 		// "data/spine/spineboy.atlas"
 		// "data/spine/spineboy.skel"
 
@@ -73,19 +74,25 @@ public class CharAnim {
 		animationTime = 0;
 		winkTime = 0;
 		renderer = new SkeletonRenderer();
-		base = skeleton.findSlot("ballbase01");
+//		Slot base = skeleton.findSlot("ballbase01");
+		
+		slotsToChangeColor.add(skeleton.findSlot("ballbase01"));
+		slotsToChangeColor.add(skeleton.findSlot("leyelid_L"));
+		slotsToChangeColor.add(skeleton.findSlot("ueyelid_L"));
+		slotsToChangeColor.add(skeleton.findSlot("leyelid_R"));
+		slotsToChangeColor.add(skeleton.findSlot("ueyelid_R"));
 //		s.setAdditiveBlending(true);
 //		slot = skeleton.findSlot("ballbase01");
 //		color = slot.getColor();
 //		color.set(1, 0, 0, 1);
-		color = base.getColor();
+//		color = base.getColor();
 //		color.set(1, 1, 0, 1);
 //		s.setAttachmentName(null);
-		log("after c: " + color);
+//		log("after c: " + color);
 //		c.r = 0;
 //		c.g = 1;
 //		c.b = 1;
-		log("c: " + color);
+//		log("c: " + color);
 		root = skeleton.getRootBone();
 		root.setX(120);
 		root.setY(20);
@@ -104,9 +111,9 @@ public class CharAnim {
 			log("A winkTime: " + winkTime + " last: " + lastWinkTime + " delta: " + delta);
 			winkTime = 0;
 			
-			SlotData s = sd.findSlot("ballbase01");
-			Color c = s.getColor();
-			log("c: " + c);
+//			SlotData s = sd.findSlot("ballbase01");
+//			Color c = s.getColor();
+//			log("c: " + c);
 		}
 		lastWinkTime = winkTime;
 		winkTime += delta;
@@ -154,9 +161,13 @@ public class CharAnim {
 	
 	public void setColor(Color color) {
 //		animData.setBaseColor(color);
-		this.color = base.getColor();
-		this.color.set(color);
+//		this.color = base.getColor();
+//		this.color.set(color);
 //		applyColor();
+		for (Slot slot : slotsToChangeColor) {
+			Color c = slot.getColor();
+			c.set(color);
+		}
 	}
 
 	private void applyColor() {
