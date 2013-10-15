@@ -64,7 +64,7 @@ public class LevelScreenUI {
 
 		Char p1 = screen.game.getGameState().getPlayer();
 		p1.setPos(FACETABLE_X + FACETABLE_WIDTH/2, FACETABLE_CHARY);
-		p1.setScale(FACETABLE_CHARSIZE, FACETABLE_CHARSIZE);
+		p1.setScale(FACETABLE_CHARSIZE);
 		p1button = new TextButton(p1.getName(), skin);
 //		Image image = new Image(p1.getTex());
 //		p1button.add(image);

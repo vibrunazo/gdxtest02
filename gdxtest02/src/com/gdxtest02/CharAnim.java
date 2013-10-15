@@ -36,8 +36,7 @@ public class CharAnim {
 	private float lastTime;
 	private float lastWinkTime;
 
-	float scalex = 1;
-	float scaley = 1;
+	float scale = 1;
 	private Animation blueAnimation;
 	private Animation redAnimation;
 	private Array<Slot> slotsToChangeColor;
@@ -182,23 +181,12 @@ public class CharAnim {
 	 * @param scale
 	 */
 	public void setScale(float scale) {
-
+		this.scale = scale;
+		loadSkeletonDataFromJson(scale);
 	}
 
-	public void setScale(float x, float y) {
-		scalex = x;
-		scaley = y;
-		loadSkeletonDataFromJson((x+y)/2);
-//		root.setScaleX(x);
-//		root.setScaleY(y);
-	}
-
-	public float getScaleX() {
-		return scalex;
-	}
-
-	public float getScaleY() {
-		return scaley;
+	public float getScale() {
+		return scale;
 	}
 
 	public void setColor(Color color) {

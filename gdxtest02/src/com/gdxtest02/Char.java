@@ -564,25 +564,17 @@ public class Char implements Cloneable {
 	}
 
 	/**Sets scale
-	 * @param x
-	 * @param y
+	 * @param scale
 	 */
-	public void setScale(float x, float y) {
-		charAnim.setScale(x, y);
+	public void setScale(float scale) {
+		charAnim.setScale(scale);
 	}
 	
-	/**Get scale X
+	/**Get scale
 	 * @return
 	 */
-	public float getScaleX() {
-		return charAnim.getScaleX();
-	}
-	
-	/**Get scale Y
-	 * @return
-	 */
-	public float getScaleY() {
-		return charAnim.getScaleY();
+	public float getScale() {
+		return charAnim.getScale();
 	}
 	
 	public void setColor(Color color) {

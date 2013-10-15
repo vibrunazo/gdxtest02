@@ -58,7 +58,7 @@ public class CharActor extends Image {
 	@Override
 	public void setWidth(float width) {
 		super.setWidth(width);
-		if (charAnim != null) charAnim.setScale(getWidth()/SIZEX, getHeight()/SIZEY);
+		if (charAnim != null) charAnim.setScale(getWidth()/SIZEX);
 	}
 
 	/* (non-Javadoc)
@@ -67,7 +67,7 @@ public class CharActor extends Image {
 	@Override
 	public void setHeight(float height) {
 		super.setHeight(height);
-		if (charAnim != null) charAnim.setScale(getWidth()/SIZEX, getHeight()/SIZEY);
+		if (charAnim != null) charAnim.setScale(getWidth()/SIZEX);
 	}
 
 }
