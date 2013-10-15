@@ -23,6 +23,7 @@ public class GameScreen implements Screen {
 
 	public static final int CONTROL_AI = 0;
 	public static final int CONTROL_HUMAN = 1;
+	private static final float PAUSE_TIME = 4;
 	
 	
 
@@ -47,6 +48,9 @@ public class GameScreen implements Screen {
 
 	public int p1control;
 	public int p2control;
+	private float delta;
+	private float gametime;
+	private float pausetime;
 
 	public GameScreen(GdxTest02 game) {
 		this(game, new Char01("p1"), new Char02("p2"));
@@ -123,6 +127,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		this.delta = delta;
 		updateLogic();
 
 		// clear the screen with a dark blue color. The
@@ -154,7 +159,7 @@ public class GameScreen implements Screen {
 		p2.drawShapes(shapeRenderer);
 		shapeRenderer.end();
 
-		if(!Gdx.input.isTouched()) ui.updateScroll(Gdx.graphics.getDeltaTime());
+		if(!Gdx.input.isTouched()) ui.updateScroll(delta);
 		ui.draw();
 
 		//		fps.log();
@@ -162,7 +167,18 @@ public class GameScreen implements Screen {
 	}
 
 	private void updateLogic() {
-		//		p1.incHp(-1);
+		gametime += delta;
+		
+		if (fightstate.equals("anim")) {
+			pausetime -= delta;
+			pausetime = Math.max(pausetime, 0);
+			ui.setAnimTime((int)Math.ceil(pausetime));
+			if (pausetime <= 0) {
+				fightstate = "go";
+				log("pause over");
+				pausetime = PAUSE_TIME;
+			}
+		}
 	}
 
 
@@ -172,6 +188,14 @@ public class GameScreen implements Screen {
 	 */
 	public void go() {
 		if (fightstate.equals("paused")) return;
+		if (fightstate.equals("anim")) {
+			fightstate = "go";
+			pausetime = 0;
+			ui.setAnimTime((int)Math.ceil(pausetime));
+			return;
+		}
+		fightstate = "anim";
+		pausetime = PAUSE_TIME;
 		
 		//preparing
 		if (p1control == CONTROL_AI){

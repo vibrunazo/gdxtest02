@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -24,6 +25,7 @@ public class GameScreenUI extends UIBuilder {
 	
 	private static final int CENTERBUTTON_WIDTH = 140;
 	private static final int CENTERBUTTON_HEIGHT = 40;
+	private static final float CENTERTABLE_Y = 50;
 	private GameScreen screen;
 	private Char p1;
 	private Char p2;
@@ -50,6 +52,7 @@ public class GameScreenUI extends UIBuilder {
 	private List consoleList;
 	private ScrollPane scroll;
 	private ClickListener clickOnBackButton;
+	private Label animTime;
 	
 	public GameScreenUI(GdxTest02 game, GameScreen gameScreen) {
 		super(game);
@@ -103,7 +106,12 @@ public class GameScreenUI extends UIBuilder {
 		//				table.setSize(260, 195);
 		//				table.setPosition(190, 142);
 		stage.addActor(centerTable);
-
+		centerTable.setPosition(0, CENTERTABLE_Y);
+		
+		animTime = new Label("0", skin);
+		centerTable.add(animTime);
+		centerTable.row();
+		
 		// Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
 		final TextButton gobutton = new TextButton("Go!", skin);
 		gobutton.setDisabled(true);
@@ -276,6 +284,13 @@ public class GameScreenUI extends UIBuilder {
 			return;
 		}
 		logToConsole(activeActionId + ": " + a.getTooltip());
+	}
+
+	/**
+	 * @param animTime the animTime to set
+	 */
+	public void setAnimTime(int time) {
+		animTime.setText(Integer.toString(time));
 	}
 	
 }
