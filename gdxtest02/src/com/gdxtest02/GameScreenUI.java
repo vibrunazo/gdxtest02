@@ -23,9 +23,9 @@ import com.esotericsoftware.tablelayout.Value;
  */
 public class GameScreenUI extends UIBuilder {
 	
-	private static final int CENTERBUTTON_WIDTH = 140;
-	private static final int CENTERBUTTON_HEIGHT = 40;
-	private static final float CENTERTABLE_Y = 50;
+	private static final int CENTERBUTTON_WIDTH = 100;
+	private static final int CENTERBUTTON_HEIGHT = 30;
+	private static final float CENTERTABLE_Y = 10;
 	private GameScreen screen;
 	private Char p1;
 	private Char p2;

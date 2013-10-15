@@ -22,6 +22,7 @@ public class CharActor extends Image {
 		this.player = player;
 		charAnim = new CharAnim(player.getAnimData());
 		setTouchable(Touchable.disabled);
+//		charAnim.setScale(getWidth()/SIZEX, getHeight()/SIZEY);
 	}
 	
 	public void draw(SpriteBatch batch, float parentAlpha) {
@@ -35,12 +36,11 @@ public class CharActor extends Image {
 //		player.setScale(getWidth()/SIZEX, getHeight()/SIZEY);
 //		if (flipx != player.getFlipX()) player.flipX(true);
 //		player.draw(batch, getX() + (getWidth())/2, getY());
-		charAnim.setScale(getWidth()/SIZEX, getHeight()/SIZEY);
 		if (flipx != player.getFlipX()) charAnim.flipX(true);
 		charAnim.draw(batch, getX() + (getWidth())/2, getY());
 //		player.draw(batch, getX(), getY());
 	}
-
+	
 	public void flipX(boolean b) {
 		flipx = b;
 		
@@ -50,6 +50,24 @@ public class CharActor extends Image {
 		player = c;
 		charAnim.setData(c.getAnimData());
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.scenes.scene2d.Actor#setWidth(float)
+	 */
+	@Override
+	public void setWidth(float width) {
+		super.setWidth(width);
+		if (charAnim != null) charAnim.setScale(getWidth()/SIZEX, getHeight()/SIZEY);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.scenes.scene2d.Actor#setHeight(float)
+	 */
+	@Override
+	public void setHeight(float height) {
+		super.setHeight(height);
+		if (charAnim != null) charAnim.setScale(getWidth()/SIZEX, getHeight()/SIZEY);
 	}
 
 }

@@ -12,10 +12,10 @@
 	{ "name": "arm_R", "parent": "shoulder_R", "length": 80, "rotation": 90 },
 	{ "name": "leyelid_L", "parent": "eye_L" },
 	{ "name": "ueyelid_L", "parent": "eye_L" },
-	{ "name": "forearm_L", "parent": "arm_L", "length": 70, "x": 80 },
-	{ "name": "forearm_R", "parent": "arm_R", "length": 70, "x": 80 },
-	{ "name": "hand_L", "parent": "forearm_L", "length": 30, "x": 70 },
-	{ "name": "hand_R", "parent": "forearm_R", "length": 30, "x": 70 }
+	{ "name": "forearm_L", "parent": "arm_L", "length": 70, "x": 80, "scaleX": 1.2, "scaleY": 1.2, "inheritScale": false },
+	{ "name": "forearm_R", "parent": "arm_R", "length": 70, "x": 80, "scaleX": 1.2, "scaleY": 1.2, "inheritScale": false },
+	{ "name": "hand_L", "parent": "forearm_L", "length": 30, "x": 70, "scaleX": 1.2, "scaleY": 1.2, "inheritScale": false },
+	{ "name": "hand_R", "parent": "forearm_R", "length": 30, "x": 70, "scaleX": 1.2, "scaleY": 1.2, "inheritScale": false }
 ],
 "slots": [
 	{ "name": "arm_L", "bone": "arm_L", "attachment": "arm_L" },
@@ -98,6 +98,200 @@
 	}
 },
 "animations": {
+	"punch01": {
+		"bones": {
+			"forearm_L": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 111.23,
+						"curve": [ 0.25, 0, 0.625, 0.5 ]
+					},
+					{
+						"time": 0.1666,
+						"angle": 75.42,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.2333, "angle": -0.14, "curve": "stepped" },
+					{
+						"time": 0.3,
+						"angle": -0.14,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.6666, "angle": 111.23 }
+				],
+				"scale": [
+					{
+						"time": 0,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.1666, "x": 0.598, "y": 1 },
+					{ "time": 0.2333, "x": 1.05, "y": 1 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"arm_R": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": -252.36,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.2333,
+						"angle": 68.22,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.6666, "angle": -252.36 }
+				]
+			},
+			"arm_L": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": -424.01,
+						"curve": [ 0.25, 0, 0.625, 0.5 ]
+					},
+					{
+						"time": 0.1666,
+						"angle": -396.89,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.2333,
+						"angle": 0.69,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.3,
+						"angle": -359.3,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.6666, "angle": -424.01 }
+				],
+				"scale": [
+					{
+						"time": 0,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.1666, "x": 0.511, "y": 1 },
+					{ "time": 0.2333, "x": 1.05, "y": 1 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"forearm_R": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 114.23,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.2333,
+						"angle": 149.6,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.6666, "angle": 114.23 }
+				]
+			},
+			"body": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.6666, "angle": 0 }
+				],
+				"scale": [
+					{
+						"time": 0,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.2333, "x": 0.898, "y": 1, "curve": "stepped" },
+					{
+						"time": 0.3,
+						"x": 0.898,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.6666, "x": 1, "y": 1 }
+				]
+			},
+			"shoulders": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.2333, "x": -14.46, "y": 0, "curve": "stepped" },
+					{
+						"time": 0.3,
+						"x": -14.46,
+						"y": 0,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.6666, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.2333, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.3, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.6666, "x": 1, "y": 1 }
+				]
+			}
+		},
+		"slots": {
+			"leyelid_L": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.0666, "name": "f6" },
+					{ "time": 0.1333, "name": "f5" },
+					{ "time": 0.2, "name": "f4" },
+					{ "time": 0.4666, "name": "f5" },
+					{ "time": 0.5333, "name": "f6" },
+					{ "time": 0.6, "name": "f6" }
+				]
+			},
+			"leyelid_R": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.0666, "name": "6" },
+					{ "time": 0.1333, "name": "5" },
+					{ "time": 0.2, "name": "4" },
+					{ "time": 0.4666, "name": "5" },
+					{ "time": 0.5333, "name": "6" },
+					{ "time": 0.6, "name": "6" }
+				]
+			},
+			"ueyelid_L": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.0666, "name": "6" },
+					{ "time": 0.1333, "name": "5" },
+					{ "time": 0.2, "name": "4" },
+					{ "time": 0.4666, "name": "5" },
+					{ "time": 0.5333, "name": "6" },
+					{ "time": 0.6, "name": "6" }
+				]
+			},
+			"ueyelid_R": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.0666, "name": "6" },
+					{ "time": 0.1333, "name": "5" },
+					{ "time": 0.2, "name": "4" },
+					{ "time": 0.4666, "name": "5" },
+					{ "time": 0.5333, "name": "6" },
+					{ "time": 0.6, "name": "6" }
+				]
+			}
+		}
+	},
 	"stand01": {
 		"bones": {
 			"eye_L": {
