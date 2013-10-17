@@ -135,8 +135,6 @@ public class CharSelectScreenUI {
 		
 		charactorp1 = new CharActor(p1); 
 		p1button.add(charactorp1).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
-//		Image image = new Image(p1.getTex());
-//		p1button.add(image);
 		
 		if (gamemode != MODE_STORY) {
 			p1aibutton = new TextButton("AI", skin); 
@@ -242,11 +240,8 @@ public class CharSelectScreenUI {
 		gobuttonlistener = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				if (gamemode == MODE_STORY) {
-//					p1.levelUp();p1.levelUp();p1.levelUp();
-//					p1.levelUp();p1.levelUp();p1.levelUp();
 					screen.game.getGameState().setPlayer(getP1());
 					screen.game.setScreen(new LevelSelectScreen(screen.game));
-//					screen.game.setScreen(new Level02(screen.game));
 				}
 				else {
 					screen.game.setScreen(new GameScreen(screen.game, getP1(), getP2(), p1control, p2control));
@@ -300,9 +295,7 @@ public class CharSelectScreenUI {
 		LinkedListener linkedlistener = new LinkedListener() {
 			
 			public void clicked(InputEvent event, float x, float y)  {
-//				String name = event.getTarget().getParent().getName();
 				String name = owner.getName();
-//				Char c = unlockedchars.get(name);
 				log("clicked on: " + event.getTarget());
 				Char c = getCharFromId(name);
 				
@@ -423,7 +416,6 @@ public class CharSelectScreenUI {
 	}
 	private void setCurrentPlayer(Char c) {
 		setPlayer(turn, c);
-//		c.getBalance().testModel1();
 	}
 	
 	

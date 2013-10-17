@@ -22,23 +22,12 @@ public class CharActor extends Image {
 		this.player = player;
 		charRenderer = new AnimRenderer(player.getAnimData());
 		setTouchable(Touchable.disabled);
-//		charAnim.setScale(getWidth()/SIZEX, getHeight()/SIZEY);
 	}
 	
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-//		if (getParent() != null) {
-//			float x = getParent().getX();
-//			float y = getParent().getY();
-//			player.setPos(x, y);
-//			player.setPos(getX(), getY());
-//		}
-//		player.setScale(getWidth()/SIZEX, getHeight()/SIZEY);
-//		if (flipx != player.getFlipX()) player.flipX(true);
-//		player.draw(batch, getX() + (getWidth())/2, getY());
 		if (flipx != player.getFlipX()) charRenderer.flipX(true);
 		charRenderer.draw(batch, getX() + (getWidth())/2, getY());
-//		player.draw(batch, getX(), getY());
 	}
 	
 	public void flipX(boolean b) {

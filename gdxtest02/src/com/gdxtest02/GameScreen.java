@@ -266,7 +266,6 @@ public class GameScreen implements Screen {
 		ui.logToConsole("Round" + round++ + ", " + "p1 uses: " + actionidp1 + ": " + a1name +
 				", p2 uses: " + actionidp2 + ": " + a2name + ". Fight!");
 		
-//		p1.updateAll();p2.updateAll();
 		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
 		if (actionp1 != null) actionp1.act(p1, p2);
 		if (actionp2 != null) actionp2.act(p2, p1);
