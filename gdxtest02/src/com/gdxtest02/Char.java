@@ -55,8 +55,8 @@ public class Char implements Cloneable {
 	private int exp;
 	private Array<Integer> aiSkillList;
 	
-	private CharAnim charAnim;
-	private AnimData animData;
+	private AnimRenderer animRenderer;
+	private CharSkin skin;
 
 	public Char(String name) {
 		this.name = name;
@@ -71,8 +71,8 @@ public class Char implements Cloneable {
 		this.posY = 0;
 		basehp = maxhp;
 		canoverheal = true;
-		animData = new AnimData();
-		charAnim = new CharAnim(animData);
+		skin = new CharSkin();
+		animRenderer = new AnimRenderer(skin);
 		
 		level = 1;
 		powerMultiplier = 1;
@@ -104,11 +104,11 @@ public class Char implements Cloneable {
 	
 	public void draw(SpriteBatch batch){
 //		batch.draw(tex, posX, posY);
-		charAnim.draw(batch, posX, posY);
+		animRenderer.draw(batch, posX, posY);
 	}
 	
 	public void draw(SpriteBatch batch, float x, float y) {
-		charAnim.draw(batch, (int)x, (int)y);
+		animRenderer.draw(batch, (int)x, (int)y);
 	}
 	
 	/**Draw shapes, such as health bars
@@ -259,7 +259,7 @@ public class Char implements Cloneable {
 		this.hp = hp;
 	}
 	
-	/**Incremeants hp by 'delta', returns final hp after change
+	/**Increments hp by 'delta', returns final hp after change
 	 * @param inc how much to change
 	 * @return returns current total amount of dmg to be taken this round
 	 */
@@ -567,18 +567,18 @@ public class Char implements Cloneable {
 	 * @param scale
 	 */
 	public void setScale(float scale) {
-		charAnim.setScale(scale);
+		animRenderer.setScale(scale);
 	}
 	
 	/**Get scale
 	 * @return
 	 */
 	public float getScale() {
-		return charAnim.getScale();
+		return animRenderer.getScale();
 	}
 	
 	public void setColor(Color color) {
-		charAnim.setColor(color);
+		animRenderer.setColor(color);
 	}
 	
 	public void setColor(float r, float g, float b, float alpha) {
@@ -587,23 +587,23 @@ public class Char implements Cloneable {
 	}
 
 	public boolean getFlipX() {
-		return charAnim.getFlipX();
+		return animRenderer.getFlipX();
 	}
 	
 	public void flipX(boolean flip) {
-		charAnim.flipX(flip);
+		animRenderer.flipX(flip);
 	}
 	
 	public void flipY(boolean flip) {
-		charAnim.flipY(flip);
+		animRenderer.flipY(flip);
 	}
 
 	public void setPos(float x, float y) {
 		setPos((int)x, (int)y);
 	}
 
-	public AnimData getAnimData() {
-		return animData;
+	public CharSkin getAnimData() {
+		return skin;
 	}
 
 }

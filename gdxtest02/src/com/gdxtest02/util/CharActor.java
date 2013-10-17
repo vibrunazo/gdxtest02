@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.gdxtest02.AnimData;
+import com.gdxtest02.CharSkin;
 import com.gdxtest02.Char;
-import com.gdxtest02.CharAnim;
+import com.gdxtest02.AnimRenderer;
 
 public class CharActor extends Image {
 	private Char player;
@@ -16,11 +16,11 @@ public class CharActor extends Image {
 	
 	private boolean flipx;
 	
-	private CharAnim charAnim;
+	private AnimRenderer charRenderer;
 
 	public CharActor(Char player) {
 		this.player = player;
-		charAnim = new CharAnim(player.getAnimData());
+		charRenderer = new AnimRenderer(player.getAnimData());
 		setTouchable(Touchable.disabled);
 //		charAnim.setScale(getWidth()/SIZEX, getHeight()/SIZEY);
 	}
@@ -36,8 +36,8 @@ public class CharActor extends Image {
 //		player.setScale(getWidth()/SIZEX, getHeight()/SIZEY);
 //		if (flipx != player.getFlipX()) player.flipX(true);
 //		player.draw(batch, getX() + (getWidth())/2, getY());
-		if (flipx != player.getFlipX()) charAnim.flipX(true);
-		charAnim.draw(batch, getX() + (getWidth())/2, getY());
+		if (flipx != player.getFlipX()) charRenderer.flipX(true);
+		charRenderer.draw(batch, getX() + (getWidth())/2, getY());
 //		player.draw(batch, getX(), getY());
 	}
 	
@@ -48,7 +48,7 @@ public class CharActor extends Image {
 	
 	public void setChar(Char c) {
 		player = c;
-		charAnim.setData(c.getAnimData());
+		charRenderer.setData(c.getAnimData());
 		
 	}
 
@@ -58,7 +58,7 @@ public class CharActor extends Image {
 	@Override
 	public void setWidth(float width) {
 		super.setWidth(width);
-		if (charAnim != null) charAnim.setScale(getWidth()/SIZEX);
+		if (charRenderer != null) charRenderer.setScale(getWidth()/SIZEX);
 	}
 
 	/* (non-Javadoc)
@@ -67,7 +67,7 @@ public class CharActor extends Image {
 	@Override
 	public void setHeight(float height) {
 		super.setHeight(height);
-		if (charAnim != null) charAnim.setScale(getWidth()/SIZEX);
+		if (charRenderer != null) charRenderer.setScale(getWidth()/SIZEX);
 	}
 
 }

@@ -2,10 +2,10 @@ package com.gdxtest02;
 
 import com.badlogic.gdx.graphics.Color;
 
-public class AnimData {
+public class CharSkin {
 	Color baseColor;
 	
-	public AnimData() {
+	public CharSkin() {
 		
 	}
 
