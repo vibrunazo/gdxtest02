@@ -19,7 +19,10 @@ public class Punch01 extends CharAnim {
 	@Override
 	public void draw() {
 		super.draw();
-		punchAnimation.apply(skeleton, lastTime, animationTime, true, null);
+		punchAnimation.apply(skeleton, lastTime, animationTime, false, null);
+		if (animationTime > punchAnimation.getDuration()) {
+			end();
+		}
 	}
 
 }

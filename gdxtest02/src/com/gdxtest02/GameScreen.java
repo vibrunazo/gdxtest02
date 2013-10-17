@@ -195,6 +195,7 @@ public class GameScreen implements Screen {
 			return;
 		}
 		fightstate = "anim";
+		p1.setAnim("punch");
 		pausetime = PAUSE_TIME;
 		
 		//preparing

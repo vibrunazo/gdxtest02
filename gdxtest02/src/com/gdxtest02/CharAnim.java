@@ -52,4 +52,11 @@ public class CharAnim {
 //		winkAnimation.apply(skeleton, lastWinkTime*10, winkTime*10, false, null);
 	}
 	
+	/**ends animation and go back to default anim
+	 * 
+	 */
+	public void end() {
+		renderer.setAnimToDefault();
+	}
+	
 }

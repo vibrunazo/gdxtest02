@@ -605,5 +605,9 @@ public class Char implements Cloneable {
 	public CharSkin getAnimData() {
 		return skin;
 	}
+	
+	public void setAnim(String animname) {
+		animRenderer.setAnim(animname);
+	}
 
 }
