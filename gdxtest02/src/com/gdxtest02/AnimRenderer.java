@@ -39,6 +39,7 @@ public class AnimRenderer {
 	private String jsonfile;
 	private CharAnim anim;
 	private String defaultanim;
+	private String animname;
 
 	public AnimRenderer(CharSkin data) {
 
@@ -60,7 +61,12 @@ public class AnimRenderer {
 		loadSkeletonDataFromJson();
 	}
 	
+	public String getAnimName() {
+		return animname;
+	}
+	
 	public void setAnim(String animname) {
+		this.animname = animname;
 		if (animname.equals("stand")) {
 			anim = new Stand01(this);
 		}
@@ -71,6 +77,10 @@ public class AnimRenderer {
 	
 	public void setDefaultAnim(String animname) {
 		defaultanim = animname;
+	}
+	
+	public String getDefaultAnimName() {
+		return defaultanim;
 	}
 	
 	public void setAnimToDefault() {

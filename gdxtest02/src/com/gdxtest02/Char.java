@@ -577,23 +577,42 @@ public class Char implements Cloneable {
 		return animRenderer.getScale();
 	}
 	
+	/**Sets a color object to change the char image color with
+	 * 
+	 * @param color
+	 */
 	public void setColor(Color color) {
 		animRenderer.setColor(color);
 	}
 	
+	/**Set the color of the character
+	 * @param r
+	 * @param g
+	 * @param b
+	 * @param alpha
+	 */
 	public void setColor(float r, float g, float b, float alpha) {
 		Color color = new Color(r, g, b, alpha);
 		setColor(color);
 	}
 
+	/**returns true if the char is flipped horizontally, false otherwise
+	 * @return
+	 */
 	public boolean getFlipX() {
 		return animRenderer.getFlipX();
 	}
 	
+	/**Flip char image horizontally
+	 * @param flip
+	 */
 	public void flipX(boolean flip) {
 		animRenderer.flipX(flip);
 	}
 	
+	/**Flip char image vertically
+	 * @param flip
+	 */
 	public void flipY(boolean flip) {
 		animRenderer.flipY(flip);
 	}
@@ -602,12 +621,44 @@ public class Char implements Cloneable {
 		setPos((int)x, (int)y);
 	}
 
+	/**Gets the anim data, which contains all the data about each animation
+	 * this Char can use
+	 * 
+	 * @return
+	 */
 	public CharSkin getAnimData() {
 		return skin;
 	}
 	
+	/**Sets the name of the current animation to play
+	 * @param animname
+	 */
 	public void setAnim(String animname) {
 		animRenderer.setAnim(animname);
+	}
+	
+	/**Name of current animation being played
+	 * @return
+	 */
+	public String getAnimName() {
+		return animRenderer.getAnimName();
+	}
+	
+	/**The name of the default animation, which is the animation
+	 * the char will default to when nothing is specified
+	 * @return
+	 */
+	public String getDefaultAnimName() {
+		return animRenderer.getDefaultAnimName();
+	}
+	
+	/**Returns true if the Char is currently using the default animation,
+	 * false otherwise
+	 * @return
+	 */
+	public boolean isUsingDefaultAnim() {
+		if (getAnimName().equals(getDefaultAnimName())) return true;
+		return false;
 	}
 
 }

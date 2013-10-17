@@ -27,7 +27,7 @@ public class Stand01 extends CharAnim {
 	public void draw() {
 		super.draw();
 		if (winkTime > 1.5) {
-			log("A winkTime: " + winkTime + " last: " + lastWinkTime + " delta: " + delta);
+//			log("A winkTime: " + winkTime + " last: " + lastWinkTime + " delta: " + delta);
 			winkTime = 0;
 		}
 		lastWinkTime = winkTime;

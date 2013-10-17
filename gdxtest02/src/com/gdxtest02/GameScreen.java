@@ -169,16 +169,48 @@ public class GameScreen implements Screen {
 	private void updateLogic() {
 		gametime += delta;
 		
-		if (fightstate.equals("anim")) {
-			pausetime -= delta;
-			pausetime = Math.max(pausetime, 0);
-			ui.setAnimTime((int)Math.ceil(pausetime));
-			if (pausetime <= 0) {
-				fightstate = "go";
-				log("pause over");
-				pausetime = PAUSE_TIME;
+		if (fightstate.contains("anim")) {
+			updateAnimTime();
+			if (fightstate.contains("p1") && p1.isUsingDefaultAnim()) {
+				// if p1 just ended it's attack anim and is back to default
+				// then start p2 anim
+//				log("p1 using default anim");
+				setAnimStateP2();
+			}
+			
+			if (fightstate.contains("p2") && p2.isUsingDefaultAnim()) {
+				// if p2 just ended it's attack anim and is back to default
+				// then end the anim state
+//				log("p2 using default anim");
+				endAnimState();
 			}
 		}
+	}
+	
+	private void setAnimStateP1() {
+		fightstate = "anim p1";
+		p1.setAnim("punch");
+	}
+	
+	private void setAnimStateP2() {
+		fightstate = "anim p2";
+		p2.setAnim("punch");
+	}
+
+	private void updateAnimTime() {
+		pausetime -= delta;
+		pausetime = Math.max(pausetime, 0);
+		ui.setAnimTime((int)Math.ceil(pausetime));
+		if (pausetime <= 0) {
+			endAnimState();
+		}
+	}
+
+	private void endAnimState() {
+		fightstate = "go";
+//		log("pause over");
+		pausetime = 0;
+		ui.setAnimTime(0);
 	}
 
 
@@ -188,14 +220,13 @@ public class GameScreen implements Screen {
 	 */
 	public void go() {
 		if (fightstate.equals("paused")) return;
-		if (fightstate.equals("anim")) {
+		if (fightstate.contains("anim")) {
 			fightstate = "go";
 			pausetime = 0;
-			ui.setAnimTime((int)Math.ceil(pausetime));
+			ui.setAnimTime(0);
 			return;
 		}
-		fightstate = "anim";
-		p1.setAnim("punch");
+		setAnimStateP1();
 		pausetime = PAUSE_TIME;
 		
 		//preparing
@@ -264,7 +295,6 @@ public class GameScreen implements Screen {
 		
 		updateUi();
 	}
-
 
 	private void fightOver(Char winner) {
 		if (winner == null) ui.logToConsole("Fight over. Draw!");

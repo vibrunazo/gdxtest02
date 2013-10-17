@@ -28,28 +28,13 @@ public class CharAnim {
 	}
 
 	private void ini() {
-//		standAnimation = sd.findAnimation("stand01");
-//		punchAnimation = sd.findAnimation("punch01");
-//		winkAnimation = sd.findAnimation("wink");		
-		
 		animationTime = 0;
-//		winkTime = 0;
-//		log("anim ini");
 	}
 
 	public void draw() {
 		delta = Gdx.graphics.getDeltaTime();
 		lastTime = animationTime;
 		animationTime += delta;
-//		log("A animationTime: " + animationTime + " last: " + lastTime + " delta: " + delta);
-//		if (winkTime > 1.5) {
-//			log("A winkTime: " + winkTime + " last: " + lastWinkTime + " delta: " + delta);
-//			winkTime = 0;
-//		}
-//		lastWinkTime = winkTime;
-//		winkTime += delta;
-//		standAnimation.apply(skeleton, lastTime, animationTime, true, null);
-//		winkAnimation.apply(skeleton, lastWinkTime*10, winkTime*10, false, null);
 	}
 	
 	/**ends animation and go back to default anim
