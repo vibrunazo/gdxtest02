@@ -134,7 +134,8 @@ public class CharSelectScreenUI {
 		lefttable.add(p1button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH*1.2f);
 		
 		charactorp1 = new CharActor(p1); 
-		p1button.add(charactorp1).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
+		p1button.add(charactorp1);
+		charactorp1.setSize(FACETABLE_WIDTH);
 		
 		if (gamemode != MODE_STORY) {
 			p1aibutton = new TextButton("AI", skin); 
@@ -162,7 +163,8 @@ public class CharSelectScreenUI {
 		righttable.add(p2button).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
 		
 		charactorp2 = new CharActor(p2); 
-		p2button.add(charactorp2).width(FACETABLE_WIDTH).height(FACETABLE_WIDTH);
+		p2button.add(charactorp2);
+		charactorp2.setSize(FACETABLE_WIDTH);
 		charactorp2.flipX(true);
 		
 		p2aibutton = new TextButton("AI", skin); 
@@ -207,7 +209,8 @@ public class CharSelectScreenUI {
 		cbutton.addListener(getCharListener().setOwner(cbutton));
 		cbutton.setDisabled(true);
 		CharActor charactor = new CharActor(c); 
-		cbutton.add(charactor).width(CHARBUTTON_WIDTH*.8f).height(CHARBUTTON_WIDTH*.8f);
+		cbutton.add(charactor);
+		charactor.setSize(CHARBUTTON_WIDTH*.8f);
 	}
 
 	private void createMenuTable() {

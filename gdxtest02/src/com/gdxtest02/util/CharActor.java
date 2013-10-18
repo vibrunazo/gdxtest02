@@ -58,5 +58,13 @@ public class CharActor extends Image {
 		super.setHeight(height);
 		if (charRenderer != null) charRenderer.setScale(getWidth()/SIZEX);
 	}
+	
+	public void updateScale() {
+		charRenderer.setScale(getWidth()/SIZEX);
+	}
+	
+	public void setSize(float size) {
+		charRenderer.setScale(size/SIZEX);
+	}
 
 }
