@@ -189,7 +189,7 @@ public class GameScreen implements Screen {
 	
 	private void setAnimStateP1() {
 		fightstate = "anim p1";
-		p1.setAnim("punch");
+		p1.setAnim("cast");
 	}
 	
 	private void setAnimStateP2() {
