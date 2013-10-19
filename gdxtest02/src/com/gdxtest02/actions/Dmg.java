@@ -14,7 +14,9 @@ public class Dmg extends Action implements Cloneable {
 
 	@Override
 	protected void go(Char self, Char target) {
-		target.incHp(-power);
+		target.incHp(-power, self, true);
+		
+		
 	}
 	
 	public float getDmgAfterRounds(int rounds) {
