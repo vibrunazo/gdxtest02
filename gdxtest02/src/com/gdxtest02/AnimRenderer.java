@@ -19,6 +19,7 @@ import com.esotericsoftware.spine.attachments.Attachment;
 import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.Castup01;
 import com.gdxtest02.anims.Punch01;
+import com.gdxtest02.anims.PunchRight01;
 import com.gdxtest02.anims.Stand01;
 
 import static com.gdxtest02.GdxTest02.log;
@@ -77,6 +78,9 @@ public class AnimRenderer {
 		}
 		if (animname.equals("punch")) {
 			anim = new Punch01(this);
+		}
+		if (animname.equals("punchright")) {
+			anim = new PunchRight01(this);
 		}
 		if (animname.equals("cast")) {
 			anim = new Cast01(this);

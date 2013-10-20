@@ -273,8 +273,9 @@ public abstract class Action {
 	/**Sets the name of the animation this action should show when active
 	 * @param anim
 	 */
-	public void setAnim(String anim) {
+	public Action setAnim(String anim) {
 		this.anim = anim;
+		return this;
 	}
 	
 }

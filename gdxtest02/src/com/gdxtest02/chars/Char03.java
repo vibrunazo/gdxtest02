@@ -13,7 +13,7 @@ public class Char03 extends Char {
 		float ratio = 0.42553192f;
 //		float ratio = 1f;
 		addAction(new Dmg(100*ratio).setName("Yoga Fire"));
-		addAction(new Dmg(400*ratio, 5).setName("Overpacarai"));
+		addAction(new Dmg(400*ratio, 5).setName("Overpacarai").setAnim("punchright"));
 		addAction(new PutDot(50*ratio, 0, 5).setName("DotFoda"));
 		setTex("ball02red.png");
 		
