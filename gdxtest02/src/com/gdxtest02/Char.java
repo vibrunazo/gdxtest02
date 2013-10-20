@@ -630,6 +630,17 @@ public class Char implements Cloneable {
 		return skin;
 	}
 	
+	/**Sets the animation to the one of the current active action
+	 * @param animname
+	 */
+	public void setAnimToActiveAction() {
+		if (getActiveAction() == null) {
+			animRenderer.setAnimToDefault();return;
+		}
+		String animname = getActiveAction().getAnim();
+		animRenderer.setAnim(animname);
+	}
+	
 	/**Sets the name of the current animation to play
 	 * @param animname
 	 */

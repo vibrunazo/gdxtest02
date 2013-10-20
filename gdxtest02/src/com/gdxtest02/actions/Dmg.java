@@ -7,6 +7,7 @@ public class Dmg extends Action implements Cloneable {
 	
 	public void ini() {
 		setName("DD");
+		setAnim("punch");
 	}
 	public void update() {
 		setDescription("Does " + getPower() + " direct damage to the enemy.");

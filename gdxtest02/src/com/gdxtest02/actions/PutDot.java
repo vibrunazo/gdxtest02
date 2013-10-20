@@ -15,6 +15,7 @@ public class PutDot extends Action {
 	@Override
 	public void ini() {
 		setName("Put Dot");
+		setAnim("cast");
 	}
 	
 	public void update() {

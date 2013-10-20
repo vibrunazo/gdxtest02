@@ -13,6 +13,7 @@ public class Drain extends Action {
 	@Override
 	public void ini() {
 		setName("Drain");
+		setAnim("cast");
 	}
 	public void update() {
 		setDescription("Drains " + getPower() + " damage and heals you.");

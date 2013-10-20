@@ -67,6 +67,9 @@ public class AnimRenderer {
 	}
 	
 	public void setAnim(String animname) {
+		if (animname.equals("") || animname == null) {
+			setAnimToDefault();
+		}
 		this.animname = animname;
 		if (animname.equals("stand")) {
 			anim = new Stand01(this);

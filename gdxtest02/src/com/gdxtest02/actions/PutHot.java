@@ -15,6 +15,7 @@ public class PutHot extends Action {
 	@Override
 	public void ini() {
 		setName("Put Hot");
+		setAnim("cast");
 	}
 	public void update() {
 		setDescription("Heals " + getPower() + " per sec for " + getDuration() + 

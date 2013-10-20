@@ -10,6 +10,7 @@ public abstract class Action {
 	protected int duration = 5;
 	private String description = "This is a skill";
 	private float avgdps;
+	private String anim = "";
 	
 	private Char owner;
 	private float basepower;
@@ -260,6 +261,20 @@ public abstract class Action {
 	 */
 	public float getHealThisRound(int round, int maxrounds) {
 		return getHealAfterRounds(maxrounds - round + 1);
+	}
+
+	/**Gets the name of the animation for this action
+	 * @return
+	 */
+	public String getAnim() {
+		return anim;
+	}
+
+	/**Sets the name of the animation this action should show when active
+	 * @param anim
+	 */
+	public void setAnim(String anim) {
+		this.anim = anim;
 	}
 	
 }

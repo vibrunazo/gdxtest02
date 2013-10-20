@@ -8,6 +8,7 @@ public class Heal extends Action {
 	@Override
 	public void ini() {
 		setName("Direct Heal");
+		setAnim("cast");
 	}
 	public void update() {
 		setDescription("Heals " + getPower() + " damage.");
