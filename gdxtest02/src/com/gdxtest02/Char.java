@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import static com.gdxtest02.GdxTest02.log;
 
 public class Char implements Cloneable {
+	private float spikes;
 	private String name;
 	private String type;
 	private int hp;
@@ -74,6 +75,7 @@ public class Char implements Cloneable {
 		skin = new CharSkin();
 		animRenderer = new AnimRenderer(skin);
 		
+		spikes = 0;
 		level = 1;
 		powerMultiplier = 1;
 		
@@ -96,7 +98,7 @@ public class Char implements Cloneable {
 		dmg = 0;
 		buffs = new Array<Buff>();
 		newbuffs = new Array<Buff>();
-		
+		spikes = 0;
 		updateAllActions();
 		//reset all actions
 		for (Action a : actionBar) a.reset();
@@ -260,11 +262,15 @@ public class Char implements Cloneable {
 	}
 	
 	/**Increments hp by 'delta', returns final hp after change
+	 * @param b 
 	 * @param inc how much to change
-	 * @return returns current total amount of dmg to be taken this round
 	 */
-	public float incHp(float delta) {
-		return dmg += delta;
+	public void incHp(float delta, Char source, boolean b) {
+		dmg += delta;
+		if (b == true && getSpikes()>0)
+		{
+			target.incHp(-getSpikes(), this, false);
+		}
 	}
 	
 	/**Applies the damage to be taken this round. After all the skills used this round are considered.
@@ -615,6 +621,14 @@ public class Char implements Cloneable {
 	 */
 	public void flipY(boolean flip) {
 		animRenderer.flipY(flip);
+	}
+
+	public float getSpikes() {
+		return spikes;
+	}
+
+	public void setSpikes(float power) {
+		this.spikes = power;
 	}
 
 	public void setPos(float x, float y) {

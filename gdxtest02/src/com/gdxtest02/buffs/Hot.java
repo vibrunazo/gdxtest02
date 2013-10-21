@@ -7,7 +7,7 @@ public class Hot extends Buff {
 
 	@Override
 	public void act(Char self) {
-		self.incHp(power);
+		self.incHp(power, self, false);
 	}
 	
 	public Hot() {

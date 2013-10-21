@@ -6,7 +6,7 @@ import com.gdxtest02.Char;
 public class Dot extends Buff {
 	@Override
 	public void act(Char self) {
-		self.incHp(-power);
+		self.incHp(-power, self, false);
 	}
 
 	public Dot() {

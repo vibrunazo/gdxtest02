@@ -43,7 +43,7 @@ public abstract class Buff {
 	 * -1 means it's infinite
 	 */
 	public void incDuration(int delta) {
-		duration += delta;
+		duration += delta;	
 	}
 	
 	public Buff setPower(float power) {
