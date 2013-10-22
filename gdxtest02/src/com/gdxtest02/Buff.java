@@ -87,4 +87,17 @@ public abstract class Buff {
 	public float getPower() {
 		return power;
 	}
+	
+	/**when buff is removed 
+	 * 
+	 */ 
+	public void end(Char self){
+	}
+	
+	/**when buff is applied 
+	 * 
+	 */ 
+	public void ini(Char self) {
+	}
+	
 }

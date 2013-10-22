@@ -8,6 +8,7 @@ public class Dmg extends Action implements Cloneable {
 	public void ini() {
 		setName("DD");
 		setAnim("punch");
+		setReflect(true);
 	}
 	public void update() {
 		setDescription("Does " + getPower() + " direct damage to the enemy.");
@@ -15,7 +16,7 @@ public class Dmg extends Action implements Cloneable {
 
 	@Override
 	protected void go(Char self, Char target) {
-		target.incHp(-power, self, true);
+		target.incHp(-power, self, getReflect());
 		
 		
 	}

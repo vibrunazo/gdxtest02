@@ -6,14 +6,20 @@ import static com.gdxtest02.GdxTest02.log;
 public class Spikes extends Buff{
 	@Override
 	public void act(Char self) {
-		self.setSpikes(+power);
+		
 		log("Spikes: "+ self.getSpikes());
-		if (getDuration()==0){
-			self.setSpikes(-power);
-		}
+		
 			
 	}
 	
+	public void ini(Char self){
+		self.setSpikes(self.getSpikes()+power);
+	}
+	
+	public void end(Char self){
+		self.setSpikes(self.getSpikes()-power);
+	}
+		
 	public Spikes() {
 		super();
 	}

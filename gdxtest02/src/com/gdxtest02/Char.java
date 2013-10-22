@@ -196,7 +196,10 @@ public class Char implements Cloneable {
 		for (Buff buff : buffs) {
 			buff.act(this);
 			buff.incDuration(-1);
-			if (buff.getDuration() == 0) toremove.add(buff); // this buff will be removed 
+			if (buff.getDuration() == 0){
+				toremove.add(buff); // this buff will be removed 
+				buff.end(this);
+			}
 		}
 		// remove buffs from the list of buffs to be removed
 		for (Buff buff : toremove) {
@@ -205,6 +208,9 @@ public class Char implements Cloneable {
 		
 		// move new buffs to main buffs list
 		buffs.addAll(newbuffs);
+		for (Buff buff : newbuffs) {
+			buff.ini(this);
+		}
 		newbuffs.clear();
 	}
 	
@@ -262,12 +268,12 @@ public class Char implements Cloneable {
 	}
 	
 	/**Increments hp by 'delta', returns final hp after change
-	 * @param b 
+	 * @param reflect if damage can be reflected or not 
 	 * @param inc how much to change
 	 */
-	public void incHp(float delta, Char source, boolean b) {
+	public void incHp(float delta, Char source, boolean reflect) {
 		dmg += delta;
-		if (b == true && getSpikes()>0)
+		if (reflect == true && getSpikes()>0)
 		{
 			target.incHp(-getSpikes(), this, false);
 		}

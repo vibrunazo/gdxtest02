@@ -16,7 +16,7 @@ public class Heal extends Action {
 	
 	@Override
 	protected void go(Char self, Char target) {
-		self.incHp(power, self, false);
+		self.incHp(power, self, getReflect());
 	}
 	
 	public float getDmgAfterRounds(int rounds) {

@@ -8,10 +8,10 @@ public abstract class Action {
 	protected int cooldown = 0;
 	private int curcooldown = 0;
 	protected int duration = 5;
+	private boolean reflect = false;
 	private String description = "This is a skill";
 	private float avgdps;
 	private String anim = "";
-	
 	private Char owner;
 	private float basepower;
 	
@@ -275,6 +275,21 @@ public abstract class Action {
 	 */
 	public Action setAnim(String anim) {
 		this.anim = anim;
+		return this;
+	}
+	
+	/**
+	 * @return if action can be reflected
+	 */
+	public boolean getReflect() {
+		return reflect;
+	}
+
+	/**Sets if the action can be reflected or not
+	 * @param reflect
+	 */
+	public Action setReflect(boolean reflect) {
+		this.reflect = reflect;
 		return this;
 	}
 	

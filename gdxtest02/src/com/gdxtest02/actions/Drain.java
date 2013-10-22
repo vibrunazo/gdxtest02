@@ -6,8 +6,8 @@ import com.gdxtest02.Char;
 public class Drain extends Action {
 	@Override
 	protected void go(Char self, Char target) {
-		target.incHp(-power, self, false);
-		self.incHp(power, self, false);
+		target.incHp(-power, self, getReflect());
+		self.incHp(power, self, getReflect());
 	}
 
 	@Override
