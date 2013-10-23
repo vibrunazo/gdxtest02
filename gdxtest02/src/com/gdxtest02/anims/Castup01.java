@@ -11,8 +11,8 @@ import com.gdxtest02.CharAnim;
 public class Castup01 extends CharAnim {
 
 	private Animation punchAnimation;
-	private ParticleEffect effect1;
-	private ParticleEffect effect2;
+	protected ParticleEffect effect1;
+	protected ParticleEffect effect2;
 	private float x;
 	private float y;
 
@@ -20,17 +20,19 @@ public class Castup01 extends CharAnim {
 		super(animRenderer);
 		punchAnimation = sd.findAnimation("castup01");
 		
+		setParticles();
+	}
+
+	protected void setParticles() {
 		effect1 = new ParticleEffect();
 		effect1.load(Gdx.files.internal("effects/part01.p"), Gdx.files.internal("effects"));
 		effect1.start();
-		effect1.setPosition(200, 300);
 		renderer.addParticle(effect1);
 		
 		effect2 = new ParticleEffect();
 		effect2.load(Gdx.files.internal("effects/part01.p"), Gdx.files.internal("effects"));
 		effect2.start();
-		effect2.setPosition(200, 300);
-		renderer.addParticle(effect2);
+		renderer.addParticle(effect2);		
 	}
 
 	/* (non-Javadoc)

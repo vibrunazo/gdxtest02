@@ -19,6 +19,7 @@ import com.esotericsoftware.spine.SlotData;
 import com.esotericsoftware.spine.attachments.Attachment;
 import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.Castup01;
+import com.gdxtest02.anims.Castup02;
 import com.gdxtest02.anims.Punch01;
 import com.gdxtest02.anims.PunchRight01;
 import com.gdxtest02.anims.Stand01;
@@ -96,6 +97,9 @@ public class AnimRenderer {
 		}
 		if (animname.equals("castup")) {
 			anim = new Castup01(this);
+		}
+		if (animname.equals("castup02")) {
+			anim = new Castup02(this);
 		}
 	}
 	
