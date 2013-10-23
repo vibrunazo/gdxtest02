@@ -15,6 +15,7 @@ public class PutSpikes extends Action{
 	@Override
 	public void ini() {
 		setName("Put Spikes");
+		setAnim("castup");
 	}
 	public void update() {
 		setDescription("Reflects " + getPower() + " each Direct Damage for " + getDuration() + 

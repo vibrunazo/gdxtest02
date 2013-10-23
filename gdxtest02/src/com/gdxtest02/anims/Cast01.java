@@ -47,7 +47,6 @@ public class Cast01 extends CharAnim {
 		
 		effect.setPosition(x, y);
 		
-		
 		if (animationTime > animation.getDuration()) {
 			end();
 		}
