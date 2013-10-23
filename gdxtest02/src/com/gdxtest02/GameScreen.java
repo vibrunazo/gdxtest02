@@ -226,8 +226,6 @@ public class GameScreen implements Screen {
 			ui.setAnimTime(0);
 			return;
 		}
-		setAnimStateP1();
-		pausetime = PAUSE_TIME;
 		
 		//preparing
 		if (p1control == CONTROL_AI){
@@ -259,6 +257,9 @@ public class GameScreen implements Screen {
 				return;
 			}
 		}
+		
+		setAnimStateP1();
+		pausetime = PAUSE_TIME;
 		
 		
 		// now we know everything is ok, so start actually doing stuff
