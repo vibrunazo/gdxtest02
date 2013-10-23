@@ -2,6 +2,7 @@ package com.gdxtest02;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
@@ -43,6 +44,7 @@ public class AnimRenderer {
 	private CharAnim anim;
 	private String defaultanim;
 	private String animname;
+	private Array<ParticleEffect> particles;
 
 	public AnimRenderer(CharSkin data) {
 
@@ -68,7 +70,14 @@ public class AnimRenderer {
 		return animname;
 	}
 	
+	/**Sets the animation of the character to the animation with this generic name
+	 * the renderer will decided which exact animation to use depending on the character
+	 * 
+	 * @param animname
+	 */
 	public void setAnim(String animname) {
+		// reset particles when changing anim
+		particles = new Array<ParticleEffect>(); 
 		if (animname.equals("") || animname == null) {
 			setAnimToDefault();
 		}
@@ -157,11 +166,26 @@ public class AnimRenderer {
 
 		root.setX(posX); root.setY(posY);
 		
+		delta = Gdx.graphics.getDeltaTime();
 		anim.draw();
 
 		skeleton.updateWorldTransform();
-		skeleton.update(delta);
+//		skeleton.update(delta);
 		renderer.draw(batch, skeleton);
+		
+		drawParticles(batch);
+	}
+
+	private void drawParticles(SpriteBatch batch) {
+		for (ParticleEffect p : particles) {
+//			if (p.getEmitters().get(0).getPercentComplete() == 0) {
+//				p.start();
+//			}
+			p.update(delta);
+			p.draw(batch);
+			
+//			log("part: " + p.getEmitters().get(0).getPercentComplete() + " delta: " + delta);
+		}
 	}
 
 	/**Scales the whole character, will reload everything again, use with care
@@ -205,6 +229,11 @@ public class AnimRenderer {
 
 	public boolean getFlipX() {
 		return skeleton.getFlipX();
+	}
+
+	public void addParticle(ParticleEffect effect) {
+		particles.add(effect);
+		effect.start();
 	}
 
 }

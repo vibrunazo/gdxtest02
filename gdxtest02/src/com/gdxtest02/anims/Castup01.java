@@ -19,7 +19,11 @@ public class Castup01 extends CharAnim {
 	@Override
 	public void draw() {
 		super.draw();
+		
 		punchAnimation.apply(skeleton, lastTime, animationTime, false, null);
+		float x = skeleton.findBone("hand_R").getWorldX();
+		float y = skeleton.findBone("hand_R").getWorldY();
+		
 		if (animationTime > punchAnimation.getDuration()) {
 			end();
 		}

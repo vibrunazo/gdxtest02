@@ -1,16 +1,28 @@
 package com.gdxtest02.anims;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.esotericsoftware.spine.Animation;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.CharAnim;
+import static com.gdxtest02.GdxTest02.log;
 
 public class Cast01 extends CharAnim {
 
-	private Animation punchAnimation;
+	private Animation animation;
+	private ParticleEffect effect;
+	private float x;
+	private float y;
 
 	public Cast01(AnimRenderer animRenderer) {
 		super(animRenderer);
-		punchAnimation = sd.findAnimation("cast01");
+		animation = sd.findAnimation("cast01");
+		
+		effect = new ParticleEffect();
+		effect.load(Gdx.files.internal("effects/part01.p"), Gdx.files.internal("effects"));
+		effect.start();
+		effect.setPosition(200, 300);
+		renderer.addParticle(effect);
 	}
 
 	/* (non-Javadoc)
@@ -19,8 +31,24 @@ public class Cast01 extends CharAnim {
 	@Override
 	public void draw() {
 		super.draw();
-		punchAnimation.apply(skeleton, lastTime, animationTime, false, null);
-		if (animationTime > punchAnimation.getDuration()) {
+		
+		animation.apply(skeleton, lastTime, animationTime, false, null);
+		if (animationTime < 0.8f) {
+			x = skeleton.findBone("hand_R").getWorldX();
+			y = skeleton.findBone("hand_R").getWorldY() + 10;
+		}
+		else {
+			int flip = 1;
+			if (skeleton.getFlipX()) flip = -1;
+			x += delta*800*flip;
+		}
+		
+		log("animtime: " + animationTime);
+		
+		effect.setPosition(x, y);
+		
+		
+		if (animationTime > animation.getDuration()) {
 			end();
 		}
 	}
