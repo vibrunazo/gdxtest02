@@ -313,8 +313,9 @@ public abstract class Action {
 	/**
 	 * @param animeffect the animeffect to set
 	 */
-	public void setAnimEffect(String animeffect) {
+	public Action setAnimEffect(String animeffect) {
 		this.animeffect = animeffect;
+		return this;
 	}
 	
 }
