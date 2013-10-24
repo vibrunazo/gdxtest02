@@ -14,6 +14,7 @@ public abstract class Action {
 	private String anim = "";
 	private Char owner;
 	private float basepower;
+	private String animeffect;
 	
 	public Action() {
 		ini();
@@ -278,6 +279,15 @@ public abstract class Action {
 		return this;
 	}
 	
+	/**Sets the name of the animation this action should show when active
+	 * @param anim
+	 */
+	public Action setAnim(String anim, String effect) {
+		this.anim = anim;
+		this.animeffect = effect;
+		return this;
+	}
+	
 	/**
 	 * @return if action can be reflected
 	 */
@@ -291,6 +301,20 @@ public abstract class Action {
 	public Action setReflect(boolean reflect) {
 		this.reflect = reflect;
 		return this;
+	}
+
+	/**
+	 * @return the animeffect
+	 */
+	public String getAnimEffect() {
+		return animeffect;
+	}
+
+	/**
+	 * @param animeffect the animeffect to set
+	 */
+	public void setAnimEffect(String animeffect) {
+		this.animeffect = animeffect;
 	}
 	
 }

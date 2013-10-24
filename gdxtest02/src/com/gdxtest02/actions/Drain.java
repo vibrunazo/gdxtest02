@@ -14,6 +14,7 @@ public class Drain extends Action {
 	public void ini() {
 		setName("Drain");
 		setAnim("cast");
+		setAnimEffect("green");
 	}
 	public void update() {
 		setDescription("Drains " + getPower() + " damage and heals you.");

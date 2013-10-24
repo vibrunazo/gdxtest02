@@ -10,7 +10,7 @@ import com.gdxtest02.CharAnim;
 
 public class Castup01 extends CharAnim {
 
-	private Animation punchAnimation;
+	private Animation animation;
 	protected ParticleEffect effect1;
 	protected ParticleEffect effect2;
 	private float x;
@@ -18,23 +18,17 @@ public class Castup01 extends CharAnim {
 
 	public Castup01(AnimRenderer animRenderer) {
 		super(animRenderer);
-		punchAnimation = sd.findAnimation("castup01");
+		animation = sd.findAnimation("castup01");
 		
-		setParticles();
+		iniParticles();
 	}
 
-	protected void setParticles() {
-		effect1 = new ParticleEffect();
-		effect1.load(Gdx.files.internal("effects/part01.p"), Gdx.files.internal("effects"));
-		effect1.start();
-		renderer.addParticle(effect1);
+	protected void iniParticles() {
+		effect1 = addEffect();
 		
-		effect2 = new ParticleEffect();
-		effect2.load(Gdx.files.internal("effects/part01.p"), Gdx.files.internal("effects"));
-		effect2.start();
-		renderer.addParticle(effect2);		
+		effect2 = addEffect();		
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.gdxtest02.CharAnim#draw()
 	 */
@@ -50,9 +44,9 @@ public class Castup01 extends CharAnim {
 		y = skeleton.findBone("hand_L").getWorldY();
 		effect2.setPosition(x, y);
 		
-		punchAnimation.apply(skeleton, lastTime, animationTime, false, null);
+		animation.apply(skeleton, lastTime, animationTime, false, null);
 		
-		if (animationTime > punchAnimation.getDuration()) {
+		if (animationTime > animation.getDuration()) {
 			end();
 		}
 	}

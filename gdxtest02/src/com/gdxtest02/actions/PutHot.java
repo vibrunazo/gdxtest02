@@ -16,6 +16,7 @@ public class PutHot extends Action {
 	public void ini() {
 		setName("Put Hot");
 		setAnim("castup");
+		setAnimEffect("green");
 	}
 	public void update() {
 		setDescription("Heals " + getPower() + " per sec for " + getDuration() + 

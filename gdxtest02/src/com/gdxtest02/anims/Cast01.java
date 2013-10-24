@@ -18,11 +18,11 @@ public class Cast01 extends CharAnim {
 		super(animRenderer);
 		animation = sd.findAnimation("cast01");
 		
-		effect = new ParticleEffect();
-		effect.load(Gdx.files.internal("effects/part01.p"), Gdx.files.internal("effects"));
-		effect.start();
-		effect.setPosition(200, 300);
-		renderer.addParticle(effect);
+		iniParticles();
+	}
+	
+	protected void iniParticles() {
+		effect = addEffect();
 	}
 
 	/* (non-Javadoc)
@@ -43,7 +43,7 @@ public class Cast01 extends CharAnim {
 			x += delta*800*flip;
 		}
 		
-		log("animtime: " + animationTime);
+//		log("animtime: " + animationTime);
 		
 		effect.setPosition(x, y);
 		
