@@ -51,6 +51,8 @@ public class FightScreen implements Screen {
 	private float delta;
 	private float gametime;
 	private float pausetime;
+	private String a1name;
+	private String a2name;
 
 	public FightScreen(GdxTest02 game) {
 		this(game, new Char01("p1"), new Char02("p2"));
@@ -207,10 +209,14 @@ public class FightScreen implements Screen {
 	}
 
 	private void endAnimState() {
-		fightstate = "go";
-//		log("pause over");
 		pausetime = 0;
 		ui.setAnimTime(0);
+		if (isFightOver()) {
+			endFight();
+		}
+		else {
+			fightstate = "go";
+		}
 	}
 
 
@@ -221,9 +227,7 @@ public class FightScreen implements Screen {
 	public void go() {
 		if (fightstate.equals("paused")) return;
 		if (fightstate.contains("anim")) {
-			fightstate = "go";
-			pausetime = 0;
-			ui.setAnimTime(0);
+			endAnimState();
 			return;
 		}
 		
@@ -241,22 +245,7 @@ public class FightScreen implements Screen {
 		Action actionp1 = p1.getActiveAction();
 		Action actionp2 = p2.getActiveAction();
 		
-		String a1name = "null";
-		String a2name = "null";
-		if (actionp1 != null) {
-			a1name = actionp1.getName();
-			if (!actionp1.isLegal()) {
-				ui.logToConsole("Cannot go because p1 action, " + a1name + " is illegal");
-				return;
-			} 
-		}
-		if (actionp2 != null) {
-			a2name = actionp2.getName();
-			if (!actionp2.isLegal()) {
-				ui.logToConsole("Cannot go because p2 action, " + a2name + " is illegal");
-				return;
-			}
-		}
+		if (!areActionsLegal(actionp1, actionp2)) return;
 		
 		setAnimStateP1();
 		pausetime = PAUSE_TIME;
@@ -276,7 +265,33 @@ public class FightScreen implements Screen {
 		p1.applyDmg(); p2.applyDmg();
 		
 
-		if (p1.getHp() == 0 || p2.getHp() == 0) {
+//		endFight();
+		
+		updateUi();
+	}
+
+	private boolean areActionsLegal(Action actionp1, Action actionp2) {
+		a1name = "null";
+		a2name = "null";
+		if (actionp1 != null) {
+			a1name = actionp1.getName();
+			if (!actionp1.isLegal()) {
+				ui.logToConsole("Cannot go because p1 action, " + a1name + " is illegal");
+				return false;
+			} 
+		}
+		if (actionp2 != null) {
+			a2name = actionp2.getName();
+			if (!actionp2.isLegal()) {
+				ui.logToConsole("Cannot go because p2 action, " + a2name + " is illegal");
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private void endFight() {
+		if (isFightOver()) {
 			fightstate = "paused";
 			Char winner = null;
 			if (p1.getHp() == 0) {
@@ -292,8 +307,10 @@ public class FightScreen implements Screen {
 			
 			fightOver(winner);
 		}
-		
-		updateUi();
+	}
+
+	private boolean isFightOver() {
+		return p1.getHp() == 0 || p2.getHp() == 0;
 	}
 
 	private void fightOver(Char winner) {
