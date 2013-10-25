@@ -39,8 +39,8 @@ public class CharSelectScreenUI {
 	private static final int CHARS_PER_ROW = 4;
 	private static final int CHARBUTTON_WIDTH = 50;
 	private static final int AIBUTTON_WIDTH = 50;
-	protected static final int CONTROL_AI = GameScreen.CONTROL_AI;
-	protected static final int CONTROL_HUMAN = GameScreen.CONTROL_HUMAN;
+	protected static final int CONTROL_AI = FightScreen.CONTROL_AI;
+	protected static final int CONTROL_HUMAN = FightScreen.CONTROL_HUMAN;
 	private static final float FACETABLE_X = 50;
 	private static final  float FACETABLE_Y = 300;
 	private static final  float FACETABLE_WIDTH = 150;
@@ -247,7 +247,7 @@ public class CharSelectScreenUI {
 					screen.game.setScreen(new LevelSelectScreen(screen.game));
 				}
 				else {
-					screen.game.setScreen(new GameScreen(screen.game, getP1(), getP2(), p1control, p2control));
+					screen.game.setScreen(new FightScreen(screen.game, getP1(), getP2(), p1control, p2control));
 				}
 				screen.dispose();
 			}

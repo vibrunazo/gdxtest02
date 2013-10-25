@@ -77,7 +77,7 @@ public class CharAnim {
 			return Gdx.files.internal("effects/part02.p");
 		} 
 		else if (effecttype.equals("ice")) {
-			return Gdx.files.internal("effects/ice01.p");
+			return Gdx.files.internal("effects/ice02.p");
 		} 
 		
 		effecttype = "fire";

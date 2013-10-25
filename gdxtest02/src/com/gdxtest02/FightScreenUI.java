@@ -21,12 +21,12 @@ import com.esotericsoftware.tablelayout.Value;
  * @author vib
  *
  */
-public class GameScreenUI extends UIBuilder {
+public class FightScreenUI extends UIBuilder {
 	
 	private static final int CENTERBUTTON_WIDTH = 100;
 	private static final int CENTERBUTTON_HEIGHT = 30;
 	private static final float CENTERTABLE_Y = 10;
-	private GameScreen screen;
+	private FightScreen screen;
 	private Char p1;
 	private Char p2;
 	
@@ -54,7 +54,7 @@ public class GameScreenUI extends UIBuilder {
 	private ClickListener clickOnBackButton;
 	private Label animTime;
 	
-	public GameScreenUI(GdxTest02 game, GameScreen gameScreen) {
+	public FightScreenUI(GdxTest02 game, FightScreen gameScreen) {
 		super(game);
 		this.screen = gameScreen;
 		p1 = screen.getP1();
@@ -174,7 +174,7 @@ public class GameScreenUI extends UIBuilder {
 		Table tablep1 = new Table();
 		createActionBar(tablep1, "p1", buttons1, ACTION_BAR_X, ACTION_BAR_Y);
 
-		if (screen.p2control != GameScreen.CONTROL_AI) {
+		if (screen.p2control != FightScreen.CONTROL_AI) {
 			Table tablep2 = new Table();
 			createActionBar(tablep2, "p2", buttons2, 800 - ACTION_BAR_WIDTH - ACTION_BAR_X,
 					ACTION_BAR_Y);
@@ -219,7 +219,7 @@ public class GameScreenUI extends UIBuilder {
 	 * @param text
 	 */
 	private void setButtonText(int group, int button, String text) {
-		if (screen.p2control == GameScreen.CONTROL_AI && group > 1) return;
+		if (screen.p2control == FightScreen.CONTROL_AI && group > 1) return;
 		TextButton b = getButtonGroup(group).get(button-1);
 		b.setText(text);
 	}

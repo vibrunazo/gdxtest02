@@ -155,7 +155,7 @@ public class LevelScreenUI {
 					screen.endLevel();
 					return;
 				}
-				GameScreen gameScreen = new GameScreen(screen.game, p1, p2);
+				FightScreen gameScreen = new FightScreen(screen.game, p1, p2);
 				//				gameScreen.setNextLevel(new LevelScreen(screen.game));
 				gameScreen.setNextLevel(screen.getClass());
 				screen.game.setScreen(gameScreen);

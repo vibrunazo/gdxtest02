@@ -18,7 +18,7 @@ import com.gdxtest02.gamestate.LevelState;
 
 import static com.gdxtest02.gamestate.LevelState.*;
 
-public class GameScreen implements Screen {
+public class FightScreen implements Screen {
 
 
 	public static final int CONTROL_AI = 0;
@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
 	 */
 	private String fightstate; 
 	private int round = 1;
-	private GameScreenUI ui;
+	private FightScreenUI ui;
 	private Class<? extends LevelScreen> nextLevel;
 
 	public int p1control;
@@ -52,17 +52,17 @@ public class GameScreen implements Screen {
 	private float gametime;
 	private float pausetime;
 
-	public GameScreen(GdxTest02 game) {
+	public FightScreen(GdxTest02 game) {
 		this(game, new Char01("p1"), new Char02("p2"));
 		
 	}
 	
-	public GameScreen(final GdxTest02 game, Char player1, Char player2) {
+	public FightScreen(final GdxTest02 game, Char player1, Char player2) {
 		this(game, player1, player2,
 				CONTROL_HUMAN, CONTROL_AI);
 	}
 	
-	public GameScreen(final GdxTest02 game, Char player1, Char player2,
+	public FightScreen(final GdxTest02 game, Char player1, Char player2,
 			int p1control, int p2control) {
 		this.game = game;
 		this.p1control = p1control;
@@ -92,7 +92,7 @@ public class GameScreen implements Screen {
 		p1.setTarget(p2);
 		p2.setTarget(p1);
 		
-		ui = new GameScreenUI(game, this);
+		ui = new FightScreenUI(game, this);
 		ui.setupUi();
 		
 		logPlayerDescriptions();
@@ -114,7 +114,7 @@ public class GameScreen implements Screen {
 	}
 	
 	protected void restart() {
-		GameScreen newgame = new GameScreen(game, p1, p2, p1control, p2control);
+		FightScreen newgame = new FightScreen(game, p1, p2, p1control, p2control);
 		newgame.setNextLevel(nextLevel);
 		game.setScreen(newgame);
 //		dispose();

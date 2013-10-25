@@ -63,7 +63,7 @@ public class MainMenuScreenUI {
 		ChangeListener gobuttonlistener = new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 				screen.game.getGameState().setGameMode(MODE_VERSUS);
-				screen.game.setScreen(new GameScreen(screen.game));
+				screen.game.setScreen(new FightScreen(screen.game));
 				screen.dispose();
 			}
 		};
