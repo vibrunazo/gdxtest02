@@ -16,6 +16,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import com.esotericsoftware.tablelayout.Value;
 
+import static com.gdxtest02.FightScreen.*;
+
 /**class that specifically defines the ui for the Game Screen
  * 
  * @author vib
@@ -53,6 +55,8 @@ public class FightScreenUI extends UIBuilder {
 	private ScrollPane scroll;
 	private ClickListener clickOnBackButton;
 	private Label animTime;
+	private int selected_action_for_p1;
+	private int selected_action_for_p2;
 	
 	public FightScreenUI(GdxTest02 game, FightScreen gameScreen) {
 		super(game);
@@ -155,21 +159,67 @@ public class FightScreenUI extends UIBuilder {
 				int groupnumber = Integer.parseInt(actor.getName().substring(1, 2)); // number of the group
 				//				Gdx.app.log("gdxtest", "le click group: " + groupnumber);
 
-				for (TextButton b : buttonGroups.get(groupnumber)) { // for all buttons in this group
-//					Gdx.app.log("gdxtest", "looping on button: " + b.getName());
-					b.setChecked(false); // uncheck all buttons on this group
-				}
-				((TextButton)actor).setChecked(true); // set this that was just clicked as checked
-
 				// number of the action
 				int activeActionId = Integer.parseInt(actor.getName().substring(2));
 				
+				checkButtonFromGroup(actor, groupnumber, activeActionId);
+
 				// set the action number for the appropriate player
 				clickedActionButton(groupnumber, activeActionId);
+				
+				if (getSelectedActionForPlayer(1) != 0 && getSelectedActionForPlayer(2) != 0) {
+					screen.go();
+				}
 			}
+
 		};
 	}
 
+	/**Check this button on the button group, and unchecks all others
+	 * @param actor
+	 * @param groupnumber
+	 * @param activeActionId 
+	 */
+	private void checkButtonFromGroup(Actor actor, int groupnumber, int activeActionId) {
+		setSelectedActionForPlayer(groupnumber, activeActionId);
+		uncheckAllButtonsFromGroup(groupnumber);
+		((TextButton)actor).setChecked(true); // set this that was just clicked as checked
+	}
+
+	private void setSelectedActionForPlayer(int playernumber, int actionId) {
+		if (playernumber == 1) selected_action_for_p1 = actionId;
+		if (playernumber == 2) selected_action_for_p2 = actionId;
+	}
+	
+	/**returns the action this player selected on the UI
+	 * returns zero if nothing is selected
+	 * returns -1 if player is controlled by AI
+	 * 
+	 * @param playernumber
+	 * @return
+	 */
+	private int getSelectedActionForPlayer(int playernumber) {
+		if (playernumber == 1) {
+			if (screen.p1control == CONTROL_AI) return -1;
+			return selected_action_for_p1;
+		}
+		if (playernumber == 2) {
+			if (screen.p2control == CONTROL_AI) return -1;
+			return selected_action_for_p2;
+		}
+		return 0;
+	}
+
+	/**Unchecks all buttons on this button group
+	 * @param groupnumber
+	 */
+	private void uncheckAllButtonsFromGroup(int groupnumber) {
+		for (TextButton b : buttonGroups.get(groupnumber)) { // for all buttons in this group
+//			Gdx.app.log("gdxtest", "looping on button: " + b.getName());
+			b.setChecked(false); // uncheck all buttons on this group
+		}
+	}
+	
 	private void createActionBars() {
 		Table tablep1 = new Table();
 		createActionBar(tablep1, "p1", buttons1, ACTION_BAR_X, ACTION_BAR_Y);
@@ -284,6 +334,24 @@ public class FightScreenUI extends UIBuilder {
 			return;
 		}
 		logToConsole(activeActionId + ": " + a.getTooltip());
+	}
+	
+	/**resets active actions for both players
+	 * 
+	 */
+	public void resetActiveActions() {
+		resetActiveAction(1);
+		resetActiveAction(2);
+	}
+
+	/**resets active action for player
+	 * @param playernumber
+	 */
+	private void resetActiveAction(int playernumber) {
+//		Char c = screen.getPlayer(playernumber);
+//		c.setActiveActionId(0);
+		setSelectedActionForPlayer(playernumber, 0);
+		uncheckAllButtonsFromGroup(playernumber);
 	}
 
 	/**

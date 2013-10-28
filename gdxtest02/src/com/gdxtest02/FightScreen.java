@@ -353,13 +353,14 @@ public class FightScreen implements Screen {
 	private void updateUi() {
 		logPlayerStats(p1);
 		logPlayerStats(p2);
-		updateButtons();
+		updateButtonsText();
+		ui.resetActiveActions();
 	}
 
 	/**Update buttons' text
 	 * 
 	 */
-	private void updateButtons() {
+	private void updateButtonsText() {
 		for (int player = 1; player <= 2; player++) {
 			for (int action = 1; action <= 4; action++) {
 				ui.updateActionText(player, action);
