@@ -41,12 +41,12 @@ public abstract class Action {
 		ini();
 	}
 	
-	/**Updates the power of this action based on the level multiplier
+	/**Updates the power of this action based on the level multiplier and buff multiplier
 	 * 
 	 */
 	public void updatePower() {
 		if (owner == null) return;
-		power = (float) Math.ceil(basepower) * owner.getPowerMultiplier();
+		power = (float) Math.ceil(basepower) * owner.getPowerMultiplier() * owner.getBuffPwMultiplier();
 	}
 	
 	/**Sets the owner of this action, will be used to calculate level and

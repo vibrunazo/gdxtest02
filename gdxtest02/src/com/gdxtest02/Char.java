@@ -51,7 +51,8 @@ public class Char implements Cloneable {
 	private Char target;
 	private boolean canoverheal;
 	
-	private float powerMultiplier;
+	private float buffPwMultiplier;
+	private float levelMultiplier;
 	private int level;
 	private int exp;
 	private Array<Integer> aiSkillList;
@@ -77,7 +78,8 @@ public class Char implements Cloneable {
 		
 		spikes = 0;
 		level = 1;
-		powerMultiplier = 1;
+		levelMultiplier = 1;
+		buffPwMultiplier = 1;
 		
 		resetStats();
 //		resetAssets();
@@ -99,6 +101,7 @@ public class Char implements Cloneable {
 		buffs = new Array<Buff>();
 		newbuffs = new Array<Buff>();
 		spikes = 0;
+		buffPwMultiplier = 1;
 		updateAllActions();
 		//reset all actions
 		for (Action a : actionBar) a.reset();
@@ -391,7 +394,7 @@ public class Char implements Cloneable {
 	 */
 	public String getFullDescription() {
 //		return description + " avgdps: " + balance.getAvgDps();
-		return description + " level " + level  + " (k: " + powerMultiplier + ") " + getActionListString();
+		return description + " level " + level  + " (k: " + levelMultiplier + ") " + getActionListString();
 	}
 
 	/**
@@ -474,14 +477,14 @@ public class Char implements Cloneable {
 	 * @return the powerMultiplier
 	 */
 	public float getPowerMultiplier() {
-		return powerMultiplier;
+		return levelMultiplier;
 	}
 
 	/**
 	 * @param powerMultiplier the powerMultiplier to set
 	 */
 	public void setPowerMultiplier(float powerMultiplier) {
-		this.powerMultiplier = powerMultiplier;
+		this.levelMultiplier = powerMultiplier;
 		updateAllActions();
 		updateHp();
 	}
@@ -490,7 +493,7 @@ public class Char implements Cloneable {
 	 */
 	private void updateHp() {
 		float pct = ((float) hp)/((float) maxhp); // get current heal %
-		maxhp = (int) (basehp * powerMultiplier);
+		maxhp = (int) (basehp * levelMultiplier);
 		hp = (int) Math.ceil(pct*hp); // keep health % the same
 		
 	}
@@ -514,7 +517,7 @@ public class Char implements Cloneable {
 		level++;
 		setPowerMultiplier(1f + (level - 1f)*0.1f);
 		unlockSkillsForLevel(level);
-		log(name + " leveled up, level: " + level + " pmult: " + powerMultiplier);
+		log(name + " leveled up, level: " + level + " pmult: " + levelMultiplier);
 	}
 	
 	private void unlockSkillsForLevel(int level) {
@@ -691,6 +694,22 @@ public class Char implements Cloneable {
 	public boolean isUsingDefaultAnim() {
 		if (getAnimName().equals(getDefaultAnimName())) return true;
 		return false;
+	}
+
+	/**
+	 * @return the buffPwMultiplier
+	 */
+	public float getBuffPwMultiplier() {
+		return buffPwMultiplier;
+	}
+
+	/**
+	 * @param buffPwMultiplier the buffPwMultiplier to set
+	 */
+	public void setBuffPwMultiplier(float buffPwMultiplier) {
+		this.buffPwMultiplier = buffPwMultiplier;
+		updateAllActions();
+		updateHp();
 	}
 
 }
