@@ -28,6 +28,10 @@ public class FightScreenUI extends UIBuilder {
 	private static final int CENTERBUTTON_WIDTH = 100;
 	private static final int CENTERBUTTON_HEIGHT = 30;
 	private static final float CENTERTABLE_Y = 10;
+	private static final float CONFIG_Y = 440;
+	private static final float CONFIG_X = 40;
+	private static final float CONFIG_WIDTH = 40;
+	private static final float CONFIG_HEIGHT = 40;
 	private FightScreen screen;
 	private Char p1;
 	private Char p2;
@@ -57,6 +61,11 @@ public class FightScreenUI extends UIBuilder {
 	private Label animTime;
 	private int selected_action_for_p1;
 	private int selected_action_for_p2;
+	private ClickListener clickOnConfigButton;
+	private boolean showconfig;
+	private TextButton configbutton;
+	private Table consoletable;
+	private Table centerTable;
 	
 	public FightScreenUI(GdxTest02 game, FightScreen gameScreen) {
 		super(game);
@@ -78,15 +87,29 @@ public class FightScreenUI extends UIBuilder {
 		createCenterTable();
 		createActionBars();
 		createConsole();
+		createConfigTable();
+		
+		setShowConfig(false);
+	}
+
+	private void createConfigTable() {
+		Table table = new Table();
+		table.setPosition(CONFIG_X, CONFIG_Y);
+		configbutton = new TextButton("CFG", skin);
+		table.add(configbutton).width(CONFIG_WIDTH).height(CONFIG_HEIGHT);
+
+		configbutton.addListener(clickOnConfigButton);
+		
+		stage.addActor(table);
 	}
 
 	private void createConsole() {
-		Table table = new Table();
+		consoletable = new Table();
 //		table.setFillParent(true);
-		table.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
-		table.setSize(CONSOLE_WIDTH, CONSOLE_HEIGHT);
-		table.setPosition(400 - CONSOLE_WIDTH/2, CONSOLE_Y);
-		stage.addActor(table);
+		consoletable.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
+		consoletable.setSize(CONSOLE_WIDTH, CONSOLE_HEIGHT);
+		consoletable.setPosition(400 - CONSOLE_WIDTH/2, CONSOLE_Y);
+		stage.addActor(consoletable);
 		
 		
 		consoleData = new Array<String>();
@@ -99,12 +122,11 @@ public class FightScreenUI extends UIBuilder {
 //		scroll.setScrollingDisabled(true, false);
 //		scroll.setFlickScroll(false);
 //		scroll.setClamp(false);
-		table.addActor(scroll);
+		consoletable.addActor(scroll);
 	}
 
 	private void createCenterTable() {
-		// Create a table that fills the screen. Everything else will go inside this table.
-		Table centerTable = new Table();
+		centerTable = new Table();
 		centerTable.setFillParent(true);
 		//				table.setBackground(skin.newDrawable("white", Color.LIGHT_GRAY));
 		//				table.setSize(260, 195);
@@ -133,6 +155,11 @@ public class FightScreenUI extends UIBuilder {
 	}
 
 	private void createListeners() {
+		clickOnConfigButton = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				toggleConfig();
+			}
+		};
 		clickOnGoButton = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				screen.go();
@@ -173,6 +200,20 @@ public class FightScreenUI extends UIBuilder {
 			}
 
 		};
+	}
+
+	protected void toggleConfig() {
+		if (showconfig == true) {
+			setShowConfig(false);
+		}
+		else setShowConfig(true);
+	}
+
+	private void setShowConfig(boolean b) {
+		showconfig = b;
+		configbutton.setChecked(b);
+		consoletable.setVisible(b);
+		centerTable.setVisible(b);
 	}
 
 	/**Check this button on the button group, and unchecks all others

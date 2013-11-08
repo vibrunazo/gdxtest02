@@ -123,7 +123,7 @@ public class Char implements Cloneable {
 //		int x = posX + 256/2 - 100; // bar start x position
 //		int y = posY + 256 + 10; // bar start y position
 		int x = posX - 100; // bar start x position
-		int y = posY + 256 - 20; // bar start y position
+		int y = posY + 256 - 50; // bar start y position
 		int width = 200; // bar width
 		int height = 10; // bar height
 		// health normalized between 0 and 1
