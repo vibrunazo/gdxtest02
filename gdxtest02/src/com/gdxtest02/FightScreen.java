@@ -147,11 +147,14 @@ public class FightScreen implements Screen {
 		game.batch.setProjectionMatrix(camera.combined);
 
 		game.batch.begin();
-		game.font.draw(game.batch, "Test", 0, 480);
+//		game.font.draw(game.batch, "Test", 0, 480);
 
 		// tell chars to draw themselves
 		p1.draw(game.batch);
 		p2.draw(game.batch);
+		
+		p1.drawParticles(game.batch);
+		p2.drawParticles(game.batch);
 
 		game.batch.end();
 

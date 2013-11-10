@@ -181,10 +181,10 @@ public class AnimRenderer {
 //		skeleton.update(delta);
 		renderer.draw(batch, skeleton);
 		
-		drawParticles(batch);
+//		drawParticles(batch);
 	}
 
-	private void drawParticles(SpriteBatch batch) {
+	public void drawParticles(SpriteBatch batch) {
 		for (ParticleEffect p : particles) {
 //			if (p.getEmitters().get(0).getPercentComplete() == 0) {
 //				p.start();
