@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.esotericsoftware.spine.Animation;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.CharAnim;
+import com.gdxtest02.Projectile;
+
 import static com.gdxtest02.GdxTest02.log;
 
 public class Cast01 extends CharAnim {
@@ -22,7 +24,8 @@ public class Cast01 extends CharAnim {
 	}
 	
 	protected void iniParticles() {
-		effect = addEffect();
+		effect = addAnimEffect();
+		effect.setDuration(1500);
 	}
 
 	/* (non-Javadoc)
@@ -40,7 +43,13 @@ public class Cast01 extends CharAnim {
 		else {
 			int flip = 1;
 			if (skeleton.getFlipX()) flip = -1;
-			x += delta*800*flip;
+//			x += delta*800*flip;
+			
+			Projectile p = createProjectile(x, y);
+			if (p != null) {
+//				p.setSpeedx(800);
+				p.setFlipX(skeleton.getFlipX()) ;
+			}
 		}
 		
 //		log("animtime: " + animationTime);

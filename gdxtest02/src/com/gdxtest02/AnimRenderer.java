@@ -1,6 +1,7 @@
 package com.gdxtest02;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -44,7 +45,16 @@ public class AnimRenderer {
 	private CharAnim anim;
 	private String defaultanim;
 	private String animname;
-	private Array<ParticleEffect> particles;
+	/**Animation specific effects. Will reset when animation changes
+	 * 
+	 */
+	private Array<ParticleEffect> animeffects;
+	/**Generic char effects. Will persist through animations and only stops
+	 * when char dies or effect ends
+	 * 
+	 */
+	private Array<ParticleEffect> chareffects;
+	private Array<Projectile> projectiles;
 
 	public AnimRenderer(CharSkin data) {
 
@@ -64,6 +74,9 @@ public class AnimRenderer {
 		atlas = new TextureAtlas(Gdx.files.internal(atlasfile));
 //		sb = new SkeletonBinary(atlas);
 		loadSkeletonDataFromJson();
+		
+		chareffects = new Array<ParticleEffect>(); 
+		projectiles = new Array<Projectile>(); 
 	}
 	
 	public String getAnimName() {
@@ -82,7 +95,7 @@ public class AnimRenderer {
 	 */
 	public void setAnim(String animname, String effectname) {
 		// reset particles when changing anim
-		particles = new Array<ParticleEffect>(); 
+		animeffects = new Array<ParticleEffect>(); 
 		if (animname.equals("") || animname == null) {
 			setAnimToDefault();
 		}
@@ -185,14 +198,19 @@ public class AnimRenderer {
 	}
 
 	public void drawParticles(SpriteBatch batch) {
-		for (ParticleEffect p : particles) {
-//			if (p.getEmitters().get(0).getPercentComplete() == 0) {
-//				p.start();
-//			}
+		for (ParticleEffect p : animeffects) {
 			p.update(delta);
 			p.draw(batch);
-			
-//			log("part: " + p.getEmitters().get(0).getPercentComplete() + " delta: " + delta);
+		}
+		
+		for (ParticleEffect p : chareffects) {
+			p.update(delta);
+			p.draw(batch);
+		}
+		
+		for (Projectile p : projectiles) {
+			p.update(delta);
+			p.draw(batch);
 		}
 	}
 
@@ -239,13 +257,61 @@ public class AnimRenderer {
 		return skeleton.getFlipX();
 	}
 
-	public void addParticle(ParticleEffect effect) {
-		particles.add(effect);
+	public void addAnimParticle(ParticleEffect effect) {
+		animeffects.add(effect);
+		effect.start();
+	}
+	
+	public void addCharParticle(ParticleEffect effect) {
+		chareffects.add(effect);
 		effect.start();
 	}
 
 	public void resetParticles() {
-		particles.clear();
+		animeffects.clear();
+	}
+
+	public void createProjectile(Projectile p) {
+		projectiles.add(p);
+		p.start();
+	}
+	
+	/**How many projectiles this char have right now
+	 * @return
+	 */
+	public int getNumProj() {
+		return projectiles.size;
+	}
+	
+	public static FileHandle getParticleFile(String effecttype) {
+		if (effecttype.equals("fire")) {
+			return Gdx.files.internal("effects/part01.p");
+		}
+		else if (effecttype.equals("green")) {
+			return Gdx.files.internal("effects/part02.p");
+		} 
+		else if (effecttype.equals("ice")) {
+			return Gdx.files.internal("effects/ice02.p");
+		} 
+		
+		effecttype = "fire";
+		return getParticleFile(effecttype);
+	}
+
+	public void removeProjectile() {
+//		projectiles.clear();
+//		projectiles.removeIndex(0);
+		projectiles = new Array<Projectile>(); 
+		chareffects.clear();
+		
+		clearCharEffects();
+		
+	}
+
+	private void clearCharEffects() {
+		for (ParticleEffect p : chareffects) {
+			p.dispose();
+		}
 	}
 }
 

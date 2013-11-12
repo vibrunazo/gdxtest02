@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.esotericsoftware.spine.Animation;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.CharAnim;
+import static com.gdxtest02.GdxTest02.log;
 
 public class Castup01 extends CharAnim {
 
@@ -24,9 +25,11 @@ public class Castup01 extends CharAnim {
 	}
 
 	protected void iniParticles() {
-		effect1 = addEffect();
+		effect1 = addAnimEffect();
+		effect1.setDuration(1500);
 		
-		effect2 = addEffect();		
+		effect2 = addAnimEffect();
+		effect2.setDuration(1500);
 	}
 	
 	/* (non-Javadoc)

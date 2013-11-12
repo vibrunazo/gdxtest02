@@ -8,7 +8,6 @@ import com.gdxtest02.actions.PutDmgBuff;
 import com.gdxtest02.actions.PutDot;
 import com.gdxtest02.actions.PutHot;
 import com.gdxtest02.actions.PutSpikes;
-import com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler;
 
 public class Char02 extends Char {
 	

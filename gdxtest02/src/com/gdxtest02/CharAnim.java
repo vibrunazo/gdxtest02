@@ -61,11 +61,29 @@ public class CharAnim {
 		return effecttype;
 	}
 	
-	protected ParticleEffect addEffect() {
+	/**Adds an effect tied to the animation, this effect will disappear
+	 * if the animation ends
+	 * 
+	 * @return
+	 */
+	protected ParticleEffect addAnimEffect() {
 		ParticleEffect effect = new ParticleEffect();
 		effect.load(getParticleFile(), Gdx.files.internal("effects"));
 		effect.start();
-		renderer.addParticle(effect);
+		renderer.addAnimParticle(effect);
+		return effect;
+	}
+	
+	/**Adds an effect tied to the char, this effect will disappear
+	 * if the char dies
+	 * 
+	 * @return
+	 */
+	protected ParticleEffect addCharEffect() {
+		ParticleEffect effect = new ParticleEffect();
+		effect.load(getParticleFile(), Gdx.files.internal("effects"));
+		effect.start();
+		renderer.addAnimParticle(effect);
 		return effect;
 	}
 
@@ -82,6 +100,15 @@ public class CharAnim {
 		
 		effecttype = "fire";
 		return getParticleFile();
+	}
+	
+	protected Projectile createProjectile(float x, float y) {
+		if (renderer.getNumProj() > 0) return null;
+		Projectile p = new Projectile(renderer);
+		p.setPos(x, y);
+		p.setEffecttype(effecttype);
+		renderer.createProjectile(p);
+		return p;
 	}
 	
 }
