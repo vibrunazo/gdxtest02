@@ -9,6 +9,12 @@ import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
 
+/**This is the base class every animation will extend, it should have commonly used
+ * methods that most animations use
+ *  
+ * @author Vandré
+ *
+ */
 public class CharAnim {
 
 	protected AnimRenderer renderer;
@@ -83,23 +89,12 @@ public class CharAnim {
 		ParticleEffect effect = new ParticleEffect();
 		effect.load(getParticleFile(), Gdx.files.internal("effects"));
 		effect.start();
-		renderer.addAnimParticle(effect);
+		renderer.addCharParticle(effect);
 		return effect;
 	}
 
 	private FileHandle getParticleFile() {
-		if (effecttype.equals("fire")) {
-			return Gdx.files.internal("effects/part01.p");
-		}
-		else if (effecttype.equals("green")) {
-			return Gdx.files.internal("effects/part02.p");
-		} 
-		else if (effecttype.equals("ice")) {
-			return Gdx.files.internal("effects/ice02.p");
-		} 
-		
-		effecttype = "fire";
-		return getParticleFile();
+		return AnimRenderer.getParticleFile(effecttype);
 	}
 	
 	protected Projectile createProjectile(float x, float y) {
@@ -111,4 +106,15 @@ public class CharAnim {
 		return p;
 	}
 	
+	/**Create a hit effect on the target
+	 * 
+	 */
+	protected void createHitEffect() {
+		Char c = renderer.getOwner();
+		Char t = c.getTarget();
+		
+		renderer.addEffect("fire", t.getPosX(), t.getPosY() + 70f);
+		
+		log("hit created");
+	}
 }

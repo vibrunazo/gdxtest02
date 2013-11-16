@@ -7,6 +7,8 @@ import com.gdxtest02.CharAnim;
 public class Punch01 extends CharAnim {
 
 	private Animation punchAnimation;
+	
+	private int hits = 0;
 
 	public Punch01(AnimRenderer animRenderer) {
 		super(animRenderer);
@@ -22,6 +24,11 @@ public class Punch01 extends CharAnim {
 		punchAnimation.apply(skeleton, lastTime, animationTime, false, null);
 		if (animationTime > punchAnimation.getDuration()) {
 			end();
+		}
+		
+		if (animationTime > 0.3 & hits == 0) {
+			hits++;
+			createHitEffect();
 		}
 	}
 

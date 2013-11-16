@@ -75,6 +75,7 @@ public class Char implements Cloneable {
 		canoverheal = true;
 		skin = new CharSkin();
 		animRenderer = new AnimRenderer(skin);
+		animRenderer.setOwner(this);
 		
 		spikes = 0;
 		level = 1;

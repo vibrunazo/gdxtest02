@@ -83,13 +83,13 @@ public class Projectile {
 		x += delta * speedx * flipXFactor;
 		y += delta * speedy;
 		effect.setPosition(x, y);
-		log("proj time: " + time + " duration: "+ duration);
+//		log("proj time: " + time + " duration: "+ duration);
 		if (time >= duration) end();
 	}
 	
 	public void end() {
 		renderer.removeProjectile();
-		log("end proj time: " + time + " duration: "+ duration);
+//		log("end proj time: " + time + " duration: "+ duration);
 	}
 
 	public void draw(SpriteBatch batch) {

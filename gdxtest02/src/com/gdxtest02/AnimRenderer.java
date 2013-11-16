@@ -55,6 +55,7 @@ public class AnimRenderer {
 	 */
 	private Array<ParticleEffect> chareffects;
 	private Array<Projectile> projectiles;
+	private Char owner;
 
 	public AnimRenderer(CharSkin data) {
 
@@ -257,6 +258,22 @@ public class AnimRenderer {
 		return skeleton.getFlipX();
 	}
 
+	public ParticleEffect createAnimEffect(String effecttype) {
+		ParticleEffect effect = new ParticleEffect();
+		effect.load(getParticleFile(effecttype), Gdx.files.internal("effects"));
+		effect.start();
+		addAnimParticle(effect);
+		return effect;
+	}
+	
+	public ParticleEffect createCharEffect(String effecttype) {
+		ParticleEffect effect = new ParticleEffect();
+		effect.load(getParticleFile(effecttype), Gdx.files.internal("effects"));
+		effect.start();
+		addCharParticle(effect);
+		return effect;
+	}
+	
 	public void addAnimParticle(ParticleEffect effect) {
 		animeffects.add(effect);
 		effect.start();
@@ -265,6 +282,11 @@ public class AnimRenderer {
 	public void addCharParticle(ParticleEffect effect) {
 		chareffects.add(effect);
 		effect.start();
+	}
+
+	public void addEffect(String string, float posX, float posY) {
+		ParticleEffect e = createCharEffect("hit");
+		e.setPosition(posX, posY);
 	}
 
 	public void resetParticles() {
@@ -293,6 +315,9 @@ public class AnimRenderer {
 		else if (effecttype.equals("ice")) {
 			return Gdx.files.internal("effects/ice02.p");
 		} 
+		else if (effecttype.equals("hit")) {
+			return Gdx.files.internal("effects/spark01.p");
+		} 
 		
 		effecttype = "fire";
 		return getParticleFile(effecttype);
@@ -313,5 +338,14 @@ public class AnimRenderer {
 			p.dispose();
 		}
 	}
+
+	public void setOwner(Char owner) {
+		this.owner = owner;
+	}
+
+	public Char getOwner() {
+		return owner;
+	}
+
 }
 
