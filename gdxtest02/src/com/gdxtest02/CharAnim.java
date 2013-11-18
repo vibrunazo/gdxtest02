@@ -113,7 +113,7 @@ public class CharAnim {
 		Char c = renderer.getOwner();
 		Char t = c.getTarget();
 		
-		renderer.addEffect("fire", t.getPosX(), t.getPosY() + 70f);
+		renderer.addEffect("hit", t.getPosX(), t.getPosY() + 70f);
 		
 		log("hit created");
 	}

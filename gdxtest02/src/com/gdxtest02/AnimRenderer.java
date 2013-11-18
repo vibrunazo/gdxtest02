@@ -284,8 +284,8 @@ public class AnimRenderer {
 		effect.start();
 	}
 
-	public void addEffect(String string, float posX, float posY) {
-		ParticleEffect e = createCharEffect("hit");
+	public void addEffect(String effecttype, float posX, float posY) {
+		ParticleEffect e = createCharEffect(effecttype);
 		e.setPosition(posX, posY);
 	}
 
