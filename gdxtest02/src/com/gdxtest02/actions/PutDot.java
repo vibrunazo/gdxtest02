@@ -2,6 +2,8 @@ package com.gdxtest02.actions;
 
 import com.gdxtest02.Action;
 import com.gdxtest02.Char;
+import com.gdxtest02.anims.Cast01;
+import com.gdxtest02.anims.Punch01;
 import com.gdxtest02.buffs.Dot;
 
 public class PutDot extends Action {
@@ -15,7 +17,7 @@ public class PutDot extends Action {
 	@Override
 	public void ini() {
 		setName("Put Dot");
-		setAnim("cast");
+		setAnim(new Cast01(owner.getAnimRenderer()));
 	}
 	
 	public void update() {

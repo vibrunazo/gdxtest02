@@ -11,8 +11,8 @@ public abstract class Action {
 	private boolean reflect = false;
 	private String description = "This is a skill";
 	private float avgdps;
-	private String anim = "";
-	private Char owner;
+	private CharAnim anim;
+	protected Char owner;
 	private float basepower;
 	private String animeffect;
 	
@@ -23,14 +23,14 @@ public abstract class Action {
 	public Action(float value) {
 		power = (float) Math.ceil(value);
 		basepower = power;
-		ini();
+//		ini();	
 	}
 	
 	public Action(float value, int cooldown) {
 		power = (float) Math.ceil(value);
 		basepower = power;
 		this.cooldown = cooldown;
-		ini();
+//		ini();
 	}
 	
 	public Action(float value, int cooldown, int duration) {
@@ -38,7 +38,7 @@ public abstract class Action {
 		basepower = power;
 		this.cooldown = cooldown;
 		this.duration = duration;
-		ini();
+//		ini();
 	}
 	
 	/**Updates the power of this action based on the level multiplier and buff multiplier
@@ -53,8 +53,10 @@ public abstract class Action {
 	 * power multiplier
 	 * @param character
 	 */
-	public void setOwner(Char character) {
+	public Action setOwner(Char character) {
 		owner = character;
+		ini();
+		return this;
 	}
 
 	/**Do whatever is it that you do
@@ -267,14 +269,14 @@ public abstract class Action {
 	/**Gets the name of the animation for this action
 	 * @return
 	 */
-	public String getAnim() {
-		return anim;
+	public String getAnimName() {
+		return anim.getName();
 	}
 
 	/**Sets the name of the animation this action should show when active
 	 * @param anim
 	 */
-	public Action setAnim(String anim) {
+	public Action setAnim(CharAnim anim) {
 		this.anim = anim;
 		return this;
 	}
@@ -282,7 +284,7 @@ public abstract class Action {
 	/**Sets the name of the animation this action should show when active
 	 * @param anim
 	 */
-	public Action setAnim(String anim, String effect) {
+	public Action setAnim(CharAnim anim, String effect) {
 		this.anim = anim;
 		this.animeffect = effect;
 		return this;
@@ -316,6 +318,20 @@ public abstract class Action {
 	public Action setAnimEffect(String animeffect) {
 		this.animeffect = animeffect;
 		return this;
+	}
+
+	/**Set the anim from the name of the animation
+	 * @param name
+	 * @return
+	 */
+	public Action setAnim(String name) {	
+		AnimRenderer renderer = owner.getAnimRenderer();
+		this.anim = renderer.getAnimByName(name);
+		return this;
+	}
+
+	public CharAnim getAnim() {
+		return anim;
 	}
 	
 }

@@ -12,11 +12,11 @@ public class Char03 extends Char {
 		
 		float ratio = 0.42553192f;
 //		float ratio = 1f;
-		addAction(new Dmg(100*ratio).setName("Yoga Fire"));
-		addAction(new Dmg(400*ratio, 5).setName("Overpacarai").setAnim("punchright"));
-		addAction(new PutDot(50*ratio, 0, 5).setName("DotFoda"));
-		addAction(new Dmg(500*ratio, 2).setName("Frost Bolt").setReflect(false)
-				.setAnim("cast").setAnimEffect("ice"));
+		addAction(new Dmg(100*ratio)).setName("Yoga Fire");
+		addAction(new Dmg(400*ratio, 5)).setName("Overpacarai").setAnim("punchright01");
+		addAction(new PutDot(50*ratio, 0, 5)).setName("DotFoda");
+		addAction(new Dmg(500*ratio, 2)).setName("Frost Bolt").setReflect(false)
+				.setOwner(this).setAnim("cast").setAnimEffect("ice");
 		setTex("ball02red.png");
 		
 		setColor(1, 0.2f, 0.6f, 1);

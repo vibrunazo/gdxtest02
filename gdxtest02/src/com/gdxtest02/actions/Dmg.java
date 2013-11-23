@@ -2,12 +2,13 @@ package com.gdxtest02.actions;
 
 import com.gdxtest02.Action;
 import com.gdxtest02.Char;
+import com.gdxtest02.anims.Punch01;
 
 public class Dmg extends Action implements Cloneable {
 	
 	public void ini() {
 		setName("DD");
-		setAnim("punch");
+		setAnim(new Punch01(owner.getAnimRenderer()));
 		setReflect(true);
 	}
 	public void update() {
@@ -17,14 +18,11 @@ public class Dmg extends Action implements Cloneable {
 	@Override
 	protected void go(Char self, Char target) {
 		target.incHp(-power, self, getReflect());
-		
-		
 	}
 	
 	public float getDmgAfterRounds(int rounds) {
 		return power;
 	}
-	
 	
 	public Dmg() {
 		super();
@@ -32,7 +30,6 @@ public class Dmg extends Action implements Cloneable {
 	public Dmg(float value) {
 		super(value);
 	}
-	
 	public Dmg(float value, int cooldown) {
 		super(value, cooldown);
 	}

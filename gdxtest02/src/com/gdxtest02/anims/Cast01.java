@@ -18,7 +18,8 @@ public class Cast01 extends CharAnim {
 
 	public Cast01(AnimRenderer animRenderer) {
 		super(animRenderer);
-		animation = sd.findAnimation("cast01");
+		name = "cast01";
+		animation = sd.findAnimation(name);
 		
 		iniParticles();
 	}

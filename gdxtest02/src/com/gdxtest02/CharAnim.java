@@ -27,6 +27,7 @@ public class CharAnim {
 	protected float delta;
 	protected float lastTime;
 	private String effecttype = "";
+	protected String name = "";
 
 	public CharAnim(AnimRenderer animRenderer) {
 		renderer = animRenderer;
@@ -116,5 +117,9 @@ public class CharAnim {
 		renderer.addEffect("hit", t.getPosX(), t.getPosY() + 70f);
 		
 		log("hit created");
+	}
+
+	public String getName() {
+		return name;
 	}
 }

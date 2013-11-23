@@ -169,19 +169,21 @@ public class Char implements Cloneable {
 	 * @param id
 	 * @return
 	 */
-	public void setAction(int id, Action action) {
-		if (id < 1) return;
+	public Action setAction(int id, Action action) {
+		if (id < 1) return action;
 		actionBar.set(id - 1, action);
 		action.setOwner(this);
+		return action;
 	}
 	
-	public void addAction(Action action) {
+	public Action addAction(Action action) {
 		actionsInventory.add(action);
 		if (actionBar.size < maxActionBarSize) {
 			actionBar.add(action);
 		}
 		action.setOwner(this);
 		action.updatePower();
+		return action;
 	}
 	
 	/**Add buff to new buff list
@@ -571,8 +573,9 @@ public class Char implements Cloneable {
 	 * 
 	 * @param a
 	 */
-	public void addActionForLevel(int level, Action a) {
+	public Action addActionForLevel(int level, Action a) {
 		actionUnlockedPerLevel.put(level, a);
+		return a;
 	}
 	
 	/**Gets the action to be unlocked on this level
@@ -665,7 +668,7 @@ public class Char implements Cloneable {
 		if (getActiveAction() == null) {
 			animRenderer.setAnimToDefault();return;
 		}
-		String animname = getActiveAction().getAnim();
+		String animname = getActiveAction().getAnimName();
 		String effect = getActiveAction().getAnimEffect();
 		animRenderer.setAnim(animname, effect);
 	}
@@ -715,6 +718,10 @@ public class Char implements Cloneable {
 		this.buffPwMultiplier = buffPwMultiplier;
 		updateAllActions();
 		updateHp();
+	}
+
+	public AnimRenderer getAnimRenderer() {
+		return animRenderer;
 	}
 
 }

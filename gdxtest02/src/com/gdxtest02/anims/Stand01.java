@@ -15,9 +15,10 @@ public class Stand01 extends CharAnim {
 
 	public Stand01(AnimRenderer animRenderer) {
 		super(animRenderer);
+		name = "stand01";
 		winkTime = 0;
 		winkAnimation = sd.findAnimation("wink");	
-		standAnimation = sd.findAnimation("stand01");
+		standAnimation = sd.findAnimation(name);
 	}
 
 	/* (non-Javadoc)

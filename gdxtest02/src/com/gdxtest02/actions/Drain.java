@@ -2,6 +2,8 @@ package com.gdxtest02.actions;
 
 import com.gdxtest02.Action;
 import com.gdxtest02.Char;
+import com.gdxtest02.anims.Cast01;
+import com.gdxtest02.anims.Punch01;
 
 public class Drain extends Action {
 	@Override
@@ -13,7 +15,7 @@ public class Drain extends Action {
 	@Override
 	public void ini() {
 		setName("Drain");
-		setAnim("cast");
+		setAnim(new Cast01(owner.getAnimRenderer()));
 		setAnimEffect("green");
 	}
 	public void update() {

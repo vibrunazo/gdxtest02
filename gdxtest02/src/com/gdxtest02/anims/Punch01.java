@@ -12,7 +12,8 @@ public class Punch01 extends CharAnim {
 
 	public Punch01(AnimRenderer animRenderer) {
 		super(animRenderer);
-		punchAnimation = sd.findAnimation("punch01");
+		name = "punch01";
+		punchAnimation = sd.findAnimation(name);
 	}
 
 	/* (non-Javadoc)

@@ -97,28 +97,37 @@ public class AnimRenderer {
 	public void setAnim(String animname, String effectname) {
 		// reset particles when changing anim
 		animeffects = new Array<ParticleEffect>(); 
+		
+		this.animname = animname;
+		this.anim = getAnimByName(animname);
 		if (animname.equals("") || animname == null) {
 			setAnimToDefault();
 		}
-		this.animname = animname;
-		if (animname.equals("stand")) {
-			anim = new Stand01(this);
-		}
-		if (animname.equals("punch")) {
-			anim = new Punch01(this);
-		}
-		if (animname.equals("punchright")) {
-			anim = new PunchRight01(this);
-		}
-		if (animname.equals("cast")) {
-			anim = new Cast01(this);
-		}
-		if (animname.equals("castup")) {
-			anim = new Castup01(this);
-		}
+		
 		if (effectname != null && !effectname.isEmpty()) {
 			anim.setEffect(effectname);
 		}
+	}
+	
+	public CharAnim getAnimByName(String name) {
+		CharAnim anim = null;
+		if (name.equals("stand")) {
+			anim = new Stand01(this);
+		}
+		if (name.equals("punch01")) {
+			anim = new Punch01(this);
+		}
+		if (name.equals("punchright01")) {
+			anim = new PunchRight01(this);
+		}
+		if (name.equals("cast01")) {
+			anim = new Cast01(this);
+		}
+		if (name.equals("castup01")) {
+			anim = new Castup01(this);
+		}
+		log("getanimbyname, name: " + name + " anim: " + anim);
+		return anim;
 	}
 	
 	public void setDefaultAnim(String animname) {

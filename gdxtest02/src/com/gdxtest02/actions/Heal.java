@@ -2,13 +2,15 @@ package com.gdxtest02.actions;
 
 import com.gdxtest02.Action;
 import com.gdxtest02.Char;
+import com.gdxtest02.anims.Castup01;
+import com.gdxtest02.anims.Punch01;
 
 public class Heal extends Action {
 
 	@Override
 	public void ini() {
 		setName("Direct Heal");
-		setAnim("castup");
+		setAnim(new Castup01(owner.getAnimRenderer()));
 		setAnimEffect("green");
 	}
 	public void update() {

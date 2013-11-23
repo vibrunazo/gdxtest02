@@ -19,7 +19,8 @@ public class Castup01 extends CharAnim {
 
 	public Castup01(AnimRenderer animRenderer) {
 		super(animRenderer);
-		animation = sd.findAnimation("castup01");
+		name = "castup01";
+		animation = sd.findAnimation(name);
 		
 		iniParticles();
 	}
