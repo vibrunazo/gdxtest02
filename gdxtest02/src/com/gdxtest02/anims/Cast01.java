@@ -26,9 +26,11 @@ public class Cast01 extends CharAnim {
 	}
 	
 	protected void ini() {
+		
 		animation = sd.findAnimation(name);
 		effect = addAnimEffect();
 		effect.setDuration(1500);
+		log("ini charanim: " + name + " effect: " + effect + " etype: " + effecttype);
 	}
 
 	/* (non-Javadoc)

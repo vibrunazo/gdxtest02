@@ -107,10 +107,11 @@ public class AnimRenderer {
 			anim.start();
 			return;
 		}
-		anim.start();
+		
 		if (effectname != null && !effectname.isEmpty()) {
 			anim.setEffect(effectname);
 		}
+		anim.start();
 	}
 	
 	/**Sets the animation of the character to this animation
@@ -129,12 +130,12 @@ public class AnimRenderer {
 		this.anim = anim;
 //		this.anim = getAnimByName(anim.getName());
 		this.animname = anim.getName();
-		anim.start();
 		
 		if (effectname != null && !effectname.isEmpty()) {
 			anim.setEffect(effectname);
 		}
-		log("setanim anim: " + anim + " ename: " + effectname);
+		anim.start();
+//		log("setanim anim: " + anim + " ename: " + effectname);
 	}
 	
 	public CharAnim getAnimByName(String name) {
@@ -237,6 +238,8 @@ public class AnimRenderer {
 	}
 
 	public void drawParticles(SpriteBatch batch) {
+//		log("drawpart, owner: " + owner + " ae: " + animeffects + " ce: " +
+//	chareffects + " p: " + projectiles);
 		for (ParticleEffect p : animeffects) {
 			p.update(delta);
 			p.draw(batch);

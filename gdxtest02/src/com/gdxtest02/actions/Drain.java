@@ -15,8 +15,9 @@ public class Drain extends Action {
 	@Override
 	public void ini() {
 		setName("Drain");
-		setAnim(new Cast01(owner.getAnimRenderer()));
 		setAnimEffect("green");
+		setAnim(new Cast01(owner.getAnimRenderer()), "green");
+		
 	}
 	public void update() {
 		setDescription("Drains " + getPower() + " damage and heals you.");

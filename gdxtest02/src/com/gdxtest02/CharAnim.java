@@ -26,7 +26,7 @@ public class CharAnim {
 	protected float animationTime;
 	protected float delta;
 	protected float lastTime;
-	private String effecttype = "";
+	protected String effecttype = "";
 	protected String name = "";
 
 	public CharAnim(AnimRenderer animRenderer) {
@@ -70,7 +70,7 @@ public class CharAnim {
 	public void setEffect(String type) {
 		renderer.resetParticles();
 		this.effecttype = type;
-		ini();
+//		ini();
 	}
 	
 	protected void ini() {

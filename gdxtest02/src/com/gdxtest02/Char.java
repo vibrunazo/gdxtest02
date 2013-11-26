@@ -591,7 +591,7 @@ public class Char implements Cloneable {
 	 */
 	public void setScale(float scale) {
 		animRenderer.setScale(scale);
-		restartAnims();
+//		restartAnims();
 	}
 	
 	private void restartAnims() {
