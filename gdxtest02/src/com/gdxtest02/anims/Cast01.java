@@ -19,12 +19,14 @@ public class Cast01 extends CharAnim {
 	public Cast01(AnimRenderer animRenderer) {
 		super(animRenderer);
 		name = "cast01";
-		animation = sd.findAnimation(name);
 		
-		iniParticles();
+//		log("cast01 anim: " + animation);
+		
+//		iniParticles();
 	}
 	
-	protected void iniParticles() {
+	protected void ini() {
+		animation = sd.findAnimation(name);
 		effect = addAnimEffect();
 		effect.setDuration(1500);
 	}
@@ -42,8 +44,8 @@ public class Cast01 extends CharAnim {
 			y = skeleton.findBone("hand_R").getWorldY() + 10;
 		}
 		else {
-			int flip = 1;
-			if (skeleton.getFlipX()) flip = -1;
+//			int flip = 1;
+//			if (skeleton.getFlipX()) flip = -1;
 //			x += delta*800*flip;
 			
 			Projectile p = createProjectile(x, y);
@@ -53,7 +55,8 @@ public class Cast01 extends CharAnim {
 			}
 		}
 		
-//		log("animtime: " + animationTime);
+//		log("animtime: " + animationTime + " anim: " + animation + " name: "
+//		+ animation.getName() + " dur: " + animation.getDuration());
 		
 		effect.setPosition(x, y);
 		

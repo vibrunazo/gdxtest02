@@ -65,8 +65,6 @@ public class AnimRenderer {
 	private void ini(CharSkin data) {
 		charSkinData = data;
 		slotsToChangeColor = new Array<Slot>();
-		// "data/spine/spineboy.atlas"
-		// "data/spine/spineboy.skel"
 
 		atlasfile = "data/spine/ball/skeleton.atlas";
 //		skfile = "data/spine/ball/skeleton.skel";
@@ -89,6 +87,10 @@ public class AnimRenderer {
 		setAnim(animname, null);
 	}
 	
+	public void setAnim(CharAnim anim) {
+		setAnim(anim, null);
+	}
+	
 	/**Sets the animation of the character to the animation with this generic name
 	 * the renderer will decided which exact animation to use depending on the character
 	 * 
@@ -102,11 +104,37 @@ public class AnimRenderer {
 		this.anim = getAnimByName(animname);
 		if (animname.equals("") || animname == null) {
 			setAnimToDefault();
+			anim.start();
+			return;
 		}
+		anim.start();
+		if (effectname != null && !effectname.isEmpty()) {
+			anim.setEffect(effectname);
+		}
+	}
+	
+	/**Sets the animation of the character to this animation
+	 * 
+	 * @param anim
+	 */
+	public void setAnim(CharAnim anim, String effectname) {
+		// reset particles when changing anim
+		animeffects = new Array<ParticleEffect>(); 
+//		log("setanim anim: " + anim + " ename: " + effectname);
+		if (anim == null || anim.getName().equals("")) {
+			setAnimToDefault();
+			anim.start();
+			return;
+		}
+		this.anim = anim;
+//		this.anim = getAnimByName(anim.getName());
+		this.animname = anim.getName();
+		anim.start();
 		
 		if (effectname != null && !effectname.isEmpty()) {
 			anim.setEffect(effectname);
 		}
+		log("setanim anim: " + anim + " ename: " + effectname);
 	}
 	
 	public CharAnim getAnimByName(String name) {
@@ -126,7 +154,7 @@ public class AnimRenderer {
 		if (name.equals("castup01")) {
 			anim = new Castup01(this);
 		}
-		log("getanimbyname, name: " + name + " anim: " + anim);
+//		log("getanimbyname, name: " + name + " anim: " + anim);
 		return anim;
 	}
 	
@@ -205,6 +233,7 @@ public class AnimRenderer {
 		renderer.draw(batch, skeleton);
 		
 //		drawParticles(batch);
+		
 	}
 
 	public void drawParticles(SpriteBatch batch) {

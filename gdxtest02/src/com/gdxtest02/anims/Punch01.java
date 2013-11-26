@@ -13,6 +13,11 @@ public class Punch01 extends CharAnim {
 	public Punch01(AnimRenderer animRenderer) {
 		super(animRenderer);
 		name = "punch01";
+		
+	}
+	
+	@Override
+	protected void ini() {
 		punchAnimation = sd.findAnimation(name);
 	}
 

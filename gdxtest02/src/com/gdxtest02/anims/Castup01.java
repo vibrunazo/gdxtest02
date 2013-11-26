@@ -20,12 +20,11 @@ public class Castup01 extends CharAnim {
 	public Castup01(AnimRenderer animRenderer) {
 		super(animRenderer);
 		name = "castup01";
-		animation = sd.findAnimation(name);
-		
-		iniParticles();
 	}
 
-	protected void iniParticles() {
+	@Override
+	protected void ini() {
+		animation = sd.findAnimation(name);
 		effect1 = addAnimEffect();
 		effect1.setDuration(1500);
 		

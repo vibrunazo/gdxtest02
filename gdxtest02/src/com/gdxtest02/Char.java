@@ -401,7 +401,7 @@ public class Char implements Cloneable {
 	 */
 	public String getFullDescription() {
 //		return description + " avgdps: " + balance.getAvgDps();
-		return description + " level " + level  + " (k: " + levelMultiplier + ") " + getActionListString();
+		return name + " " + description + " level " + level  + " (k: " + levelMultiplier + ") " + getActionListString();
 	}
 
 	/**
@@ -591,8 +591,16 @@ public class Char implements Cloneable {
 	 */
 	public void setScale(float scale) {
 		animRenderer.setScale(scale);
+		restartAnims();
 	}
 	
+	private void restartAnims() {
+//		for (Action a : actionBar) a.reset();
+		for (Action a : actionBar) {
+			a.getAnim().start();
+		}
+	}
+
 	/**Get scale
 	 * @return
 	 */
@@ -668,9 +676,10 @@ public class Char implements Cloneable {
 		if (getActiveAction() == null) {
 			animRenderer.setAnimToDefault();return;
 		}
-		String animname = getActiveAction().getAnimName();
+		CharAnim anim = getActiveAction().getAnim();
 		String effect = getActiveAction().getAnimEffect();
-		animRenderer.setAnim(animname, effect);
+		animRenderer.setAnim(anim, effect);
+//		animRenderer.setAnim(anim.getName(), effect);
 	}
 	
 	/**Sets the name of the current animation to play

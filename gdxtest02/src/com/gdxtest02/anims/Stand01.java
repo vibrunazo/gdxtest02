@@ -17,8 +17,7 @@ public class Stand01 extends CharAnim {
 		super(animRenderer);
 		name = "stand01";
 		winkTime = 0;
-		winkAnimation = sd.findAnimation("wink");	
-		standAnimation = sd.findAnimation(name);
+		
 	}
 
 	/* (non-Javadoc)
@@ -36,6 +35,12 @@ public class Stand01 extends CharAnim {
 		standAnimation.apply(skeleton, lastTime, animationTime, true, null);
 		winkAnimation.apply(skeleton, lastWinkTime*10, winkTime*10, false, null);
 		
+	}
+
+	@Override
+	protected void ini() {
+		winkAnimation = sd.findAnimation("wink");	
+		standAnimation = sd.findAnimation(name);
 	}
 
 }

@@ -31,17 +31,30 @@ public class CharAnim {
 
 	public CharAnim(AnimRenderer animRenderer) {
 		renderer = animRenderer;
+		
+//		ini();
+	}
+
+	/**Called when the animation needs to start, must call this before using the animation
+	 * 
+	 * @return
+	 */
+	public void start() {
+		
 		skeleton = renderer.getSkeleton();
 		sd = renderer.getSkeletonData();
-		
+//		Char owner = renderer.getOwner();
+//		if (owner != null) {
+//			log("charanim ini, skeleton: " + skeleton.hashCode() + " owner: " + renderer.getOwner()
+//					+ " hash: " + renderer.getOwner().hashCode());
+//		}
+		animationTime = 0;
 		ini();
 	}
 
-	private void ini() {
-		animationTime = 0;
-	}
-
 	public void draw() {
+//		log("charanim draw this: " + this + " name: " + name + " etype: " + effecttype + 
+//				" time:" + animationTime);
 		delta = Gdx.graphics.getDeltaTime();
 		lastTime = animationTime;
 		animationTime += delta;
@@ -57,10 +70,10 @@ public class CharAnim {
 	public void setEffect(String type) {
 		renderer.resetParticles();
 		this.effecttype = type;
-		iniParticles();
+		ini();
 	}
 	
-	protected void iniParticles() {
+	protected void ini() {
 		
 	}
 	
@@ -116,7 +129,7 @@ public class CharAnim {
 		
 		renderer.addEffect("hit", t.getPosX(), t.getPosY() + 70f);
 		
-		log("hit created");
+//		log("hit created");
 	}
 
 	public String getName() {
