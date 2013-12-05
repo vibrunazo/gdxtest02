@@ -255,6 +255,10 @@ public class AnimRenderer {
 			p.draw(batch);
 		}
 	}
+	
+	public void drawSkeleton(SpriteBatch batch, Skeleton skeleton) {
+		renderer.draw(batch, skeleton);
+	}
 
 	/**Scales the whole character, will reload everything again, use with care
 	 * @param scale

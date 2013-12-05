@@ -3,6 +3,11 @@ package com.gdxtest02;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.esotericsoftware.spine.Skeleton;
+import com.esotericsoftware.spine.SkeletonData;
+import com.esotericsoftware.spine.SkeletonJson;
+
 import static com.gdxtest02.GdxTest02.log;
 
 public class Projectile {
@@ -21,6 +26,7 @@ public class Projectile {
 	private ParticleEffect effect;
 	private boolean flipX;
 	private int flipXFactor;
+	private Skeleton skeleton;
 	
 	public Projectile(AnimRenderer renderer) {
 		this.renderer = renderer;
@@ -31,8 +37,23 @@ public class Projectile {
 		duration = 2;
 		time = 0;
 		setFlipXFactor();
+		
+		loadSkeleton(1f);
 	}
 	
+	private void loadSkeleton(float scale) {
+		String atlasfile = "data/spine/proj/skeleton.atlas";
+		String jsonfile = "data/spine/proj/skeleton.json";
+
+		TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(atlasfile));
+		SkeletonJson json = new SkeletonJson(atlas);
+		json.setScale(scale);
+		SkeletonData sd = json.readSkeletonData(Gdx.files.internal(jsonfile));
+		skeleton = new Skeleton(sd);
+//		skeleton.setSlotsToSetupPose();
+		skeleton.updateWorldTransform();
+	}
+
 	public void start() {
 		effect = new ParticleEffect();
 		effect.load(AnimRenderer.getParticleFile(effecttype), Gdx.files.internal("effects"));
@@ -44,6 +65,8 @@ public class Projectile {
 	public void setPos(float x, float y) {
 		this.x = x;
 		this.y = y;
+		skeleton.setX(x);
+		skeleton.setY(y);
 	}
 	
 	public float getX() {
@@ -82,6 +105,8 @@ public class Projectile {
 		time += delta;
 		x += delta * speedx * flipXFactor;
 		y += delta * speedy;
+		skeleton.setX(x);
+		skeleton.setY(y);
 		effect.setPosition(x, y);
 //		log("proj time: " + time + " duration: "+ duration);
 		if (time >= duration) end();
@@ -93,7 +118,8 @@ public class Projectile {
 	}
 
 	public void draw(SpriteBatch batch) {
-		
+		renderer.drawSkeleton(batch, skeleton);
+		log("proj draw, skel: " + skeleton);
 	}
 
 	public String getEffecttype() {
