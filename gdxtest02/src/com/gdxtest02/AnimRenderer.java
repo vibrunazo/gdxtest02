@@ -237,7 +237,7 @@ public class AnimRenderer {
 		
 	}
 
-	public void drawParticles(SpriteBatch batch) {
+	public void drawEffects(SpriteBatch batch) {
 //		log("drawpart, owner: " + owner + " ae: " + animeffects + " ce: " +
 //	chareffects + " p: " + projectiles);
 		for (ParticleEffect p : animeffects) {
@@ -303,7 +303,7 @@ public class AnimRenderer {
 		return skeleton.getFlipX();
 	}
 
-	public ParticleEffect createAnimEffect(String effecttype) {
+	public ParticleEffect createAnimParticle(String effecttype) {
 		ParticleEffect effect = new ParticleEffect();
 		effect.load(getParticleFile(effecttype), Gdx.files.internal("effects"));
 		effect.start();
@@ -311,7 +311,7 @@ public class AnimRenderer {
 		return effect;
 	}
 	
-	public ParticleEffect createCharEffect(String effecttype) {
+	public ParticleEffect createCharParticle(String effecttype) {
 		ParticleEffect effect = new ParticleEffect();
 		effect.load(getParticleFile(effecttype), Gdx.files.internal("effects"));
 		effect.start();
@@ -330,7 +330,7 @@ public class AnimRenderer {
 	}
 
 	public void addEffect(String effecttype, float posX, float posY) {
-		ParticleEffect e = createCharEffect(effecttype);
+		ParticleEffect e = createCharParticle(effecttype);
 		e.setPosition(posX, posY);
 	}
 

@@ -118,7 +118,7 @@ public class Char implements Cloneable {
 	}
 	
 	public void drawParticles(SpriteBatch batch) {
-		animRenderer.drawParticles(batch);
+		animRenderer.drawEffects(batch);
 	}
 	
 	/**Draw shapes, such as health bars
