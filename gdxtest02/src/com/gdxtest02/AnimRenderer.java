@@ -45,15 +45,19 @@ public class AnimRenderer {
 	private CharAnim anim;
 	private String defaultanim;
 	private String animname;
+	
+	
+	private Array<Effect> animeffects;
+	
 	/**Animation specific effects. Will reset when animation changes
 	 * 
 	 */
-	private Array<ParticleEffect> animeffects;
+	private Array<ParticleEffect> animparticleeffects;
 	/**Generic char effects. Will persist through animations and only stops
 	 * when char dies or effect ends
 	 * 
 	 */
-	private Array<ParticleEffect> chareffects;
+	private Array<ParticleEffect> charparticleeffects;
 	private Array<Projectile> projectiles;
 	private Char owner;
 
@@ -74,7 +78,7 @@ public class AnimRenderer {
 //		sb = new SkeletonBinary(atlas);
 		loadSkeletonDataFromJson();
 		
-		chareffects = new Array<ParticleEffect>(); 
+		charparticleeffects = new Array<ParticleEffect>(); 
 		projectiles = new Array<Projectile>(); 
 	}
 	
@@ -98,7 +102,7 @@ public class AnimRenderer {
 	 */
 	public void setAnim(String animname, String effectname) {
 		// reset particles when changing anim
-		animeffects = new Array<ParticleEffect>(); 
+		animparticleeffects = new Array<ParticleEffect>(); 
 		
 		this.animname = animname;
 		this.anim = getAnimByName(animname);
@@ -120,7 +124,7 @@ public class AnimRenderer {
 	 */
 	public void setAnim(CharAnim anim, String effectname) {
 		// reset particles when changing anim
-		animeffects = new Array<ParticleEffect>(); 
+		animparticleeffects = new Array<ParticleEffect>(); 
 //		log("setanim anim: " + anim + " ename: " + effectname);
 		if (anim == null || anim.getName().equals("")) {
 			setAnimToDefault();
@@ -240,12 +244,12 @@ public class AnimRenderer {
 	public void drawEffects(SpriteBatch batch) {
 //		log("drawpart, owner: " + owner + " ae: " + animeffects + " ce: " +
 //	chareffects + " p: " + projectiles);
-		for (ParticleEffect p : animeffects) {
+		for (ParticleEffect p : animparticleeffects) {
 			p.update(delta);
 			p.draw(batch);
 		}
 		
-		for (ParticleEffect p : chareffects) {
+		for (ParticleEffect p : charparticleeffects) {
 			p.update(delta);
 			p.draw(batch);
 		}
@@ -320,12 +324,12 @@ public class AnimRenderer {
 	}
 	
 	public void addAnimParticle(ParticleEffect effect) {
-		animeffects.add(effect);
+		animparticleeffects.add(effect);
 		effect.start();
 	}
 	
 	public void addCharParticle(ParticleEffect effect) {
-		chareffects.add(effect);
+		charparticleeffects.add(effect);
 		effect.start();
 	}
 
@@ -335,7 +339,7 @@ public class AnimRenderer {
 	}
 
 	public void resetParticles() {
-		animeffects.clear();
+		animparticleeffects.clear();
 	}
 
 	public void createProjectile(Projectile p) {
@@ -372,14 +376,14 @@ public class AnimRenderer {
 //		projectiles.clear();
 //		projectiles.removeIndex(0);
 		projectiles = new Array<Projectile>(); 
-		chareffects.clear();
+		charparticleeffects.clear();
 		
 		clearCharEffects();
 		
 	}
 
 	private void clearCharEffects() {
-		for (ParticleEffect p : chareffects) {
+		for (ParticleEffect p : charparticleeffects) {
 			p.dispose();
 		}
 	}
