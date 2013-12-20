@@ -48,6 +48,7 @@ public class AnimRenderer {
 	
 	
 	private Array<Effect> animeffects;
+	private Array<Effect> chareffects;
 	
 	/**Animation specific effects. Will reset when animation changes
 	 * 
@@ -78,7 +79,8 @@ public class AnimRenderer {
 //		sb = new SkeletonBinary(atlas);
 		loadSkeletonDataFromJson();
 		
-		charparticleeffects = new Array<ParticleEffect>(); 
+		charparticleeffects = new Array<ParticleEffect>();
+		chareffects = new Array<Effect>();
 		projectiles = new Array<Projectile>(); 
 	}
 	
@@ -103,6 +105,7 @@ public class AnimRenderer {
 	public void setAnim(String animname, String effectname) {
 		// reset particles when changing anim
 		animparticleeffects = new Array<ParticleEffect>(); 
+		animeffects = new Array<Effect>();
 		
 		this.animname = animname;
 		this.anim = getAnimByName(animname);
@@ -252,6 +255,16 @@ public class AnimRenderer {
 		for (ParticleEffect p : charparticleeffects) {
 			p.update(delta);
 			p.draw(batch);
+		}
+		
+		for (Effect e : animeffects) {
+			e.update(delta);
+			e.draw(batch);
+		}
+		
+		for (Effect e : chareffects) {
+			e.update(delta);
+			e.draw(batch);
 		}
 		
 		for (Projectile p : projectiles) {
