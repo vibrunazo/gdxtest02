@@ -190,7 +190,7 @@ public class Char implements Cloneable {
 	 * @param buff
 	 */
 	public void addBuff(Buff buff) {
-		newbuffs.add(buff);
+		buffs.add(buff);
 	}
 	
 	/**Buffs do whatever they do when this is called.
@@ -198,6 +198,13 @@ public class Char implements Cloneable {
 	 * such as, every turn
 	 */
 	public void applyBuffs() {
+		
+		for (Action a : getActionBar()) {
+			a.setBuffPwMultiplier(1);
+			a.updatePower();
+			a.update();
+		}
+	    spikes = 0;
 		// list of buffs that will be removed
 		// this is done because you can't remove the items in the middle of a loop
 		Array<Buff> toremove = new Array<Buff>(); 
@@ -217,11 +224,11 @@ public class Char implements Cloneable {
 		}
 		
 		// move new buffs to main buffs list
-		buffs.addAll(newbuffs);
-		for (Buff buff : newbuffs) {
-			buff.ini(this);
-		}
-		newbuffs.clear();
+//		buffs.addAll(newbuffs);
+//		for (Buff buff : buffs) {
+//			buff.ini(this);
+//		}
+//		newbuffs.clear();
 	}
 	
 	/**Returns a string with a description of current buffs
@@ -323,10 +330,10 @@ public class Char implements Cloneable {
 	 * use actions, update cooldowns
 	 */
 	public void updateAll() {
-		
+		applyBuffs(); 
 		Action a = getActiveAction();
 		if (a != null) a.act(this, getTarget());
-		applyBuffs(); 
+		
 //		applyDmg();
 		updateCooldowns();
 	}

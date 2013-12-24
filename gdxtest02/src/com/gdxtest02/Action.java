@@ -8,6 +8,7 @@ public abstract class Action {
 	protected int cooldown = 0;
 	private int curcooldown = 0;
 	protected int duration = 5;
+	private String type = "normal";
 	private boolean reflect = false;
 	private String description = "This is a skill";
 	private float avgdps;
@@ -15,6 +16,7 @@ public abstract class Action {
 	protected Char owner;
 	private float basepower;
 	private String animeffect;
+	private float BuffPwMultiplier = 1;
 	
 	public Action() {
 		ini();
@@ -46,7 +48,7 @@ public abstract class Action {
 	 */
 	public void updatePower() {
 		if (owner == null) return;
-		power = (float) Math.ceil(basepower) * owner.getPowerMultiplier() * owner.getBuffPwMultiplier();
+		power = (float) Math.ceil(basepower) * owner.getPowerMultiplier() * getBuffPwMultiplier();
 	}
 	
 	/**Sets the owner of this action, will be used to calculate level and
@@ -332,6 +334,35 @@ public abstract class Action {
 
 	public CharAnim getAnim() {
 		return anim;
+	}
+
+	/**
+	 * @return the buffPwMultiplier
+	 */
+	public float getBuffPwMultiplier() {
+		return BuffPwMultiplier;
+	}
+
+	/**
+	 * @param buffPwMultiplier the buffPwMultiplier to set
+	 */
+	public void setBuffPwMultiplier(float buffPwMultiplier) {
+		BuffPwMultiplier = buffPwMultiplier;
+	}
+	
+	/**Gets the action type
+	 * @return
+	 */
+	public String getType() {
+		return type;
+	}
+	/**Sets the type
+	 * @param type
+	 * @return
+	 */
+	public Action setType(String type) {
+		this.type = type;
+		return this;
 	}
 	
 }
