@@ -321,17 +321,13 @@ public class AnimRenderer {
 	}
 
 	public ParticleEffect createAnimParticle(String effecttype) {
-		ParticleEffect effect = new ParticleEffect();
-		effect.load(getParticleFile(effecttype), Gdx.files.internal("effects"));
-		effect.start();
+		ParticleEffect effect = getParticleFromName(effecttype);
 		addAnimParticle(effect);
 		return effect;
 	}
 	
 	public ParticleEffect createCharParticle(String effecttype) {
-		ParticleEffect effect = new ParticleEffect();
-		effect.load(getParticleFile(effecttype), Gdx.files.internal("effects"));
-		effect.start();
+		ParticleEffect effect = getParticleFromName(effecttype);
 		addCharParticle(effect);
 		return effect;
 	}
@@ -343,6 +339,11 @@ public class AnimRenderer {
 	
 	public void addCharParticle(ParticleEffect effect) {
 		charparticleeffects.add(effect);
+		effect.start();
+	}
+	
+	public void addCharEffect(Effect effect) {
+		chareffects.add(effect);
 		effect.start();
 	}
 
@@ -365,6 +366,13 @@ public class AnimRenderer {
 	 */
 	public int getNumProj() {
 		return projectiles.size;
+	}
+	
+	public static ParticleEffect getParticleFromName(String effecttype) {
+		ParticleEffect effect = new ParticleEffect();
+		effect.load(getParticleFile(effecttype), Gdx.files.internal("effects"));
+		effect.start();
+		return effect;
 	}
 	
 	public static FileHandle getParticleFile(String effecttype) {

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonJson;
+import com.gdxtest02.effects.Projectile01;
 
 import static com.gdxtest02.GdxTest02.log;
 
@@ -23,7 +24,7 @@ public class Projectile {
 	private Char target;
 	private AnimRenderer renderer;
 	private String effecttype;
-	private ParticleEffect effect;
+	private Effect effect;
 	private boolean flipX;
 	private int flipXFactor;
 	private Skeleton skeleton;
@@ -55,11 +56,15 @@ public class Projectile {
 	}
 
 	public void start() {
-		effect = new ParticleEffect();
-		effect.load(AnimRenderer.getParticleFile(effecttype), Gdx.files.internal("effects"));
+//		effect = new ParticleEffect();
+//		effect.load(AnimRenderer.getParticleFile(effecttype), Gdx.files.internal("effects"));
+//		effect.start();
+//		effect.setPosition(x, y);
+//		renderer.addCharParticle(effect);
+		effect = new Projectile01();
 		effect.start();
 		effect.setPosition(x, y);
-		renderer.addCharParticle(effect);
+		renderer.addCharEffect(effect);
 	}
 	
 	public void setPos(float x, float y) {
@@ -108,6 +113,7 @@ public class Projectile {
 		skeleton.setX(x);
 		skeleton.setY(y);
 		effect.setPosition(x, y);
+		effect.update(delta);
 //		log("proj time: " + time + " duration: "+ duration);
 		if (time >= duration) end();
 	}
@@ -119,7 +125,8 @@ public class Projectile {
 
 	public void draw(SpriteBatch batch) {
 		renderer.drawSkeleton(batch, skeleton);
-		log("proj draw, skel: " + skeleton);
+		effect.draw(batch);
+//		log("proj draw, skel: " + skeleton);
 	}
 
 	public String getEffecttype() {
