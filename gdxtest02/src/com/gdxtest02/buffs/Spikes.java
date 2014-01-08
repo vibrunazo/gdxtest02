@@ -13,11 +13,11 @@ public class Spikes extends Buff{
 	}
 	
 	public void ini(Char self){
-		self.setSpikes(self.getSpikes()+power);
+	//	self.setSpikes(self.getSpikes()+power);
 	}
 	
 	public void end(Char self){
-		self.setSpikes(self.getSpikes()-power);
+	//	self.setSpikes(self.getSpikes()-power);
 	}
 		
 	public Spikes() {

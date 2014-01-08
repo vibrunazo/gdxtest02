@@ -21,7 +21,7 @@ public class PutDmgBuff extends Action{
 		setAnim(new Castup01(owner.getAnimRenderer()));
 	}
 	public void update() {
-		setDescription("increses power by " + getPower()*100 + "%" + " for " + getDuration() + 
+		setDescription("increases power by " + getPower()*100 + "%" + " for " + getDuration() + 
 				"sec.");
 	}
 	

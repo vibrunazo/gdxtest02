@@ -9,10 +9,12 @@ public class BuffDmg extends Buff{
 	public void act(Char self) {
 		
 		for (Action a : self.getActionBar()) {
+			if(a.getType() == "normal"){
 			a.setBuffPwMultiplier(a.getBuffPwMultiplier()+power);
 			a.updatePower();
 			a.update();
 			log("buff power: "+ a.getBuffPwMultiplier());
+			}
 		}
 		
 		
@@ -20,12 +22,12 @@ public class BuffDmg extends Buff{
 	}
 	
 	public void ini(Char self){
-		self.setBuffPwMultiplier(self.getBuffPwMultiplier() + power);
+	//	self.setBuffPwMultiplier(self.getBuffPwMultiplier() + power);
 		
 	}
 	
 	public void end(Char self){
-		self.setBuffPwMultiplier(self.getBuffPwMultiplier() - power);
+	//	self.setBuffPwMultiplier(self.getBuffPwMultiplier() - power);
 	}
 		
 	public BuffDmg() {

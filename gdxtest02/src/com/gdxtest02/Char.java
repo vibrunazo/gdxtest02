@@ -199,12 +199,8 @@ public class Char implements Cloneable {
 	 */
 	public void applyBuffs() {
 		
-		for (Action a : getActionBar()) {
-			a.setBuffPwMultiplier(1);
-			a.updatePower();
-			a.update();
-		}
-	    spikes = 0;
+		updateAllActions();
+		spikes = 0;
 		// list of buffs that will be removed
 		// this is done because you can't remove the items in the middle of a loop
 		Array<Buff> toremove = new Array<Buff>(); 
@@ -215,7 +211,7 @@ public class Char implements Cloneable {
 			buff.incDuration(-1);
 			if (buff.getDuration() == 0){
 				toremove.add(buff); // this buff will be removed 
-				buff.end(this);
+//				buff.end(this);
 			}
 		}
 		// remove buffs from the list of buffs to be removed
@@ -517,9 +513,10 @@ public class Char implements Cloneable {
 	 * 
 	 */
 	private void updateAllActions() {
-		for (Action a : actionBar) {
+		for (Action a : getActionBar()) {
+			a.setBuffPwMultiplier(1);
 			a.updatePower();
-			a.update(); // updates descriptions
+			a.update();
 		}
 	}
 	
@@ -739,5 +736,7 @@ public class Char implements Cloneable {
 	public AnimRenderer getAnimRenderer() {
 		return animRenderer;
 	}
+	
+	
 
 }
