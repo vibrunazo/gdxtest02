@@ -260,14 +260,14 @@ public class FightScreen implements Screen {
 				", p2 uses: " + actionidp2 + ": " + a2name + ". Fight!");
 		
 		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
-		p1.applyBuffs(); p2.applyBuffs(); 
+		
 		if (actionp1 != null) actionp1.act(p1, p2);
 		if (actionp2 != null) actionp2.act(p2, p1);
 		
 		p1.updateCooldowns();p2.updateCooldowns();
 		// actually applies the damage done this round by all players
 		p1.applyDmg(); p2.applyDmg();
-		
+		p1.applyBuffs(); p2.applyBuffs(); 
 
 //		endFight();
 		
