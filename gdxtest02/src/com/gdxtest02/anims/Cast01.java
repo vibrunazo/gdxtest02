@@ -15,6 +15,7 @@ public class Cast01 extends CharAnim {
 	private ParticleEffect effect;
 	private float x;
 	private float y;
+	private Projectile p;
 
 	public Cast01(AnimRenderer animRenderer) {
 		super(animRenderer);
@@ -30,7 +31,9 @@ public class Cast01 extends CharAnim {
 		animation = sd.findAnimation(name);
 		effect = addAnimEffect();
 		effect.setDuration(1500);
+		p = null;
 		log("ini charanim: " + name + " effect: " + effect + " etype: " + effecttype);
+		
 	}
 
 	/* (non-Javadoc)
@@ -50,8 +53,9 @@ public class Cast01 extends CharAnim {
 //			if (skeleton.getFlipX()) flip = -1;
 //			x += delta*800*flip;
 			
-			Projectile p = createProjectile(x, y);
-			if (p != null) {
+			
+			if (p == null) {
+				p = createProjectile(x, y);
 //				p.setSpeedx(800);
 				p.setFlipX(skeleton.getFlipX()) ;
 			}

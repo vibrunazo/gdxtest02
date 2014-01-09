@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonJson;
-import com.gdxtest02.effects.Projectile01;
+import com.gdxtest02.effects.FireEffect;
+import com.gdxtest02.effects.GreenEffect;
+import com.gdxtest02.effects.IceEffect;
 
 import static com.gdxtest02.GdxTest02.log;
 
@@ -61,7 +63,7 @@ public class Projectile {
 //		effect.start();
 //		effect.setPosition(x, y);
 //		renderer.addCharParticle(effect);
-		effect = new Projectile01();
+		effect = new IceEffect();
 		effect.start();
 		effect.setPosition(x, y);
 		renderer.addCharEffect(effect);

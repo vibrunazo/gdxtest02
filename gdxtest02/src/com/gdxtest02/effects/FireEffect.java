@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.Effect;
 
-public class Projectile01 extends Effect {
+public class FireEffect extends Effect {
 
 	private ParticleEffect particle;
 
@@ -24,7 +24,7 @@ public class Projectile01 extends Effect {
 
 	@Override
 	public void start() {
-		particle = AnimRenderer.getParticleFromName("green");
+		particle = AnimRenderer.getParticleFromName("fire");
 	}
 	
 
