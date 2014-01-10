@@ -326,11 +326,11 @@ public abstract class Action {
 	 * @param name
 	 * @return
 	 */
-	public Action setAnim(String name) {	
-		AnimRenderer renderer = owner.getAnimRenderer();
-		this.anim = renderer.getAnimByName(name);
-		return this;
-	}
+//	public Action setAnim(String name) {	
+//		AnimRenderer renderer = owner.getAnimRenderer();
+//		this.anim = renderer.getAnimByName(name);
+//		return this;
+//	}
 
 	public CharAnim getAnim() {
 		return anim;
