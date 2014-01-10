@@ -75,6 +75,7 @@ public class CharBuilder {
 		chars.add(build(CHAR_03, 3));
 		chars.add(build(CHAR_04, 3));
 		chars.add(build(CHAR_06, 4));
+		chars.add(build(CHAR_01, 3));
 		chars.add(build(CHAR_08, 3));
 		return chars;
 	}

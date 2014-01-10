@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
+import com.gdxtest02.projectiles.Projectile01;
+import com.gdxtest02.projectiles.Projectile02;
 
 /**This is the base class every animation will extend, it should have commonly used
  * methods that most animations use
@@ -111,9 +113,9 @@ public class CharAnim {
 		return AnimRenderer.getParticleFile(effecttype);
 	}
 	
-	protected Projectile createProjectile(float x, float y) {
+	protected Projectile addProjectile(float x, float y, Projectile p) {
 		if (renderer.getNumProj() > 0) return null;
-		Projectile p = new Projectile(renderer);
+		if (p == null) p = new Projectile02(renderer);
 		p.setPos(x, y);
 		p.setEffecttype(effecttype);
 		renderer.createProjectile(p);

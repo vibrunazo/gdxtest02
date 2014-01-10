@@ -26,7 +26,7 @@ public class Projectile {
 	private Char target;
 	private AnimRenderer renderer;
 	private String effecttype;
-	private Effect effect;
+	protected Effect effect;
 	private boolean flipX;
 	private int flipXFactor;
 	private Skeleton skeleton;
@@ -58,15 +58,9 @@ public class Projectile {
 	}
 
 	public void start() {
-//		effect = new ParticleEffect();
-//		effect.load(AnimRenderer.getParticleFile(effecttype), Gdx.files.internal("effects"));
-//		effect.start();
-//		effect.setPosition(x, y);
-//		renderer.addCharParticle(effect);
-		effect = new IceEffect();
+		if (effect == null) effect = new FireEffect();
 		effect.start();
 		effect.setPosition(x, y);
-		renderer.addCharEffect(effect);
 	}
 	
 	public void setPos(float x, float y) {

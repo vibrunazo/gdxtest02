@@ -6,6 +6,7 @@ import com.esotericsoftware.spine.Animation;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.CharAnim;
 import com.gdxtest02.Projectile;
+import com.gdxtest02.projectiles.Projectile01;
 
 import static com.gdxtest02.GdxTest02.log;
 
@@ -16,6 +17,7 @@ public class Cast01 extends CharAnim {
 	private float x;
 	private float y;
 	private Projectile p;
+	private boolean projcreated = false;
 
 	public Cast01(AnimRenderer animRenderer) {
 		super(animRenderer);
@@ -26,12 +28,16 @@ public class Cast01 extends CharAnim {
 //		iniParticles();
 	}
 	
+	public Cast01 setProjectile(Projectile projectile) {
+		p = projectile;
+		return this;
+	}
+	
 	protected void ini() {
 		
 		animation = sd.findAnimation(name);
 		effect = addAnimEffect();
 		effect.setDuration(1500);
-		p = null;
 		log("ini charanim: " + name + " effect: " + effect + " etype: " + effecttype);
 		
 	}
@@ -54,8 +60,10 @@ public class Cast01 extends CharAnim {
 //			x += delta*800*flip;
 			
 			
-			if (p == null) {
-				p = createProjectile(x, y);
+			if (projcreated == false) {
+				projcreated = true;
+				if (p == null) p = new Projectile01(renderer);
+				addProjectile(x, y, p);
 //				p.setSpeedx(800);
 				p.setFlipX(skeleton.getFlipX()) ;
 			}
