@@ -5,6 +5,7 @@ import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.Char;
 import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.Punch01;
+import com.gdxtest02.effects.GreenEffect;
 import com.gdxtest02.projectiles.Projectile03;
 
 public class Drain extends Action {
@@ -17,11 +18,11 @@ public class Drain extends Action {
 	@Override
 	public void ini() {
 		setName("Drain");
-		setAnimEffect("green");
+		setAnimEffect(new GreenEffect());
 		AnimRenderer renderer = owner.getAnimRenderer();
 		setAnim(new Cast01(renderer)
-		.setProjectile(new Projectile03(renderer)),
-				"green");
+			.setProjectile(new Projectile03(renderer)),
+			new GreenEffect());
 
 	}
 	public void update() {

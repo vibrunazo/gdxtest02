@@ -681,7 +681,7 @@ public class Char implements Cloneable {
 			animRenderer.setAnimToDefault();return;
 		}
 		CharAnim anim = getActiveAction().getAnim();
-		String effect = getActiveAction().getAnimEffect();
+		Effect effect = getActiveAction().getAnimEffect();
 		animRenderer.setAnim(anim, effect);
 //		animRenderer.setAnim(anim.getName(), effect);
 	}

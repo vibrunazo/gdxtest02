@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.esotericsoftware.spine.Animation;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.CharAnim;
+import com.gdxtest02.Effect;
 import com.gdxtest02.Projectile;
 import com.gdxtest02.projectiles.Projectile01;
 
@@ -13,7 +14,7 @@ import static com.gdxtest02.GdxTest02.log;
 public class Cast01 extends CharAnim {
 
 	private Animation animation;
-	private ParticleEffect effect;
+	private Effect effect;
 	private float x;
 	private float y;
 	private Projectile p;

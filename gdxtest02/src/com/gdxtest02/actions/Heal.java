@@ -4,6 +4,7 @@ import com.gdxtest02.Action;
 import com.gdxtest02.Char;
 import com.gdxtest02.anims.Castup01;
 import com.gdxtest02.anims.Punch01;
+import com.gdxtest02.effects.GreenEffect;
 
 public class Heal extends Action {
 
@@ -11,7 +12,7 @@ public class Heal extends Action {
 	public void ini() {
 		setName("Direct Heal");
 		setAnim(new Castup01(owner.getAnimRenderer()));
-		setAnimEffect("green");
+		setAnimEffect(new GreenEffect());
 	}
 	public void update() {
 		setDescription("Heals " + getPower() + " damage.");

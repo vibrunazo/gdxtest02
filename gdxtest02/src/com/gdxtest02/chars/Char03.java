@@ -7,6 +7,7 @@ import com.gdxtest02.actions.Drain;
 import com.gdxtest02.actions.PutDot;
 import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.PunchRight01;
+import com.gdxtest02.effects.IceEffect;
 
 public class Char03 extends Char {
 	
@@ -22,7 +23,7 @@ public class Char03 extends Char {
 		addAction(new PutDot(50*ratio, 0, 5)).setName("DotFoda");
 		addAction(new Dmg(500*ratio, 2)).setName("Frost Bolt").setReflect(false)
 				.setAnim(new Cast01(renderer))
-				.setAnimEffect("ice");
+				.setAnimEffect(new IceEffect());
 		setTex("ball02red.png");
 		
 		setColor(1, 0.2f, 0.6f, 1);

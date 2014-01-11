@@ -5,6 +5,7 @@ import com.gdxtest02.Char;
 import com.gdxtest02.anims.Castup01;
 import com.gdxtest02.anims.Punch01;
 import com.gdxtest02.buffs.Hot;
+import com.gdxtest02.effects.GreenEffect;
 
 public class PutHot extends Action {
 
@@ -18,7 +19,7 @@ public class PutHot extends Action {
 	public void ini() {
 		setName("Put Hot");
 		setAnim(new Castup01(owner.getAnimRenderer()));
-		setAnimEffect("green");
+		setAnimEffect(new GreenEffect());
 	}
 	public void update() {
 		setDescription("Heals " + getPower() + " per sec for " + getDuration() + 

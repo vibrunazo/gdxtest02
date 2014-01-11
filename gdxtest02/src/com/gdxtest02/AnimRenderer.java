@@ -102,7 +102,7 @@ public class AnimRenderer {
 	 * 
 	 * @param animname
 	 */
-	public void setAnim(String animname, String effectname) {
+	public void setAnim(String animname, Effect effect) {
 		// reset particles when changing anim
 		animparticleeffects = new Array<ParticleEffect>(); 
 		animeffects = new Array<Effect>();
@@ -115,8 +115,8 @@ public class AnimRenderer {
 			return;
 		}
 		
-		if (effectname != null && !effectname.isEmpty()) {
-			anim.setEffect(effectname);
+		if (effect != null) {
+			anim.setEffect(effect);
 		}
 		anim.start();
 	}
@@ -125,7 +125,7 @@ public class AnimRenderer {
 	 * 
 	 * @param anim
 	 */
-	public void setAnim(CharAnim anim, String effectname) {
+	public void setAnim(CharAnim anim, Effect effect) {
 		// reset particles when changing anim
 		animparticleeffects = new Array<ParticleEffect>(); 
 //		log("setanim anim: " + anim + " ename: " + effectname);
@@ -138,8 +138,8 @@ public class AnimRenderer {
 //		this.anim = getAnimByName(anim.getName());
 		this.animname = anim.getName();
 		
-		if (effectname != null && !effectname.isEmpty()) {
-			anim.setEffect(effectname);
+		if (effect != null) {
+			anim.setEffect(effect);
 		}
 		anim.start();
 //		log("setanim anim: " + anim + " ename: " + effectname);
@@ -344,6 +344,11 @@ public class AnimRenderer {
 	
 	public void addCharEffect(Effect effect) {
 		chareffects.add(effect);
+		effect.start();
+	}
+	
+	public void addAnimEffect(Effect effect) {
+		animeffects.add(effect);
 		effect.start();
 	}
 

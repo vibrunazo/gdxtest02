@@ -25,7 +25,7 @@ public class Projectile {
 	private Char source;
 	private Char target;
 	private AnimRenderer renderer;
-	private String effecttype;
+	private Effect effecttype;
 	protected Effect effect;
 	private boolean flipX;
 	private int flipXFactor;
@@ -125,11 +125,11 @@ public class Projectile {
 //		log("proj draw, skel: " + skeleton);
 	}
 
-	public String getEffecttype() {
+	public Effect getEffecttype() {
 		return effecttype;
 	}
 
-	public void setEffecttype(String effecttype) {
+	public void setEffecttype(Effect effecttype) {
 		this.effecttype = effecttype;
 	}
 

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
+import com.gdxtest02.effects.FireEffect;
 import com.gdxtest02.projectiles.Projectile01;
 import com.gdxtest02.projectiles.Projectile02;
 
@@ -28,7 +29,7 @@ public class CharAnim {
 	protected float animationTime;
 	protected float delta;
 	protected float lastTime;
-	protected String effecttype = "";
+	protected Effect effecttype;
 	protected String name = "";
 
 	public CharAnim(AnimRenderer animRenderer) {
@@ -69,7 +70,7 @@ public class CharAnim {
 		renderer.setAnimToDefault();
 	}
 	
-	public void setEffect(String type) {
+	public void setEffect(Effect type) {
 		renderer.resetParticles();
 		this.effecttype = type;
 //		ini();
@@ -88,11 +89,11 @@ public class CharAnim {
 	 * 
 	 * @return
 	 */
-	protected ParticleEffect addAnimEffect() {
-		ParticleEffect effect = new ParticleEffect();
-		effect.load(getParticleFile(), Gdx.files.internal("effects"));
+	protected Effect addAnimEffect() {
+		Effect effect = getNewEffect();
+//		effect.load(getParticleFile(), Gdx.files.internal("effects"));
 		effect.start();
-		renderer.addAnimParticle(effect);
+		renderer.addAnimEffect(effect);
 		return effect;
 	}
 	
@@ -101,23 +102,30 @@ public class CharAnim {
 	 * 
 	 * @return
 	 */
-	protected ParticleEffect addCharEffect() {
-		ParticleEffect effect = new ParticleEffect();
-		effect.load(getParticleFile(), Gdx.files.internal("effects"));
+	protected Effect addCharEffect() {
+		Effect effect = getNewEffect();
+//		effect.load(getParticleFile(), Gdx.files.internal("effects"));
 		effect.start();
-		renderer.addCharParticle(effect);
+		renderer.addCharEffect(effect);
+		return effect;
+	}
+	
+	protected Effect getNewEffect() {
+		Effect effect;
+		if (effecttype != null) effect = effecttype.getClone(); 
+		else effect = new FireEffect();
 		return effect;
 	}
 
-	private FileHandle getParticleFile() {
-		return AnimRenderer.getParticleFile(effecttype);
-	}
+//	private FileHandle getParticleFile() {
+//		return AnimRenderer.getParticleFile(effecttype);
+//	}
 	
 	protected Projectile addProjectile(float x, float y, Projectile p) {
 		if (renderer.getNumProj() > 0) return null;
 		if (p == null) p = new Projectile02(renderer);
 		p.setPos(x, y);
-		p.setEffecttype(effecttype);
+		p.setEffecttype(getNewEffect());
 		renderer.createProjectile(p);
 		return p;
 	}

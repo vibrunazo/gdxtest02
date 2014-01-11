@@ -15,7 +15,7 @@ public abstract class Action {
 	private CharAnim anim;
 	protected Char owner;
 	private float basepower;
-	private String animeffect;
+	private Effect animeffect;
 	private float BuffPwMultiplier = 1;
 	
 	public Action() {
@@ -286,7 +286,7 @@ public abstract class Action {
 	/**Sets the name of the animation this action should show when active
 	 * @param anim
 	 */
-	public Action setAnim(CharAnim anim, String effect) {
+	public Action setAnim(CharAnim anim, Effect effect) {
 		this.anim = anim;
 		this.animeffect = effect;
 		return this;
@@ -310,14 +310,14 @@ public abstract class Action {
 	/**
 	 * @return the animeffect
 	 */
-	public String getAnimEffect() {
+	public Effect getAnimEffect() {
 		return animeffect;
 	}
 
 	/**
 	 * @param animeffect the animeffect to set
 	 */
-	public Action setAnimEffect(String animeffect) {
+	public Action setAnimEffect(Effect animeffect) {
 		this.animeffect = animeffect;
 		return this;
 	}
