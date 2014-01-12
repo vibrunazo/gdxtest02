@@ -122,7 +122,7 @@ public class CharAnim {
 //	}
 	
 	protected Projectile addProjectile(float x, float y, Projectile p) {
-		if (renderer.getNumProj() > 0) return null;
+//		if (renderer.getNumProj() > 0) return null;
 		if (p == null) p = new Projectile02(renderer);
 		p.setPos(x, y);
 		p.setEffecttype(getNewEffect());

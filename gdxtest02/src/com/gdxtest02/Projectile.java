@@ -59,6 +59,7 @@ public class Projectile {
 
 	public void start() {
 		if (effect == null) effect = new FireEffect();
+		time = 0;
 		effect.start();
 		effect.setPosition(x, y);
 	}
@@ -110,7 +111,7 @@ public class Projectile {
 		skeleton.setY(y);
 		effect.setPosition(x, y);
 		effect.update(delta);
-//		log("proj time: " + time + " duration: "+ duration);
+//		log("projupdate time: " + time + " duration: "+ duration);
 		if (time >= duration) end();
 	}
 	

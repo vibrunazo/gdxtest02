@@ -399,12 +399,12 @@ public class AnimRenderer {
 	}
 
 	public void removeProjectile() {
-//		projectiles.clear();
+		projectiles.clear();
 //		projectiles.removeIndex(0);
-		projectiles = new Array<Projectile>(); 
-		charparticleeffects.clear();
+//		projectiles = new Array<Projectile>(); 
+//		charparticleeffects.clear();
 		
-		clearCharEffects();
+//		clearCharEffects();
 		
 	}
 
