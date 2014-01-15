@@ -15,22 +15,28 @@ public abstract class Buff {
 	public Buff() {
 		setPower(DEFAULT_POWER);
 		setDuration(DEFAULT_DURATION);
-		setName(DEFAULT_NAME);
-		thisid = id++;
+		ini();
 	}
 	
 	public Buff(float power) {
 		setPower(power);
 		setDuration(DEFAULT_DURATION);
-		setName(DEFAULT_NAME);
-		thisid = id++;
+		ini();
 	}
 	
 	public Buff(float power, int duration) {
 		setPower(power);
 		setDuration(duration);
+		ini();
+	}
+	
+	/**initialization
+	 * 
+	 */ 
+	private void ini() {
 		setName(DEFAULT_NAME);
 		thisid = id++;
+		
 	}
 	
 	/**Do whatever is it that you do
@@ -86,18 +92,6 @@ public abstract class Buff {
 	 */
 	public float getPower() {
 		return power;
-	}
-	
-	/**when buff is removed 
-	 * 
-	 */ 
-	public void end(Char self){
-	}
-	
-	/**when buff is applied 
-	 * 
-	 */ 
-	public void ini(Char self) {
 	}
 	
 }
