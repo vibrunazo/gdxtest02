@@ -257,6 +257,10 @@ public class AnimRenderer {
 //			p.draw(batch);
 //		}
 		
+		for (Buff b : owner.getBuffs()) {
+			b.draw(batch, delta);
+		}
+		
 		for (Effect e : animeffects) {
 			e.update(delta);
 			e.draw(batch);

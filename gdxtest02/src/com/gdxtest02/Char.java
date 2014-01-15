@@ -42,6 +42,10 @@ public class Char implements Cloneable {
 	private ArrayMap<Integer, Action> actionUnlockedPerLevel;
 	private int maxActionBarSize = 4;
 	private Array<Buff> buffs;
+	public Array<Buff> getBuffs() {
+		return buffs;
+	}
+
 	/**List of buffs to be added this round, 
 	 * these will be moved to the main buffs list at the end of the round
 	 * so they don't make effect when first applied, only 1 round later

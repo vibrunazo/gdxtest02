@@ -1,5 +1,7 @@
 package com.gdxtest02;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public abstract class Buff {
 	protected String name;
 	protected float power;
@@ -92,6 +94,10 @@ public abstract class Buff {
 	 */
 	public float getPower() {
 		return power;
+	}
+
+	public void draw(SpriteBatch batch, float delta) {
+		
 	}
 	
 }
