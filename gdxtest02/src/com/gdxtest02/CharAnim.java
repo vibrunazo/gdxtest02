@@ -9,6 +9,7 @@ import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
 import com.gdxtest02.effects.FireEffect;
+import com.gdxtest02.effects.HitEffect;
 import com.gdxtest02.projectiles.Projectile01;
 import com.gdxtest02.projectiles.Projectile02;
 
@@ -71,7 +72,7 @@ public class CharAnim {
 	}
 	
 	public void setEffect(Effect type) {
-		renderer.resetParticles();
+//		renderer.resetParticles();
 		this.effecttype = type;
 //		ini();
 	}
@@ -137,7 +138,10 @@ public class CharAnim {
 		Char c = renderer.getOwner();
 		Char t = c.getTarget();
 		
-		renderer.addEffect("hit", t.getPosX(), t.getPosY() + 70f);
+		HitEffect e = new HitEffect();
+		e.setPosition(t.getPosX(), t.getPosY() + 70f);
+		renderer.addCharEffect(new HitEffect());
+//		renderer.addEffect("hit", t.getPosX(), t.getPosY() + 70f);
 		
 //		log("hit created");
 	}

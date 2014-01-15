@@ -50,15 +50,15 @@ public class AnimRenderer {
 	private Array<Effect> animeffects;
 	private Array<Effect> chareffects;
 	
-	/**Animation specific effects. Will reset when animation changes
-	 * 
-	 */
-	private Array<ParticleEffect> animparticleeffects;
-	/**Generic char effects. Will persist through animations and only stops
-	 * when char dies or effect ends
-	 * 
-	 */
-	private Array<ParticleEffect> charparticleeffects;
+//	/**Animation specific effects. Will reset when animation changes
+//	 * 
+//	 */
+//	private Array<ParticleEffect> animparticleeffects;
+//	/**Generic char effects. Will persist through animations and only stops
+//	 * when char dies or effect ends
+//	 * 
+//	 */
+//	private Array<ParticleEffect> charparticleeffects;
 	private Array<Projectile> projectiles;
 	private Char owner;
 
@@ -79,7 +79,7 @@ public class AnimRenderer {
 //		sb = new SkeletonBinary(atlas);
 		loadSkeletonDataFromJson();
 		
-		charparticleeffects = new Array<ParticleEffect>();
+//		charparticleeffects = new Array<ParticleEffect>();
 		chareffects = new Array<Effect>();
 		projectiles = new Array<Projectile>(); 
 	}
@@ -104,7 +104,7 @@ public class AnimRenderer {
 	 */
 	public void setAnim(String animname, Effect effect) {
 		// reset particles when changing anim
-		animparticleeffects = new Array<ParticleEffect>(); 
+//		animparticleeffects = new Array<ParticleEffect>(); 
 		animeffects = new Array<Effect>();
 		
 		this.animname = animname;
@@ -127,7 +127,7 @@ public class AnimRenderer {
 	 */
 	public void setAnim(CharAnim anim, Effect effect) {
 		// reset particles when changing anim
-		animparticleeffects = new Array<ParticleEffect>(); 
+//		animparticleeffects = new Array<ParticleEffect>(); 
 //		log("setanim anim: " + anim + " ename: " + effectname);
 		if (anim == null || anim.getName().equals("")) {
 			setAnimToDefault();
@@ -247,15 +247,15 @@ public class AnimRenderer {
 	public void drawEffects(SpriteBatch batch) {
 //		log("drawpart, owner: " + owner + " ae: " + animeffects + " ce: " +
 //	chareffects + " p: " + projectiles);
-		for (ParticleEffect p : animparticleeffects) {
-			p.update(delta);
-			p.draw(batch);
-		}
-		
-		for (ParticleEffect p : charparticleeffects) {
-			p.update(delta);
-			p.draw(batch);
-		}
+//		for (ParticleEffect p : animparticleeffects) {
+//			p.update(delta);
+//			p.draw(batch);
+//		}
+//		
+//		for (ParticleEffect p : charparticleeffects) {
+//			p.update(delta);
+//			p.draw(batch);
+//		}
 		
 		for (Effect e : animeffects) {
 			e.update(delta);
@@ -320,27 +320,27 @@ public class AnimRenderer {
 		return skeleton.getFlipX();
 	}
 
-	public ParticleEffect createAnimParticle(String effecttype) {
-		ParticleEffect effect = getParticleFromName(effecttype);
-		addAnimParticle(effect);
-		return effect;
-	}
+//	public ParticleEffect createAnimParticle(String effecttype) {
+//		ParticleEffect effect = getParticleFromName(effecttype);
+//		addAnimParticle(effect);
+//		return effect;
+//	}
+//	
+//	public ParticleEffect createCharParticle(String effecttype) {
+//		ParticleEffect effect = getParticleFromName(effecttype);
+//		addCharParticle(effect);
+//		return effect;
+//	}
 	
-	public ParticleEffect createCharParticle(String effecttype) {
-		ParticleEffect effect = getParticleFromName(effecttype);
-		addCharParticle(effect);
-		return effect;
-	}
-	
-	public void addAnimParticle(ParticleEffect effect) {
-		animparticleeffects.add(effect);
-		effect.start();
-	}
-	
-	public void addCharParticle(ParticleEffect effect) {
-		charparticleeffects.add(effect);
-		effect.start();
-	}
+//	public void addAnimParticle(ParticleEffect effect) {
+//		animparticleeffects.add(effect);
+//		effect.start();
+//	}
+//	
+//	public void addCharParticle(ParticleEffect effect) {
+//		charparticleeffects.add(effect);
+//		effect.start();
+//	}
 	
 	public void addCharEffect(Effect effect) {
 		chareffects.add(effect);
@@ -352,14 +352,14 @@ public class AnimRenderer {
 		effect.start();
 	}
 
-	public void addEffect(String effecttype, float posX, float posY) {
-		ParticleEffect e = createCharParticle(effecttype);
-		e.setPosition(posX, posY);
-	}
+//	public void addEffect(String effecttype, float posX, float posY) {
+//		ParticleEffect e = createCharParticle(effecttype);
+//		e.setPosition(posX, posY);
+//	}
 
-	public void resetParticles() {
-		animparticleeffects.clear();
-	}
+//	public void resetParticles() {
+//		animparticleeffects.clear();
+//	}
 
 	public void createProjectile(Projectile p) {
 		projectiles.add(p);
@@ -408,11 +408,11 @@ public class AnimRenderer {
 		
 	}
 
-	private void clearCharEffects() {
-		for (ParticleEffect p : charparticleeffects) {
-			p.dispose();
-		}
-	}
+//	private void clearCharEffects() {
+//		for (ParticleEffect p : charparticleeffects) {
+//			p.dispose();
+//		}
+//	}
 
 	public void setOwner(Char owner) {
 		this.owner = owner;
