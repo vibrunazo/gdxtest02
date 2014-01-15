@@ -1,6 +1,7 @@
 package com.gdxtest02;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
 
 public abstract class Action {
 	protected String name = "Action";
@@ -16,7 +17,8 @@ public abstract class Action {
 	protected Char owner;
 	private float basepower;
 	private String animeffect;
-	private float BuffPwMultiplier = 1;
+	private float buffpwmultiplier = 1;
+	private Array<String> acttypelist = new Array<String>();
 	
 	public Action() {
 		ini();
@@ -340,14 +342,14 @@ public abstract class Action {
 	 * @return the buffPwMultiplier
 	 */
 	public float getBuffPwMultiplier() {
-		return BuffPwMultiplier;
+		return buffpwmultiplier;
 	}
 
 	/**
 	 * @param buffPwMultiplier the buffPwMultiplier to set
 	 */
 	public void setBuffPwMultiplier(float buffPwMultiplier) {
-		BuffPwMultiplier = buffPwMultiplier;
+		buffpwmultiplier = buffPwMultiplier;
 	}
 	
 	/**Gets the action type
@@ -365,4 +367,17 @@ public abstract class Action {
 		return this;
 	}
 	
+	public void addType(String type){
+		if(acttypelist == null){
+			acttypelist = new Array<String>();
+		}
+		acttypelist.add(type);
+	}
+	
+	public Array<String> getTypeList(){
+		if(acttypelist == null){
+			acttypelist = new Array<String>();
+		}
+		return acttypelist;
+	}
 }
