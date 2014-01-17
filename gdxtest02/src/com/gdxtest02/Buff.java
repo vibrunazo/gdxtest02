@@ -1,11 +1,13 @@
 package com.gdxtest02;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.gdxtest02.effects.FireEffect;
 
 public abstract class Buff {
 	protected String name;
 	protected float power;
 	protected int duration;
+	protected Effect effect;
 	
 	private int DEFAULT_POWER = 200;
 	private int DEFAULT_DURATION = 2;
@@ -38,6 +40,9 @@ public abstract class Buff {
 	private void ini() {
 		setName(DEFAULT_NAME);
 		thisid = id++;
+		
+		effect = new FireEffect();
+		effect.start();
 		
 	}
 	
@@ -97,7 +102,9 @@ public abstract class Buff {
 	}
 
 	public void draw(SpriteBatch batch, float delta) {
-		
+//		if (effect == null) return;
+		effect.update(delta);
+		effect.draw(batch);
 	}
 	
 }
