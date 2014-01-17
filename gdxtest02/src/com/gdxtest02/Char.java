@@ -194,6 +194,7 @@ public class Char implements Cloneable {
 	 * @param buff
 	 */
 	public void addBuff(Buff buff) {
+		buff.setTarget(this);
 		buffs.add(buff);
 	}
 	
@@ -212,6 +213,7 @@ public class Char implements Cloneable {
 		// loop through all buffs and make their do their thing
 		for (Buff buff : buffs) {
 			buff.act(this);
+//			buff.setVisible(true);
 			buff.incDuration(-1);
 			if (buff.getDuration() == 0){
 				toremove.add(buff); // this buff will be removed 

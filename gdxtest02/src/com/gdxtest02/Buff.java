@@ -8,6 +8,7 @@ public abstract class Buff {
 	protected float power;
 	protected int duration;
 	protected Effect effect;
+	protected Char target;
 	
 	private int DEFAULT_POWER = 200;
 	private int DEFAULT_DURATION = 2;
@@ -15,6 +16,7 @@ public abstract class Buff {
 	
 	private static int id = 0;
 	private int thisid = 0;
+	private boolean visible = false;
 	
 	public Buff() {
 		setPower(DEFAULT_POWER);
@@ -42,7 +44,6 @@ public abstract class Buff {
 		thisid = id++;
 		
 		effect = new FireEffect();
-		effect.start();
 		
 	}
 	
@@ -102,9 +103,25 @@ public abstract class Buff {
 	}
 
 	public void draw(SpriteBatch batch, float delta) {
-//		if (effect == null) return;
+		if (!visible ) return;
+		effect.setPosition(target.getPosX(), target.getPosY());
 		effect.update(delta);
 		effect.draw(batch);
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	public void setTarget(Char target) {
+		this.target = target;
+		visible = true;
+		effect.start();
+		
 	}
 	
 }
