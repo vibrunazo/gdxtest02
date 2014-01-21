@@ -386,7 +386,7 @@ public class AnimRenderer {
 	
 	public static FileHandle getParticleFile(String effecttype) {
 		if (effecttype.equals("fire")) {
-			return Gdx.files.internal("effects/fire01.p");
+			return Gdx.files.internal("effects/fire03.p");
 		}
 		else if (effecttype.equals("green")) {
 			return Gdx.files.internal("effects/part02.p");
