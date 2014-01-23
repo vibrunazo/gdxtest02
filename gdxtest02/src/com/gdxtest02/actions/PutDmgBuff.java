@@ -1,5 +1,6 @@
 package com.gdxtest02.actions;
 
+import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Action;
 import com.gdxtest02.Char;
 import com.gdxtest02.anims.Castup01;
@@ -8,9 +9,11 @@ import com.gdxtest02.buffs.BuffDmg;
 
 
 public class PutDmgBuff extends Action{
+	private Array<String> bufftype;
+	
 	@Override
 	protected void go(Char self, Char target) {
-		BuffDmg buff = new BuffDmg(power, duration);
+		BuffDmg buff = new BuffDmg(power, duration, bufftype);
 		self.addBuff(buff.setName("Dmg Buff"));
 		
 	}
@@ -40,6 +43,12 @@ public class PutDmgBuff extends Action{
 	
 	public PutDmgBuff(float value, int cooldown, int duration) {
 		super(value, cooldown, duration);
+	}
+	
+	public void addBuffType(String type){
+		if (bufftype == null)
+			bufftype = new Array<String>();
+		bufftype.add(type);
 	}
 
 }

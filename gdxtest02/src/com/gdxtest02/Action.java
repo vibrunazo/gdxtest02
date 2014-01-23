@@ -9,7 +9,7 @@ public abstract class Action {
 	protected int cooldown = 0;
 	private int curcooldown = 0;
 	protected int duration = 5;
-	private String type = "normal";
+	//private String type = "normal";
 	private boolean reflect = false;
 	private String description = "This is a skill";
 	private float avgdps;
@@ -355,22 +355,21 @@ public abstract class Action {
 	/**Gets the action type
 	 * @return
 	 */
-	public String getType() {
-		return type;
-	}
+//	public String getType() {
+//		return type;
+//	}
 	/**Sets the type
 	 * @param type
 	 * @return
 	 */
-	public Action setType(String type) {
-		this.type = type;
-		return this;
-	}
+//	public Action setType(String type) {
+//		this.type = type;
+//		return this;
+//	}
 	
 	public void addType(String type){
-		if(acttypelist == null){
+		if(acttypelist == null)
 			acttypelist = new Array<String>();
-		}
 		acttypelist.add(type);
 	}
 	
