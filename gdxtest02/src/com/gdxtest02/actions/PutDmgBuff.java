@@ -45,10 +45,10 @@ public class PutDmgBuff extends Action{
 		super(value, cooldown, duration);
 	}
 	
-	public void addBuffType(String type){
+	public void addBuffType(String[] strings){
 		if (bufftype == null)
 			bufftype = new Array<String>();
-		bufftype.add(type);
+		bufftype.addAll(strings);
 	}
 
 }

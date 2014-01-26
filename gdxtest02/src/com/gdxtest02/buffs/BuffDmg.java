@@ -19,6 +19,7 @@ public class BuffDmg extends Buff{
 					a.updatePower();
 					a.update();
 					log("buff power: "+ a.getBuffPwMultiplier());
+					break;
 				}
 			}
 		}	

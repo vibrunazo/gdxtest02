@@ -1,5 +1,7 @@
 package com.gdxtest02;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 
@@ -359,7 +361,7 @@ public abstract class Action {
 //		return type;
 //	}
 	/**Sets the type
-	 * @param type
+	 * @param strings
 	 * @return
 	 */
 //	public Action setType(String type) {
@@ -367,10 +369,10 @@ public abstract class Action {
 //		return this;
 //	}
 	
-	public void addType(String type){
+	public void addType(String[] strings){
 		if(acttypelist == null)
 			acttypelist = new Array<String>();
-		acttypelist.add(type);
+		acttypelist.addAll(strings);
 	}
 	
 	public Array<String> getTypeList(){

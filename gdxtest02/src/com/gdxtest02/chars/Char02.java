@@ -17,13 +17,13 @@ public class Char02 extends Char {
 		float ratio = 0.95238096f;
 		float hratio = 0.5f;
 		
-		addAction(new Dmg(50*ratio)).setName("Punch").addType("falcon");
+		addAction(new Dmg(50*ratio)).setName("Punch").addType(new String[] { "malcon", "normal", "melee", "falcon" });
 		addAction(new Heal(250*hratio, 3)).setName("Heal");
 		//(addAction(new PutDmgBuff(1, 0, 5))).setName("aaa").setType("Buff");
 		PutDmgBuff b = new PutDmgBuff(1, 0, 5);
-		b.setName("aa");
-		b.addType("buff");
-		b.addBuffType("falcon");
+		b.setName("aaa");
+//		b.addType("buff");
+		b.addBuffType((new String[] {"falcon", "satan", "normal"}));
 		addAction(b);
 		//addAction(new PutDot(50*ratio, 0, 2).setName("Death Fart"));
 		addAction(new PutSpikes(300, 0, 5)).setName("Flame Shield");
