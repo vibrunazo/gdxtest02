@@ -392,7 +392,7 @@ public class AnimRenderer {
 			return Gdx.files.internal("effects/part02.p");
 		} 
 		else if (effecttype.equals("ice")) {
-			return Gdx.files.internal("effects/ice02.p");
+			return Gdx.files.internal("effects/ice04.p");
 		} 
 		else if (effecttype.equals("hit")) {
 			return Gdx.files.internal("effects/spark01.p");
