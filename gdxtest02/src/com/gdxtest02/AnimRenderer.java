@@ -389,7 +389,7 @@ public class AnimRenderer {
 			return Gdx.files.internal("effects/fire03.p");
 		}
 		else if (effecttype.equals("green")) {
-			return Gdx.files.internal("effects/part02.p");
+			return Gdx.files.internal("effects/green02.p");
 		} 
 		else if (effecttype.equals("ice")) {
 			return Gdx.files.internal("effects/ice04.p");

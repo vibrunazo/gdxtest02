@@ -2,6 +2,7 @@ package com.gdxtest02;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gdxtest02.effects.FireEffect;
+import com.gdxtest02.effects.GreenEffect;
 import com.gdxtest02.effects.IceEffect;
 
 public abstract class Buff {
@@ -44,7 +45,7 @@ public abstract class Buff {
 		setName(DEFAULT_NAME);
 		thisid = id++;
 		
-		effect = new IceEffect();
+		effect = new GreenEffect();
 		
 	}
 	
