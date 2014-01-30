@@ -4,8 +4,17 @@ import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Action;
 import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
+import com.gdxtest02.effects.FireEffect;
+
 import static com.gdxtest02.GdxTest02.log;
 public class BuffDmg extends Buff{
+	
+	@Override
+	protected void ini() {
+		super.ini();
+		effect = new FireEffect();
+	}
+	
 	private Array<String> bufftype;
 	@Override
 	public void act(Char self) {

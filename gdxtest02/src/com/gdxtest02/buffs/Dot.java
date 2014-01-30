@@ -2,8 +2,15 @@ package com.gdxtest02.buffs;
 
 import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
+import com.gdxtest02.effects.FireEffect;
 
 public class Dot extends Buff {
+	@Override
+	protected void ini() {
+		super.ini();
+		effect = new FireEffect();
+	}
+
 	@Override
 	public void act(Char self) {
 		self.incHp(-power, self, false);

@@ -41,7 +41,7 @@ public abstract class Buff {
 	/**initialization
 	 * 
 	 */ 
-	private void ini() {
+	protected void ini() {
 		setName(DEFAULT_NAME);
 		thisid = id++;
 		
