@@ -2,11 +2,12 @@ package com.gdxtest02.actions;
 
 import com.gdxtest02.Action;
 import com.gdxtest02.Char;
+import com.gdxtest02.PutBuffAction;
 import com.gdxtest02.anims.Castup01;
 import com.gdxtest02.anims.Punch01;
 import com.gdxtest02.buffs.Spikes;
 
-public class PutSpikes extends Action{
+public class PutSpikes extends PutBuffAction {
 	@Override
 	protected void go(Char self, Char target) {
 		Spikes buff = new Spikes(power, duration);

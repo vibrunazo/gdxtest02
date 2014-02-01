@@ -3,12 +3,13 @@ package com.gdxtest02.actions;
 import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Action;
 import com.gdxtest02.Char;
+import com.gdxtest02.PutBuffAction;
 import com.gdxtest02.anims.Castup01;
 import com.gdxtest02.anims.Punch01;
 import com.gdxtest02.buffs.BuffDmg;
 
 
-public class PutDmgBuff extends Action{
+public class PutDmgBuff extends PutBuffAction {
 	private Array<String> bufftype;
 	
 	@Override

@@ -126,4 +126,17 @@ public abstract class Buff {
 		
 	}
 	
+	/**
+	 * @return the effect
+	 */
+	public Effect getEffect() {
+		return effect;
+	}
+
+	/**
+	 * @param effect the effect to set
+	 */
+	public void setEffect(Effect effect) {
+		this.effect = effect;
+	}
 }
