@@ -1,5 +1,7 @@
 package com.gdxtest02;
 
+import java.lang.reflect.Constructor;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gdxtest02.effects.FireEffect;
 import com.gdxtest02.effects.GreenEffect;
@@ -138,5 +140,21 @@ public abstract class Buff {
 	 */
 	public void setEffect(Effect effect) {
 		this.effect = effect;
+	}
+	
+	public Buff getClone() {
+//		return new Buff(power, duration);
+		
+		try {
+			Constructor<? extends Buff> constructor = this.getClass().getConstructor();
+			Object clone = constructor.newInstance();
+			Buff b = (Buff)clone;
+			b.duration = this.duration;
+			b.power = this.power;
+			return b;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

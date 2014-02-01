@@ -8,6 +8,7 @@ import com.gdxtest02.actions.PutDmgBuff;
 import com.gdxtest02.actions.PutDot;
 import com.gdxtest02.actions.PutHot;
 import com.gdxtest02.actions.PutSpikes;
+import com.gdxtest02.effects.IceEffect;
 
 public class Char02 extends Char {
 	
@@ -24,6 +25,7 @@ public class Char02 extends Char {
 		b.setName("aaa");
 //		b.addType("buff");
 		b.addBuffType((new String[] {"falcon", "satan", "normal"}));
+		b.setEffect(new IceEffect());
 		addAction(b);
 		//addAction(new PutDot(50*ratio, 0, 2).setName("Death Fart"));
 		addAction(new PutSpikes(300, 0, 5)).setName("Flame Shield");

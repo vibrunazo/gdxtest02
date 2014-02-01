@@ -473,17 +473,7 @@ public class Char implements Cloneable {
 			Constructor<? extends Char> constructor = this.getClass().getConstructor(String.class);
 			Object clone = constructor.newInstance(this.getName());
 			return (Char)clone;
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

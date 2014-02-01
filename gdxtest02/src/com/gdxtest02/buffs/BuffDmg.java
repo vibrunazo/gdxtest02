@@ -1,5 +1,7 @@
 package com.gdxtest02.buffs;
 
+import java.lang.reflect.Constructor;
+
 import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Action;
 import com.gdxtest02.Buff;
@@ -47,6 +49,11 @@ public class BuffDmg extends Buff{
 	//	self.setBuffPwMultiplier(self.getBuffPwMultiplier() - power);
 	}
 		
+	public BuffDmg() {
+		super();
+		bufftype = new Array<String>();
+	}
+	
 	public BuffDmg(Array<String> bufflist) {
 		super();
 		bufftype = bufflist;
@@ -62,6 +69,28 @@ public class BuffDmg extends Buff{
 		super(value, duration);
 		bufftype = bufflist;
 	}
+
+
+	/* (non-Javadoc)
+	 * @see com.gdxtest02.Buff#getClone()
+	 */
+	@Override
+	public Buff getClone() {
+		try {
+			Constructor<? extends BuffDmg> constructor = this.getClass().getConstructor();
+			Object clone = constructor.newInstance();
+			BuffDmg b = (BuffDmg)clone;
+			b.duration = this.duration;
+			b.power = this.power;
+			b.bufftype = this.bufftype;
+			return b;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 }
 
 
