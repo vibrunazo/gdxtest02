@@ -1,5 +1,6 @@
 package com.gdxtest02.actions;
 
+import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Action;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.Char;
@@ -11,8 +12,9 @@ import com.gdxtest02.projectiles.Projectile03;
 public class Drain extends Action {
 	@Override
 	protected void go(Char self, Char target) {
-		target.incHp(-power, self, getReflect());
-		self.incHp(power, self, getReflect());
+		target.incHp(-power, self, getReflect(), this.getTypeList());
+		String[] a = {"heal"};
+		self.incHp(power, self, getReflect(), new Array<String>(a));
 	}
 
 	@Override

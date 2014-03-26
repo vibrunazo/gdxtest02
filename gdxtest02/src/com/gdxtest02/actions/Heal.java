@@ -1,5 +1,6 @@
 package com.gdxtest02.actions;
 
+import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Action;
 import com.gdxtest02.Char;
 import com.gdxtest02.anims.Castup01;
@@ -20,7 +21,8 @@ public class Heal extends Action {
 	
 	@Override
 	protected void go(Char self, Char target) {
-		self.incHp(power, self, getReflect());
+		String[] a = {"heal"};
+		self.incHp(power, self, getReflect(), new Array<String>(a));
 	}
 	
 	public float getDmgAfterRounds(int rounds) {

@@ -22,7 +22,7 @@ public class Char03 extends Char {
 		addAction(new Dmg(100*ratio)).setName("Yoga Fire");
 		addAction(new Dmg(400*ratio, 5)).setName("Overpacarai")
 			.setAnim(new PunchRight01(renderer));
-		addAction(new PutDot(50*ratio, 0, 5)).setName("DotFoda");
+		addAction(new PutDot(50*ratio, 0, 5)).setName("DotFoda").addType(new String[] {"fire"});
 		addAction(new Dmg(500*ratio, 2)).setName("Frost Bolt").setReflect(false)
 				.setAnim(new Cast01(renderer)
 				.setProjectile(new Projectile02(renderer)))

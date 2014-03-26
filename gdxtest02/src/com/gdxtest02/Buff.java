@@ -3,6 +3,7 @@ package com.gdxtest02;
 import java.lang.reflect.Constructor;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.effects.FireEffect;
 import com.gdxtest02.effects.GreenEffect;
 import com.gdxtest02.effects.IceEffect;
@@ -17,6 +18,7 @@ public abstract class Buff {
 	private int DEFAULT_POWER = 200;
 	private int DEFAULT_DURATION = 2;
 	private String DEFAULT_NAME = "Buff";
+
 	
 	private static int id = 0;
 	private int thisid = 0;
@@ -157,4 +159,6 @@ public abstract class Buff {
 		}
 		return null;
 	}
+	
+
 }

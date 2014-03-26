@@ -11,8 +11,9 @@ public class PutDot extends PutBuffAction {
 
 	@Override
 	protected void go(Char self, Char target) {
-		Dot buff = new Dot(power, duration);
+		Dot buff = new Dot(power, duration, getTypeList());
 		target.addBuff(buff.setName("Dot"));
+		
 	}
 
 	@Override

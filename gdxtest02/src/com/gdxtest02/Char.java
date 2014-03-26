@@ -2,6 +2,7 @@ package com.gdxtest02;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
@@ -60,6 +61,7 @@ public class Char implements Cloneable {
 	private int level;
 	private int exp;
 	private Array<Integer> aiSkillList;
+	private HashMap<String, Float> resists;
 	
 	private AnimRenderer animRenderer;
 	private CharSkin skin;
@@ -80,7 +82,8 @@ public class Char implements Cloneable {
 		skin = new CharSkin();
 		animRenderer = new AnimRenderer(skin);
 		animRenderer.setOwner(this);
-		
+		resists = new HashMap<String, Float>();
+        resists.put("all", new Float (1));
 		spikes = 0;
 		level = 1;
 		levelMultiplier = 1;
@@ -290,11 +293,29 @@ public class Char implements Cloneable {
 	 * @param reflect if damage can be reflected or not 
 	 * @param inc how much to change
 	 */
-	public void incHp(float delta, Char source, boolean reflect) {
-		dmg += delta;
+	public void incHp(float delta, Char source, boolean reflect, Array<String> type) {
+		if(type.size < 1)
+			type.add("normal");
+		float y = 0;
+		float z;
+		for (int x = 0; x < type.size; x++){
+			if(resists.containsKey(type.get(x)) == false)
+				resists.put(type.get(x), resists.get("all"));
+		    if (x == 0)
+		    	y = resists.get(type.get(x));
+		    else{
+		    	z = resists.get(type.get(x));
+		    	y = z*y;
+		    }
+		    
+		}
+		 dmg += delta *y;
+		log(type.toString());
+		log(resists.toString());
 		if (reflect == true && getSpikes()>0)
 		{
-			target.incHp(-getSpikes(), this, false);
+			String[] a = {"counter"};
+			target.incHp(-getSpikes(), this, false, new Array<String>(a));
 		}
 	}
 	
@@ -733,6 +754,9 @@ public class Char implements Cloneable {
 		return animRenderer;
 	}
 	
-	
+	public void editResists(String type, float value){
+		resists.put(type, value);
+		
+	}
 
 }
