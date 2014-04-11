@@ -1,6 +1,6 @@
 package com.gdxtest02.client;
 
-import com.gdxtest02.GdxTest02;
+import com.gdxtest02.core.GdxTest02;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;

@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import static com.gdxtest02.GdxTest02.log;
+import com.gdxtest02.core.GdxTest02;
+
+import static com.gdxtest02.core.GdxTest02.log;
 
 public class MainActivity extends AndroidApplication {
     private View gameView;
