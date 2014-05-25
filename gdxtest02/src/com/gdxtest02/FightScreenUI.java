@@ -55,7 +55,7 @@ public class FightScreenUI extends UIBuilder {
 	private ClickListener clickOnRestartButton;
 	private IntMap<Array<TextButton>> buttonGroups;
 	private Array<String> consoleData;
-	private List consoleList;
+	private List<String[]> consoleList;
 	private ScrollPane scroll;
 	private ClickListener clickOnBackButton;
 	private Label animTime;
@@ -114,9 +114,10 @@ public class FightScreenUI extends UIBuilder {
 		
 		consoleData = new Array<String>();
 //		String[] consoleItems = (String[])consoleData.items;
-		String[] consoleItems = {};
-		consoleList = new List(consoleItems, skin);
-		scroll = new ScrollPane(consoleList, skin);
+//		String[] consoleItems = {};
+//		consoleList = new List(consoleItems, skin);
+//		scroll = new ScrollPane(consoleList, skin);
+		scroll = new ScrollPane(null, skin);
 		scroll.setFillParent(true);
 		scroll.setOverscroll(false, false);
 //		scroll.setScrollingDisabled(true, false);
