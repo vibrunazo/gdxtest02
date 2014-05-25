@@ -111,6 +111,7 @@ public class UIBuilder {
 	public void resize(int width, int height) {
 //		stage.setViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, false);
 		stage.getViewport().update(width, height, true);
+//		stage.getViewport().update(GdxTest02.VIRTUAL_WIDTH, GdxTest02.VIRTUAL_HEIGHT, true);
 	}
 
 	public void draw() {

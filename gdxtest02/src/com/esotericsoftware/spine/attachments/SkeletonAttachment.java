@@ -30,18 +30,23 @@
 
 package com.esotericsoftware.spine.attachments;
 
-import com.esotericsoftware.spine.Skin;
+import com.esotericsoftware.spine.Skeleton;
 
-public interface AttachmentLoader {
-	/** @return May be null to not load any attachment. */
-	public RegionAttachment newRegionAttachment (Skin skin, String name, String path);
+/** Attachment that displays a skeleton. */
+public class SkeletonAttachment extends Attachment {
+	private Skeleton skeleton;
 
-	/** @return May be null to not load any attachment. */
-	public MeshAttachment newMeshAttachment (Skin skin, String name, String path);
-	
-	/** @return May be null to not load any attachment. */
-	public SkinnedMeshAttachment newSkinnedMeshAttachment (Skin skin, String name, String path);
+	public SkeletonAttachment (String name) {
+		super(name);
+	}
 
-	/** @return May be null to not load any attachment. */
-	public BoundingBoxAttachment newBoundingBoxAttachment (Skin skin, String name);
+	/** @return May return null. */
+	public Skeleton getSkeleton () {
+		return skeleton;
+	}
+
+	/** @param skeleton May be null. */
+	public void setSkeleton (Skeleton skeleton) {
+		this.skeleton = skeleton;
+	}
 }
