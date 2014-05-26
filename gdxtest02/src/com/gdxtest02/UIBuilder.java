@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 /**This is supposed to be ageneric ui class that is suppused to be good for every screen
  * Screen specific classes could derive from it
@@ -42,7 +43,8 @@ public class UIBuilder {
 
 	public UIBuilder(final GdxTest02 game) {
 		this.game = game;
-		stage = new Stage(new ScreenViewport());
+//		stage = new Stage(new ScreenViewport());
+		stage = new Stage(new StretchViewport(GdxTest02.VIRTUAL_WIDTH, GdxTest02.VIRTUAL_HEIGHT));
 		Gdx.input.setInputProcessor(stage);
 //		stage.setViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, false);
 
