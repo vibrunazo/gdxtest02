@@ -5,6 +5,7 @@ import static com.gdxtest02.GdxTest02.log;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
@@ -113,7 +114,9 @@ public class CharAnim {
 	
 	protected Effect getNewEffect() {
 		Effect effect;
-		if (effecttype != null) effect = effecttype.getClone(); 
+//		if (effecttype != null) effect = effecttype.getClone();
+		Kryo kryo = new Kryo();
+		if (effecttype != null) effect = kryo.copy(effecttype);
 		else effect = new FireEffect();
 		return effect;
 	}

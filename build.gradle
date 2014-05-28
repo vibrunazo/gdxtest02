@@ -81,6 +81,7 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+	compile group: 'com.esotericsoftware.kryo', name: 'kryo', version: '2.24.0'
     }
 }
 
