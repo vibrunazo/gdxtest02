@@ -37,26 +37,4 @@ public class Effect  {
 		
 	}
 
-	public Effect getClone() {
-		try {
-			Constructor<? extends Effect> constructor = this.getClass().getConstructor();
-			Object clone = constructor.newInstance();
-			return (Effect)clone;
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		}
-		return null;
-
-	}
-
 }
