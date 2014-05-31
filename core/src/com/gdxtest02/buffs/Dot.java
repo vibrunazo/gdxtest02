@@ -18,6 +18,11 @@ public class Dot extends Buff {
 		self.incHp(-power, self, false, type );
 	}
 
+	public Dot() {
+		super();
+		type = new Array<String>();
+	}
+	
 	public Dot(Array<String> typelist){
 		super();
 		type = typelist;

@@ -1,17 +1,20 @@
 package com.gdxtest02.actions;
 
 import com.gdxtest02.Action;
+import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
+import com.gdxtest02.GdxTest02;
 import com.gdxtest02.PutBuffAction;
 import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.Punch01;
 import com.gdxtest02.buffs.Dot;
 
 public class PutDot extends PutBuffAction {
+	Buff bufftype;
 
 	@Override
 	protected void go(Char self, Char target) {
-		Dot buff = new Dot(power, duration, getTypeList());
+		Buff buff = GdxTest02.getKryo().copy(bufftype);
 		target.addBuff(buff.setName("Dot"));
 		
 	}
@@ -20,6 +23,7 @@ public class PutDot extends PutBuffAction {
 	public void ini() {
 		setName("Put Dot");
 		setAnim(new Cast01(owner.getAnimRenderer()));
+		bufftype = new Dot(power, duration, getTypeList());
 	}
 	
 	public void update() {

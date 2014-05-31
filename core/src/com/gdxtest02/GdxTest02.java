@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.esotericsoftware.kryo.Kryo;
 import com.gdxtest02.chars.Char01;
 import com.gdxtest02.gamestate.GameState;
 
@@ -39,9 +40,19 @@ public class GdxTest02 extends Game {
 	public BitmapFont font;
 	private GameState gamestate;
 	private static GdxTest02 game;
+	
+	private static Kryo kryo;
+
+	/**
+	 * @return the kryo
+	 */
+	public static Kryo getKryo() {
+		return kryo;
+	}
 
 	public void create() {
 		gamestate = new GameState(this);
+		kryo = new Kryo();
 //		gamestate.setPlayer(new Char01("p1"));
 		
 		batch = new SpriteBatch();
