@@ -6,6 +6,7 @@ import com.esotericsoftware.spine.SkeletonData;
 import com.gdxtest02.effects.FireEffect;
 import com.gdxtest02.effects.HitEffect;
 import com.gdxtest02.projectiles.Projectile02;
+import com.gdxtest02.util.Util;
 
 /**This is the base class every animation will extend, it should have commonly used
  * methods that most animations use
@@ -107,7 +108,7 @@ public class CharAnim {
 	
 	protected Effect getNewEffect() {
 		Effect effect;
-		if (effecttype != null) effect = GdxTest02.getKryo().copy(effecttype);
+		if (effecttype != null) effect = Util.copy(effecttype);
 		else effect = new FireEffect();
 		return effect;
 	}

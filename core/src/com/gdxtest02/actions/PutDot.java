@@ -8,13 +8,14 @@ import com.gdxtest02.PutBuffAction;
 import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.Punch01;
 import com.gdxtest02.buffs.Dot;
+import com.gdxtest02.util.Util;
 
 public class PutDot extends PutBuffAction {
 	Buff bufftype;
 
 	@Override
 	protected void go(Char self, Char target) {
-		Buff buff = GdxTest02.getKryo().copy(bufftype);
+		Buff buff = Util.copy(bufftype);
 		target.addBuff(buff.setName("Dot"));
 		
 	}
