@@ -1,17 +1,12 @@
 package com.gdxtest02;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonJson;
 import com.gdxtest02.effects.FireEffect;
-import com.gdxtest02.effects.GreenEffect;
-import com.gdxtest02.effects.IceEffect;
-
-import static com.gdxtest02.GdxTest02.log;
 
 public class Projectile {
 	private float x;

@@ -14,8 +14,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.gdxtest02.util.Util;
+import com.gdxtest02.util.Util.*;
 
-import static com.gdxtest02.GdxTest02.log;
 
 public class Char implements Cloneable {
 	private float spikes;
@@ -310,8 +311,8 @@ public class Char implements Cloneable {
 		    
 		}
 		 dmg += delta *y;
-		log(type.toString());
-		log(resists.toString());
+		Util.log(type.toString());
+		Util.log(resists.toString());
 		if (reflect == true && getSpikes()>0)
 		{
 			String[] a = {"counter"};
@@ -468,7 +469,7 @@ public class Char implements Cloneable {
 	}
 	
 	public int getAiSkill(int round){
-		log(aiSkillList.toString());
+		Util.log(aiSkillList.toString());
 		if (aiSkillList != null && aiSkillList.size >= round){
 			
 			 return aiSkillList.get(round - 1);
@@ -545,7 +546,7 @@ public class Char implements Cloneable {
 		level++;
 		setPowerMultiplier(1f + (level - 1f)*0.1f);
 		unlockSkillsForLevel(level);
-		log(name + " leveled up, level: " + level + " pmult: " + levelMultiplier);
+		Util.log(name + " leveled up, level: " + level + " pmult: " + levelMultiplier);
 	}
 	
 	private void unlockSkillsForLevel(int level) {
@@ -553,7 +554,7 @@ public class Char implements Cloneable {
 			Action a = actionUnlockedPerLevel.get(level);
 			if (a != null) {
 				addAction(a);
-				log(this.getName() + " unlocks a new skill: " + a.getName());
+				Util.log(this.getName() + " unlocks a new skill: " + a.getName());
 			}
 		}
 	}

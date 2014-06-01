@@ -24,7 +24,6 @@ import com.gdxtest02.anims.Punch01;
 import com.gdxtest02.anims.PunchRight01;
 import com.gdxtest02.anims.Stand01;
 
-import static com.gdxtest02.GdxTest02.log;
 import static com.gdxtest02.GdxTest02.VIRTUAL_WIDTH;
 
 public class AnimRenderer {

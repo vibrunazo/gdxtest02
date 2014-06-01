@@ -1,15 +1,9 @@
 package com.gdxtest02.anims;
 
-import static com.gdxtest02.GdxTest02.log;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.esotericsoftware.spine.Animation;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.CharAnim;
 import com.gdxtest02.Effect;
-
-import static com.gdxtest02.GdxTest02.log;
 
 public class Castup01 extends CharAnim {
 

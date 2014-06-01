@@ -5,9 +5,6 @@ import com.gdxtest02.Char;
 import com.gdxtest02.CharBuilder;
 import com.gdxtest02.GdxTest02;
 
-import static com.gdxtest02.CharBuilder.*;
-import static com.gdxtest02.GdxTest02.log;
-
 public class GameState {
 	
 		public static final int MODE_STORY = 0;

@@ -3,8 +3,7 @@ package com.gdxtest02.buffs;
 import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
 import com.gdxtest02.effects.FireEffect;
-
-import static com.gdxtest02.GdxTest02.log;
+import com.gdxtest02.util.Util;
 public class Spikes extends Buff{
 	
 	@Override
@@ -17,7 +16,7 @@ public class Spikes extends Buff{
 	@Override
 	public void act(Char self) {
 		self.setSpikes(self.getSpikes()+power);
-		log("Spikes act, self.getSpikes: "+ self.getSpikes());
+		Util.log("Spikes act, self.getSpikes: "+ self.getSpikes());
 	}
 	
 	public void ini(Char self){

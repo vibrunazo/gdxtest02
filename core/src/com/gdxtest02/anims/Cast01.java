@@ -1,15 +1,12 @@
 package com.gdxtest02.anims;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.esotericsoftware.spine.Animation;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.CharAnim;
 import com.gdxtest02.Effect;
 import com.gdxtest02.Projectile;
 import com.gdxtest02.projectiles.Projectile01;
-
-import static com.gdxtest02.GdxTest02.log;
+import com.gdxtest02.util.Util;
 
 public class Cast01 extends CharAnim {
 
@@ -40,7 +37,7 @@ public class Cast01 extends CharAnim {
 		effect = addAnimEffect();
 		effect.setDuration(1500);
 		projcreated = false;
-		log("ini charanim: " + name + " effect: " + effect + " etype: " + effecttype);
+		Util.log("ini charanim: " + name + " effect: " + effect + " etype: " + effecttype);
 		
 	}
 

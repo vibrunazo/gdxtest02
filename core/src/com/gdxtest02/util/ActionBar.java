@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Action;
 import com.gdxtest02.Char;
-import static com.gdxtest02.GdxTest02.log;
 
 public class ActionBar extends Table {
 	private Array<TextButton> actionButtons;

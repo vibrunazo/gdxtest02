@@ -7,8 +7,7 @@ import com.gdxtest02.Action;
 import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
 import com.gdxtest02.effects.FireEffect;
-
-import static com.gdxtest02.GdxTest02.log;
+import com.gdxtest02.util.Util;
 public class BuffDmg extends Buff{
 	
 	@Override
@@ -29,7 +28,7 @@ public class BuffDmg extends Buff{
 					a.setBuffPwMultiplier(a.getBuffPwMultiplier()+power);
 					a.updatePower();
 					a.update();
-					log("buff power: "+ a.getBuffPwMultiplier());
+					Util.log("buff power: "+ a.getBuffPwMultiplier());
 					break;
 				}
 			}

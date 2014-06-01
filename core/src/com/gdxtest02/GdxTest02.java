@@ -2,7 +2,6 @@ package com.gdxtest02;
 import java.util.Iterator;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -31,6 +30,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.esotericsoftware.kryo.Kryo;
 import com.gdxtest02.chars.Char01;
 import com.gdxtest02.gamestate.GameState;
+import com.gdxtest02.util.Util;
 
 public class GdxTest02 extends Game {
 	public static int VIRTUAL_WIDTH = 800;
@@ -40,8 +40,9 @@ public class GdxTest02 extends Game {
 	public BitmapFont font;
 	private GameState gamestate;
 	private static GdxTest02 game;
-	
+
 	private static Kryo kryo;
+	
 
 	/**
 	 * @return the kryo
@@ -81,10 +82,6 @@ public class GdxTest02 extends Game {
 	 */
 	public GameState getGameState() {
 		return gamestate;
-	}
-	
-	public static void log(String text) {
-		Gdx.app.log("gdxtest", text);
 	}
 
 }

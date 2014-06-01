@@ -1,17 +1,10 @@
 package com.gdxtest02;
 
-import static com.gdxtest02.GdxTest02.log;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
 import com.gdxtest02.effects.FireEffect;
 import com.gdxtest02.effects.HitEffect;
-import com.gdxtest02.projectiles.Projectile01;
 import com.gdxtest02.projectiles.Projectile02;
 
 /**This is the base class every animation will extend, it should have commonly used
