@@ -114,9 +114,7 @@ public class CharAnim {
 	
 	protected Effect getNewEffect() {
 		Effect effect;
-//		if (effecttype != null) effect = effecttype.getClone();
-		Kryo kryo = new Kryo();
-		if (effecttype != null) effect = kryo.copy(effecttype);
+		if (effecttype != null) effect = GdxTest02.getKryo().copy(effecttype);
 		else effect = new FireEffect();
 		return effect;
 	}
