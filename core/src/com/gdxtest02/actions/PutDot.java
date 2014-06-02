@@ -11,11 +11,10 @@ import com.gdxtest02.buffs.Dot;
 import com.gdxtest02.util.Util;
 
 public class PutDot extends PutBuffAction {
-	Buff bufftype;
 
 	@Override
 	protected void go(Char self, Char target) {
-		Buff buff = Util.copy(bufftype);
+		Buff buff = getNewBuffInstance();
 		target.addBuff(buff.setName("Dot"));
 		
 	}
@@ -24,7 +23,7 @@ public class PutDot extends PutBuffAction {
 	public void ini() {
 		setName("Put Dot");
 		setAnim(new Cast01(owner.getAnimRenderer()));
-		bufftype = new Dot(power, duration, getTypeList());
+		setBuff(new Dot(power, duration, getTypeList()));;
 	}
 	
 	public void update() {

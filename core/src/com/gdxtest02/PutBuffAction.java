@@ -3,17 +3,19 @@
  */
 package com.gdxtest02;
 
+import com.gdxtest02.util.Util;
+
 /**An Action that puts a Buff
  * 
  * @author Vandré
  *
  */
 public class PutBuffAction extends Action {
-	protected Buff buff;
+	protected Buff buffdummy;
 	
 	public PutBuffAction setEffect(Effect effect) {
-		if (buff == null) return this;
-		buff.setEffect(effect);
+		if (buffdummy == null) return this;
+		buffdummy.setEffect(effect);
 		return this;
 	}
 
@@ -58,6 +60,20 @@ public class PutBuffAction extends Action {
 	
 	public PutBuffAction(float value, int cooldown, int duration) {
 		super(value, cooldown, duration);
+	}
+
+	/**Gets a copy of the Buff this action should cast, ready to use
+	 * @return a copy of this action's buff
+	 */
+	protected Buff getNewBuffInstance() {
+		return Util.copy(buffdummy);
+	}
+
+	/**Sets which Buff this action will cast
+	 * @param buff the buff to set
+	 */
+	protected void setBuff(Buff buff) {
+		this.buffdummy = buff;
 	}
 
 }
