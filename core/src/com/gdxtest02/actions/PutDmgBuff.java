@@ -12,12 +12,10 @@ import com.gdxtest02.buffs.BuffDmg;
 
 public class PutDmgBuff extends PutBuffAction {
 	private Array<String> bufftype;
-	private BuffDmg buff;
 	
 	@Override
 	protected void go(Char self, Char target) {
-//		BuffDmg buff = new BuffDmg(power, duration, bufftype);
-		Buff b = buff.getClone();
+		Buff b = getNewBuffInstance();
 		self.addBuff(b.setName("Dmg Buff"));
 		
 	}
@@ -26,7 +24,7 @@ public class PutDmgBuff extends PutBuffAction {
 	public void ini() {
 		setName("Put Dmg Buff");
 		setAnim(new Castup01(owner.getAnimRenderer()));
-		buff = new BuffDmg(power, duration, bufftype);
+		setBuff(new BuffDmg(power, duration, bufftype));
 	}
 	
 	public void update() {
