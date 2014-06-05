@@ -13,6 +13,7 @@ public class IceEffect extends Effect {
 	
 	@Override
 	public void update(float delta) {
+		super.update(delta);
 		particle.setPosition(x, y);
 		particle.update(delta);
 	}

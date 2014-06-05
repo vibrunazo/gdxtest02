@@ -110,7 +110,7 @@ public abstract class Buff {
 
 	public void draw(SpriteBatch batch, float delta) {
 		if (!visible ) return;
-		effect.setPosition(target.getPosX(), target.getPosY());
+//		effect.setPosition(target.getPosX(), target.getPosY() + 50);
 		effect.update(delta);
 		effect.draw(batch);
 	}
@@ -126,8 +126,8 @@ public abstract class Buff {
 	public void setTarget(Char target) {
 		this.target = target;
 		visible = true;
+		effect.setAttachedChar(target);
 		effect.start();
-		
 	}
 	
 	/**
@@ -142,6 +142,7 @@ public abstract class Buff {
 	 */
 	public void setEffect(Effect effect) {
 		this.effect = effect;
+		if (target != null) this.effect.setAttachedChar(target);
 	}
 	
 	public Buff getClone() {
