@@ -17,6 +17,7 @@ public class Effect  {
 	private Char attachedChar;
 	private float offsetx;
 	private float offsety;
+	private Bone bone;
 
 	public Effect() {
 //		attachedChar = null;
@@ -26,10 +27,7 @@ public class Effect  {
 //		Util.log("effect update, aC: " + attachedChar + " at: " + x + "x, " + y);
 		if (attachedChar == null) return;
 //		x = attachedChar.getPosX();
-		Skeleton sk = attachedChar.getAnimRenderer().getSkeleton();
-		SkeletonData sd = attachedChar.getAnimRenderer().getSkeletonData();
-		int bi = sd.findBoneIndex("shoulderPos");
-		Bone bone = sk.getBones().get(bi);
+		
 		x = bone.getWorldX();
 		y = bone.getWorldY();
 	}
@@ -64,6 +62,10 @@ public class Effect  {
 	 */
 	public void setAttachedChar(Char attachedChar) {
 		this.attachedChar = attachedChar;
+		Skeleton sk = attachedChar.getAnimRenderer().getSkeleton();
+		SkeletonData sd = attachedChar.getAnimRenderer().getSkeletonData();
+		int bi = sd.findBoneIndex("shoulderPos");
+		bone = sk.getBones().get(bi);
 	}
 
 }
