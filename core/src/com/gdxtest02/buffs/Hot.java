@@ -12,6 +12,7 @@ public class Hot extends Buff {
 	protected void ini() {
 		super.ini();
 		effect = new GreenEffect();
+		effect.setOffset(0, 10);
 	}
 
 	@Override

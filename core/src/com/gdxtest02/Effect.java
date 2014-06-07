@@ -15,8 +15,8 @@ public class Effect  {
 	protected float y;
 	protected int duration;
 	private Char attachedChar;
-	private float offsetx;
-	private float offsety;
+	private float offsetx = 0;
+	private float offsety = 0;
 	private Bone bone;
 	private String attachName;
 	
@@ -30,8 +30,8 @@ public class Effect  {
 		if (attachedChar == null) return;
 //		x = attachedChar.getPosX();
 		
-		x = bone.getWorldX();
-		y = bone.getWorldY();
+		x = bone.getWorldX() + offsetx*attachedChar.getFlipXMultiplier();
+		y = bone.getWorldY() + offsety;
 	}
 
 	public void draw(SpriteBatch batch) {
@@ -88,6 +88,29 @@ public class Effect  {
 		SkeletonData sd = attachedChar.getAnimRenderer().getSkeletonData();
 		int bi = sd.findBoneIndex(attachName);
 		bone = sk.getBones().get(bi);
+	}
+
+	/**
+	 * @return the offsetx
+	 */
+	public float getOffsetx() {
+		return offsetx;
+	}
+
+	/**
+	 * @param offsetx the offsetx to set
+	 * @param offsety the offsety to set
+	 */
+	public void setOffset(float offsetx, float offsety) {
+		this.offsetx = offsetx;
+		this.offsety = offsety;
+	}
+
+	/**
+	 * @return the offsety
+	 */
+	public float getOffsety() {
+		return offsety;
 	}
 
 }

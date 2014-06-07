@@ -656,6 +656,14 @@ public class Char implements Cloneable {
 		return animRenderer.getFlipX();
 	}
 	
+	/**returns -1 if the char is flipped horizontally, 1 otherwise
+	 * @return
+	 */
+	public int getFlipXMultiplier() {
+		if (getFlipX()) return -1;
+		return 1;
+	}
+	
 	/**Flip char image horizontally
 	 * @param flip
 	 */

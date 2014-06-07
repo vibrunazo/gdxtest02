@@ -14,6 +14,7 @@ public class BuffDmg extends Buff{
 	protected void ini() {
 		super.ini();
 		effect = new FireEffect();
+		effect.setOffset(0, 50);
 	}
 	
 	private Array<String> bufftype;
