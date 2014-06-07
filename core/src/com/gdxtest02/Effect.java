@@ -18,9 +18,11 @@ public class Effect  {
 	private float offsetx;
 	private float offsety;
 	private Bone bone;
+	private String attachName;
+	
 
 	public Effect() {
-//		attachedChar = null;
+		attachName = "";
 	}
 
 	public void update(float delta) {
@@ -62,9 +64,29 @@ public class Effect  {
 	 */
 	public void setAttachedChar(Char attachedChar) {
 		this.attachedChar = attachedChar;
+		
+		if (attachName.equals("")) setAttachName("shoulderPos");
+	}
+
+	/**
+	 * @return the attachName
+	 */
+	public String getAttachName() {
+		return attachName;
+	}
+
+	/**
+	 * @param attachName the attachName to set
+	 */
+	public void setAttachName(String attachName) {
+		this.attachName = attachName;
+		if (attachName.equals("")) {
+			bone = null;
+			return;
+		}
 		Skeleton sk = attachedChar.getAnimRenderer().getSkeleton();
 		SkeletonData sd = attachedChar.getAnimRenderer().getSkeletonData();
-		int bi = sd.findBoneIndex("shoulderPos");
+		int bi = sd.findBoneIndex(attachName);
 		bone = sk.getBones().get(bi);
 	}
 
