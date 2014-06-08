@@ -9,8 +9,8 @@ public class Spikes extends Buff{
 	@Override
 	protected void ini() {
 		super.ini();
-		effect = new FireEffect();
-		effect.setOffset(40, 10);
+		setEffect(new FireEffect());
+		getEffect().setOffset(40, 10);
 	}
 	
 	

@@ -9,8 +9,8 @@ public class Dot extends Buff {
 	@Override
 	protected void ini() {
 		super.ini();
-		effect = new FireEffect();
-		effect.setOffset(0, -30);
+		setEffect(new FireEffect());
+		getEffect().setOffset(0, -30);
 	}
 	private Array<String> type;
 

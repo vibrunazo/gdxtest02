@@ -13,8 +13,8 @@ public class BuffDmg extends Buff{
 	@Override
 	protected void ini() {
 		super.ini();
-		effect = new FireEffect();
-		effect.setOffset(0, 50);
+		setEffect(new FireEffect());
+		getEffect().setOffset(0, 50);
 	}
 	
 	private Array<String> bufftype;

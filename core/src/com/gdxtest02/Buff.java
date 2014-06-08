@@ -12,7 +12,7 @@ public abstract class Buff {
 	protected String name;
 	protected float power;
 	protected int duration;
-	protected Effect effect;
+	private Effect effect;
 	protected Char target;
 	
 	private int DEFAULT_POWER = 200;
