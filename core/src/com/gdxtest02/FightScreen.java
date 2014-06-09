@@ -260,6 +260,7 @@ public class FightScreen implements Screen {
 		
 		setAnimStateP1();
 		pausetime = PAUSE_TIME;
+		updateUi();
 	}
 	
 	private void applyDamages() {
@@ -287,6 +288,7 @@ public class FightScreen implements Screen {
 		// actually applies the damage done this round by all players
 		p1.applyDmg(); p2.applyDmg();
 		p1.applyBuffs(); p2.applyBuffs();
+		updateUi();
 	}
 
 	private boolean areActionsLegal(Action actionp1, Action actionp2) {
