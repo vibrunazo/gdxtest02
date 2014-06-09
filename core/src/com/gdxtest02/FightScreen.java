@@ -220,6 +220,8 @@ public class FightScreen implements Screen {
 		else {
 			fightstate = "go";
 		}
+		
+		applyDamages(); 
 	}
 
 
@@ -234,6 +236,15 @@ public class FightScreen implements Screen {
 			return;
 		}
 		
+		castSkills();
+//		applyDamages(); 
+
+//		endFight();
+		
+		updateUi();
+	}
+
+	private void castSkills() {
 		//preparing
 		if (p1control == CONTROL_AI){
 			p1.setActiveActionId(p1.getAiSkill(round));	
@@ -242,9 +253,6 @@ public class FightScreen implements Screen {
 			p2.setActiveActionId(p2.getAiSkill(round));	
 		}
 		
-		int actionidp1 = p1.getActiveActionId();
-		int actionidp2 = p2.getActiveActionId();
-		
 		Action actionp1 = p1.getActiveAction();
 		Action actionp2 = p2.getActiveAction();
 		
@@ -252,7 +260,18 @@ public class FightScreen implements Screen {
 		
 		setAnimStateP1();
 		pausetime = PAUSE_TIME;
+	}
+	
+	private void applyDamages() {
 		
+		
+		int actionidp1 = p1.getActiveActionId();
+		int actionidp2 = p2.getActiveActionId();
+		
+		Action actionp1 = p1.getActiveAction();
+		Action actionp2 = p2.getActiveAction();
+		
+		if (!areActionsLegal(actionp1, actionp2)) return;
 		
 		// now we know everything is ok, so start actually doing stuff
 		
@@ -267,11 +286,7 @@ public class FightScreen implements Screen {
 		p1.updateCooldowns();p2.updateCooldowns();
 		// actually applies the damage done this round by all players
 		p1.applyDmg(); p2.applyDmg();
-		p1.applyBuffs(); p2.applyBuffs(); 
-
-//		endFight();
-		
-		updateUi();
+		p1.applyBuffs(); p2.applyBuffs();
 	}
 
 	private boolean areActionsLegal(Action actionp1, Action actionp2) {
