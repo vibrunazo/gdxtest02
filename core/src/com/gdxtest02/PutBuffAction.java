@@ -66,6 +66,7 @@ public class PutBuffAction extends Action {
 	 * @return a copy of this action's buff
 	 */
 	protected Buff getNewBuffInstance() {
+		buffdummy.ini();
 		return Util.copy(buffdummy);
 	}
 

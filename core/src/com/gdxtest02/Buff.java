@@ -3,10 +3,12 @@ package com.gdxtest02;
 import java.lang.reflect.Constructor;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.effects.FireEffect;
 import com.gdxtest02.effects.GreenEffect;
 import com.gdxtest02.effects.IceEffect;
+import com.gdxtest02.util.Util;
 
 public abstract class Buff {
 	protected String name;
@@ -14,6 +16,8 @@ public abstract class Buff {
 	protected int duration;
 	private Effect effect;
 	protected Char target;
+	private float effectOffsetX;
+	private float effectOffsetY;
 	
 	private int DEFAULT_POWER = 200;
 	private int DEFAULT_DURATION = 2;
@@ -49,8 +53,12 @@ public abstract class Buff {
 		setName(DEFAULT_NAME);
 		thisid = id++;
 		
-		effect = new GreenEffect();
-		
+		float x = MathUtils.random()*50 - 25;
+		float y = MathUtils.random()*50 - 25;
+		effectOffsetX = x;
+		effectOffsetY = y;
+		setEffect(new GreenEffect());
+//		Util.log("Buff ini, effect offset x: " + x + " y: " + y);
 	}
 	
 	/**Do whatever is it that you do
@@ -142,6 +150,8 @@ public abstract class Buff {
 	 */
 	public void setEffect(Effect effect) {
 		this.effect = effect;
+		effect.setAttachedBuff(this);
+//		effect.setOffset(effectOffsetX, effectOffsetY);
 		if (target != null) this.effect.setAttachedChar(target);
 	}
 	
@@ -159,6 +169,20 @@ public abstract class Buff {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * @return the effectOffsetX
+	 */
+	public float getEffectOffsetX() {
+		return effectOffsetX;
+	}
+
+	/**
+	 * @return the effectOffsetY
+	 */
+	public float getEffectOffsetY() {
+		return effectOffsetY;
 	}
 	
 

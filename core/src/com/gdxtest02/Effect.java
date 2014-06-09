@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.Bone;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
@@ -15,6 +16,7 @@ public class Effect  {
 	protected float y;
 	protected int duration;
 	private Char attachedChar;
+	private Buff attachedBuff;
 	private float offsetx = 0;
 	private float offsety = 0;
 	private Bone bone;
@@ -32,6 +34,9 @@ public class Effect  {
 		
 		x = bone.getWorldX() + offsetx*attachedChar.getFlipXMultiplier();
 		y = bone.getWorldY() + offsety;
+//		Util.log("Effect update, x: " + x + " offsetx: " + offsetx + 
+//				" buffoff: " + attachedBuff.getEffectOffsetX()
+//				+ " buff: " + attachedBuff);
 	}
 
 	public void draw(SpriteBatch batch) {
@@ -91,19 +96,18 @@ public class Effect  {
 	}
 
 	/**
-	 * @return the offsetx
-	 */
-	public float getOffsetx() {
-		return offsetx;
-	}
-
-	/**
 	 * @param offsetx the offsetx to set
 	 * @param offsety the offsety to set
 	 */
 	public void setOffset(float offsetx, float offsety) {
 		this.offsetx = offsetx;
+//		this.offsetx += MathUtils.random()*100;
+//		Util.log("effect setoffset, offsetx: " + this.offsetx);
 		this.offsety = offsety;
+		if (attachedBuff != null) {
+			this.offsetx += attachedBuff.getEffectOffsetX();
+			this.offsety += attachedBuff.getEffectOffsetY();
+		}
 	}
 
 	/**
@@ -111,6 +115,27 @@ public class Effect  {
 	 */
 	public float getOffsety() {
 		return offsety;
+	}
+	
+	/**
+	 * @return the offsetx
+	 */
+	public float getOffsetx() {
+		return offsetx;
+	}
+
+	/**
+	 * @return the attachedBuff
+	 */
+	public Buff getAttachedBuff() {
+		return attachedBuff;
+	}
+
+	/**
+	 * @param attachedBuff the attachedBuff to set
+	 */
+	public void setAttachedBuff(Buff attachedBuff) {
+		this.attachedBuff = attachedBuff;
 	}
 
 }

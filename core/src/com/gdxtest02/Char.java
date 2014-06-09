@@ -44,9 +44,6 @@ public class Char implements Cloneable {
 	private ArrayMap<Integer, Action> actionUnlockedPerLevel;
 	private int maxActionBarSize = 4;
 	private Array<Buff> buffs;
-	public Array<Buff> getBuffs() {
-		return buffs;
-	}
 
 	/**List of buffs to be added this round, 
 	 * these will be moved to the main buffs list at the end of the round
@@ -766,6 +763,10 @@ public class Char implements Cloneable {
 	public void editResists(String type, float value){
 		resists.put(type, value);
 		
+	}
+	
+	public Array<Buff> getBuffs() {
+		return buffs;
 	}
 
 }
