@@ -15,12 +15,14 @@ public class Effect  {
 	protected float x;
 	protected float y;
 	protected int duration;
+	protected boolean hasStarted;
 	private Char attachedChar;
 	private Buff attachedBuff;
 	private float offsetx = 0;
 	private float offsety = 0;
 	private Bone bone;
 	private String attachName;
+	private float scale = 1;
 	
 
 	public Effect() {
@@ -136,6 +138,20 @@ public class Effect  {
 	 */
 	public void setAttachedBuff(Buff attachedBuff) {
 		this.attachedBuff = attachedBuff;
+	}
+
+	/**
+	 * @return the scale
+	 */
+	public float getScale() {
+		return scale;
+	}
+
+	/**
+	 * @param scale the scale to set
+	 */
+	public void setScale(float scale) {
+		this.scale = scale;
 	}
 
 }

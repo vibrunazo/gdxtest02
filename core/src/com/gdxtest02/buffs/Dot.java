@@ -11,6 +11,7 @@ public class Dot extends Buff {
 		super.ini();
 		setEffect(new FireEffect());
 		getEffect().setOffset(0, -30);
+		getEffect().setScale(0.2f);
 	}
 	private Array<String> type;
 
