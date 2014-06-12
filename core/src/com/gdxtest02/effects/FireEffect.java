@@ -38,7 +38,6 @@ public class FireEffect extends Effect {
 	public void setScale(float scale) {
 		super.setScale(scale);
 		if (!hasStarted) return;
-		Util.log("setting scale");
 		Util.scaleParticle(particle, scale);
 	}
 	
