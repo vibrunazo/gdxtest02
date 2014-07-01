@@ -16,11 +16,27 @@ public abstract class Buff {
 	protected int duration;
 	private Effect effect;
 	protected Char target;
+	/**final x position of the effect, after random change
+	 * 
+	 */
 	private float effectOffsetX;
+	/**final y position of the effect, after random change
+	 * 
+	 */
 	private float effectOffsetY;
 	
+	/**x Position of the effect, before random change
+	 * 
+	 */
 	private float effectBaseOffsetX;
+	/**y Position of the effect, before random change
+	 * 
+	 */
 	private float effectBaseOffsetY;
+	/** by how much the offset changes randomly with each buff
+	 * 
+	 */
+	private float effectRandomDeltaOffset = 50;
 	
 	private int DEFAULT_POWER = 200;
 	private int DEFAULT_DURATION = 2;
@@ -63,8 +79,8 @@ public abstract class Buff {
 	}
 
 	public void setRandomOffset() {
-		float x = MathUtils.random()*50 - 25;
-		float y = MathUtils.random()*50 - 25;
+		float x = MathUtils.random()*getEffectRandomDeltaOffset() - getEffectRandomDeltaOffset()/2;
+		float y = MathUtils.random()*getEffectRandomDeltaOffset() - getEffectRandomDeltaOffset()/2;
 		effectOffsetX = x;
 		effectOffsetY = y;
 	}
@@ -178,7 +194,7 @@ public abstract class Buff {
 	}
 	
 	public void resetEffectPosition() {
-		getEffect().setOffset(effectBaseOffsetX, effectBaseOffsetX);
+		getEffect().setOffset(effectBaseOffsetX, effectBaseOffsetY);
 	}
 
 	/**
@@ -188,6 +204,20 @@ public abstract class Buff {
 	public void setEffectBaseOffset(float effectBaseOffsetX, float effectBaseOffsetY) {
 		this.effectBaseOffsetX = effectBaseOffsetX;
 		this.effectBaseOffsetY = effectBaseOffsetY;
+	}
+
+	/**
+	 * @return the effectRandomDeltaOffset
+	 */
+	public float getEffectRandomDeltaOffset() {
+		return effectRandomDeltaOffset;
+	}
+
+	/**
+	 * @param effectRandomDeltaOffset the effectRandomDeltaOffset to set
+	 */
+	public void setEffectRandomDeltaOffset(float effectRandomDeltaOffset) {
+		this.effectRandomDeltaOffset = effectRandomDeltaOffset;
 	}
 	
 
