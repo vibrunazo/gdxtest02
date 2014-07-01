@@ -765,6 +765,10 @@ public class Char implements Cloneable {
 		
 	}
 	
+	public HashMap<String, Float> getResists(){
+		return resists;
+	}
+	
 	public Array<Buff> getBuffs() {
 		return buffs;
 	}

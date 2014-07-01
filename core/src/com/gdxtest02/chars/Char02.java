@@ -30,8 +30,8 @@ public class Char02 extends Char {
 		//addAction(new PutDot(50*ratio, 0, 2).setName("Death Fart"));
 		addAction(new PutSpikes(300, 0, 5)).setName("Flame Shield");
 //		actions.add(new PutHot(100, 5, 5).setName("Rejuv"));
-		editResists("fire", 2);
-		editResists("normal", 0);
+		editDefaultResists("fire", 2);
+		editDefaultResists("normal", 0);
 
 		setTex("ball02yell.png");
 		
