@@ -13,12 +13,6 @@ import com.gdxtest02.util.Util;
 public class PutBuffAction extends Action {
 	protected Buff buffdummy;
 	
-	public PutBuffAction setEffect(Effect effect) {
-		if (buffdummy == null) return this;
-		buffdummy.setEffect(effect);
-		return this;
-	}
-
 	/* (non-Javadoc)
 	 * @see com.gdxtest02.Action#go(com.gdxtest02.Char, com.gdxtest02.Char)
 	 */
@@ -66,7 +60,8 @@ public class PutBuffAction extends Action {
 	 * @return a copy of this action's buff
 	 */
 	protected Buff getNewBuffInstance() {
-		buffdummy.ini();
+		buffdummy.setRandomOffset();
+		buffdummy.resetEffectPosition();
 		return Util.copy(buffdummy);
 	}
 

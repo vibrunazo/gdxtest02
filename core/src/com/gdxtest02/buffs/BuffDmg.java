@@ -14,9 +14,9 @@ public class BuffDmg extends Buff{
 	protected void ini() {
 		super.ini();
 		setEffect(new FireEffect());
-		getEffect().setOffset(0, 50);
+		resetEffectPosition();
 	}
-	
+
 	private Array<String> bufftype;
 	@Override
 	public void act(Char self) {
@@ -70,27 +70,6 @@ public class BuffDmg extends Buff{
 		bufftype = bufflist;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see com.gdxtest02.Buff#getClone()
-	 */
-	@Override
-	public Buff getClone() {
-		try {
-			Constructor<? extends BuffDmg> constructor = this.getClass().getConstructor();
-			Object clone = constructor.newInstance();
-			BuffDmg b = (BuffDmg)clone;
-			b.duration = this.duration;
-			b.power = this.power;
-			b.bufftype = this.bufftype;
-			return b;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	
 }
 
 

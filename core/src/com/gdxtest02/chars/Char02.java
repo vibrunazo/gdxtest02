@@ -25,7 +25,7 @@ public class Char02 extends Char {
 		b.setName("aaa");
 //		b.addType("buff");
 		b.addBuffType((new String[] {"falcon", "satan", "normal"}));
-		b.setEffect(new IceEffect());
+//		b.setBuffEffect(new IceEffect());
 		addAction(b);
 		//addAction(new PutDot(50*ratio, 0, 2).setName("Death Fart"));
 		addAction(new PutSpikes(300, 0, 5)).setName("Flame Shield");

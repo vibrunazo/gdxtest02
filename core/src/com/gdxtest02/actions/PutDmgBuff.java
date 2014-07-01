@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Action;
 import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
+import com.gdxtest02.Effect;
 import com.gdxtest02.PutBuffAction;
 import com.gdxtest02.anims.Castup01;
 import com.gdxtest02.anims.Punch01;
@@ -53,6 +54,15 @@ public class PutDmgBuff extends PutBuffAction {
 		if (bufftype == null)
 			bufftype = new Array<String>();
 		bufftype.addAll(strings);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.gdxtest02.PutBuffAction#setBuff(com.gdxtest02.Buff)
+	 */
+	@Override
+	protected void setBuff(Buff buff) {
+		buff.getEffect().setAttachName("hand_L");
+		super.setBuff(buff);
 	}
 
 }

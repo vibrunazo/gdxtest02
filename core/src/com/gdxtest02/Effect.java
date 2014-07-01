@@ -21,12 +21,12 @@ public class Effect  {
 	private float offsetx = 0;
 	private float offsety = 0;
 	private Bone bone;
-	private String attachName;
+	private String attachName = "shoulderPos";
 	private float scale = 1;
 	
 
 	public Effect() {
-		attachName = "";
+//		attachName = "";
 	}
 
 	public void update(float delta) {
@@ -72,7 +72,9 @@ public class Effect  {
 	public void setAttachedChar(Char attachedChar) {
 		this.attachedChar = attachedChar;
 		
-		if (attachName.equals("")) setAttachName("shoulderPos");
+//		if (attachName.equals("")) setAttachName("shoulderPos");
+//		if (attachName.equals("")) setAttachName("hand_L");
+		applyAttachment();
 	}
 
 	/**
@@ -87,7 +89,11 @@ public class Effect  {
 	 */
 	public void setAttachName(String attachName) {
 		this.attachName = attachName;
-		if (attachName.equals("")) {
+		applyAttachment();
+	}
+
+	private void applyAttachment() {
+		if (attachName.equals("") || attachedChar == null) {
 			bone = null;
 			return;
 		}

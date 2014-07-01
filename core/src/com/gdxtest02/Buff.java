@@ -19,6 +19,9 @@ public abstract class Buff {
 	private float effectOffsetX;
 	private float effectOffsetY;
 	
+	private float effectBaseOffsetX;
+	private float effectBaseOffsetY;
+	
 	private int DEFAULT_POWER = 200;
 	private int DEFAULT_DURATION = 2;
 	private String DEFAULT_NAME = "Buff";
@@ -53,12 +56,17 @@ public abstract class Buff {
 		setName(DEFAULT_NAME);
 		thisid = id++;
 		
+		setRandomOffset();
+		
+		setEffect(new GreenEffect());
+//		Util.log("Buff ini, effect offset x: " + x + " y: " + y);
+	}
+
+	public void setRandomOffset() {
 		float x = MathUtils.random()*50 - 25;
 		float y = MathUtils.random()*50 - 25;
 		effectOffsetX = x;
 		effectOffsetY = y;
-		setEffect(new GreenEffect());
-//		Util.log("Buff ini, effect offset x: " + x + " y: " + y);
 	}
 	
 	/**Do whatever is it that you do
@@ -155,22 +163,6 @@ public abstract class Buff {
 		if (target != null) this.effect.setAttachedChar(target);
 	}
 	
-	public Buff getClone() {
-//		return new Buff(power, duration);
-		
-		try {
-			Constructor<? extends Buff> constructor = this.getClass().getConstructor();
-			Object clone = constructor.newInstance();
-			Buff b = (Buff)clone;
-			b.duration = this.duration;
-			b.power = this.power;
-			return b;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	/**
 	 * @return the effectOffsetX
 	 */
@@ -183,6 +175,19 @@ public abstract class Buff {
 	 */
 	public float getEffectOffsetY() {
 		return effectOffsetY;
+	}
+	
+	public void resetEffectPosition() {
+		getEffect().setOffset(effectBaseOffsetX, effectBaseOffsetX);
+	}
+
+	/**
+	 * @param effectBaseOffsetX the effectBaseOffsetX to set
+	 * @param effectBaseOffsetY the effectBaseOffsetY to set
+	 */
+	public void setEffectBaseOffset(float effectBaseOffsetX, float effectBaseOffsetY) {
+		this.effectBaseOffsetX = effectBaseOffsetX;
+		this.effectBaseOffsetY = effectBaseOffsetY;
 	}
 	
 
