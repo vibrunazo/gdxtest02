@@ -14,7 +14,7 @@ public abstract class Buff {
 	protected String name;
 	protected float power;
 	protected int duration;
-	private Effect effect;
+	private Array<Effect> effects;
 	protected Char target;
 	/**final x position of the effect, after random change
 	 * 
@@ -143,8 +143,10 @@ public abstract class Buff {
 	public void draw(SpriteBatch batch, float delta) {
 		if (!visible ) return;
 //		effect.setPosition(target.getPosX(), target.getPosY() + 50);
-		effect.update(delta);
-		effect.draw(batch);
+		for (Effect effect : effects) {
+			effect.update(delta);
+			effect.draw(batch);
+		}
 	}
 
 	public boolean isVisible() {
@@ -158,25 +160,29 @@ public abstract class Buff {
 	public void setTarget(Char target) {
 		this.target = target;
 		visible = true;
-		effect.setAttachedChar(target);
-		effect.start();
+		for (Effect effect : effects) {
+			effect.setAttachedChar(target);
+			effect.start();
+		}
 	}
 	
 	/**
 	 * @return the effect
 	 */
 	public Effect getEffect() {
-		return effect;
+		return effects.first();
 	}
 
 	/**
 	 * @param effect the effect to set
 	 */
 	public void setEffect(Effect effect) {
-		this.effect = effect;
+		if (effects == null) effects = new Array<Effect>();
+		if (effects.size == 0) effects.add(effect);
+		else effects.set(0, effect);
 		effect.setAttachedBuff(this);
 //		effect.setOffset(effectOffsetX, effectOffsetY);
-		if (target != null) this.effect.setAttachedChar(target);
+		if (target != null) effect.setAttachedChar(target);
 	}
 	
 	/**
