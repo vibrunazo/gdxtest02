@@ -172,16 +172,29 @@ public abstract class Buff {
 	public Effect getEffect() {
 		return effects.first();
 	}
+	
+	/**
+	 * @return the effect
+	 */
+	public Effect getEffect(int index) {
+		return effects.get(index);
+	}
 
 	/**
 	 * @param effect the effect to set
 	 */
 	public void setEffect(Effect effect) {
+		setEffect(0, effect);
+	}
+	
+	/**
+	 * @param effect the effect to set
+	 */
+	public void setEffect(int index, Effect effect) {
 		if (effects == null) effects = new Array<Effect>();
-		if (effects.size == 0) effects.add(effect);
-		else effects.set(0, effect);
+		if (effects.size <= index) effects.insert(index, effect);
+		else effects.set(index, effect);
 		effect.setAttachedBuff(this);
-//		effect.setOffset(effectOffsetX, effectOffsetY);
 		if (target != null) effect.setAttachedChar(target);
 	}
 	
