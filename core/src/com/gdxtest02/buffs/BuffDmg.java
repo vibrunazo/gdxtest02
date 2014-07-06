@@ -13,7 +13,8 @@ public class BuffDmg extends Buff{
 	@Override
 	protected void ini() {
 		super.ini();
-		setEffect(new FireEffect());
+		setEffect(0, new FireEffect());
+		setEffect(1, new FireEffect());
 		resetEffectPosition();
 	}
 

@@ -192,7 +192,7 @@ public abstract class Buff {
 	 */
 	public void setEffect(int index, Effect effect) {
 		if (effects == null) effects = new Array<Effect>();
-		if (effects.size <= index) effects.insert(index, effect);
+		if (effects.size <= index) effects.insert(index, effect); // TODO might need to check previous slots
 		else effects.set(index, effect);
 		effect.setAttachedBuff(this);
 		if (target != null) effect.setAttachedChar(target);

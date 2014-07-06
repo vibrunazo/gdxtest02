@@ -62,6 +62,7 @@ public class PutDmgBuff extends PutBuffAction {
 	@Override
 	protected void setBuff(Buff buff) {
 		buff.getEffect().setAttachName("hand_L");
+		buff.getEffect(1).setAttachName("hand_R");
 		buff.setEffectRandomDeltaOffset(0);
 		super.setBuff(buff);
 	}
