@@ -59,7 +59,8 @@ public class Char implements Cloneable {
 	private int level;
 	private int exp;
 	private Array<Integer> aiSkillList;
-	private HashMap<String, Float> resists;
+	private HashMap<String, Float> defaultResists;
+	private HashMap<String, Float> actualResists;
 	
 	private AnimRenderer animRenderer;
 	private CharSkin skin;
@@ -80,8 +81,10 @@ public class Char implements Cloneable {
 		skin = new CharSkin();
 		animRenderer = new AnimRenderer(skin);
 		animRenderer.setOwner(this);
-		resists = new HashMap<String, Float>();
-        resists.put("all", new Float (1));
+		defaultResists = new HashMap<String, Float>();
+		actualResists = new HashMap<String, Float>();
+        defaultResists.put("all", new Float (1));
+        actualResists.put("all", new Float (1));
 		spikes = 0;
 		level = 1;
 		levelMultiplier = 1;
@@ -104,11 +107,14 @@ public class Char implements Cloneable {
 		this.hp = maxhp;
 		this.activeAction = 0;
 		dmg = 0;
+		actualResists.clear();
+		actualResists.putAll(defaultResists);
 		buffs = new Array<Buff>();
 		newbuffs = new Array<Buff>();
 		spikes = 0;
 		buffPwMultiplier = 1;
 		updateAllActions();
+		Util.log(defaultResists.toString());
 		//reset all actions
 		for (Action a : actionBar) a.reset();
 	}
@@ -297,19 +303,19 @@ public class Char implements Cloneable {
 		float y = 0;
 		float z;
 		for (int x = 0; x < type.size; x++){
-			if(resists.containsKey(type.get(x)) == false)
-				resists.put(type.get(x), resists.get("all"));
+			if(actualResists.containsKey(type.get(x)) == false)
+				actualResists.put(type.get(x), actualResists.get("all"));
 		    if (x == 0)
-		    	y = resists.get(type.get(x));
+		    	y = actualResists.get(type.get(x));
 		    else{
-		    	z = resists.get(type.get(x));
+		    	z = actualResists.get(type.get(x));
 		    	y = z*y;
 		    }
 		    
 		}
 		 dmg += delta *y;
 		Util.log(type.toString());
-		Util.log(resists.toString());
+		Util.log(actualResists.toString());
 		if (reflect == true && getSpikes()>0)
 		{
 			String[] a = {"counter"};
@@ -760,13 +766,20 @@ public class Char implements Cloneable {
 		return animRenderer;
 	}
 	
-	public void editResists(String type, float value){
-		resists.put(type, value);
-		
+	public void editDefaultResists(String type, float value){
+		defaultResists.put(type, value);
+		actualResists.putAll(defaultResists);
+			
 	}
 	
+	public void editActualResists(String type, float value){
+		actualResists.put(type, value);
+		
+	}
+
+	
 	public HashMap<String, Float> getResists(){
-		return resists;
+		return actualResists;
 	}
 	
 	public Array<Buff> getBuffs() {

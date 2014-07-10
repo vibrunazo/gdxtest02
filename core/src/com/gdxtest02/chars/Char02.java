@@ -24,14 +24,14 @@ public class Char02 extends Char {
 		PutDmgBuff b = new PutDmgBuff(1, 0, 5);
 		b.setName("aaa");
 //		b.addType("buff");
-		b.addBuffType((new String[] {"falcon", "satan", "normal"}));
+		b.addBuffType((new String[] {"falcon", "satan", "fire", "normal"}));
 		b.setEffect(new IceEffect());
 		addAction(b);
 		//addAction(new PutDot(50*ratio, 0, 2).setName("Death Fart"));
 		addAction(new PutSpikes(300, 0, 5)).setName("Flame Shield");
 //		actions.add(new PutHot(100, 5, 5).setName("Rejuv"));
 		editDefaultResists("fire", 2);
-		editDefaultResists("normal", 0);
+		editDefaultResists("normal", 1);
 
 		setTex("ball02yell.png");
 		

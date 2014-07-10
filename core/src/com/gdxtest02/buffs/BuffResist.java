@@ -25,9 +25,11 @@ public class BuffResist extends Buff{
 		bufftype = new Array<String>();
 		for (int x = 0; x < bufftype.size; x++){
 			if(self.getResists().containsKey(bufftype.get(x))){
-				self.editResists(bufftype.get(x), self.getResists().get(bufftype.get(x))/power);
-				
+				self.editActualResists(bufftype.get(x), self.getResists().get(bufftype.get(x))/power);
 			}
+			else
+				self.editActualResists(bufftype.get(x), self.getResists().get("all")/power);
+			
 		}
 //		for (Action a : self.getActionBar()) {
 //			for (int x = 0; x < bufftype.size; x++){
