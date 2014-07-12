@@ -316,7 +316,7 @@ public class Char implements Cloneable {
 		}
 		 dmg += delta *y;
 		Util.log("incHp, type: " + type.toString());
-		Util.log("resetStats, defaultResists: " + defaultResists.toString() + 
+		Util.log("incHp, defaultResists: " + defaultResists.toString() + 
 				" actualResists: " + actualResists.toString());
 		if (reflect == true && getSpikes()>0)
 		{
