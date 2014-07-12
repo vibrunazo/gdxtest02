@@ -114,7 +114,8 @@ public class Char implements Cloneable {
 		spikes = 0;
 		buffPwMultiplier = 1;
 		updateAllActions();
-		Util.log(defaultResists.toString());
+		Util.log("resetStats, defaultResists: " + defaultResists.toString() + 
+				" actualResists: " + actualResists.toString());
 		//reset all actions
 		for (Action a : actionBar) a.reset();
 	}
@@ -314,8 +315,9 @@ public class Char implements Cloneable {
 		    
 		}
 		 dmg += delta *y;
-		Util.log(type.toString());
-		Util.log(actualResists.toString());
+		Util.log("incHp, type: " + type.toString());
+		Util.log("resetStats, defaultResists: " + defaultResists.toString() + 
+				" actualResists: " + actualResists.toString());
 		if (reflect == true && getSpikes()>0)
 		{
 			String[] a = {"counter"};
