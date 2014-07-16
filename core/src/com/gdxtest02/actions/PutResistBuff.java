@@ -28,8 +28,9 @@ public class PutResistBuff extends PutBuffAction {
 		setBuff(new BuffResist(power, duration, bufftype));
 	}
 	
+	 	
 	public void update() {
-		setDescription("increases power by " + getPower()*100 + "%" + " for " + getDuration() + 
+		setDescription("increases " + bufftype.toString() + " resists by " + getPower()*100 + "%" + " for " + getDuration() + 
 				"sec.");
 	}
 	
@@ -46,8 +47,8 @@ public class PutResistBuff extends PutBuffAction {
 		super(value, cooldown);
 	}
 	
-	public PutResistBuff(float value, int cooldown, int duration) {
-		super(value, cooldown, duration);
+	public PutResistBuff(float d, int cooldown, int duration) {
+		super(d, cooldown, duration);
 	}
 	
 	public void addBuffType(String[] strings){

@@ -18,7 +18,7 @@ public class Char04 extends Char {
 		float ratio = 0.4f;
 		addAction(new Dmg(100*ratio)).setName("moo");
 		//addAction(new Dmg(200*ratio, 1)).setName("meh");
-		PutResistBuff b = new PutResistBuff(2, 0, 5);
+		PutResistBuff b = new PutResistBuff(0.5f ,5, 0);
 		b.setName("resist power");
 //		b.addType("buff");
 		b.addBuffType((new String[] {"falcon", "satan", "fire", "normal"}));

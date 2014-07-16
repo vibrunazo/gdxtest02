@@ -214,6 +214,8 @@ public class Char implements Cloneable {
 		
 		updateAllActions();
 		spikes = 0;
+		actualResists.clear();
+		actualResists.putAll(defaultResists);
 		// list of buffs that will be removed
 		// this is done because you can't remove the items in the middle of a loop
 		Array<Buff> toremove = new Array<Buff>(); 
