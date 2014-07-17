@@ -18,20 +18,20 @@ public class Char02 extends Char {
 		float ratio = 0.95238096f;
 		float hratio = 0.5f;
 		
-		addAction(new Dmg(50*ratio)).setName("Punch").addType(new String[] { "malcon", "normal", "melee", "falcon" });
+		addAction(new Dmg(50f*ratio)).setName("Punch").addType(new String[] { "malcon", "normal", "melee", "falcon" });
 		addAction(new Heal(250*hratio, 3)).setName("Heal");
 		//(addAction(new PutDmgBuff(1, 0, 5))).setName("aaa").setType("Buff");
 		PutDmgBuff b = new PutDmgBuff(1, 0, 5);
 		b.setName("aaa");
-//		b.addType("buff");
-		b.addBuffType((new String[] {"falcon", "satan", "normal"}));
-//		b.setBuffEffect(new IceEffect());
+
+		b.addBuffType((new String[] {"falcon", "satan", "fire", "normal"}));
+
 		addAction(b);
 		//addAction(new PutDot(50*ratio, 0, 2).setName("Death Fart"));
 		addAction(new PutSpikes(300, 0, 5)).setName("Flame Shield");
 //		actions.add(new PutHot(100, 5, 5).setName("Rejuv"));
-		editResists("fire", 2);
-		editResists("normal", 0);
+		editDefaultResists("fire", 2);
+		editDefaultResists("normal", 1);
 
 		setTex("ball02yell.png");
 		

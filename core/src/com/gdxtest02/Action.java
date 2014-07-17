@@ -27,20 +27,20 @@ public abstract class Action {
 	}
 
 	public Action(float value) {
-		power = (float) Math.ceil(value);
+		power = (float) /*Math.ceil*/(value);
 		basepower = power;
 //		ini();	
 	}
 	
 	public Action(float value, int cooldown) {
-		power = (float) Math.ceil(value);
+		power = (float) /*Math.ceil*/(value);
 		basepower = power;
 		this.cooldown = cooldown;
 //		ini();
 	}
 	
 	public Action(float value, int cooldown, int duration) {
-		power = (float) Math.ceil(value);
+		power = (float) /*Math.ceil*/(value);
 		basepower = power;
 		this.cooldown = cooldown;
 		this.duration = duration;
@@ -52,7 +52,7 @@ public abstract class Action {
 	 */
 	public void updatePower() {
 		if (owner == null) return;
-		power = (float) Math.ceil(basepower) * owner.getPowerMultiplier() * getBuffPwMultiplier();
+		power = (float) /*Math.ceil*/(basepower) * owner.getPowerMultiplier() * getBuffPwMultiplier();
 	}
 	
 	/**Sets the owner of this action, will be used to calculate level and
