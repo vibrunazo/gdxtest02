@@ -303,8 +303,19 @@ public class Char implements Cloneable {
 	public void incHp(float delta, Char source, boolean reflect, Array<String> type) {
 		if(type.size < 1)
 			type.add("normal");
+		/**if the skill has no type
+		 * it's type is normal
+		 */
 		float y = 0;
+		/**y is the value of the resist
+		 * or the multiplication of the resists
+		 */
 		float z;
+		/**used only if there is more than one resist. 
+		 * It keeps the values of the other resists
+		 * and its multiplied by y.
+		 * 
+		 */
 		for (int x = 0; x < type.size; x++){
 			if(actualResists.containsKey(type.get(x)) == false)
 				actualResists.put(type.get(x), actualResists.get("all"));

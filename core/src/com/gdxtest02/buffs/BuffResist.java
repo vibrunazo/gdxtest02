@@ -7,6 +7,7 @@ import com.gdxtest02.Action;
 import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
 import com.gdxtest02.effects.FireEffect;
+import com.gdxtest02.effects.GreenEffect;
 import com.gdxtest02.util.Util;
 public class BuffResist extends Buff{
 	
@@ -39,17 +40,7 @@ public class BuffResist extends Buff{
 			}
 			
 		}
-//		for (Action a : self.getActionBar()) {
-//			for (int x = 0; x < bufftype.size; x++){
-//				if(a.getTypeList().contains(bufftype.get(x), true) ){
-//					a.setBuffPwMultiplier(a.getBuffPwMultiplier()+power);
-//					a.updatePower();
-//					a.update();
-//					Util.log("buff power: "+ a.getBuffPwMultiplier());
-//					break;
-//				}
-//			}
-//		}	
+
 		
 		
 		

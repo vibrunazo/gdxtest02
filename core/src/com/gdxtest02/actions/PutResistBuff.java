@@ -30,8 +30,30 @@ public class PutResistBuff extends PutBuffAction {
 	
 	 	
 	public void update() {
-		setDescription("increases " + bufftype.toString() + " resists by " + getPower()*100 + "%" + " for " + getDuration() + 
-				"sec.");
+		String sec = null;
+		/** Secondary string used to keep 
+		 * string s values
+		 */
+		for (int x = 0; x < bufftype.size; x++){
+			String s = bufftype.get(x);
+			if( sec == null){
+				sec = s;	
+				setDescription("increases " + sec + " resist by " + getPower()*100 + "%" + " for " + getDuration() + 
+						"sec.");
+				/**if there is only one resist type
+				 * "resist by" is written instead of
+				 *  "resists by"
+				 */
+			}
+			else{			
+				sec = sec+", " + s;
+				setDescription("increases " + sec + " resists by " + getPower()*100 + "%" + " for " + getDuration() + 
+						"sec.");
+			}
+			
+		}
+//	     setDescription("increases " + bufftype.toString() + " resists by " + getPower()*100 + "%" + " for " + getDuration() + 
+//				"sec.");
 	}
 	
 	
