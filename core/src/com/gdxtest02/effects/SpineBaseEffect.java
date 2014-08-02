@@ -18,8 +18,8 @@ public class SpineBaseEffect extends Effect {
 	private SkeletonRenderer skrenderer;
 	private Skeleton skeleton;
 	private Animation skanim;
-	private float lastTime;
-	private float animationTime;
+//	private float lastTime;
+//	private float animationTime;
 	private String skeletonname;
 	
 	@Override
@@ -28,6 +28,7 @@ public class SpineBaseEffect extends Effect {
 		setScale(getScale());
 		
 		loadSkeleton(getScale());
+		duration = skanim.getDuration();
 	}
 
 	public SpineBaseEffect() {
@@ -56,16 +57,19 @@ public class SpineBaseEffect extends Effect {
 	public void update(float delta) {
 		super.update(delta);
 		
-		lastTime = animationTime;
-		animationTime += delta;
+//		lastTime = animationTime;
+//		animationTime += delta;
+//		duration = skanim.getDuration();
+//		Util.log("spinebaseeffect update, animTime: " + animationTime
+//				+ " duration: " + duration + " hasFinished: " + hasFinished);
+//		if (animationTime > duration) {
+//			
+//		}
 		
-//		skeleton.setPosition(x, y);
-//		skeleton.update(delta);
-//		skeleton.getRootBone().setPosition(x, y);
-//		skeleton.updateWorldTransform();
 	}
 	
 	public void draw(SpriteBatch batch) {
+		
 		skeleton.setPosition(x, y);
 //		skeleton.getRootBone().setPosition(x, y);
 		skeleton.updateWorldTransform();
@@ -88,6 +92,15 @@ public class SpineBaseEffect extends Effect {
 	 */
 	public void setSkeletonname(String skeletonname) {
 		this.skeletonname = skeletonname;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.gdxtest02.Effect#setPosition(float, float)
+	 */
+	@Override
+	public void setPosition(float x, float y) {
+		super.setPosition(x, y);
+		Util.log("spinebaseeffect setPos, skel: " + skeleton + " x: " + x + " y: " + y);
 	}
 		
 

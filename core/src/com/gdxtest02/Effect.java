@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.Bone;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
@@ -14,12 +15,19 @@ public class Effect  {
 	
 	protected float x;
 	protected float y;
-	protected int duration;
+	protected float duration;
+	protected float lastTime;
+	protected float animationTime;
+	
 	protected boolean hasStarted;
+	protected boolean hasFinished;
+	protected boolean isLoop;
 	private Char attachedChar;
 	private Buff attachedBuff;
 	private float offsetx = 0;
 	private float offsety = 0;
+	/**The attached Char's root bone
+	 */
 	private Bone bone;
 	private String attachName = "shoulderPos";
 	private float scale = 1;
@@ -43,6 +51,14 @@ public class Effect  {
 //		Util.log("Effect update, x: " + x + " offsetx: " + offsetx + 
 //				" buffoff: " + attachedBuff.getEffectOffsetX()
 //				+ " buff: " + attachedBuff);
+		
+		lastTime = animationTime;
+		animationTime += delta;
+//		duration = skanim.getDuration();
+		if (animationTime > duration && !isLoop()) {
+			hasFinished = true;
+		}
+		
 	}
 
 	public void draw(SpriteBatch batch) {
@@ -58,9 +74,8 @@ public class Effect  {
 		this.y = y;
 	}
 
-	public void setDuration(int i) {
-		// TODO Auto-generated method stub
-		
+	public void setDuration(float f) {
+		duration = f;
 	}
 
 	/**
@@ -162,6 +177,41 @@ public class Effect  {
 	 */
 	public void setScale(float scale) {
 		this.scale = scale;
+	}
+
+	/**
+	 * @return the isLoop
+	 */
+	public boolean isLoop() {
+		return isLoop;
+	}
+
+	/**
+	 * @param isLoop the isLoop to set
+	 */
+	public void setLoop(boolean isLoop) {
+		this.isLoop = isLoop;
+	}
+
+	/**
+	 * @return the hasStarted
+	 */
+	public boolean hasStarted() {
+		return hasStarted;
+	}
+
+	/**
+	 * @return the hasFinished
+	 */
+	public boolean getHasFinished() {
+		return hasFinished;
+	}
+
+	/**
+	 * @param hasFinished the hasFinished to set
+	 */
+	public void setHasFinished(boolean hasFinished) {
+		this.hasFinished = hasFinished;
 	}
 
 }

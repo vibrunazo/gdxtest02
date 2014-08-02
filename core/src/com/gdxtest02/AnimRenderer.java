@@ -263,11 +263,13 @@ public class AnimRenderer {
 		for (Effect e : animeffects) {
 			e.update(delta);
 			e.draw(batch);
+			if (e.getHasFinished()) animeffects.removeValue(e, true);
 		}
 		
 		for (Effect e : chareffects) {
 			e.update(delta);
 			e.draw(batch);
+			if (e.getHasFinished()) chareffects.removeValue(e, true);
 		}
 		
 		for (Projectile p : projectiles) {
@@ -323,30 +325,9 @@ public class AnimRenderer {
 		return skeleton.getFlipX();
 	}
 
-//	public ParticleEffect createAnimParticle(String effecttype) {
-//		ParticleEffect effect = getParticleFromName(effecttype);
-//		addAnimParticle(effect);
-//		return effect;
-//	}
-//	
-//	public ParticleEffect createCharParticle(String effecttype) {
-//		ParticleEffect effect = getParticleFromName(effecttype);
-//		addCharParticle(effect);
-//		return effect;
-//	}
-	
-//	public void addAnimParticle(ParticleEffect effect) {
-//		animparticleeffects.add(effect);
-//		effect.start();
-//	}
-//	
-//	public void addCharParticle(ParticleEffect effect) {
-//		charparticleeffects.add(effect);
-//		effect.start();
-//	}
-	
 	public void addCharEffect(Effect effect) {
 		chareffects.add(effect);
+		effect.setAttachedChar(owner);
 		effect.start();
 	}
 	
@@ -354,15 +335,6 @@ public class AnimRenderer {
 		animeffects.add(effect);
 		effect.start();
 	}
-
-//	public void addEffect(String effecttype, float posX, float posY) {
-//		ParticleEffect e = createCharParticle(effecttype);
-//		e.setPosition(posX, posY);
-//	}
-
-//	public void resetParticles() {
-//		animparticleeffects.clear();
-//	}
 
 	public void createProjectile(Projectile p) {
 		projectiles.add(p);

@@ -134,8 +134,9 @@ public class CharAnim {
 		Char t = c.getTarget();
 		
 		HitEffect e = new HitEffect();
+		t.getAnimRenderer().addCharEffect(new HitEffect());
+//		renderer.addCharEffect(new HitEffect());
 		e.setPosition(t.getPosX(), t.getPosY() + 70f);
-		renderer.addCharEffect(new HitEffect());
 //		renderer.addEffect("hit", t.getPosX(), t.getPosY() + 70f);
 		
 //		log("hit created");

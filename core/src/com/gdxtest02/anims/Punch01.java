@@ -34,7 +34,7 @@ public class Punch01 extends CharAnim {
 		
 		if (animationTime > 0.3 & hits == 0) {
 			hits++;
-//			createHitEffect();
+			createHitEffect();
 		}
 	}
 
