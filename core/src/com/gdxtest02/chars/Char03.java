@@ -7,6 +7,7 @@ import com.gdxtest02.actions.Drain;
 import com.gdxtest02.actions.PutDot;
 import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.PunchRight01;
+import com.gdxtest02.effects.HitEffect;
 import com.gdxtest02.effects.IceEffect;
 import com.gdxtest02.projectiles.Projectile02;
 import com.gdxtest02.projectiles.Projectile03;

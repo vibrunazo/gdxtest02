@@ -32,7 +32,7 @@ public class SpineBaseEffect extends Effect {
 
 	public SpineBaseEffect() {
 		super();
-		setSkeletonname("hit");
+//		setSkeletonname("hit");
 	}
 
 	/* (non-Javadoc)
@@ -44,12 +44,14 @@ public class SpineBaseEffect extends Effect {
 	}
 
 	private void loadSkeleton(float scale) {
-		if (skeletonname == null || skeletonname.equals("")) skeletonname = "proj";
-		skeleton = Util.loadSkeletonFromName(skeletonname, scale);
+		if (getSkeletonname() == null || getSkeletonname().equals("")) {
+			setSkeletonname("proj");
+		}
+		skeleton = Util.loadSkeletonFromName(getSkeletonname(), scale);
 		SkeletonData sd = skeleton.getData();
 		
 		// animation will have the same name as the skeleton
-		skanim = sd.findAnimation(skeletonname);
+		skanim = sd.findAnimation(getSkeletonname());
 	}	
 	
 	public void update(float delta) {
@@ -66,11 +68,10 @@ public class SpineBaseEffect extends Effect {
 		
 		Util.drawSkeleton(batch, skeleton);
 //		log("proj draw, skel: " + skeleton);
-		
-		
 	}
 
-	/**
+	/**Override this on superclass to set the skeleton used
+	 * 
 	 * @return the skeletonname
 	 */
 	public String getSkeletonname() {

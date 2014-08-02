@@ -1,13 +1,15 @@
 package com.gdxtest02.effects;
 
-public class HitEffect extends SimpleParticleBaseEffect {
+public class HitEffect extends SpineBaseEffect {
 
 	/* (non-Javadoc)
-	 * @see com.gdxtest02.effects.SimpleParticleBaseEffect#getParticlename()
+	 * @see com.gdxtest02.effects.SpineBaseEffect#getSkeletonname()
 	 */
 	@Override
-	public String getParticlename() {
+	public String getSkeletonname() {
 		return "hit";
 	}
+	
+	
 
 }
