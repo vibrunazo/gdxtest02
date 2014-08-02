@@ -49,7 +49,7 @@ public class Projectile {
 		json.setScale(scale);
 		SkeletonData sd = json.readSkeletonData(Gdx.files.internal(jsonfile));
 		skeleton = new Skeleton(sd);
-//		skeleton.setSlotsToSetupPose();
+		skeleton.setSlotsToSetupPose();
 		skeleton.updateWorldTransform();
 	}
 
