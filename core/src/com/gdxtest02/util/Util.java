@@ -4,7 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.esotericsoftware.spine.Skeleton;
+import com.esotericsoftware.spine.SkeletonData;
+import com.esotericsoftware.spine.SkeletonJson;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.gdxtest02.GdxTest02;
 
@@ -53,6 +56,36 @@ public class Util {
 	
 	public static void drawSkeleton(SpriteBatch batch, Skeleton skeleton) {
 		skrenderer.draw(batch, skeleton);
+	}
+	
+	public static String getSkeletonPathFromName(String name) {
+		if (name.toLowerCase().equals("proj")) {
+			return "data/spine/proj/";
+		}
+		else if (name.toLowerCase().equals("hit")) {
+			return "data/spine/hit/";
+		}
+		else {
+			return "data/spine/" + name + "/";	
+		}
+		
+	}
+	
+	public static Skeleton loadSkeletonFromName(String name, float scale) {
+		String atlasfile = getSkeletonPathFromName(name) + "skeleton.atlas";
+		String jsonfile = getSkeletonPathFromName(name) + "skeleton.json";
+		
+		Skeleton skeleton; 
+
+		TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(atlasfile));
+		SkeletonJson json = new SkeletonJson(atlas);
+		json.setScale(scale);
+		SkeletonData sd = json.readSkeletonData(Gdx.files.internal(jsonfile));
+		skeleton = new Skeleton(sd);
+		skeleton.setSlotsToSetupPose();
+		skeleton.updateWorldTransform();
+		
+		return skeleton;
 	}
 	
 }

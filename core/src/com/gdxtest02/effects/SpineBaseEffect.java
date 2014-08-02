@@ -38,16 +38,8 @@ public class SpineBaseEffect extends Effect {
 	}
 
 	private void loadSkeleton(float scale) {
-		String atlasfile = "data/spine/hit/skeleton.atlas";
-		String jsonfile = "data/spine/hit/skeleton.json";
-
-		TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(atlasfile));
-		SkeletonJson json = new SkeletonJson(atlas);
-		json.setScale(scale);
-		SkeletonData sd = json.readSkeletonData(Gdx.files.internal(jsonfile));
-		skeleton = new Skeleton(sd);
-//		skeleton.setSlotsToSetupPose();
-		skeleton.updateWorldTransform();
+		skeleton = Util.loadSkeletonFromName("hit", scale);
+		SkeletonData sd = skeleton.getData();
 		
 		skanim = sd.findAnimation("hit");
 	}	

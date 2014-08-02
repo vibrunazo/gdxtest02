@@ -15,8 +15,8 @@ public class Projectile03 extends Projectile {
 
 	@Override
 	public void start() {
-//		effect = new SpineBaseEffect();
-		effect = new GreenEffect();
+		effect = new SpineBaseEffect();
+//		effect = new GreenEffect();
 		
 		super.start();
 	}
