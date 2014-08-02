@@ -20,6 +20,7 @@ public class SpineBaseEffect extends Effect {
 	private Animation skanim;
 	private float lastTime;
 	private float animationTime;
+	private String skeletonname;
 	
 	@Override
 	public void start() {
@@ -27,6 +28,11 @@ public class SpineBaseEffect extends Effect {
 		setScale(getScale());
 		
 		loadSkeleton(1f);
+	}
+
+	public SpineBaseEffect() {
+		super();
+		setSkeletonname("hit");
 	}
 
 	/* (non-Javadoc)
@@ -38,10 +44,12 @@ public class SpineBaseEffect extends Effect {
 	}
 
 	private void loadSkeleton(float scale) {
-		skeleton = Util.loadSkeletonFromName("hit", scale);
+		if (skeletonname == null || skeletonname.equals("")) skeletonname = "proj";
+		skeleton = Util.loadSkeletonFromName(skeletonname, scale);
 		SkeletonData sd = skeleton.getData();
 		
-		skanim = sd.findAnimation("hit");
+		// animation will have the same name as the skeleton
+		skanim = sd.findAnimation(skeletonname);
 	}	
 	
 	public void update(float delta) {
@@ -51,8 +59,6 @@ public class SpineBaseEffect extends Effect {
 		skeleton.setPosition(x, y);
 		skeleton.update(delta);
 		skeleton.updateWorldTransform();
-		
-		
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -62,6 +68,20 @@ public class SpineBaseEffect extends Effect {
 //		log("proj draw, skel: " + skeleton);
 		
 		
+	}
+
+	/**
+	 * @return the skeletonname
+	 */
+	public String getSkeletonname() {
+		return skeletonname;
+	}
+
+	/**
+	 * @param skeletonname the skeletonname to set
+	 */
+	public void setSkeletonname(String skeletonname) {
+		this.skeletonname = skeletonname;
 	}
 		
 
