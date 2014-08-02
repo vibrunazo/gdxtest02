@@ -7,6 +7,7 @@ import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonJson;
 import com.gdxtest02.effects.FireEffect;
+import com.gdxtest02.util.Util;
 
 public class Projectile {
 	private float x;
@@ -116,7 +117,8 @@ public class Projectile {
 	}
 
 	public void draw(SpriteBatch batch) {
-		renderer.drawSkeleton(batch, skeleton);
+//		renderer.drawSkeleton(batch, skeleton);
+		Util.drawSkeleton(batch, skeleton);
 		effect.draw(batch);
 //		log("proj draw, skel: " + skeleton);
 	}

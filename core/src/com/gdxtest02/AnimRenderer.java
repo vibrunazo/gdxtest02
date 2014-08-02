@@ -33,7 +33,7 @@ public class AnimRenderer {
 //	private SkeletonBinary sb;
 	private SkeletonData sd;
 	private Skeleton skeleton;
-	private SkeletonRenderer renderer;
+	private SkeletonRenderer skrenderer;
 	private Bone root;
 
 	float scale = 1;
@@ -196,7 +196,7 @@ public class AnimRenderer {
 
 		skeleton.setSkin("eyes01");
 		skeleton.setSlotsToSetupPose();
-		renderer = new SkeletonRenderer();
+		skrenderer = new SkeletonRenderer();
 
 		setBaseColorSlots();
 		root = skeleton.getRootBone();
@@ -237,7 +237,7 @@ public class AnimRenderer {
 
 		skeleton.updateWorldTransform();
 //		skeleton.update(delta);
-		renderer.draw(batch, skeleton);
+		skrenderer.draw(batch, skeleton);
 		
 //		drawParticles(batch);
 		
@@ -277,7 +277,7 @@ public class AnimRenderer {
 	}
 	
 	public void drawSkeleton(SpriteBatch batch, Skeleton skeleton) {
-		renderer.draw(batch, skeleton);
+		skrenderer.draw(batch, skeleton);
 	}
 
 	/**Scales the whole character, will reload everything again, use with care

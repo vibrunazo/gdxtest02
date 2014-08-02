@@ -20,13 +20,12 @@ public class Drain extends Action {
 	@Override
 	public void ini() {
 		setName("Drain");
-		setAnimEffect(new GreenEffect());
 		AnimRenderer renderer = owner.getAnimRenderer();
 		setAnim(new Cast01(renderer)
 			.setProjectile(new Projectile03(renderer)),
 			new GreenEffect());
-
 	}
+	
 	public void update() {
 		setDescription("Drains " + getPower() + " damage and heals you.");
 	}

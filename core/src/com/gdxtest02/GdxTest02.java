@@ -57,6 +57,8 @@ public class GdxTest02 extends Game {
 //		gamestate.setPlayer(new Char01("p1"));
 		
 		batch = new SpriteBatch();
+		
+		Util.ini();
 		//Use LibGDX's default Arial font.
 		font = new BitmapFont();
 		this.setScreen(new MainMenuScreen(this));
