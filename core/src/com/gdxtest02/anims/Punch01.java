@@ -19,6 +19,7 @@ public class Punch01 extends CharAnim {
 	@Override
 	protected void ini() {
 		punchAnimation = sd.findAnimation(name);
+		hits = 0;
 	}
 
 	/* (non-Javadoc)
