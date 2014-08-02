@@ -4,12 +4,14 @@ import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
 import com.gdxtest02.effects.FireEffect;
+import com.gdxtest02.effects.HitEffect;
 
 public class Dot extends Buff {
 	@Override
 	protected void ini() {
 		super.ini();
-		setEffect(new FireEffect());
+//		setEffect(new FireEffect());
+		setEffect(new HitEffect());
 		getEffect().setOffset(0, -30);
 		getEffect().setScale(0.2f);
 	}

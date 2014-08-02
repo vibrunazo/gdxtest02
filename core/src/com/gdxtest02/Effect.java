@@ -28,6 +28,10 @@ public class Effect  {
 	public Effect() {
 //		attachName = "";
 	}
+	
+	public Effect(float scale) {
+		setScale(scale);
+	}
 
 	public void update(float delta) {
 //		Util.log("effect update, aC: " + attachedChar + " at: " + x + "x, " + y);

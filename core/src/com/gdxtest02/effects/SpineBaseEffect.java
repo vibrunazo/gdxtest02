@@ -27,7 +27,7 @@ public class SpineBaseEffect extends Effect {
 		hasStarted = true;
 		setScale(getScale());
 		
-		loadSkeleton(1f);
+		loadSkeleton(getScale());
 	}
 
 	public SpineBaseEffect() {
@@ -49,25 +49,30 @@ public class SpineBaseEffect extends Effect {
 		}
 		skeleton = Util.loadSkeletonFromName(getSkeletonname(), scale);
 		SkeletonData sd = skeleton.getData();
-		
 		// animation will have the same name as the skeleton
 		skanim = sd.findAnimation(getSkeletonname());
 	}	
 	
 	public void update(float delta) {
+		super.update(delta);
+		
 		lastTime = animationTime;
 		animationTime += delta;
 		
-		skeleton.setPosition(x, y);
-		skeleton.update(delta);
-		skeleton.updateWorldTransform();
+//		skeleton.setPosition(x, y);
+//		skeleton.update(delta);
+//		skeleton.getRootBone().setPosition(x, y);
+//		skeleton.updateWorldTransform();
 	}
 	
 	public void draw(SpriteBatch batch) {
+		skeleton.setPosition(x, y);
+//		skeleton.getRootBone().setPosition(x, y);
+		skeleton.updateWorldTransform();
 		skanim.apply(skeleton, lastTime, animationTime, true, null);
 		
 		Util.drawSkeleton(batch, skeleton);
-//		log("proj draw, skel: " + skeleton);
+//		Util.log("spinebaseeffect draw, skel: " + skeleton + " x: " + x + " y: " + y);
 	}
 
 	/**Override this on superclass to set the skeleton used
