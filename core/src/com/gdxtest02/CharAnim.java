@@ -133,10 +133,10 @@ public class CharAnim {
 		Char c = renderer.getOwner();
 		Char t = c.getTarget();
 		
-		HitEffect e = new HitEffect();
-		t.getAnimRenderer().addCharEffect(new HitEffect());
+		HitEffect e = new HitEffect(0.3f);
+		t.getAnimRenderer().addCharEffect(e);
 //		renderer.addCharEffect(new HitEffect());
-		e.setPosition(t.getPosX(), t.getPosY() + 70f);
+//		e.setPosition(t.getPosX(), t.getPosY() + 70f);
 //		renderer.addEffect("hit", t.getPosX(), t.getPosY() + 70f);
 		
 //		log("hit created");

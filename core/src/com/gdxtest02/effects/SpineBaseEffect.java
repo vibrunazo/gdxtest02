@@ -15,13 +15,20 @@ import com.gdxtest02.util.Util;
 
 public class SpineBaseEffect extends Effect {
 
-	private SkeletonRenderer skrenderer;
 	private Skeleton skeleton;
 	private Animation skanim;
 //	private float lastTime;
 //	private float animationTime;
 	private String skeletonname;
 	
+	
+	/**
+	 * @param scale
+	 */
+	public SpineBaseEffect(float scale) {
+		super(scale);
+	}
+
 	@Override
 	public void start() {
 		hasStarted = true;

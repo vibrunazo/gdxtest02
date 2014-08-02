@@ -18,6 +18,7 @@ public class Effect  {
 	protected float duration;
 	protected float lastTime;
 	protected float animationTime;
+	protected float animSpeed;
 	
 	protected boolean hasStarted;
 	protected boolean hasFinished;
@@ -34,10 +35,11 @@ public class Effect  {
 	
 
 	public Effect() {
-//		attachName = "";
+		setAnimSpeed(1f);
 	}
 	
 	public Effect(float scale) {
+		this();
 		setScale(scale);
 	}
 
@@ -53,7 +55,7 @@ public class Effect  {
 //				+ " buff: " + attachedBuff);
 		
 		lastTime = animationTime;
-		animationTime += delta;
+		animationTime += delta * getAnimSpeed();
 //		duration = skanim.getDuration();
 		if (animationTime > duration && !isLoop()) {
 			hasFinished = true;
@@ -212,6 +214,20 @@ public class Effect  {
 	 */
 	public void setHasFinished(boolean hasFinished) {
 		this.hasFinished = hasFinished;
+	}
+
+	/**
+	 * @return the animSpeed
+	 */
+	public float getAnimSpeed() {
+		return animSpeed;
+	}
+
+	/**
+	 * @param animSpeed the animSpeed to set
+	 */
+	public void setAnimSpeed(float animSpeed) {
+		this.animSpeed = animSpeed;
 	}
 
 }
