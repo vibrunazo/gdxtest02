@@ -6,6 +6,7 @@ import com.gdxtest02.actions.Drain;
 import com.gdxtest02.actions.PutDmgBuff;
 import com.gdxtest02.actions.PutDot;
 import com.gdxtest02.actions.PutHot;
+import com.gdxtest02.actions.PutMortalStrike;
 import com.gdxtest02.actions.PutResistBuff;
 import com.gdxtest02.effects.IceEffect;
 
@@ -23,7 +24,8 @@ public class Char04 extends Char {
 //		b.addType("buff");
 		b.addBuffType((new String[] {"falcon", "satan", "fire", "normal"}));
 		addAction(b);
-		addAction(new PutDot(50*ratio, 0, 6)).setName("a dot");
+		//addAction(new PutDot(50*ratio, 0, 6)).setName("a dot");
+		addAction(new PutMortalStrike(50, 0, 6)).setName("MS");
 		addAction(new PutHot(30*ratio, 3, 6)).setName("a hot");
 //		actions.add(new Dmg(400, 3).setName("hihihi"));
 //		editDefaultResists("fire", 2);
