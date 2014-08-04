@@ -11,6 +11,7 @@ public class GetHit01 extends CharAnim {
 	public GetHit01(AnimRenderer animRenderer) {
 		super(animRenderer);
 		name = "gethit01";
+		setSpeed(2f);
 	}
 
 	@Override

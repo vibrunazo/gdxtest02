@@ -24,13 +24,14 @@ public class CharAnim {
 //	private Animation winkAnimation;
 	protected float animationTime;
 	protected float delta;
+	protected float speed;
 	protected float lastTime;
 	protected Effect effecttype;
 	protected String name = "";
 
 	public CharAnim(AnimRenderer animRenderer) {
 		renderer = animRenderer;
-		
+		speed = 1f;
 //		ini();
 	}
 
@@ -56,7 +57,7 @@ public class CharAnim {
 //				" time:" + animationTime);
 		delta = Gdx.graphics.getDeltaTime();
 		lastTime = animationTime;
-		animationTime += delta;
+		animationTime += delta*speed;
 	}
 	
 	/**ends animation and go back to default anim
@@ -145,5 +146,19 @@ public class CharAnim {
 
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * @return the speed
+	 */
+	public float getSpeed() {
+		return speed;
+	}
+
+	/**
+	 * @param speed the speed to set
+	 */
+	public void setSpeed(float speed) {
+		this.speed = speed;
 	}
 }
