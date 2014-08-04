@@ -23,7 +23,7 @@ public class HitEffect extends SpineBaseEffect {
 	 */
 	@Override
 	public float getAnimSpeed() {
-		return 2f;
+		return 1.5f;
 	}
 	
 	
