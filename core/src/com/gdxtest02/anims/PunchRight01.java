@@ -10,9 +10,8 @@ public class PunchRight01 extends CharAnim {
 
 	public PunchRight01(AnimRenderer animRenderer) {
 		super(animRenderer);
-//		name = "punchright01";
-		name = "gethit01";
-//		name = "stand02";
+		name = "punchright01";
+//		name = "gethit01";
 	}
 
 	@Override

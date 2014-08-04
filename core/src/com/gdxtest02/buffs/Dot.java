@@ -10,8 +10,8 @@ public class Dot extends Buff {
 	@Override
 	protected void ini() {
 		super.ini();
-//		setEffect(new FireEffect());
-		setEffect(new HitEffect());
+		setEffect(new FireEffect());
+//		setEffect(new HitEffect());
 		getEffect().setOffset(0, -30);
 		getEffect().setScale(0.2f);
 	}

@@ -14,6 +14,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.gdxtest02.anims.GetHit01;
+import com.gdxtest02.anims.PunchRight01;
+import com.gdxtest02.effects.HitEffect;
 import com.gdxtest02.util.Util;
 import com.gdxtest02.util.Util.*;
 
@@ -799,6 +802,16 @@ public class Char implements Cloneable {
 	
 	public Array<Buff> getBuffs() {
 		return buffs;
+	}
+
+	/**Tells this character that he is supposed to get hit now
+	 * So play Get Hit animation and do all the appropriate calculations
+	 */
+	public void setGetHit() {
+		Util.log("I'm on your character, getting hit.");
+		HitEffect e = new HitEffect(0.3f);
+		getAnimRenderer().addCharEffect(e);
+		getAnimRenderer().setAnim(new GetHit01(animRenderer));
 	}
 
 }
