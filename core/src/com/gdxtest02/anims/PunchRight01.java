@@ -12,6 +12,7 @@ public class PunchRight01 extends CharAnim {
 		super(animRenderer);
 //		name = "punchright01";
 		name = "gethit01";
+//		name = "stand02";
 	}
 
 	@Override
