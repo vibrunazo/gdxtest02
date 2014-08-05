@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Action;
 import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
+import com.gdxtest02.effects.BlackEffect;
 import com.gdxtest02.effects.FireEffect;
 import com.gdxtest02.effects.GreenEffect;
 import com.gdxtest02.effects.WhiteEffect;
@@ -15,7 +16,7 @@ public class MortalStrike extends Buff{
 	@Override
 	protected void ini() {
 		super.ini();
-		setEffect(new WhiteEffect());
+		setEffect(new BlackEffect());
 		getEffect().setOffset(0, 50);
 	}
 	

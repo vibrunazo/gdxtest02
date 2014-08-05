@@ -365,6 +365,9 @@ public class AnimRenderer {
 		else if (effecttype.equals("ice")) {
 			return Gdx.files.internal("effects/ice04.p");
 		} 
+		else if (effecttype.equals("black")) {
+			return Gdx.files.internal("effects/black01.p");
+		} 
 		else if (effecttype.equals("white")) {
 			return Gdx.files.internal("effects/white01.p");
 		} 
