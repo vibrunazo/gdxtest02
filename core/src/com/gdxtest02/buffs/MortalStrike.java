@@ -8,13 +8,14 @@ import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
 import com.gdxtest02.effects.FireEffect;
 import com.gdxtest02.effects.GreenEffect;
+import com.gdxtest02.effects.WhiteEffect;
 import com.gdxtest02.util.Util;
 public class MortalStrike extends Buff{
 	
 	@Override
 	protected void ini() {
 		super.ini();
-		setEffect(new FireEffect());
+		setEffect(new WhiteEffect());
 		getEffect().setOffset(0, 50);
 	}
 	
