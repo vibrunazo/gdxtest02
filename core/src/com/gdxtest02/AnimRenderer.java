@@ -365,9 +365,18 @@ public class AnimRenderer {
 		else if (effecttype.equals("ice")) {
 			return Gdx.files.internal("effects/ice04.p");
 		} 
+		else if (effecttype.equals("blue")) {
+			return Gdx.files.internal("effects/blue02.p");
+		}
+		else if (effecttype.equals("red")) {
+			return Gdx.files.internal("effects/red01.p");
+		}
+		else if (effecttype.equals("yellow")) {
+			return Gdx.files.internal("effects/yellow01.p");
+		} 
 		else if (effecttype.equals("black")) {
 			return Gdx.files.internal("effects/black01.p");
-		} 
+		}
 		else if (effecttype.equals("white")) {
 			return Gdx.files.internal("effects/white01.p");
 		} 

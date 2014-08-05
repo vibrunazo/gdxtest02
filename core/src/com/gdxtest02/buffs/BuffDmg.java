@@ -6,15 +6,17 @@ import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.Action;
 import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
+import com.gdxtest02.effects.BlueEffect;
 import com.gdxtest02.effects.FireEffect;
+import com.gdxtest02.effects.YellowEffect;
 import com.gdxtest02.util.Util;
 public class BuffDmg extends Buff{
 	
 	@Override
 	protected void ini() {
 		super.ini();
-		setEffect(0, new FireEffect());
-		setEffect(1, new FireEffect());
+		setEffect(0, new YellowEffect());
+		setEffect(1, new BlueEffect());
 		resetEffectPosition();
 	}
 
