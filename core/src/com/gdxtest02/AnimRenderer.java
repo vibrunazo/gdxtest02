@@ -371,6 +371,9 @@ public class AnimRenderer {
 		else if (effecttype.equals("red")) {
 			return Gdx.files.internal("effects/red01.p");
 		}
+		else if (effecttype.equals("purple")) {
+			return Gdx.files.internal("effects/purple01.p");
+		}
 		else if (effecttype.equals("yellow")) {
 			return Gdx.files.internal("effects/yellow01.p");
 		} 

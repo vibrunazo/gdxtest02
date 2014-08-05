@@ -5,15 +5,16 @@ import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
 import com.gdxtest02.effects.FireEffect;
 import com.gdxtest02.effects.HitEffect;
+import com.gdxtest02.effects.PurpleEffect;
 
 public class Dot extends Buff {
 	@Override
 	protected void ini() {
 		super.ini();
-		setEffect(new FireEffect());
+		setEffect(new PurpleEffect());
 //		setEffect(new HitEffect());
 		getEffect().setOffset(0, -30);
-		getEffect().setScale(0.2f);
+		getEffect().setScale(0.8f);
 	}
 	private Array<String> type;
 
