@@ -8,14 +8,16 @@ import com.gdxtest02.Buff;
 import com.gdxtest02.Char;
 import com.gdxtest02.effects.FireEffect;
 import com.gdxtest02.effects.GreenEffect;
+import com.gdxtest02.effects.ShieldEffect;
 import com.gdxtest02.util.Util;
 public class BuffResist extends Buff{
 	
 	@Override
 	protected void ini() {
 		super.ini();
-		setEffect(new FireEffect());
+		setEffect(new ShieldEffect());
 		getEffect().setOffset(0, 50);
+		getEffect().setScale(0.6f);
 	}
 	
 	private Array<String> bufftype;
