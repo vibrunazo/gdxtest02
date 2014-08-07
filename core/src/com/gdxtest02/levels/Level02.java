@@ -1,7 +1,7 @@
 package com.gdxtest02.levels;
 
-import static com.gdxtest02.CharBuilder.CHAR_01;
-import static com.gdxtest02.CharBuilder.CHAR_02;
+import static com.gdxtest02.CharBuilder.TEST_CHAR_01;
+import static com.gdxtest02.CharBuilder.TEST_CHAR_02;
 import static com.gdxtest02.CharBuilder.build;
 
 import com.gdxtest02.Char;
@@ -21,11 +21,11 @@ public class Level02 extends LevelScreen {
 
 	public Level02(GdxTest02 game) {
 		super(game);
-		addChar(build(CHAR_03));
-		addChar(build(CHAR_04));
-		addChar(build(CHAR_05));
-		addChar(build(CHAR_05));
-		addChar(build(CHAR_06));
+		addChar(build(TEST_CHAR_03));
+		addChar(build(TEST_CHAR_04));
+		addChar(build(TEST_CHAR_05));
+		addChar(build(TEST_CHAR_05));
+		addChar(build(TEST_CHAR_06));
 		
 		setLevel_name("level 2");
 		ui.setupUi(this);
@@ -36,7 +36,7 @@ public class Level02 extends LevelScreen {
 		GameState gstate = GameState.getInstance();
 		if (gstate.getLevel().getFightState() == LevelState.WIN) {
 //			gstate.unlockChar(CHAR_05);
-			gstate.addCharToInvOnce(CHAR_05);
+			gstate.addCharToInvOnce(TEST_CHAR_05);
 			Char c = game.getGameState().getPlayer();
 			c.levelUp();c.levelUp();
 		}

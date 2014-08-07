@@ -14,9 +14,9 @@ public class Level01 extends LevelScreen {
 
 	public Level01(GdxTest02 game) {
 		super(game);
-		addChar(build(CHAR_04));
-		addChar(build(CHAR_06));
-		addChar(build(CHAR_03));
+		addChar(build(TEST_CHAR_04));
+		addChar(build(TEST_CHAR_06));
+		addChar(build(TEST_CHAR_03));
 		
 		setLevel_name("level 1");
 		ui.setupUi(this);
@@ -27,7 +27,7 @@ public class Level01 extends LevelScreen {
 		GameState gstate = GameState.getInstance();
 		if (gstate.getLevel().getFightState() == LevelState.WIN) {
 //			gstate.unlockChar(CHAR_01);
-			gstate.addCharToInvOnce(CHAR_06);
+			gstate.addCharToInvOnce(TEST_CHAR_06);
 			Char c = game.getGameState().getPlayer();
 			c.levelUp();
 		}
