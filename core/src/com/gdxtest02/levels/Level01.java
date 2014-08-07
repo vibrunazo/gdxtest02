@@ -3,8 +3,8 @@ package com.gdxtest02.levels;
 import com.gdxtest02.Char;
 import com.gdxtest02.GdxTest02;
 import com.gdxtest02.LevelScreen;
-import com.gdxtest02.chars.Char02;
-import com.gdxtest02.chars.Char03;
+import com.gdxtest02.chars.TestChar02;
+import com.gdxtest02.chars.TestChar03;
 import com.gdxtest02.gamestate.GameState;
 import com.gdxtest02.gamestate.LevelState;
 

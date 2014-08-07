@@ -88,4 +88,13 @@ public class Util {
 		return skeleton;
 	}
 	
+	/**Returns if the game is in debug mode or not
+	 * In debug mode, test Chars should be available
+	 * 
+	 * @return
+	 */
+	public static boolean getDebugMode() {
+		return GdxTest02.DEBUG_MODE;
+	}
+	
 }

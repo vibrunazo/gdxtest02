@@ -6,12 +6,12 @@ import static com.gdxtest02.CharBuilder.build;
 import com.gdxtest02.Char;
 import com.gdxtest02.GdxTest02;
 import com.gdxtest02.LevelScreen;
-import com.gdxtest02.chars.Char01;
-import com.gdxtest02.chars.Char02;
-import com.gdxtest02.chars.Char03;
-import com.gdxtest02.chars.Char04;
-import com.gdxtest02.chars.Char05;
-import com.gdxtest02.chars.Char06;
+import com.gdxtest02.chars.TestChar01;
+import com.gdxtest02.chars.TestChar02;
+import com.gdxtest02.chars.TestChar03;
+import com.gdxtest02.chars.TestChar04;
+import com.gdxtest02.chars.TestChar05;
+import com.gdxtest02.chars.TestChar06;
 import com.gdxtest02.gamestate.GameState;
 import com.gdxtest02.gamestate.LevelState;
 

@@ -12,8 +12,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.gdxtest02.chars.Char01;
-import com.gdxtest02.chars.Char02;
+import com.gdxtest02.chars.TestChar01;
+import com.gdxtest02.chars.TestChar02;
 import com.gdxtest02.gamestate.LevelState;
 
 import static com.gdxtest02.gamestate.LevelState.*;
@@ -55,7 +55,7 @@ public class FightScreen implements Screen {
 	private String a2name;
 
 	public FightScreen(GdxTest02 game) {
-		this(game, new Char01("p1"), new Char02("p2"));
+		this(game, new TestChar01("p1"), new TestChar02("p2"));
 		
 	}
 	

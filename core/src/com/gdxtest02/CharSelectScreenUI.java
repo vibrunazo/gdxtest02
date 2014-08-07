@@ -17,17 +17,18 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Values;
 import com.esotericsoftware.tablelayout.Value;
-import com.gdxtest02.chars.Char01;
-import com.gdxtest02.chars.Char02;
-import com.gdxtest02.chars.Char03;
-import com.gdxtest02.chars.Char04;
-import com.gdxtest02.chars.Char05;
-import com.gdxtest02.chars.Char06;
-import com.gdxtest02.chars.Char07;
+import com.gdxtest02.chars.TestChar01;
+import com.gdxtest02.chars.TestChar02;
+import com.gdxtest02.chars.TestChar03;
+import com.gdxtest02.chars.TestChar04;
+import com.gdxtest02.chars.TestChar05;
+import com.gdxtest02.chars.TestChar06;
+import com.gdxtest02.chars.TestChar07;
 import com.gdxtest02.gamestate.GameState;
 import com.gdxtest02.levels.Level02;
 import com.gdxtest02.util.CharActor;
 import com.gdxtest02.util.LinkedListener;
+import com.gdxtest02.util.Util;
 
 import static com.gdxtest02.CharBuilder.*;
 import static com.gdxtest02.gamestate.GameState.*;
@@ -86,13 +87,17 @@ public class CharSelectScreenUI {
 		turn = 1;
 		
 		gstate = GameState.getInstance();
-		
+		gamemode = gstate.getGameMode();
 //		unlockedchars = buildMapOfUnlockedChars();
 		charlist = gstate.getChars();
+		if (Util.getDebugMode() && gamemode != MODE_STORY) {
+			// if not on story mode, add test chars
+			charlist.addAll(buildListOfTestChars());
+		}
 		
-		gamemode = gstate.getGameMode();
+		
 		p1 = charlist.get(0);
-		p2 = charlist.get(1);
+		p2 = charlist.get(1); // this could be a problem if there is only 1
 		
 		createListeners();
 		

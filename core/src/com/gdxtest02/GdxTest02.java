@@ -28,13 +28,17 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.esotericsoftware.kryo.Kryo;
-import com.gdxtest02.chars.Char01;
+import com.gdxtest02.chars.TestChar01;
 import com.gdxtest02.gamestate.GameState;
 import com.gdxtest02.util.Util;
 
 public class GdxTest02 extends Game {
 	public static int VIRTUAL_WIDTH = 800;
 	public static int VIRTUAL_HEIGHT = 480;
+	
+	/**Set this to true to enable debug Chars and options
+	 */
+	public static final boolean DEBUG_MODE = true;
 	
 	public SpriteBatch batch;
 	public BitmapFont font;
