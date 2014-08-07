@@ -809,7 +809,7 @@ public class Char implements Cloneable {
 	 * So play Get Hit animation and do all the appropriate calculations
 	 */
 	public void setGetHit() {
-		Util.log("I'm on your character, getting hit.");
+//		Util.log("I'm on your character, getting hit.");
 		HitEffect e = new HitEffect(0.35f);
 //		ExplosionEffect e = new ExplosionEffect(0.35f);
 		getAnimRenderer().addCharEffect(e);

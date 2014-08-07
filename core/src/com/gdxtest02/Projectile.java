@@ -6,7 +6,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonJson;
+import com.gdxtest02.anims.GetHit01;
+import com.gdxtest02.effects.ExplosionEffect;
 import com.gdxtest02.effects.FireEffect;
+import com.gdxtest02.effects.HitEffect;
 import com.gdxtest02.util.Util;
 
 public class Projectile {
@@ -49,6 +52,7 @@ public class Projectile {
 		time = 0;
 		effect.start();
 		effect.setPosition(x, y);
+		target = renderer.getOwner().getTarget(); // default projectile target is the Char target
 	}
 	
 	public void setPos(float x, float y) {
@@ -104,7 +108,13 @@ public class Projectile {
 	
 	public void end() {
 		renderer.removeProjectile();
+		if (target == null) return;
 //		log("end proj time: " + time + " duration: "+ duration);
+		AnimRenderer trenderer = target.getAnimRenderer();
+//		HitEffect e = new HitEffect(0.35f);
+		ExplosionEffect e = new ExplosionEffect(0.35f);
+		trenderer.addCharEffect(e);
+		trenderer.setAnim(new GetHit01(trenderer));
 	}
 
 	public void draw(SpriteBatch batch) {
