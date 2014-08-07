@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.gdxtest02.anims.GetHit01;
 import com.gdxtest02.anims.PunchRight01;
+import com.gdxtest02.effects.ExplosionEffect;
 import com.gdxtest02.effects.HitEffect;
 import com.gdxtest02.util.Util;
 import com.gdxtest02.util.Util.*;
@@ -810,6 +811,7 @@ public class Char implements Cloneable {
 	public void setGetHit() {
 		Util.log("I'm on your character, getting hit.");
 		HitEffect e = new HitEffect(0.35f);
+//		ExplosionEffect e = new ExplosionEffect(0.35f);
 		getAnimRenderer().addCharEffect(e);
 		getAnimRenderer().setAnim(new GetHit01(animRenderer));
 	}
