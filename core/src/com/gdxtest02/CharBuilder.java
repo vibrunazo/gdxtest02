@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.gdxtest02.chars.Bob;
 import com.gdxtest02.chars.George;
+import com.gdxtest02.chars.Pete;
 import com.gdxtest02.chars.TestChar01;
 import com.gdxtest02.chars.TestChar02;
 import com.gdxtest02.chars.TestChar03;
@@ -26,6 +27,7 @@ import static com.gdxtest02.gamestate.GameState.*;
 public class CharBuilder {
 	public static final int CHAR_01 = 1;
 	public static final int CHAR_02 = 2;
+	public static final int CHAR_03 = 3;
 	
 	public static final int TEST_CHAR_01 = 6661;
 	public static final int TEST_CHAR_02 = 6662;
@@ -41,6 +43,7 @@ public class CharBuilder {
 		switch (name) {
 		case CHAR_01: c = new Bob("Bob");break;
 		case CHAR_02: c = new George("George");break;
+		case CHAR_03: c = new Pete("Pete");break;
 		case TEST_CHAR_01: c = new TestChar01("c1");break;
 		case TEST_CHAR_02: c = new TestChar02("c2");break;
 		case TEST_CHAR_03: c = new TestChar03("c3");break;
@@ -95,6 +98,7 @@ public class CharBuilder {
 		chars.add(build(TEST_CHAR_07, 3));
 		chars.add(build(TEST_CHAR_08, 3));
 		chars.add(build(CHAR_02, 1));
+		chars.add(build(CHAR_03, 2));
 		return chars;
 	}
 }
