@@ -97,7 +97,7 @@ public class CharSelectScreenUI {
 		
 		
 		p1 = charlist.get(0);
-		p2 = charlist.get(1); // this could be a problem if there is only 1
+		p2 = charlist.random();
 		
 		createListeners();
 		

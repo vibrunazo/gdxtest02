@@ -5,6 +5,7 @@ import static com.gdxtest02.gamestate.GameState.MODE_STORY;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.gdxtest02.chars.Bob;
+import com.gdxtest02.chars.George;
 import com.gdxtest02.chars.TestChar01;
 import com.gdxtest02.chars.TestChar02;
 import com.gdxtest02.chars.TestChar03;
@@ -24,6 +25,7 @@ import static com.gdxtest02.gamestate.GameState.*;
  */
 public class CharBuilder {
 	public static final int CHAR_01 = 1;
+	public static final int CHAR_02 = 2;
 	
 	public static final int TEST_CHAR_01 = 6661;
 	public static final int TEST_CHAR_02 = 6662;
@@ -37,7 +39,8 @@ public class CharBuilder {
 	public static Char build(int name) {
 		Char c = null;
 		switch (name) {
-		case CHAR_01: c = new Bob("Moo");break;
+		case CHAR_01: c = new Bob("Bob");break;
+		case CHAR_02: c = new George("George");break;
 		case TEST_CHAR_01: c = new TestChar01("c1");break;
 		case TEST_CHAR_02: c = new TestChar02("c2");break;
 		case TEST_CHAR_03: c = new TestChar03("c3");break;
@@ -60,27 +63,6 @@ public class CharBuilder {
 		return c;
 	}
 	
-	/**Builds a list of available chars 
-	 * (DEPRECATED) Use Char inventory instead, so there can be more than
-	 * one of each char
-	 * 
-	 * @return
-	 */
-//	public static ObjectMap<String, Char> buildMapOfUnlockedChars() {
-//		ObjectMap<String, Char> chars = new ObjectMap<String, Char>();
-//		GameState gstate = GameState.getInstance();
-//		if (gstate.isCharUnlocked(CHAR_01))	chars.put("c1", build(CHAR_01));
-//		if (gstate.isCharUnlocked(CHAR_02))	chars.put("c2", build(CHAR_02));
-//		if (gstate.isCharUnlocked(CHAR_03))	chars.put("c3", build(CHAR_03));
-//		if (gstate.isCharUnlocked(CHAR_04))	chars.put("c4", build(CHAR_04));
-//		if (gstate.isCharUnlocked(CHAR_05))	chars.put("c5", build(CHAR_05));
-//		if (gstate.isCharUnlocked(CHAR_06))	chars.put("c6", build(CHAR_06));
-//		if (gstate.isCharUnlocked(CHAR_07))	chars.put("c7", build(CHAR_07));
-//		
-//		
-//		return chars;
-//	}
-	
 	/**List of chars for Story Mode
 	 * @return
 	 */
@@ -88,8 +70,9 @@ public class CharBuilder {
 		Array<Char> chars = new Array<Char>();
 //		chars.add(build(CHAR_01));
 		chars.add(build(CHAR_01, 3));
-		chars.add(build(TEST_CHAR_03, 3));
-		chars.add(build(TEST_CHAR_04, 3));
+//		chars.add(build(CHAR_02, 1));
+//		chars.add(build(TEST_CHAR_03, 3));
+//		chars.add(build(TEST_CHAR_04, 3));
 //		chars.add(build(CHAR_05, 3));
 //		chars.add(build(CHAR_06, 4));
 //		chars.add(build(CHAR_07, 3));
@@ -111,6 +94,7 @@ public class CharBuilder {
 		chars.add(build(TEST_CHAR_06, 4));
 		chars.add(build(TEST_CHAR_07, 3));
 		chars.add(build(TEST_CHAR_08, 3));
+		chars.add(build(CHAR_02, 1));
 		return chars;
 	}
 }
