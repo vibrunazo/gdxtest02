@@ -4,7 +4,7 @@ import static com.gdxtest02.gamestate.GameState.MODE_STORY;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.gdxtest02.chars.StoryChar01;
+import com.gdxtest02.chars.Bob;
 import com.gdxtest02.chars.TestChar01;
 import com.gdxtest02.chars.TestChar02;
 import com.gdxtest02.chars.TestChar03;
@@ -37,7 +37,7 @@ public class CharBuilder {
 	public static Char build(int name) {
 		Char c = null;
 		switch (name) {
-		case CHAR_01: c = new StoryChar01("Moo");break;
+		case CHAR_01: c = new Bob("Moo");break;
 		case TEST_CHAR_01: c = new TestChar01("c1");break;
 		case TEST_CHAR_02: c = new TestChar02("c2");break;
 		case TEST_CHAR_03: c = new TestChar03("c3");break;

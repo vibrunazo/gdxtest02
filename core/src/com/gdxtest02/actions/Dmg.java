@@ -34,14 +34,4 @@ public class Dmg extends Action implements Cloneable {
 		super(value, cooldown);
 	}
 	
-	public Action getClone() {
-		try {
-			Action clone = (Action) this.clone(); 
-			return clone;
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 }
