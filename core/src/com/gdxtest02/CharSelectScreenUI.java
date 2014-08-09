@@ -208,7 +208,13 @@ public class CharSelectScreenUI {
 	}
 
 	private void addCharButton(Char c, int id) {
-		TextButton cbutton = new TextButton(c.getName(), skin);
+		TextButton cbutton;
+		if (c.getName() != null && c.getName().length() > 3) {
+			cbutton = new TextButton(c.getName().substring(0, 3), skin);
+		}
+		else {
+			cbutton = new TextButton(c.getName(), skin);
+		}
 		chartable.add(cbutton).width(CHARBUTTON_WIDTH).height(CHARBUTTON_WIDTH);
 		cbutton.setName(""+id);
 		cbutton.addListener(getCharListener().setOwner(cbutton));

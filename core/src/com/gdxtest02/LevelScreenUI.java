@@ -86,7 +86,13 @@ public class LevelScreenUI {
 				chartable.row();
 				i = 1;
 			}
-			TextButton b = addCharButton(c.getName());
+			TextButton b;
+			if (c.getName() != null && c.getName().length() > 3) {
+				b = addCharButton(c.getName().substring(0, 3));
+			}
+			else {
+				b = addCharButton(c.getName());
+			}
 			if (screen.game.getGameState().getCurenemy() == n) {
 				log("curenemy: " + screen.game.getGameState().getCurenemy());
 				b.setChecked(true);

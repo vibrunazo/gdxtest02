@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.gdxtest02.chars.Bob;
 import com.gdxtest02.chars.Linzer;
+import com.gdxtest02.chars.Pasu;
 import com.gdxtest02.chars.Tansa;
 import com.gdxtest02.chars.Diras;
 import com.gdxtest02.chars.TestChar01;
@@ -30,6 +31,7 @@ public class CharBuilder {
 	public static final int CHAR_02 = 2;
 	public static final int CHAR_03 = 3;
 	public static final int CHAR_04 = 4;
+	public static final int CHAR_05 = 5;
 	
 	public static final int TEST_CHAR_01 = 6661;
 	public static final int TEST_CHAR_02 = 6662;
@@ -47,6 +49,7 @@ public class CharBuilder {
 		case CHAR_02: c = new Tansa();break;
 		case CHAR_03: c = new Diras();break;
 		case CHAR_04: c = new Linzer();break;
+		case CHAR_05: c = new Pasu();break;
 		case TEST_CHAR_01: c = new TestChar01("c1");break;
 		case TEST_CHAR_02: c = new TestChar02("c2");break;
 		case TEST_CHAR_03: c = new TestChar03("c3");break;
