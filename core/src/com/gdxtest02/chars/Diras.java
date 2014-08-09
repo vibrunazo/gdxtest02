@@ -9,10 +9,12 @@ import com.gdxtest02.anims.PunchRight01;
 import com.gdxtest02.effects.IceEffect;
 import com.gdxtest02.projectiles.Projectile02;
 
-public class Pete extends Char {
+public class Diras extends Char {
 	
-	public Pete(String name) {
-		super("Pete"); // Overrides given name with default
+	public Diras() {
+		super();
+		
+		setName("Diras");
 		
 		AnimRenderer renderer = getAnimRenderer();
 		addAction(new Dmg(100)).setName("Bite");

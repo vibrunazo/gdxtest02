@@ -23,6 +23,7 @@ import com.gdxtest02.util.Util.*;
 
 
 public class Char implements Cloneable {
+	private static final String DEFAULT_NAME = "Char";
 	private float spikes;
 	private String name;
 	private String type;
@@ -57,7 +58,7 @@ public class Char implements Cloneable {
 	private Balance balance;
 	private Char target;
 	private boolean canoverheal;
-	
+
 	private float buffPwMultiplier;
 	private float levelMultiplier;
 	private int level;
@@ -65,10 +66,14 @@ public class Char implements Cloneable {
 	private Array<Integer> aiSkillList;
 	private HashMap<String, Float> defaultResists;
 	private HashMap<String, Float> actualResists;
-	
+
 	private AnimRenderer animRenderer;
 	private CharSkin skin;
 
+	public Char() {
+		this(DEFAULT_NAME);
+	}
+	
 	public Char(String name) {
 		this.name = name;
 		description = "This is a Char";
@@ -87,15 +92,15 @@ public class Char implements Cloneable {
 		animRenderer.setOwner(this);
 		defaultResists = new HashMap<String, Float>();
 		actualResists = new HashMap<String, Float>();
-        defaultResists.put("all", new Float (1));
-        actualResists.put("all", new Float (1));
+		defaultResists.put("all", new Float (1));
+		actualResists.put("all", new Float (1));
 		spikes = 0;
 		level = 1;
 		levelMultiplier = 1;
 		buffPwMultiplier = 1;
-		
+
 		resetStats();
-//		resetAssets();
+		//		resetAssets();
 	}
 
 	/**Reloads textures and assets
@@ -123,48 +128,48 @@ public class Char implements Cloneable {
 		//reset all actions
 		for (Action a : actionBar) a.reset();
 	}
-	
+
 	public void draw(SpriteBatch batch){
-//		batch.draw(tex, posX, posY);
+		//		batch.draw(tex, posX, posY);
 		animRenderer.draw(batch, posX, posY);
 	}
-	
+
 	public void draw(SpriteBatch batch, float x, float y) {
 		animRenderer.draw(batch, (int)x, (int)y);
 	}
-	
+
 	public void drawParticles(SpriteBatch batch) {
 		animRenderer.drawEffects(batch);
 	}
-	
+
 	/**Draw shapes, such as health bars
 	 * @param shapeRenderer
 	 */
 	public void drawShapes(ShapeRenderer shapeRenderer) {
-//		int x = posX + 256/2 - 100; // bar start x position
-//		int y = posY + 256 + 10; // bar start y position
+		//		int x = posX + 256/2 - 100; // bar start x position
+		//		int y = posY + 256 + 10; // bar start y position
 		int x = posX - 100; // bar start x position
 		int y = posY + 256 - 50; // bar start y position
 		int width = 200; // bar width
 		int height = 10; // bar height
 		// health normalized between 0 and 1
 		float health = (float)hp / (float)Math.max(maxhp, hp);
-		
+
 		shapeRenderer.setColor(0.1f, 0.1f, 0f, 1);
 		shapeRenderer.rect(x, y, width, height);
-		
+
 		shapeRenderer.setColor(1f, 1f * health, 0, 1);
 		shapeRenderer.rect(x, y, width * health, height);
-		
-//		Gdx.app.log("moo", "char: " + name + " hp: " + hp + " maxhp: " + maxhp
-//				+ " health: " + health);
-		
+
+		//		Gdx.app.log("moo", "char: " + name + " hp: " + hp + " maxhp: " + maxhp
+		//				+ " health: " + health);
+
 	}
-	
+
 	public Balance getBalance() {
 		return balance;
 	}
-	
+
 	/**Finds the id of the action, returns zero if not found 
 	 * @param a
 	 * @return
@@ -172,7 +177,7 @@ public class Char implements Cloneable {
 	public int getIdOfAction(Action a) {
 		return actionBar.indexOf(a, true) + 1;
 	}
-	
+
 	/**Get the action of specific id, starting from 1
 	 * @param id
 	 */
@@ -180,7 +185,7 @@ public class Char implements Cloneable {
 		if (id < 1 || id > actionBar.size) return null;
 		return actionBar.get(id - 1);
 	}
-	
+
 	/**Set the action of this id, starting from 1
 	 * @param id
 	 * @return
@@ -191,7 +196,7 @@ public class Char implements Cloneable {
 		action.setOwner(this);
 		return action;
 	}
-	
+
 	public Action addAction(Action action) {
 		actionsInventory.add(action);
 		if (actionBar.size < maxActionBarSize) {
@@ -201,7 +206,7 @@ public class Char implements Cloneable {
 		action.updatePower();
 		return action;
 	}
-	
+
 	/**Add buff to new buff list
 	 * @param buff
 	 */
@@ -209,13 +214,13 @@ public class Char implements Cloneable {
 		buff.setTarget(this);
 		buffs.add(buff);
 	}
-	
+
 	/**Buffs do whatever they do when this is called.
 	 * Should be called by the game when it's time for buffs to take effect
 	 * such as, every turn
 	 */
 	public void applyBuffs() {
-		
+
 		updateAllActions();
 		spikes = 0;
 		actualResists.clear();
@@ -223,30 +228,30 @@ public class Char implements Cloneable {
 		// list of buffs that will be removed
 		// this is done because you can't remove the items in the middle of a loop
 		Array<Buff> toremove = new Array<Buff>(); 
-		
+
 		// loop through all buffs and make their do their thing
 		for (Buff buff : buffs) {
 			buff.act(this);
-//			buff.setVisible(true);
+			//			buff.setVisible(true);
 			buff.incDuration(-1);
 			if (buff.getDuration() == 0){
 				toremove.add(buff); // this buff will be removed 
-//				buff.end(this);
+				//				buff.end(this);
 			}
 		}
 		// remove buffs from the list of buffs to be removed
 		for (Buff buff : toremove) {
 			buffs.removeValue(buff, true);
 		}
-		
+
 		// move new buffs to main buffs list
-//		buffs.addAll(newbuffs);
-//		for (Buff buff : buffs) {
-//			buff.ini(this);
-//		}
-//		newbuffs.clear();
+		//		buffs.addAll(newbuffs);
+		//		for (Buff buff : buffs) {
+		//			buff.ini(this);
+		//		}
+		//		newbuffs.clear();
 	}
-	
+
 	/**Returns a string with a description of current buffs
 	 * @return
 	 */
@@ -261,11 +266,11 @@ public class Char implements Cloneable {
 		r += ")";
 		return r;
 	}
-	
+
 	public void dispose() {
 		tex.dispose();
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -273,14 +278,14 @@ public class Char implements Cloneable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public int getPosX() {
 		return posX;
 	}
 	public int getPosY() {
 		return posY;
 	}
-	
+
 	public void setPos(int x, int y) {
 		this.posX = x;
 		this.posY = y;
@@ -299,7 +304,7 @@ public class Char implements Cloneable {
 	private void setHp(int hp) {
 		this.hp = hp;
 	}
-	
+
 	/**Increments hp by 'delta', returns final hp after change
 	 * @param reflect if damage can be reflected or not 
 	 * @param inc how much to change
@@ -323,15 +328,15 @@ public class Char implements Cloneable {
 		for (int x = 0; x < type.size; x++){
 			if(actualResists.containsKey(type.get(x)) == false)
 				actualResists.put(type.get(x), actualResists.get("all"));
-		    if (x == 0)
-		    	y = actualResists.get(type.get(x));
-		    else{
-		    	z = actualResists.get(type.get(x));
-		    	y = z*y;
-		    }
-		    
+			if (x == 0)
+				y = actualResists.get(type.get(x));
+			else{
+				z = actualResists.get(type.get(x));
+				y = z*y;
+			}
+
 		}
-		 dmg += delta *y;
+		dmg += delta *y;
 		Util.log("incHp, type: " + type.toString());
 		Util.log("incHp, defaultResists: " + defaultResists.toString() + 
 				" actualResists: " + actualResists.toString());
@@ -341,7 +346,7 @@ public class Char implements Cloneable {
 			target.incHp(-getSpikes(), this, false, new Array<String>(a));
 		}
 	}
-	
+
 	/**Applies the damage to be taken this round. After all the skills used this round are considered.
 	 * Called by the game logic
 	 * 
@@ -364,14 +369,14 @@ public class Char implements Cloneable {
 		}
 		return hp;
 	}
-	
+
 	/**Update cooldowns of all action
 	 * 
 	 */
 	public void updateCooldowns() {
 		for (Action a : actionBar) a.updateCooldown();
 	}
-	
+
 	/**Update all that needs to be updated every logic tick
 	 * use actions, update cooldowns
 	 */
@@ -379,8 +384,8 @@ public class Char implements Cloneable {
 		applyBuffs(); 
 		Action a = getActiveAction();
 		if (a != null) a.act(this, getTarget());
-		
-//		applyDmg();
+
+		//		applyDmg();
 		updateCooldowns();
 	}
 
@@ -407,9 +412,9 @@ public class Char implements Cloneable {
 
 	public Action getActiveAction() {
 		return getAction(getActiveActionId());
-		
+
 	}
-	
+
 	public int getActiveActionId() {
 		return activeAction;
 	}
@@ -417,14 +422,14 @@ public class Char implements Cloneable {
 	public void setActiveActionId(int activeAction) {
 		this.activeAction = activeAction;
 	}
-	
+
 	/**Gets how many actions I have
 	 * @return
 	 */
 	public int getNumOfActions() {
 		return actionBar.size;
 	}
-	
+
 	/**gets the list of actions
 	 * 
 	 * Avoid using this unless there's no other way
@@ -448,12 +453,12 @@ public class Char implements Cloneable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	/**
 	 * @return the description
 	 */
 	public String getFullDescription() {
-//		return description + " avgdps: " + balance.getAvgDps();
+		//		return description + " avgdps: " + balance.getAvgDps();
 		return name + " " + description + " level " + level  + " (k: " + levelMultiplier + ") " + getActionListString();
 	}
 
@@ -463,7 +468,7 @@ public class Char implements Cloneable {
 	public void setFullDescription(String description) {
 		this.description = description;
 	}
-	
+
 	/**A string with the name of every skill
 	 * @return
 	 */
@@ -489,14 +494,14 @@ public class Char implements Cloneable {
 	public void setTarget(Char target) {
 		this.target = target;
 	}
-	
+
 	public int getAiSkill(int round){
 		Util.log(aiSkillList.toString());
 		if (aiSkillList != null && aiSkillList.size >= round){
-			
-			 return aiSkillList.get(round - 1);
-			
-			
+
+			return aiSkillList.get(round - 1);
+
+
 		}
 		else {
 			int Min = 1;
@@ -511,7 +516,7 @@ public class Char implements Cloneable {
 			return x;
 		}
 	}
-	
+
 	public Char getClone() {
 		try {
 			Constructor<? extends Char> constructor = this.getClass().getConstructor(String.class);
@@ -545,7 +550,7 @@ public class Char implements Cloneable {
 		float pct = ((float) hp)/((float) maxhp); // get current heal %
 		maxhp = (int) (basehp * levelMultiplier);
 		hp = (int) Math.ceil(pct*hp); // keep health % the same
-		
+
 	}
 
 	/**Update power of all actions, remultiply base power by power
@@ -559,7 +564,7 @@ public class Char implements Cloneable {
 			a.update();
 		}
 	}
-	
+
 	/**Increases current level by 1 and updates
 	 * everything that needs it
 	 * 
@@ -570,7 +575,7 @@ public class Char implements Cloneable {
 		unlockSkillsForLevel(level);
 		Util.log(name + " leveled up, level: " + level + " pmult: " + levelMultiplier);
 	}
-	
+
 	private void unlockSkillsForLevel(int level) {
 		if (actionUnlockedPerLevel.containsKey(level)) {
 			Action a = actionUnlockedPerLevel.get(level);
@@ -612,7 +617,7 @@ public class Char implements Cloneable {
 	public void setAiSkillList(Array<Integer> x) {
 		aiSkillList.addAll(x);
 	}
-	
+
 	/**adds an action to be unlocked this level
 	 * 
 	 * @param a
@@ -621,7 +626,7 @@ public class Char implements Cloneable {
 		actionUnlockedPerLevel.put(level, a);
 		return a;
 	}
-	
+
 	/**Gets the action to be unlocked on this level
 	 * @param level
 	 * @return
@@ -635,11 +640,11 @@ public class Char implements Cloneable {
 	 */
 	public void setScale(float scale) {
 		animRenderer.setScale(scale);
-//		restartAnims();
+		//		restartAnims();
 	}
-	
+
 	private void restartAnims() {
-//		for (Action a : actionBar) a.reset();
+		//		for (Action a : actionBar) a.reset();
 		for (Action a : actionBar) {
 			a.getAnim().start();
 		}
@@ -651,7 +656,7 @@ public class Char implements Cloneable {
 	public float getScale() {
 		return animRenderer.getScale();
 	}
-	
+
 	/**Sets a color object to change the char image color with
 	 * 
 	 * @param color
@@ -659,7 +664,7 @@ public class Char implements Cloneable {
 	public void setColor(Color color) {
 		animRenderer.setColor(color);
 	}
-	
+
 	/**Set the color of the character
 	 * @param r
 	 * @param g
@@ -677,7 +682,7 @@ public class Char implements Cloneable {
 	public boolean getFlipX() {
 		return animRenderer.getFlipX();
 	}
-	
+
 	/**returns -1 if the char is flipped horizontally, 1 otherwise
 	 * @return
 	 */
@@ -685,14 +690,14 @@ public class Char implements Cloneable {
 		if (getFlipX()) return -1;
 		return 1;
 	}
-	
+
 	/**Flip char image horizontally
 	 * @param flip
 	 */
 	public void flipX(boolean flip) {
 		animRenderer.flipX(flip);
 	}
-	
+
 	/**Flip char image vertically
 	 * @param flip
 	 */
@@ -720,7 +725,7 @@ public class Char implements Cloneable {
 	public CharSkin getAnimData() {
 		return skin;
 	}
-	
+
 	/**Sets the animation to the one of the current active action
 	 * @param animname
 	 */
@@ -731,23 +736,23 @@ public class Char implements Cloneable {
 		CharAnim anim = getActiveAction().getAnim();
 		Effect effect = getActiveAction().getAnimEffect();
 		animRenderer.setAnim(anim, effect);
-//		animRenderer.setAnim(anim.getName(), effect);
+		//		animRenderer.setAnim(anim.getName(), effect);
 	}
-	
+
 	/**Sets the name of the current animation to play
 	 * @param animname
 	 */
 	public void setAnim(String animname) {
 		animRenderer.setAnim(animname);
 	}
-	
+
 	/**Name of current animation being played
 	 * @return
 	 */
 	public String getAnimName() {
 		return animRenderer.getAnimName();
 	}
-	
+
 	/**The name of the default animation, which is the animation
 	 * the char will default to when nothing is specified
 	 * @return
@@ -755,7 +760,7 @@ public class Char implements Cloneable {
 	public String getDefaultAnimName() {
 		return animRenderer.getDefaultAnimName();
 	}
-	
+
 	/**Returns true if the Char is currently using the default animation,
 	 * false otherwise
 	 * @return
@@ -784,23 +789,23 @@ public class Char implements Cloneable {
 	public AnimRenderer getAnimRenderer() {
 		return animRenderer;
 	}
-	
+
 	public void editDefaultResists(String type, float value){
 		defaultResists.put(type, value);
 		actualResists.putAll(defaultResists);
-			
-	}
-	
-	public void editActualResists(String type, float value){
-		actualResists.put(type, value);
-		
+
 	}
 
-	
+	public void editActualResists(String type, float value){
+		actualResists.put(type, value);
+
+	}
+
+
 	public HashMap<String, Float> getResists(){
 		return actualResists;
 	}
-	
+
 	public Array<Buff> getBuffs() {
 		return buffs;
 	}
@@ -809,9 +814,9 @@ public class Char implements Cloneable {
 	 * So play Get Hit animation and do all the appropriate calculations
 	 */
 	public void setGetHit() {
-//		Util.log("I'm on your character, getting hit.");
+		//		Util.log("I'm on your character, getting hit.");
 		HitEffect e = new HitEffect(0.35f);
-//		ExplosionEffect e = new ExplosionEffect(0.35f);
+		//		ExplosionEffect e = new ExplosionEffect(0.35f);
 		getAnimRenderer().addCharEffect(e);
 		getAnimRenderer().setAnim(new GetHit01(animRenderer));
 	}

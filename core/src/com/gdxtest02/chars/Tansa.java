@@ -7,10 +7,12 @@ import com.gdxtest02.actions.Drain;
 import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.PunchRight01;
 
-public class George extends Char {
+public class Tansa extends Char {
 	
-	public George(String name) {
-		super("George"); // Overrides given name with default
+	public Tansa() {
+		super();
+
+		setName("Tansa");
 		
 		AnimRenderer renderer = getAnimRenderer();
 		addAction(new Dmg(100)).setName("Bite");

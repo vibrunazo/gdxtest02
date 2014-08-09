@@ -8,9 +8,10 @@ import com.gdxtest02.anims.PunchRight01;
 
 public class Bob extends Char {
 	
-	public Bob(String name) {
-		super("Bob"); // Overrides given name with default
+	public Bob() {
+		super();
 		
+		setName("Bob");
 		AnimRenderer renderer = getAnimRenderer();
 		addAction(new Dmg(120)).setName("Punch");
 		addAction(new Dmg(250, 2)).setName("Strong Punch")
