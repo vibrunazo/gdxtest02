@@ -197,7 +197,7 @@ public class FightScreenUI extends UIBuilder {
 				checkButtonFromGroup(actor, groupnumber, selectedActionId);
 
 				// set the action number for the appropriate player
-				setActiveActionForPlayer(groupnumber, selectedActionId);
+//				setActiveActionForPlayer(groupnumber, selectedActionId);
 				
 				if (getSelectedActionForPlayer(1) != 0 && getSelectedActionForPlayer(2) != 0) {
 					screen.go();

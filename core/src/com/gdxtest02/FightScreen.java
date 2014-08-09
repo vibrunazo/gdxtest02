@@ -38,8 +38,9 @@ public class FightScreen implements Screen {
 	private Char p2;
 
 	/**fightstate, is the game paused or running?
-	 * "go" = fight can go on
+	 * "go" = fight can go on, this is the "ready" state
 	 * "paused" = fight is paused
+	 * "anim p1" or "anim p2" = playing either player's anim
 	 */
 	private String fightstate; 
 	private int round = 1;
@@ -227,6 +228,7 @@ public class FightScreen implements Screen {
 		}
 		
 		applyDamages(); 
+		ui.resetActiveActions();
 	}
 
 
@@ -244,6 +246,7 @@ public class FightScreen implements Screen {
 			return;
 		}
 		
+		ui.setActiveActionsForPlayers();
 		castSkills();
 //		applyDamages(); 
 
@@ -277,7 +280,6 @@ public class FightScreen implements Screen {
 	 */
 	private void applyDamages() {
 		
-		ui.setActiveActionsForPlayers();
 		
 		int actionidp1 = p1.getActiveActionId();
 		int actionidp2 = p2.getActiveActionId();
@@ -388,7 +390,7 @@ public class FightScreen implements Screen {
 		logPlayerStats(p1);
 		logPlayerStats(p2);
 		updateButtonsText();
-		ui.resetActiveActions();
+//		ui.resetActiveActions();
 	}
 
 	/**Update buttons' text
