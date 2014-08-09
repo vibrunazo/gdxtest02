@@ -209,6 +209,7 @@ public class FightScreen implements Screen {
 		ui.setAnimTime((int)Math.ceil(pausetime));
 		if (pausetime <= 0) {
 			endAnimState();
+			ui.resetActiveActions();
 		}
 	}
 
@@ -228,7 +229,7 @@ public class FightScreen implements Screen {
 		}
 		
 		applyDamages(); 
-		ui.resetActiveActions();
+//		ui.resetActiveActions();
 	}
 
 
@@ -243,15 +244,11 @@ public class FightScreen implements Screen {
 		if (fightstate.equals("paused")) return;
 		if (fightstate.contains("anim")) {
 			endAnimState();
-			return;
+//			return;
 		}
 		
 		ui.setActiveActionsForPlayers();
 		castSkills();
-//		applyDamages(); 
-
-//		endFight();
-		
 		updateUi();
 	}
 
