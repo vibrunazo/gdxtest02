@@ -23,7 +23,7 @@ public class Diras extends Char {
 		.setProjectile(new Projectile02(renderer)))
 		.setAnimEffect(new IceEffect());
 		
-		setColor(0.4f, 0.5f, 0.9f, 1);
+		setColor(0.3f, 0.5f, 0.9f, 1);
 
 	}
 
