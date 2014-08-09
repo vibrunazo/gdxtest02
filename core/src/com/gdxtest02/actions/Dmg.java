@@ -8,7 +8,7 @@ public class Dmg extends Action implements Cloneable {
 	
 	public void ini() {
 		setName("DD");
-		setAnim(new Punch01(owner.getAnimRenderer()));
+		setAnim(new Punch01());
 		setReflect(true);
 	}
 	public void update() {

@@ -10,17 +10,17 @@ import com.gdxtest02.effects.SpineBaseEffect;
 
 public class Projectile03 extends Projectile {
 
-	public Projectile03(AnimRenderer renderer) {
-		super(renderer);
+	public Projectile03() {
+		super();
 	}
 
 	@Override
-	public void start() {
+	public void start(AnimRenderer renderer) {
 //		effect = new SpineBaseEffect();
 //		effect = new HitEffect();
 		effect = new GreenEffect();
 		
-		super.start();
+		super.start(renderer);
 	}
 	
 

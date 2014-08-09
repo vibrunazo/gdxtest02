@@ -26,7 +26,7 @@ public class PutMortalStrike extends PutBuffAction {
 	@Override
 	public void ini() {
 		setName("Put Resist Buff");
-		setAnim(new Punch01(owner.getAnimRenderer()));
+		setAnim(new Punch01());
 		setBuff(new MortalStrike(power, duration));
 //		setReflect(true);
 	}

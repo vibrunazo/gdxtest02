@@ -17,7 +17,7 @@ public class PutSpikes extends PutBuffAction {
 	@Override
 	public void ini() {
 		setName("Put Spikes");
-		setAnim(new Castup01(owner.getAnimRenderer()));
+		setAnim(new Castup01());
 	}
 	
 	public void update() {

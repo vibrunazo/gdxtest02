@@ -13,8 +13,8 @@ public class Castup01 extends CharAnim {
 	private float x;
 	private float y;
 
-	public Castup01(AnimRenderer animRenderer) {
-		super(animRenderer);
+	public Castup01() {
+		super();
 		name = "castup01";
 	}
 

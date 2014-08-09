@@ -15,10 +15,9 @@ public class Linzer extends Char {
 
 		setName("Linzer");
 		
-		AnimRenderer renderer = getAnimRenderer();
 		addAction(new Dmg(120)).setName("Punch");
 		addAction(new PutDot(180, 2)).setName("Bleed")
-			.setAnim(new PunchRight01(renderer));
+			.setAnim(new PunchRight01());
 		
 		setColor(0.7f, 0.6f, 0.2f, 1);
 

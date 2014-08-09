@@ -14,19 +14,19 @@ import com.gdxtest02.projectiles.Projectile03;
 
 public class TestChar03 extends Char {
 	
-	public TestChar03(String name) {
-		super(name);
+	public TestChar03() {
+		super();
 		
 		float ratio = 0.42553192f;
-		AnimRenderer renderer = getAnimRenderer();
 //		float ratio = 1f;
+		setName("c3");
 		addAction(new Dmg(100*ratio)).setName("Yoga Fire");
 		addAction(new Dmg(400*ratio, 5)).setName("Overpacarai")
-			.setAnim(new PunchRight01(renderer));
+			.setAnim(new PunchRight01());
 		addAction(new PutDot(50*ratio, 0, 5)).setName("DotFoda").addType(new String[] {"fire"});
 		addAction(new Dmg(500*ratio, 2)).setName("Frost Bolt").setReflect(false)
-				.setAnim(new Cast01(renderer)
-				.setProjectile(new Projectile02(renderer)))
+				.setAnim(new Cast01()
+				.setProjectile(new Projectile02()))
 				.setAnimEffect(new IceEffect());
 				
 		setTex("ball02red.png");

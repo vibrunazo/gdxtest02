@@ -8,8 +8,8 @@ public class GetHit01 extends CharAnim {
 
 	private Animation animation;
 
-	public GetHit01(AnimRenderer animRenderer) {
-		super(animRenderer);
+	public GetHit01() {
+		super();
 		name = "gethit01";
 		setSpeed(2f);
 	}

@@ -8,9 +8,10 @@ import com.gdxtest02.actions.PutHot;
 
 public class TestChar07 extends Char {
 	
-	public TestChar07(String name) {
-		super(name);
+	public TestChar07() {
+		super();
 		
+		setName("c7");
 		addAction(new PutDot(50)).setName("Vorpal Bite");
 		addAction(new PutHot(20)).setName("Shrubbery");
 		addAction(new PutDot(1000, 3, 2)).setName("Holy Hand Grenade");

@@ -531,7 +531,7 @@ public class Balance {
 	 */
 	private TestResult testBestCombo(int maxrounds) {
 		// prepare for simulation
-		Char dummy = new Char("dummy");
+		Char dummy = new Char();
 		dummy.setMaxBasehp(100000);
 		int inihp = dummy.getMaxhp();
 		player.setTarget(dummy);
@@ -613,7 +613,7 @@ public class Balance {
 	private TestResult bruteForceAllCombos(int maxrounds, 
 			Array<Array<Integer>> listofcombos) {
 
-		Char dummy = new Char("dummy");
+		Char dummy = new Char();
 		dummy.setMaxBasehp(100000);
 
 		player.resetStats();

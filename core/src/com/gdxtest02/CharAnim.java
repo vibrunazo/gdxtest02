@@ -29,8 +29,7 @@ public class CharAnim {
 	protected Effect effecttype;
 	protected String name = "";
 
-	public CharAnim(AnimRenderer animRenderer) {
-		renderer = animRenderer;
+	public CharAnim() {
 		speed = 1f;
 //		ini();
 	}
@@ -39,8 +38,8 @@ public class CharAnim {
 	 * 
 	 * @return
 	 */
-	public void start() {
-		
+	public void start(AnimRenderer animRenderer) {
+		renderer = animRenderer;
 		skeleton = renderer.getSkeleton();
 		sd = renderer.getSkeletonData();
 //		Char owner = renderer.getOwner();
@@ -120,7 +119,7 @@ public class CharAnim {
 	
 	protected Projectile addProjectile(float x, float y, Projectile p) {
 //		if (renderer.getNumProj() > 0) return null;
-		if (p == null) p = new Projectile02(renderer);
+		if (p == null) p = new Projectile02();
 		p.setPos(x, y);
 		p.setEffecttype(getNewEffect());
 		renderer.createProjectile(p);

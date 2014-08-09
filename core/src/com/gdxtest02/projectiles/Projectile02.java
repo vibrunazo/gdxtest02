@@ -7,15 +7,15 @@ import com.gdxtest02.effects.IceEffect;
 
 public class Projectile02 extends Projectile {
 
-	public Projectile02(AnimRenderer renderer) {
-		super(renderer);
+	public Projectile02() {
+		super();
 	}
 
 	@Override
-	public void start() {
+	public void start(AnimRenderer renderer) {
 		effect = new IceEffect();
 		
-		super.start();
+		super.start(renderer);
 	}
 	
 

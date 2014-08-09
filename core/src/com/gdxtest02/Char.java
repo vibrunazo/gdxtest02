@@ -71,11 +71,8 @@ public class Char implements Cloneable {
 	private CharSkin skin;
 
 	public Char() {
-		this(DEFAULT_NAME);
-	}
-	
-	public Char(String name) {
-		this.name = name;
+		setName(DEFAULT_NAME);
+		
 		description = "This is a Char";
 		actionBar = new Array<Action>();
 		actionsInventory = new Array<Action>();
@@ -100,9 +97,8 @@ public class Char implements Cloneable {
 		buffPwMultiplier = 1;
 
 		resetStats();
-		//		resetAssets();
 	}
-
+	
 	/**Reloads textures and assets
 	 * 
 	 */
@@ -517,17 +513,6 @@ public class Char implements Cloneable {
 		}
 	}
 
-	public Char getClone() {
-		try {
-			Constructor<? extends Char> constructor = this.getClass().getConstructor(String.class);
-			Object clone = constructor.newInstance(this.getName());
-			return (Char)clone;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	/**
 	 * @return the powerMultiplier
 	 */
@@ -646,7 +631,7 @@ public class Char implements Cloneable {
 	private void restartAnims() {
 		//		for (Action a : actionBar) a.reset();
 		for (Action a : actionBar) {
-			a.getAnim().start();
+			a.getAnim().start(animRenderer);
 		}
 	}
 
@@ -818,7 +803,20 @@ public class Char implements Cloneable {
 		HitEffect e = new HitEffect(0.35f);
 		//		ExplosionEffect e = new ExplosionEffect(0.35f);
 		getAnimRenderer().addCharEffect(e);
-		getAnimRenderer().setAnim(new GetHit01(animRenderer));
+		getAnimRenderer().setAnim(new GetHit01());
+	}
+	
+	public Char getClone() {
+		try {
+//			Constructor<? extends Char> constructor = this.getClass().getConstructor(String.class);
+//			Object clone = constructor.newInstance(this.getName());
+			Constructor<? extends Char> constructor = this.getClass().getConstructor();
+			Object clone = constructor.newInstance();
+			return (Char)clone;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

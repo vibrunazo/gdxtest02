@@ -20,9 +20,8 @@ public class Drain extends Action {
 	@Override
 	public void ini() {
 		setName("Drain");
-		AnimRenderer renderer = owner.getAnimRenderer();
-		setAnim(new Cast01(renderer)
-			.setProjectile(new Projectile03(renderer)),
+		setAnim(new Cast01()
+			.setProjectile(new Projectile03()),
 			new GreenEffect());
 	}
 	

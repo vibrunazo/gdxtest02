@@ -50,14 +50,14 @@ public class CharBuilder {
 		case CHAR_03: c = new Diras();break;
 		case CHAR_04: c = new Linzer();break;
 		case CHAR_05: c = new Pasu();break;
-		case TEST_CHAR_01: c = new TestChar01("c1");break;
-		case TEST_CHAR_02: c = new TestChar02("c2");break;
-		case TEST_CHAR_03: c = new TestChar03("c3");break;
-		case TEST_CHAR_04: c = new TestChar04("c4");break;
-		case TEST_CHAR_05: c = new TestChar05("c5");break;
-		case TEST_CHAR_06: c = new TestChar06("c6");break;
-		case TEST_CHAR_07: c = new TestChar07("c7");break;
-		case TEST_CHAR_08: c = new TestChar08("c8");break;
+		case TEST_CHAR_01: c = new TestChar01();break;
+		case TEST_CHAR_02: c = new TestChar02();break;
+		case TEST_CHAR_03: c = new TestChar03();break;
+		case TEST_CHAR_04: c = new TestChar04();break;
+		case TEST_CHAR_05: c = new TestChar05();break;
+		case TEST_CHAR_06: c = new TestChar06();break;
+		case TEST_CHAR_07: c = new TestChar07();break;
+		case TEST_CHAR_08: c = new TestChar08();break;
 
 		default:break;
 		}

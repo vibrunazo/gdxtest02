@@ -17,8 +17,8 @@ public class Cast01 extends CharAnim {
 	private Projectile p;
 	private boolean projcreated = false;
 
-	public Cast01(AnimRenderer animRenderer) {
-		super(animRenderer);
+	public Cast01() {
+		super();
 		name = "cast01";
 		
 //		log("cast01 anim: " + animation);
@@ -61,7 +61,7 @@ public class Cast01 extends CharAnim {
 			
 			if (projcreated == false) {
 				projcreated = true;
-				if (p == null) p = new Projectile01(renderer);
+				if (p == null) p = new Projectile01();
 				addProjectile(x, y, p);
 //				p.setSpeedx(800);
 				p.setFlipX(skeleton.getFlipX()) ;

@@ -15,10 +15,9 @@ public class Pasu extends Char {
 
 		setName("Pasu");
 		
-		AnimRenderer renderer = getAnimRenderer();
 		addAction(new Dmg(120)).setName("Punch");
 		addAction(new Dmg(250, 4)).setName("Tail whip")
-			.setAnim(new PunchRight01(renderer));
+			.setAnim(new PunchRight01());
 		
 		setColor(0.5f, 0.35f, 0.05f, 1);
 

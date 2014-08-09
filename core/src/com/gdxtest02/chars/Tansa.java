@@ -14,10 +14,9 @@ public class Tansa extends Char {
 
 		setName("Tansa");
 		
-		AnimRenderer renderer = getAnimRenderer();
 		addAction(new Dmg(100)).setName("Bite");
 		addAction(new Dmg(250, 2)).setName("FireBall")
-			.setAnim(new Cast01(renderer));
+			.setAnim(new Cast01());
 		
 		setColor(0.9f, 0.2f, 0.1f, 1);
 

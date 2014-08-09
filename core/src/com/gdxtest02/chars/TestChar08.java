@@ -10,15 +10,15 @@ import com.gdxtest02.anims.PunchRight01;
 
 public class TestChar08 extends Char {
 	
-	public TestChar08(String name) {
-		super(name);
+	public TestChar08() {
+		super();
 		
 //		float ratio = 0.6666667f;
 		float ratio = 1f;
-		AnimRenderer renderer = getAnimRenderer();
+		setName("c8");
 		addAction(new Dmg(150*ratio)).setName("a");
 		addAction(new Dmg(220*ratio, 2)).setName("b")
-				.setAnim(new PunchRight01(renderer));
+				.setAnim(new PunchRight01());
 		addAction(new PutDot(50*ratio, 4, 10).setName("c"));
 //		addAction(new Drain(60*ratio, 1).setName("d"));
 //		addAction(new Dmg(120*ratio, 1).setName("e"));

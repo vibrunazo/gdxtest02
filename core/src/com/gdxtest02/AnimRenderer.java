@@ -110,14 +110,14 @@ public class AnimRenderer {
 		this.anim = getAnimByName(animname);
 		if (animname.equals("") || animname == null) {
 			setAnimToDefault();
-			anim.start();
+			anim.start(this);
 			return;
 		}
 		
 		if (effect != null) {
 			anim.setEffect(effect);
 		}
-		anim.start();
+		anim.start(this);
 	}
 	
 	/**Sets the animation of the character to this animation
@@ -130,7 +130,7 @@ public class AnimRenderer {
 //		log("setanim anim: " + anim + " ename: " + effectname);
 		if (anim == null || anim.getName().equals("")) {
 			setAnimToDefault();
-			anim.start();
+			anim.start(this);
 			return;
 		}
 		this.anim = anim;
@@ -140,26 +140,26 @@ public class AnimRenderer {
 		if (effect != null) {
 			anim.setEffect(effect);
 		}
-		anim.start();
+		anim.start(this);
 //		log("setanim anim: " + anim + " ename: " + effectname);
 	}
 	
 	public CharAnim getAnimByName(String name) {
 		CharAnim anim = null;
 		if (name.equals("stand")) {
-			anim = new Stand01(this);
+			anim = new Stand01();
 		}
 		if (name.equals("punch01")) {
-			anim = new Punch01(this);
+			anim = new Punch01();
 		}
 		if (name.equals("punchright01")) {
-			anim = new PunchRight01(this);
+			anim = new PunchRight01();
 		}
 		if (name.equals("cast01")) {
-			anim = new Cast01(this);
+			anim = new Cast01();
 		}
 		if (name.equals("castup01")) {
-			anim = new Castup01(this);
+			anim = new Castup01();
 		}
 //		log("getanimbyname, name: " + name + " anim: " + anim);
 		return anim;
@@ -338,7 +338,7 @@ public class AnimRenderer {
 
 	public void createProjectile(Projectile p) {
 		projectiles.add(p);
-		p.start();
+		p.start(this);
 	}
 	
 	/**How many projectiles this char have right now

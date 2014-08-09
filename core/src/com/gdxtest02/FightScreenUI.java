@@ -190,12 +190,14 @@ public class FightScreenUI extends UIBuilder {
 				//				Gdx.app.log("gdxtest", "le click group: " + groupnumber);
 
 				// number of the action
-				int activeActionId = Integer.parseInt(actor.getName().substring(2));
+				int selectedActionId = Integer.parseInt(actor.getName().substring(2));
 				
-				checkButtonFromGroup(actor, groupnumber, activeActionId);
+				// checks the selected action button, unchecks others
+				// also sets number of selected action by this player
+				checkButtonFromGroup(actor, groupnumber, selectedActionId);
 
 				// set the action number for the appropriate player
-				clickedActionButton(groupnumber, activeActionId);
+				setActiveActionForPlayer(groupnumber, selectedActionId);
 				
 				if (getSelectedActionForPlayer(1) != 0 && getSelectedActionForPlayer(2) != 0) {
 					screen.go();
@@ -219,7 +221,8 @@ public class FightScreenUI extends UIBuilder {
 		centerTable.setVisible(b);
 	}
 
-	/**Check this button on the button group, and unchecks all others
+	/**This action button was clicked by the player
+	 * Check this button on the button group, and unchecks all others
 	 * @param actor
 	 * @param groupnumber
 	 * @param activeActionId 
@@ -230,6 +233,11 @@ public class FightScreenUI extends UIBuilder {
 		((TextButton)actor).setChecked(true); // set this that was just clicked as checked
 	}
 
+	/**Sets the number of the selected action for this player
+	 * 
+	 * @param playernumber
+	 * @param actionId
+	 */
 	private void setSelectedActionForPlayer(int playernumber, int actionId) {
 		if (playernumber == 1) selected_action_for_p1 = actionId;
 		if (playernumber == 2) selected_action_for_p2 = actionId;
@@ -365,11 +373,21 @@ public class FightScreenUI extends UIBuilder {
 		Gdx.app.log("gdxtest", text);
 	}
 
-	/**What to do now that I know what action button was clicked and for what player
+	/** Sets the action for both players from their selected actions
+	 *  
+	 */
+	public void setActiveActionsForPlayers() {
+		setActiveActionForPlayer(1, selected_action_for_p1);
+		setActiveActionForPlayer(2, selected_action_for_p2);
+	}
+	
+	/**Action button was selected by player
+	 * Sets the action from this button as the active action for this player
+	 *  
 	 * @param player
 	 * @param activeActionId
 	 */
-	private void clickedActionButton(int player, int activeActionId) {
+	private void setActiveActionForPlayer(int player, int activeActionId) {
 		Char c = screen.getPlayer(player);
 		c.setActiveActionId(activeActionId);
 		Action a = c.getActiveAction();

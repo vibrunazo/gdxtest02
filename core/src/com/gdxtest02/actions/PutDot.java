@@ -22,7 +22,7 @@ public class PutDot extends PutBuffAction {
 	@Override
 	public void ini() {
 		setName("Put Dot");
-		setAnim(new Cast01(owner.getAnimRenderer()));
+		setAnim(new Cast01());
 		setBuff(new Dot(power, duration, getTypeList()));;
 	}
 	

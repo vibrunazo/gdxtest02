@@ -9,8 +9,8 @@ public class PunchRight01 extends CharAnim {
 	private Animation punchAnimation;
 	private int hits;
 
-	public PunchRight01(AnimRenderer animRenderer) {
-		super(animRenderer);
+	public PunchRight01() {
+		super();
 		name = "punchright01";
 //		name = "gethit01";
 	}

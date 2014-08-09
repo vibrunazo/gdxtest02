@@ -12,12 +12,13 @@ import com.gdxtest02.effects.IceEffect;
 
 public class TestChar02 extends Char {
 	
-	public TestChar02(String name) {
-		super(name);
+	public TestChar02() {
+		super();
 		
 		float ratio = 0.95238096f;
 		float hratio = 0.5f;
 		
+		setName("c2");
 		addAction(new Dmg(50f*ratio)).setName("Punch").addType(new String[] { "malcon", "normal", "melee", "falcon" });
 		addAction(new Heal(250*hratio, 3)).setName("Heal");
 		//(addAction(new PutDmgBuff(1, 0, 5))).setName("aaa").setType("Buff");

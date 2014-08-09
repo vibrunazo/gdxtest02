@@ -10,16 +10,16 @@ import com.gdxtest02.anims.PunchRight01;
 
 public class TestChar05 extends Char {
 	
-	public TestChar05(String name) {
-		super(name);
+	public TestChar05() {
+		super();
 		
 		float ratio = 0.47619048f;
-		AnimRenderer renderer = getAnimRenderer();
+		setName("c5");
 		addAction(new Dmg(50*ratio)).setName("test1");
 		addAction(new Dmg(100*ratio, 4)).setName("test2");
 		addAction(new Dmg(200*ratio, 3)).setName("test3");
 		addAction(new Dmg(400*ratio, 3)).setName("test4")
-				.setAnim(new PunchRight01(renderer));
+				.setAnim(new PunchRight01());
 		
 //		addAction(new Heal(300, 1).setName("test2"));
 //		addAction(new Drain(100, 1).setName("test3"));

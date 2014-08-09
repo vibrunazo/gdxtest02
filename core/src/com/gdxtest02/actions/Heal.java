@@ -12,7 +12,7 @@ public class Heal extends Action {
 	@Override
 	public void ini() {
 		setName("Direct Heal");
-		setAnim(new Castup01(owner.getAnimRenderer()));
+		setAnim(new Castup01());
 		setAnimEffect(new GreenEffect());
 	}
 	public void update() {

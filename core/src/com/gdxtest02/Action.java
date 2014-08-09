@@ -23,7 +23,7 @@ public abstract class Action {
 	private Array<String> acttypelist = new Array<String>();
 	
 	public Action() {
-		ini();
+//		ini();
 	}
 
 	public Action(float value) {

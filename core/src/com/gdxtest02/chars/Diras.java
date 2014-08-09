@@ -16,11 +16,10 @@ public class Diras extends Char {
 		
 		setName("Diras");
 		
-		AnimRenderer renderer = getAnimRenderer();
 		addAction(new Dmg(100)).setName("Bite");
 		addAction(new Dmg(200, 2)).setName("Frost Bolt").setReflect(false)
-		.setAnim(new Cast01(renderer)
-		.setProjectile(new Projectile02(renderer)))
+		.setAnim(new Cast01()
+		.setProjectile(new Projectile02()))
 		.setAnimEffect(new IceEffect());
 		
 		setColor(0.3f, 0.5f, 0.9f, 1);

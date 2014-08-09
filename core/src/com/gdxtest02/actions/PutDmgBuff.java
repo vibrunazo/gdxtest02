@@ -24,7 +24,7 @@ public class PutDmgBuff extends PutBuffAction {
 	@Override
 	public void ini() {
 		setName("Put Dmg Buff");
-		setAnim(new Castup01(owner.getAnimRenderer()));
+		setAnim(new Castup01());
 		setBuff(new BuffDmg(power, duration, bufftype));
 	}
 	

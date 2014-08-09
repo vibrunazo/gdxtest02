@@ -24,7 +24,7 @@ public class PutResistBuff extends PutBuffAction {
 	@Override
 	public void ini() {
 		setName("Put Resist Buff");
-		setAnim(new Castup01(owner.getAnimRenderer()));
+		setAnim(new Castup01());
 		setBuff(new BuffResist(power, duration, bufftype));
 	}
 	

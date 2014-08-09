@@ -55,7 +55,7 @@ public class FightScreen implements Screen {
 	private String a2name;
 
 	public FightScreen(GdxTest02 game) {
-		this(game, new TestChar01("p1"), new TestChar02("p2"));
+		this(game, new TestChar01(), new TestChar02());
 		
 	}
 	
@@ -211,6 +211,11 @@ public class FightScreen implements Screen {
 		}
 	}
 
+	/**ends the anim state, and sets it to the go state, ready waiting for next input
+	 * this happens either when anims finished playing, or when they're interrupted
+	 * by player input
+	 * 
+	 */
 	private void endAnimState() {
 		pausetime = 0;
 		ui.setAnimTime(0);
@@ -225,7 +230,10 @@ public class FightScreen implements Screen {
 	}
 
 
-	/**calculate damages
+	/**this is where the attacks actually happen,
+	 * when both actions are selected, 
+	 * play anims and
+	 * calculate damages
 	 * 
 	 * Actions might be null!
 	 */
@@ -263,8 +271,13 @@ public class FightScreen implements Screen {
 		updateUi();
 	}
 	
+	/**Applies damages to both chars
+	 * picks the actions both used and tell them to do their thing
+	 * 
+	 */
 	private void applyDamages() {
 		
+		ui.setActiveActionsForPlayers();
 		
 		int actionidp1 = p1.getActiveActionId();
 		int actionidp2 = p2.getActiveActionId();

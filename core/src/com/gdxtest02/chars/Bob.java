@@ -12,10 +12,9 @@ public class Bob extends Char {
 		super();
 		
 		setName("Bob");
-		AnimRenderer renderer = getAnimRenderer();
 		addAction(new Dmg(120)).setName("Punch");
 		addAction(new Dmg(250, 2)).setName("Strong Punch")
-			.setAnim(new PunchRight01(renderer));
+			.setAnim(new PunchRight01());
 		addAction(new Drain(240, 4)).setName("Absorb");
 		
 		setColor(0.3f, 0.1f, 0.7f, 1);

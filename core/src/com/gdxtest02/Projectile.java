@@ -30,8 +30,7 @@ public class Projectile {
 	private int flipXFactor;
 	private Skeleton skeleton;
 	
-	public Projectile(AnimRenderer renderer) {
-		this.renderer = renderer;
+	public Projectile() {
 		x = 0;
 		y = 0;
 		speedx = 200;
@@ -47,7 +46,9 @@ public class Projectile {
 		skeleton = Util.loadSkeletonFromName("proj", scale);
 	}
 
-	public void start() {
+	public void start(AnimRenderer renderer) {
+		this.renderer = renderer;
+		
 		if (effect == null) effect = new FireEffect();
 		time = 0;
 		effect.start();
@@ -114,7 +115,7 @@ public class Projectile {
 //		HitEffect e = new HitEffect(0.35f);
 		ExplosionEffect e = new ExplosionEffect(0.35f);
 		trenderer.addCharEffect(e);
-		trenderer.setAnim(new GetHit01(trenderer));
+		trenderer.setAnim(new GetHit01());
 	}
 
 	public void draw(SpriteBatch batch) {

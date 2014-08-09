@@ -21,7 +21,7 @@ public class PutHot extends PutBuffAction {
 	@Override
 	public void ini() {
 		setName("Put Hot");
-		setAnim(new Castup01(owner.getAnimRenderer()));
+		setAnim(new Castup01());
 		setAnimEffect(new GreenEffect());
 		setBuff(new Hot(power, duration));;
 	}

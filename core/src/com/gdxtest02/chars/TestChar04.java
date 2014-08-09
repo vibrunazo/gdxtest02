@@ -12,11 +12,12 @@ import com.gdxtest02.effects.IceEffect;
 
 public class TestChar04 extends Char {
 	
-	public TestChar04(String name) {
-		super(name);
+	public TestChar04() {
+		super();
 		
 //		float ratio = 0.6666667f;
 		float ratio = 0.4f;
+		setName("c4");
 		addAction(new Dmg(100*ratio)).setName("moo");
 		//addAction(new Dmg(200*ratio, 1)).setName("meh");
 		PutResistBuff b = new PutResistBuff(0.5f ,5, 5);

@@ -11,8 +11,8 @@ public class Stand01 extends CharAnim {
 	private Animation winkAnimation;
 	private Animation standAnimation;
 
-	public Stand01(AnimRenderer animRenderer) {
-		super(animRenderer);
+	public Stand01() {
+		super();
 		name = "stand01";
 		winkTime = 0;
 		
