@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
-import com.esotericsoftware.tablelayout.Value;
+//import com.esotericsoftware.tablelayout.Value;
 
 import static com.gdxtest02.FightScreen.*;
 

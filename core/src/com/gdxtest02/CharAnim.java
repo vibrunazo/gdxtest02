@@ -11,7 +11,6 @@ import com.gdxtest02.util.Util;
 /**This is the base class every animation will extend, it should have commonly used
  * methods that most animations use
  *  
- * @author Vandré
  *
  */
 public class CharAnim {

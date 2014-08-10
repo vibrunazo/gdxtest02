@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Values;
-import com.esotericsoftware.tablelayout.Value;
+//import com.esotericsoftware.tablelayout.Value;
 import com.gdxtest02.chars.TestChar01;
 import com.gdxtest02.chars.TestChar02;
 import com.gdxtest02.chars.TestChar03;

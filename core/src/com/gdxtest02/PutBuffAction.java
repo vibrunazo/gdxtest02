@@ -7,7 +7,6 @@ import com.gdxtest02.util.Util;
 
 /**An Action that puts a Buff
  * 
- * @author Vandré
  *
  */
 public class PutBuffAction extends Action {
