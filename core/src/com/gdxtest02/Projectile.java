@@ -110,12 +110,8 @@ public class Projectile {
 	public void end() {
 		renderer.removeProjectile();
 		if (target == null) return;
-//		log("end proj time: " + time + " duration: "+ duration);
-		AnimRenderer trenderer = target.getAnimRenderer();
-//		HitEffect e = new HitEffect(0.35f);
 		ExplosionEffect e = new ExplosionEffect(0.35f);
-		trenderer.addCharEffect(e);
-		trenderer.setAnim(new GetHit01());
+		target.setGetHit(e);
 	}
 
 	public void draw(SpriteBatch batch) {

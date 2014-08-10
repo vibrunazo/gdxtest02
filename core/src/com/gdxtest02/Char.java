@@ -799,10 +799,17 @@ public class Char implements Cloneable {
 	 * So play Get Hit animation and do all the appropriate calculations
 	 */
 	public void setGetHit() {
-		//		Util.log("I'm on your character, getting hit.");
 		HitEffect e = new HitEffect(0.35f);
-		//		ExplosionEffect e = new ExplosionEffect(0.35f);
+		setGetHit(e);
+	}
+	
+	/**Tells this character to get and which effect to use in it
+	 * @param e
+	 */
+	public void setGetHit(Effect e) {
 		getAnimRenderer().addCharEffect(e);
+		// only shows GetHit anim if not casting, so it never gets interrupted
+		if (!isUsingDefaultAnim()) return; 
 		getAnimRenderer().setAnim(new GetHit01());
 	}
 	
