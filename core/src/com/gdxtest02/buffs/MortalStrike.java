@@ -25,24 +25,18 @@ public class MortalStrike extends Buff{
 	public void act(Char self) {
 		
 	if(target.getResists().containsKey("heal")){
-		target.editActualResists("heal", target.getResists().get("heal") - power/100);
+		target.editActualResists("heal", target.getResists().get("heal") - power02/100);
 		if(target.getResists().get("heal") < 0){
 			target.editActualResists("heal", 0);
 		}
 	}
 	else{
-		target.editActualResists("heal", self.getResists().get("all")-power/100);
+		target.editActualResists("heal", self.getResists().get("all")-power02/100);
 		if(target.getResists().get("heal") < 0){
 			target.editActualResists("heal", 0);
 		}
 	}
 	}
-			
-
-		
-		
-		
-		
 	
 	
 	public void ini(Char self){
@@ -63,14 +57,17 @@ public class MortalStrike extends Buff{
 
 	public MortalStrike(float value) {
 		super(value);
-		
-		
+				
 	}
 	
 	public MortalStrike(float value, int duration) {
 		super(value, duration);
-		
-		
+				
+	}
+	
+	public MortalStrike(float value, int duration, float value02) {
+		super(value, duration, value02);
+				
 	}
 
 

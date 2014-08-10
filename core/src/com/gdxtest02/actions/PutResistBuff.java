@@ -69,8 +69,8 @@ public class PutResistBuff extends PutBuffAction {
 		super(value, cooldown);
 	}
 	
-	public PutResistBuff(float d, int cooldown, int duration) {
-		super(d, cooldown, duration);
+	public PutResistBuff(float value, int cooldown, int duration) {
+		super(value, cooldown, duration);
 	}
 	
 	public void addBuffType(String[] strings){

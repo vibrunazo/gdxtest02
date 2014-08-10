@@ -25,7 +25,7 @@ public class Char04 extends Char {
 		b.addBuffType((new String[] {"falcon", "satan", "fire", "normal"}));
 		addAction(b);
 		//addAction(new PutDot(50*ratio, 0, 6)).setName("a dot");
-		addAction(new PutMortalStrike(50, 0, 6)).setName("MS");
+		addAction(new PutMortalStrike(50, 0, 6, 50)).setName("MS");
 		addAction(new PutHot(30*ratio, 3, 6)).setName("a hot");
 //		actions.add(new Dmg(400, 3).setName("hihihi"));
 //		editDefaultResists("fire", 2);

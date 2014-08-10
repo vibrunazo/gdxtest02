@@ -18,7 +18,7 @@ public class PutMortalStrike extends PutBuffAction {
 	@Override
 	protected void go(Char self, Char target) {
 		Buff b = getNewBuffInstance();
-		self.addBuff(b.setName("Resist Buff"));
+		target.addBuff(b.setName("Resist Buff"));
 		target.incHp(-power, self, getReflect(), this.getTypeList());
 		
 	}
@@ -27,7 +27,7 @@ public class PutMortalStrike extends PutBuffAction {
 	public void ini() {
 		setName("Put Resist Buff");
 		setAnim(new Punch01(owner.getAnimRenderer()));
-		setBuff(new MortalStrike(power, duration));
+		setBuff(new MortalStrike(power, duration, power02));
 //		setReflect(true);
 	}
 	
@@ -37,14 +37,8 @@ public class PutMortalStrike extends PutBuffAction {
 	 	
 	public void update() {
 		
-				setDescription("Deals" + power + "damage and reduces healing by" + power + "for" + getDuration() + 
-						"sec.");
-				/**if there is only one resist type
-				 * "resist by" is written instead of
-				 *  "resists by"
-				 */
-			
-			
+				setDescription("Deals " + power + " damage and reduces healing by " + power + " for " + getDuration() + 
+						"sec.");			
 		}
 
 	
@@ -62,15 +56,14 @@ public class PutMortalStrike extends PutBuffAction {
 		super(value, cooldown);
 	}
 	
-	public PutMortalStrike(float d, int cooldown, int duration) {
-		super(d, cooldown, duration);
+	public PutMortalStrike(float value, int cooldown, int duration) {
+		super(value, cooldown, duration);
 	}
 	
-	public void addBuffType(String[] strings){
-		if (bufftype == null)
-			bufftype = new Array<String>();
-		bufftype.addAll(strings);
+	public PutMortalStrike(float value, int cooldown, int duration, float value02) {
+		super(value, cooldown, duration, value02);
 	}
+	
 
 }
 
