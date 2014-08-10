@@ -132,7 +132,7 @@ public class AnimRenderer {
 	
 	public CharAnim getAnimByName(String name) {
 		CharAnim anim = null;
-		if (name.equals("stand")) {
+		if (name.equals("stand01")) {
 			anim = new Stand01();
 		}
 		if (name.equals("punch01")) {
@@ -191,7 +191,7 @@ public class AnimRenderer {
 
 		skeleton.updateWorldTransform();
 //		anim = new Stand01(this);
-		setDefaultAnim("stand");
+		setDefaultAnim("stand01");
 		setAnimToDefault();
 	}
 

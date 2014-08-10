@@ -174,7 +174,9 @@ public class FightScreen implements Screen {
 
 	private void updateLogic() {
 		gametime += delta;
-		
+//		log("UpdateLogic, fightstate: " + fightstate +
+//				" isp1default: " + p1.isUsingDefaultAnim() +
+//				" anim: " + p1.getAnimName() + " danim: " + p1.getDefaultAnimName());
 		if (fightstate.contains("anim")) {
 			updateAnimTime();
 			if (fightstate.contains("p1") && p1.isUsingDefaultAnim()) {
@@ -189,6 +191,7 @@ public class FightScreen implements Screen {
 				// then end the anim state
 //				log("p2 using default anim");
 				endAnimState();
+				ui.resetActiveActions();
 			}
 		}
 	}
@@ -203,19 +206,22 @@ public class FightScreen implements Screen {
 		p2.setAnimToActiveAction();
 	}
 
+	/**When either one of both anims are updated
+	 * 
+	 */
 	private void updateAnimTime() {
 		pausetime -= delta;
 		pausetime = Math.max(pausetime, 0);
 		ui.setAnimTime((int)Math.ceil(pausetime));
 		if (pausetime <= 0) {
 			endAnimState();
-			ui.resetActiveActions();
 		}
 	}
 
 	/**ends the anim state, and sets it to the go state, ready waiting for next input
 	 * this happens either when anims finished playing, or when they're interrupted
 	 * by player input
+	 * should only play when BOTH anims end
 	 * 
 	 */
 	private void endAnimState() {
