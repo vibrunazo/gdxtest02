@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Values;
-//import com.esotericsoftware.tablelayout.Value;
 import com.gdxtest02.chars.TestChar01;
 import com.gdxtest02.chars.TestChar02;
 import com.gdxtest02.chars.TestChar03;
@@ -60,10 +59,8 @@ public class CharSelectScreenUI {
 	private Stage stage;
 	private Skin skin;
 	private Table chartable;
-	private ClickListener charlistener;
 	private ClickListener gobuttonlistener;
 	private ClickListener backlistener;
-	private ObjectMap<String, Char> unlockedchars;
 	private TextButton p1button;
 	private int turn;
 	private Label titlelabel;
@@ -88,13 +85,13 @@ public class CharSelectScreenUI {
 		
 		gstate = GameState.getInstance();
 		gamemode = gstate.getGameMode();
-//		unlockedchars = buildMapOfUnlockedChars();
-		charlist = gstate.getChars();
+
+		charlist = new Array<Char>();
+		charlist.addAll(gstate.getChars());
 		if (Util.getDebugMode() && gamemode != MODE_STORY) {
 			// if not on story mode, add test chars
-			charlist.addAll(buildListOfTestChars());
+			charlist.addAll(gstate.getTestCharsInventory());
 		}
-		
 		
 		p1 = charlist.get(0);
 		p2 = charlist.random();

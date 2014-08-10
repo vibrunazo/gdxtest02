@@ -13,8 +13,8 @@ public class GameState {
 		private Char player;
 		private LevelState level;
 		private int gameMode;
-		private Array<Integer> unlockedChars;
 		private Array<Char> charsInventory;
+		private Array<Char> testCharsInventory;
 		
 		private GdxTest02 game;
 		private static GameState gameState;
@@ -24,7 +24,6 @@ public class GameState {
 			this.game = game;
 			gameState = this;
 			level = new LevelState();
-			unlockedChars = new Array<Integer>();
 			
 //			unlockChar(CHAR_04);
 //			unlockChar(CHAR_02);
@@ -38,20 +37,13 @@ public class GameState {
 		 */
 		private void buildCharsList() {
 			charsInventory = CharBuilder.buildListOfChars();
+			testCharsInventory = CharBuilder.buildListOfTestChars();
 		}
 
 		public static GameState getInstance() {
 			return gameState;
 		}
 		
-		public void unlockChar(int character) {
-			unlockedChars.add(character);
-		}
-		
-		public boolean isCharUnlocked(int character) {
-			return unlockedChars.contains(character, true);
-		}
-
 		/**
 		 * @return the curenemy
 		 */
@@ -158,5 +150,12 @@ public class GameState {
 			Char c = CharBuilder.build(char_type);
 			if (isThisCharOnInv(c)) return;
 			else addCharToInv(c);
+		}
+
+		/**
+		 * @return the testCharsInventory
+		 */
+		public Array<Char> getTestCharsInventory() {
+			return testCharsInventory;
 		}
 }
