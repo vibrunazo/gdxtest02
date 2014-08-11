@@ -190,7 +190,8 @@ public class FightScreen implements Screen {
 				// if p2 just ended it's attack anim and is back to default
 				// then end the anim state
 //				log("p2 using default anim");
-				endAnimState();
+				endAnimState(); // will also check if the fight is over
+				if (isFightOver()) return; // if it is over, stop everything
 				ui.resetActiveActions();
 			}
 		}
@@ -232,9 +233,10 @@ public class FightScreen implements Screen {
 		}
 		else {
 			fightstate = "go";
+			applyDamages(); 
 		}
 		
-		applyDamages(); 
+		
 //		ui.resetActiveActions();
 	}
 
@@ -252,9 +254,14 @@ public class FightScreen implements Screen {
 			endAnimState();
 //			return;
 		}
+		if (!isFightOver()) {
+			ui.setActiveActionsForPlayers();
+			castSkills();
+		}
+		else {
+			endFight();
+		}
 		
-		ui.setActiveActionsForPlayers();
-		castSkills();
 		updateUi();
 	}
 

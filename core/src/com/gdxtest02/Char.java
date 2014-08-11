@@ -120,6 +120,8 @@ public class Char implements Cloneable {
 		buffPwMultiplier = 1;
 		updateAllActions();
 		getAnimRenderer().removeProjectile();
+		getAnimRenderer().setAnimToDefault();
+//		setAnim(getDefaultAnimName());
 		Util.log("resetStats, defaultResists: " + defaultResists.toString() + 
 				" actualResists: " + actualResists.toString());
 		//reset all actions
