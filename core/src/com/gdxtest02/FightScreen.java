@@ -329,6 +329,10 @@ public class FightScreen implements Screen {
 		return true;
 	}
 
+	/**Pauses fight state, checks who is the winner then calls
+	 * method to show the fight is over
+	 * 
+	 */
 	private void endFight() {
 		if (isFightOver()) {
 			fightstate = "paused";
@@ -344,18 +348,34 @@ public class FightScreen implements Screen {
 				}
 			}
 			
-			fightOver(winner);
+			showFightIsOver(winner);
 		}
 	}
 
+	/**Either player's health is zero, so the fight should be over
+	 * 
+	 * @return
+	 */
 	private boolean isFightOver() {
 		return p1.getHp() == 0 || p2.getHp() == 0;
 	}
 
-	private void fightOver(Char winner) {
+	/**Show fight is over for the user
+	 * @param winner
+	 */
+	private void showFightIsOver(Char winner) {
 		if (winner == null) ui.logToConsole("Fight over. Draw!");
 		else ui.logToConsole("Fight over. " + winner.getName() + " wins.");
 		
+		p1.resetStats();p2.resetStats();
+		
+		goToNextScreen(winner);
+	}
+
+	/**The fight is over, change to the next screen
+	 * @param winner
+	 */
+	public void goToNextScreen(Char winner) {
 		if (nextLevel != null) {
 			LevelState levelState = game.getGameState().getLevel();
 			if (winner == p1) {
