@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 public abstract class Action {
 	protected String name = "Action";
 	protected float power = 100;
+	protected float power02 = 50;
 	protected int cooldown = 0;
 	private int curcooldown = 0;
 	protected int duration = 5;
@@ -47,12 +48,21 @@ public abstract class Action {
 //		ini();
 	}
 	
+	public Action(float value, int cooldown, int duration, float value2) {
+		power = (float) /*Math.ceil*/(value);
+		basepower = power;
+		this.cooldown = cooldown;
+		this.duration = duration;
+//		ini();
+	}
+	
 	/**Updates the power of this action based on the level multiplier and buff multiplier
 	 * 
 	 */
 	public void updatePower() {
 		if (owner == null) return;
 		power = (float) /*Math.ceil*/(basepower) * owner.getPowerMultiplier() * getBuffPwMultiplier();
+		
 	}
 	
 	/**Sets the owner of this action, will be used to calculate level and
@@ -222,12 +232,21 @@ public abstract class Action {
 	public float getPower() {
 		return power;
 	}
+	
+	public float getPower02() {
+		return power02;
+	}
+
 
 	/**
 	 * @param power the power to set
 	 */
 	public void setPower(float power) {
 		this.power = power;
+	}
+	
+	public void setPower02(float power02) {
+		this.power02 = power02;
 	}
 	
 	public void setAvgDps(float avg) {

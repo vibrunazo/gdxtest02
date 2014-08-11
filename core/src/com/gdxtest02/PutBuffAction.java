@@ -54,6 +54,10 @@ public class PutBuffAction extends Action {
 	public PutBuffAction(float value, int cooldown, int duration) {
 		super(value, cooldown, duration);
 	}
+	
+	public PutBuffAction(float value, int cooldown, int duration, float value02) {
+		super(value, cooldown, duration, value02);
+	}
 
 	/**Gets a copy of the Buff this action should cast, ready to use
 	 * @return a copy of this action's buff
