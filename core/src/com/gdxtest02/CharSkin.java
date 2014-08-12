@@ -3,8 +3,8 @@ package com.gdxtest02;
 import com.badlogic.gdx.graphics.Color;
 
 public class CharSkin {
-	Color baseColor;
-	String hands;
+	private Color baseColor;
+	private String hands;
 	
 	public CharSkin() {
 		

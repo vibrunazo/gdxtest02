@@ -20,6 +20,7 @@ public class Linzer extends Char {
 			.setAnim(new PunchRight01());
 		
 		setColor(0.7f, 0.6f, 0.2f, 1);
+		setBodyPart("hands", "hands_scythe");
 
 	}
 

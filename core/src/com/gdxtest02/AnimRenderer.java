@@ -204,7 +204,7 @@ public class AnimRenderer {
 	 * 
 	 */
 	private void loadBodypartsFromCharSkin() {
-		loadSlot("hands", "hands_scythe");		
+		loadSlot("hands", charSkinData.getHands());
 	}
 
 	/**loads a slot part into a specific slot
@@ -214,6 +214,7 @@ public class AnimRenderer {
 	 * @param skinname
 	 */
 	private void loadSlot(String slot, String skinname) {
+		if (skinname == null) return;
 		slot = slot.toLowerCase();
 		Skin skin = sd.findSkin(skinname);
 		if (slot.equals("hands")) {

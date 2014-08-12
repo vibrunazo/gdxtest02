@@ -663,6 +663,19 @@ public class Char implements Cloneable {
 		Color color = new Color(r, g, b, alpha);
 		setColor(color);
 	}
+	
+	/**Sets the type of a specific body part
+	 * valid body parts are: hands
+	 * 
+	 * @param part
+	 * @param name
+	 */
+	public void setBodyPart(String part, String name) {
+		part = part.toLowerCase();
+		if (part.equals("hands")) {
+			skin.setHands(name);
+		}
+	}
 
 	/**returns true if the char is flipped horizontally, false otherwise
 	 * @return
