@@ -105,6 +105,8 @@ public class CharBuilder {
 		chars.add(build(TEST_CHAR_08, 3));
 		chars.add(build(CHAR_02, 1));
 		chars.add(build(CHAR_03, 2));
+		chars.add(build(CHAR_04, 2));
+		chars.add(build(CHAR_05, 2));
 		return chars;
 	}
 }
