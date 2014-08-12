@@ -181,6 +181,9 @@ public class AnimRenderer {
 		skeleton = new Skeleton(sd);
 
 		skeleton.setSkin("eyes01");
+		loadBodypartsFromCharSkin();
+		
+		
 		skeleton.setSlotsToSetupPose();
 		skrenderer = new SkeletonRenderer();
 
@@ -193,6 +196,50 @@ public class AnimRenderer {
 //		anim = new Stand01(this);
 		setDefaultAnim("stand01");
 		setAnimToDefault();
+	}
+
+	/**Loads all the attachments from the Char's Skin
+	 * For example, will load the appropriate hand on 
+	 * his hands slot
+	 * 
+	 */
+	private void loadBodypartsFromCharSkin() {
+		loadSlot("hands", "hands_scythe");		
+	}
+
+	/**loads a slot part into a specific slot
+	 * example, loading scythe claws into the hands slot
+	 * 
+	 * @param slot
+	 * @param skinname
+	 */
+	private void loadSlot(String slot, String skinname) {
+		slot = slot.toLowerCase();
+		Skin skin = sd.findSkin(skinname);
+		if (slot.equals("hands")) {
+			setAttachmentFromSkin("hand_L", skin);
+			setAttachmentFromSkin("hand_R", skin);
+			
+		}
+		
+	}
+
+	/**Will take the Attachment from this Skin, and set it to the
+	 * Skin being currently used by the Skeleton
+	 * 
+	 * @param slotName
+	 * @param skin
+	 */
+	public void setAttachmentFromSkin(String slotName, Skin skin) {
+		int i = sd.findSlotIndex(slotName);
+		Array<Attachment> attachments = new Array<Attachment>();
+		skin.findAttachmentsForSlot(i, attachments);
+		Attachment a = attachments.get(0);
+		Skin dskin = skeleton.getSkin();
+		Array<String> names = new Array<String>();
+		dskin.findNamesForSlot(i, names);
+		String aname = names.get(0);
+		dskin.addAttachment(i, aname, a);
 	}
 
 	private void setBaseColorSlots() {

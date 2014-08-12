@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 
 public class CharSkin {
 	Color baseColor;
+	String hands;
 	
 	public CharSkin() {
 		
@@ -21,6 +22,20 @@ public class CharSkin {
 	 */
 	public void setBaseColor(Color baseColor) {
 		this.baseColor = baseColor;
+	}
+
+	/**
+	 * @return the hands
+	 */
+	public String getHands() {
+		return hands;
+	}
+
+	/**
+	 * @param hands the hands to set
+	 */
+	public void setHands(String hands) {
+		this.hands = hands;
 	}
 
 }
