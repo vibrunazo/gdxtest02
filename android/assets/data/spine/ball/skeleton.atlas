@@ -1,104 +1,111 @@
 
 skeleton.png
-size: 1014,510
+size: 1020,498
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 data/ballbase01
   rotate: false
-  xy: 2, 254
+  xy: 2, 242
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 data/balleyes01
   rotate: false
-  xy: 260, 254
+  xy: 260, 242
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 data/eyelid01
   rotate: false
-  xy: 518, 382
+  xy: 518, 370
   size: 256, 128
   orig: 256, 256
   offset: 0, 128
   index: -1
 data/eyelid02
-  rotate: true
+  rotate: false
   xy: 2, 2
   size: 250, 100
   orig: 256, 256
   offset: 3, 156
   index: -1
 data/eyelid03
-  rotate: false
-  xy: 518, 300
+  rotate: true
+  xy: 878, 260
   size: 238, 80
   orig: 256, 256
   offset: 9, 176
   index: -1
 data/eyelid04
-  rotate: false
-  xy: 206, 62
+  rotate: true
+  xy: 960, 280
   size: 218, 60
   orig: 256, 256
   offset: 19, 196
   index: -1
 data/eyelid05
   rotate: false
-  xy: 518, 258
+  xy: 481, 198
   size: 186, 40
   orig: 256, 256
   offset: 35, 216
   index: -1
 data/eyelid06
-  rotate: true
-  xy: 464, 114
+  rotate: false
+  xy: 481, 134
   size: 138, 20
   orig: 256, 256
   offset: 59, 236
   index: -1
 data/loweyelid01
   rotate: false
-  xy: 206, 124
+  xy: 518, 240
   size: 256, 128
   orig: 256, 256
   offset: 0, 0
   index: -1
 data/loweyelid02
   rotate: true
-  xy: 104, 2
+  xy: 776, 248
   size: 250, 100
   orig: 256, 256
   offset: 3, 0
   index: -1
 data/loweyelid03
-  rotate: false
-  xy: 776, 430
+  rotate: true
+  xy: 337, 2
   size: 238, 80
   orig: 256, 256
   offset: 9, 0
   index: -1
 data/loweyelid04
-  rotate: false
-  xy: 776, 368
+  rotate: true
+  xy: 419, 22
   size: 218, 60
   orig: 256, 256
   offset: 19, 0
   index: -1
 data/loweyelid05
   rotate: false
-  xy: 206, 20
+  xy: 481, 156
   size: 186, 40
   orig: 256, 256
   offset: 35, 0
   index: -1
 data/loweyelid06
-  rotate: true
-  xy: 486, 114
+  rotate: false
+  xy: 481, 112
   size: 138, 20
   orig: 256, 256
   offset: 59, 0
+  index: -1
+data/scythe01
+  rotate: true
+  xy: 2, 104
+  size: 136, 333
+  orig: 162, 399
+  offset: 13, 33
   index: -1
