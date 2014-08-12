@@ -54,6 +54,7 @@ public class FightScreen implements Screen {
 	private float pausetime;
 	private String a1name;
 	private String a2name;
+	private Char winner;
 
 	public FightScreen(GdxTest02 game) {
 		this(game, new TestChar01(), new TestChar02());
@@ -343,7 +344,7 @@ public class FightScreen implements Screen {
 	private void endFight() {
 		if (isFightOver()) {
 			fightstate = "paused";
-			Char winner = null;
+			winner = null;
 			if (p1.getHp() == 0) {
 				if (p2.getHp() > 0) {
 					winner = p2;
@@ -355,7 +356,7 @@ public class FightScreen implements Screen {
 				}
 			}
 			
-			showFightIsOver(winner);
+			showFightIsOver();
 		}
 	}
 
@@ -368,21 +369,21 @@ public class FightScreen implements Screen {
 	}
 
 	/**Show fight is over for the user
-	 * @param winner
 	 */
-	private void showFightIsOver(Char winner) {
+	private void showFightIsOver() {
 		if (winner == null) ui.logToConsole("Fight over. Draw!");
 		else ui.logToConsole("Fight over. " + winner.getName() + " wins.");
 		
-		p1.resetStats();p2.resetStats();
-		
-		goToNextScreen(winner);
+		ui.setShowEnd(true);
+//		goToNextScreen(winner);
 	}
 
 	/**The fight is over, change to the next screen
 	 * @param winner
 	 */
-	public void goToNextScreen(Char winner) {
+	public void goToNextScreen() {
+		p1.resetStats();p2.resetStats();
+		
 		if (nextLevel != null) {
 			LevelState levelState = game.getGameState().getLevel();
 			if (winner == p1) {
@@ -404,6 +405,7 @@ public class FightScreen implements Screen {
 			game.setScreen(clone);
 			this.dispose();
 		}
+		else back();
 	}
 
 	/**do AI stuff here

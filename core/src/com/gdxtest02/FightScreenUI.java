@@ -32,6 +32,7 @@ public class FightScreenUI extends UIBuilder {
 	private static final float CONFIG_X = 40;
 	private static final float CONFIG_WIDTH = 40;
 	private static final float CONFIG_HEIGHT = 40;
+	private static final float ENDTABLE_Y = 60;
 	private FightScreen screen;
 	private Char p1;
 	private Char p2;
@@ -66,6 +67,9 @@ public class FightScreenUI extends UIBuilder {
 	private TextButton configbutton;
 	private Table consoletable;
 	private Table centerTable;
+	private Table endTable;
+	private Label endText;
+	private ClickListener clickOnExitButton;
 	
 	public FightScreenUI(GdxTest02 game, FightScreen gameScreen) {
 		super(game);
@@ -88,6 +92,9 @@ public class FightScreenUI extends UIBuilder {
 		createActionBars();
 		createConsole();
 		createConfigTable();
+		
+		createEndTable();
+		setShowEnd(false);
 		
 		setShowConfig(false);
 	}
@@ -128,6 +135,26 @@ public class FightScreenUI extends UIBuilder {
 		consoletable.addActor(scroll);
 	}
 
+	/**The table that shows when the fight is over
+	 * 
+	 */
+	private void createEndTable() {
+		endTable = new Table();
+		endTable.setFillParent(true);
+		stage.addActor(endTable);
+		endTable.setPosition(0, ENDTABLE_Y);
+		
+		endText = new Label("Fight over", skin);
+		endTable.add(endText);
+		endTable.row();
+		
+		final TextButton exitbutton = new TextButton("Exit", skin);
+		exitbutton.setDisabled(true);
+		endTable.add(exitbutton).width(CENTERBUTTON_WIDTH).height(CENTERBUTTON_HEIGHT);
+
+		exitbutton.addListener(clickOnExitButton);
+	}
+	
 	private void createCenterTable() {
 		centerTable = new Table();
 		centerTable.setFillParent(true);
@@ -161,6 +188,11 @@ public class FightScreenUI extends UIBuilder {
 		clickOnConfigButton = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)  {
 				toggleConfig();
+			}
+		};
+		clickOnExitButton = new ClickListener() {
+			public void clicked(InputEvent event, float x, float y)  {
+				screen.goToNextScreen();
 			}
 		};
 		clickOnGoButton = new ClickListener() {
@@ -219,6 +251,10 @@ public class FightScreenUI extends UIBuilder {
 		configbutton.setChecked(b);
 		consoletable.setVisible(b);
 		centerTable.setVisible(b);
+	}
+	
+	public void setShowEnd(boolean b) {
+		endTable.setVisible(b);
 	}
 
 	/**This action button was clicked by the player
