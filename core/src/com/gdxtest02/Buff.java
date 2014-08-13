@@ -204,8 +204,9 @@ public abstract class Buff {
 	/**
 	 * @param effect the effect to set
 	 */
-	public void setEffect(Effect effect) {
+	public Buff setEffect(Effect effect) {
 		setEffect(0, effect);
+		return this;
 	}
 	
 	/**

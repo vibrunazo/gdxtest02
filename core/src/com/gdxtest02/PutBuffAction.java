@@ -11,6 +11,7 @@ import com.gdxtest02.util.Util;
  */
 public class PutBuffAction extends Action {
 	protected Buff buffdummy;
+	private Effect buffeffect;
 	
 	/* (non-Javadoc)
 	 * @see com.gdxtest02.Action#go(com.gdxtest02.Char, com.gdxtest02.Char)
@@ -71,8 +72,19 @@ public class PutBuffAction extends Action {
 	/**Sets which Buff this action will cast
 	 * @param buff the buff to set
 	 */
-	protected void setBuff(Buff buff) {
+	public void setBuff(Buff buff) {
 		this.buffdummy = buff;
+		if (buffeffect != null)	buff.setEffect(buffeffect);
+	}
+	
+	/**Sets the effect this Buff will use
+	 * @param buffeffect
+	 * @return
+	 */
+	public PutBuffAction setBuffEffect(Effect effect) {
+		buffeffect = effect;
+		return this;
+		
 	}
 
 }

@@ -16,6 +16,7 @@ public class PutDot extends PutBuffAction {
 	protected void go(Char self, Char target) {
 		Buff buff = getNewBuffInstance();
 		target.addBuff(buff.setName("Dot"));
+//		if (getAnimEffect() != null) buff.setEffect(getAnimEffect()); 
 		
 	}
 

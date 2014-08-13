@@ -65,10 +65,10 @@ public class CharAnim {
 		renderer.setAnimToDefault();
 	}
 	
-	public void setEffect(Effect type) {
+	public CharAnim setEffect(Effect type) {
 //		renderer.resetParticles();
 		this.effecttype = type;
-//		ini();
+		return this;
 	}
 	
 	protected void ini() {
