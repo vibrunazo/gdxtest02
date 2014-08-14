@@ -2,6 +2,7 @@ package com.gdxtest02;
 
 import java.lang.reflect.Constructor;
 
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
@@ -161,7 +162,7 @@ public abstract class Buff {
 		return power02;
 	}
 
-	public void draw(SpriteBatch batch, float delta) {
+	public void draw(PolygonSpriteBatch batch, float delta) {
 		if (!visible ) return;
 //		effect.setPosition(target.getPosX(), target.getPosY() + 50);
 		for (Effect effect : effects) {

@@ -3,6 +3,7 @@ package com.gdxtest02.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.esotericsoftware.spine.Skeleton;
@@ -54,7 +55,7 @@ public class Util {
 		return skrenderer;
 	}
 	
-	public static void drawSkeleton(SpriteBatch batch, Skeleton skeleton) {
+	public static void drawSkeleton(PolygonSpriteBatch batch, Skeleton skeleton) {
 		skrenderer.draw(batch, skeleton);
 	}
 	

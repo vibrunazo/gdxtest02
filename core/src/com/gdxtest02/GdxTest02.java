@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -40,7 +41,7 @@ public class GdxTest02 extends Game {
 	 */
 	public static final boolean DEBUG_MODE = true;
 	
-	public SpriteBatch batch;
+	public PolygonSpriteBatch batch;
 	public BitmapFont font;
 	private GameState gamestate;
 	private static GdxTest02 game;
@@ -60,7 +61,7 @@ public class GdxTest02 extends Game {
 		kryo = new Kryo();
 //		gamestate.setPlayer(new Char01("p1"));
 		
-		batch = new SpriteBatch();
+		batch = new PolygonSpriteBatch();
 		
 		Util.ini();
 		//Use LibGDX's default Arial font.

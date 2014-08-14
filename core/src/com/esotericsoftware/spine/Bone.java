@@ -34,13 +34,15 @@ import static com.badlogic.gdx.math.Matrix3.*;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix3;
+import com.badlogic.gdx.math.Vector2;
 
 public class Bone {
 	final BoneData data;
 	final Bone parent;
 	float x, y;
-	float rotation;
+	float rotation, rotationIK;
 	float scaleX, scaleY;
+	boolean flipX, flipY;
 
 	float m00, m01, worldX; // a b x
 	float m10, m11, worldY; // c d y
@@ -64,13 +66,17 @@ public class Bone {
 		x = bone.x;
 		y = bone.y;
 		rotation = bone.rotation;
+		rotationIK = bone.rotationIK;
 		scaleX = bone.scaleX;
 		scaleY = bone.scaleY;
+		flipX = bone.flipX;
+		flipY = bone.flipY;
 	}
 
 	/** Computes the world SRT using the parent bone and the local SRT. */
-	public void updateWorldTransform (boolean flipX, boolean flipY) {
+	public void updateWorldTransform () {
 		Bone parent = this.parent;
+		float x = this.x, y = this.y;
 		if (parent != null) {
 			worldX = x * parent.m00 + y * parent.m01 + parent.worldX;
 			worldY = x * parent.m10 + y * parent.m11 + parent.worldY;
@@ -81,27 +87,29 @@ public class Bone {
 				worldScaleX = scaleX;
 				worldScaleY = scaleY;
 			}
-			worldRotation = data.inheritRotation ? parent.worldRotation + rotation : rotation;
+			worldRotation = data.inheritRotation ? parent.worldRotation + rotationIK : rotationIK;
 		} else {
 			worldX = flipX ? -x : x;
 			worldY = flipY ? -y : y;
 			worldScaleX = scaleX;
 			worldScaleY = scaleY;
-			worldRotation = rotation;
+			worldRotation = rotationIK;
 		}
 		float cos = MathUtils.cosDeg(worldRotation);
 		float sin = MathUtils.sinDeg(worldRotation);
-		m00 = cos * worldScaleX;
-		m10 = sin * worldScaleX;
-		m01 = -sin * worldScaleY;
-		m11 = cos * worldScaleY;
 		if (flipX) {
-			m00 = -m00;
-			m01 = -m01;
+			m00 = -cos * worldScaleX;
+			m01 = sin * worldScaleY;
+		} else {
+			m00 = cos * worldScaleX;
+			m01 = -sin * worldScaleY;
 		}
 		if (flipY) {
-			m10 = -m10;
-			m11 = -m11;
+			m10 = -sin * worldScaleX;
+			m11 = -cos * worldScaleY;
+		} else {
+			m10 = sin * worldScaleX;
+			m11 = cos * worldScaleY;
 		}
 	}
 
@@ -110,6 +118,7 @@ public class Bone {
 		x = data.x;
 		y = data.y;
 		rotation = data.rotation;
+		rotationIK = rotation;
 		scaleX = data.scaleX;
 		scaleY = data.scaleY;
 	}
@@ -143,12 +152,22 @@ public class Bone {
 		this.y = y;
 	}
 
+	/** Returns the forward kinetics rotation. */
 	public float getRotation () {
 		return rotation;
 	}
 
 	public void setRotation (float rotation) {
 		this.rotation = rotation;
+	}
+
+	/** Returns the inverse kinetics rotation, as calculated by any IK constraints. */
+	public float getRotationIK () {
+		return rotationIK;
+	}
+
+	public void setRotationIK (float rotationIK) {
+		this.rotationIK = rotationIK;
 	}
 
 	public float getScaleX () {
@@ -226,6 +245,26 @@ public class Bone {
 		val[M21] = 0;
 		val[M22] = 1;
 		return worldTransform;
+	}
+
+	public Vector2 worldToLocal (Vector2 world) {
+		float x = world.x - worldX, y = world.y - worldY;
+		float m00 = this.m00, m10 = this.m10, m01 = this.m01, m11 = this.m11;
+		if (flipX != flipY) {
+			m00 *= -1;
+			m11 *= -1;
+		}
+		float invDet = 1 / (m00 * m11 - m01 * m10);
+		world.x = (x * m00 * invDet - y * m01 * invDet);
+		world.y = (y * m11 * invDet - x * m10 * invDet);
+		return world;
+	}
+
+	public Vector2 localToWorld (Vector2 local) {
+		float x = local.x, y = local.y;
+		local.x = x * m00 + y * m01 + worldX;
+		local.y = x * m10 + y * m11 + worldY;
+		return local;
 	}
 
 	public String toString () {

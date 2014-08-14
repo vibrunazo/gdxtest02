@@ -90,6 +90,15 @@ public class SkeletonJson {
 
 		JsonValue root = new JsonReader().parse(file);
 
+		// Skeleton.
+		JsonValue skeletonMap = root.get("skeleton");
+		if (skeletonMap != null) {
+			skeletonData.version = skeletonMap.getString("spine");
+			skeletonData.hash = skeletonMap.getString("hash");
+			skeletonData.width = skeletonMap.getFloat("width");
+			skeletonData.height = skeletonMap.getFloat("height");
+		}
+
 		// Bones.
 		for (JsonValue boneMap = root.getChild("bones"); boneMap != null; boneMap = boneMap.next) {
 			BoneData parent = null;
@@ -111,7 +120,28 @@ public class SkeletonJson {
 			String color = boneMap.getString("color", null);
 			if (color != null) boneData.getColor().set(Color.valueOf(color));
 
-			skeletonData.addBone(boneData);
+			skeletonData.getBones().add(boneData);
+		}
+
+		// IK.
+		for (JsonValue ikMap = root.getChild("ik"); ikMap != null; ikMap = ikMap.next) {
+			IkConstraintData ikConstraintData = new IkConstraintData(ikMap.getString("name"));
+
+			for (JsonValue boneMap = ikMap.getChild("bones"); boneMap != null; boneMap = boneMap.next) {
+				String boneName = boneMap.asString();
+				BoneData bone = skeletonData.findBone(boneName);
+				if (bone == null) throw new SerializationException("IK bone not found: " + boneName);
+				ikConstraintData.getBones().add(bone);
+			}
+
+			String targetName = ikMap.getString("target");
+			ikConstraintData.setTarget(skeletonData.findBone(targetName));
+			if (ikConstraintData.getTarget() == null) throw new SerializationException("Target bone not found: " + targetName);
+
+			ikConstraintData.setBendDirection(ikMap.getBoolean("bendPositive", true) ? 1 : -1);
+			ikConstraintData.setMix(ikMap.getFloat("mix", 1));
+
+			skeletonData.getIkConstraints().add(ikConstraintData);
 		}
 
 		// Slots.
@@ -129,7 +159,7 @@ public class SkeletonJson {
 
 			slotData.additiveBlending = slotMap.getBoolean("additive", false);
 
-			skeletonData.addSlot(slotData);
+			skeletonData.getSlots().add(slotData);
 		}
 
 		// Skins.
@@ -143,7 +173,7 @@ public class SkeletonJson {
 					if (attachment != null) skin.addAttachment(slotIndex, entry.name, attachment);
 				}
 			}
-			skeletonData.addSkin(skin);
+			skeletonData.getSkins().add(skin);
 			if (skin.name.equals("default")) skeletonData.defaultSkin = skin;
 		}
 
@@ -153,7 +183,7 @@ public class SkeletonJson {
 			eventData.intValue = eventMap.getInt("int", 0);
 			eventData.floatValue = eventMap.getFloat("float", 0f);
 			eventData.stringValue = eventMap.getString("string", null);
-			skeletonData.addEvent(eventData);
+			skeletonData.getEvents().add(eventData);
 		}
 
 		// Animations.
@@ -390,7 +420,7 @@ public class SkeletonJson {
 							}
 							if (attachment instanceof MeshAttachment) {
 								float[] meshVertices = ((MeshAttachment)attachment).getVertices();
-								for (int i = 0, n = vertices.length; i < n; i++)
+								for (int i = 0; i < vertexCount; i++)
 									vertices[i] += meshVertices[i];
 							}
 						}
@@ -461,7 +491,7 @@ public class SkeletonJson {
 		}
 
 		timelines.shrink();
-		skeletonData.addAnimation(new Animation(name, timelines, duration));
+		skeletonData.getAnimations().add(new Animation(name, timelines, duration));
 	}
 
 	void readCurve (CurveTimeline timeline, int frameIndex, JsonValue valueMap) {

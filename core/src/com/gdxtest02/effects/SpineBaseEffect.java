@@ -2,6 +2,7 @@ package com.gdxtest02.effects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.esotericsoftware.spine.Animation;
@@ -75,7 +76,7 @@ public class SpineBaseEffect extends Effect {
 		
 	}
 	
-	public void draw(SpriteBatch batch) {
+	public void draw(PolygonSpriteBatch batch) {
 		
 		skeleton.setPosition(x, y);
 //		skeleton.getRootBone().setPosition(x, y);

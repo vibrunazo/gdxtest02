@@ -1,5 +1,6 @@
 package com.gdxtest02.util;
 
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -24,7 +25,7 @@ public class CharActor extends Image {
 		setTouchable(Touchable.disabled);
 	}
 	
-	public void draw(SpriteBatch batch, float parentAlpha) {
+	public void draw(PolygonSpriteBatch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
 		if (flipx != player.getFlipX()) charRenderer.flipX(true);
 		charRenderer.draw(batch, getX() + (getWidth())/2, getY());

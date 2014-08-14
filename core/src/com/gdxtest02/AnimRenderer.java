@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
@@ -257,10 +258,10 @@ public class AnimRenderer {
 		slotsToChangeColor.add(skeleton.findSlot("hand_R"));
 	}
 
-	public void draw(SpriteBatch batch, float x, float y) {
+	public void draw(PolygonSpriteBatch batch, float x, float y) {
 		draw(batch, (int) x, (int) y);
 	}
-	public void draw(SpriteBatch batch, int posX, int posY) {
+	public void draw(PolygonSpriteBatch batch, int posX, int posY) {
 		if (skeleton.getFlipX()) posX *= -1;
 		if (skeleton.getFlipY()) posY *= -1;
 
@@ -277,7 +278,7 @@ public class AnimRenderer {
 		
 	}
 
-	public void drawEffects(SpriteBatch batch) {
+	public void drawEffects(PolygonSpriteBatch batch) {
 //		log("drawpart, owner: " + owner + " ae: " + animeffects + " ce: " +
 //	chareffects + " p: " + projectiles);
 //		for (ParticleEffect p : animparticleeffects) {
@@ -312,7 +313,7 @@ public class AnimRenderer {
 		}
 	}
 	
-	public void drawSkeleton(SpriteBatch batch, Skeleton skeleton) {
+	public void drawSkeleton(PolygonSpriteBatch batch, Skeleton skeleton) {
 		skrenderer.draw(batch, skeleton);
 	}
 

@@ -1,111 +1,118 @@
 
 skeleton.png
-size: 1020,498
+size: 942,510
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 data/ballbase01
   rotate: false
-  xy: 2, 242
+  xy: 2, 254
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 data/balleyes01
   rotate: false
-  xy: 260, 242
+  xy: 260, 254
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 data/eyelid01
   rotate: false
-  xy: 518, 370
+  xy: 518, 329
   size: 256, 128
   orig: 256, 256
   offset: 0, 128
   index: -1
 data/eyelid02
   rotate: false
-  xy: 2, 2
+  xy: 2, 14
   size: 250, 100
   orig: 256, 256
   offset: 3, 156
   index: -1
 data/eyelid03
   rotate: true
-  xy: 878, 260
+  xy: 776, 219
   size: 238, 80
   orig: 256, 256
   offset: 9, 176
   index: -1
 data/eyelid04
   rotate: true
-  xy: 960, 280
+  xy: 439, 34
   size: 218, 60
   orig: 256, 256
   offset: 19, 196
   index: -1
 data/eyelid05
   rotate: false
-  xy: 481, 198
+  xy: 501, 13
   size: 186, 40
   orig: 256, 256
   offset: 35, 216
   index: -1
 data/eyelid06
-  rotate: false
-  xy: 481, 134
+  rotate: true
+  xy: 900, 372
   size: 138, 20
   orig: 256, 256
   offset: 59, 236
   index: -1
 data/loweyelid01
   rotate: false
-  xy: 518, 240
+  xy: 518, 199
   size: 256, 128
   orig: 256, 256
   offset: 0, 0
   index: -1
 data/loweyelid02
   rotate: true
-  xy: 776, 248
+  xy: 337, 2
   size: 250, 100
   orig: 256, 256
   offset: 3, 0
   index: -1
 data/loweyelid03
-  rotate: true
-  xy: 337, 2
+  rotate: false
+  xy: 501, 117
   size: 238, 80
   orig: 256, 256
   offset: 9, 0
   index: -1
 data/loweyelid04
-  rotate: true
-  xy: 419, 22
+  rotate: false
+  xy: 501, 55
   size: 218, 60
   orig: 256, 256
   offset: 19, 0
   index: -1
 data/loweyelid05
-  rotate: false
-  xy: 481, 156
+  rotate: true
+  xy: 858, 324
   size: 186, 40
   orig: 256, 256
   offset: 35, 0
   index: -1
 data/loweyelid06
-  rotate: false
-  xy: 481, 112
+  rotate: true
+  xy: 922, 372
   size: 138, 20
   orig: 256, 256
   offset: 59, 0
   index: -1
 data/scythe01
   rotate: true
-  xy: 2, 104
+  xy: 2, 116
   size: 136, 333
   orig: 162, 399
   offset: 13, 33
+  index: -1
+data/tail01
+  rotate: false
+  xy: 518, 459
+  size: 337, 51
+  orig: 403, 61
+  offset: 33, 5
   index: -1

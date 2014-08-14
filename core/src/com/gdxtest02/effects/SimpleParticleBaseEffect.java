@@ -3,6 +3,7 @@ package com.gdxtest02.effects;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.g2d.ParticleEmitter.ScaledNumericValue;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.Effect;
@@ -24,7 +25,7 @@ public class SimpleParticleBaseEffect extends Effect {
 	}
 
 	@Override
-	public void draw(SpriteBatch batch) {
+	public void draw(PolygonSpriteBatch batch) {
 		particle.draw(batch);
 	}
 
@@ -33,7 +34,7 @@ public class SimpleParticleBaseEffect extends Effect {
 		particle = AnimRenderer.getParticleFromName(getParticlename());
 		hasStarted = true;
 		setScale(getScale());
-		if (attachedChar.getFlipX() != isFlipped) {
+		if (attachedChar != null && attachedChar.getFlipX() != isFlipped) {
 			isFlipped = attachedChar.getFlipX();
 			flipParticleX();
 		}

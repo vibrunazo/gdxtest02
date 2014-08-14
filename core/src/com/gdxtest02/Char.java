@@ -8,6 +8,7 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -128,16 +129,16 @@ public class Char implements Cloneable {
 		for (Action a : actionBar) a.reset();
 	}
 
-	public void draw(SpriteBatch batch){
+	public void draw(PolygonSpriteBatch batch){
 		//		batch.draw(tex, posX, posY);
 		animRenderer.draw(batch, posX, posY);
 	}
 
-	public void draw(SpriteBatch batch, float x, float y) {
+	public void draw(PolygonSpriteBatch batch, float x, float y) {
 		animRenderer.draw(batch, (int)x, (int)y);
 	}
 
-	public void drawParticles(SpriteBatch batch) {
+	public void drawParticles(PolygonSpriteBatch batch) {
 		animRenderer.drawEffects(batch);
 	}
 

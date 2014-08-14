@@ -1,6 +1,7 @@
 package com.gdxtest02;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.esotericsoftware.spine.Skeleton;
@@ -114,7 +115,7 @@ public class Projectile {
 		target.setGetHit(e);
 	}
 
-	public void draw(SpriteBatch batch) {
+	public void draw(PolygonSpriteBatch batch) {
 //		renderer.drawSkeleton(batch, skeleton);
 		Util.drawSkeleton(batch, skeleton);
 		effect.draw(batch);

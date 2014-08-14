@@ -3,6 +3,7 @@ package com.gdxtest02;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.Animation;
@@ -63,7 +64,7 @@ public class Effect  {
 		
 	}
 
-	public void draw(SpriteBatch batch) {
+	public void draw(PolygonSpriteBatch batch) {
 		
 	}
 
