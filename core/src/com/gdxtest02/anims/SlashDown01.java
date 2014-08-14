@@ -3,6 +3,10 @@ package com.gdxtest02.anims;
 import com.esotericsoftware.spine.Animation;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.CharAnim;
+import com.gdxtest02.effects.BloodEffect;
+import com.gdxtest02.effects.ExplosionEffect;
+import com.gdxtest02.effects.FireEffect;
+import com.gdxtest02.effects.RedEffect;
 
 public class SlashDown01 extends CharAnim {
 
@@ -34,7 +38,7 @@ public class SlashDown01 extends CharAnim {
 		if (animationTime > 0.55 & hits == 0) {
 			hits++;
 			
-			createHitEffect();
+			createHitEffect(new BloodEffect());
 		}
 	}
 

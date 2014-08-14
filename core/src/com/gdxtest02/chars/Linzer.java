@@ -8,6 +8,8 @@ import com.gdxtest02.actions.PutDot;
 import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.PunchRight01;
 import com.gdxtest02.anims.SlashDown01;
+import com.gdxtest02.effects.BleedingEffect;
+import com.gdxtest02.effects.BloodEffect;
 import com.gdxtest02.effects.RedEffect;
 
 public class Linzer extends Char {
@@ -18,7 +20,8 @@ public class Linzer extends Char {
 		setName("Linzer");
 		
 		addAction(new Dmg(120)).setName("Punch");
-		addAction(new PutDot(180, 2).setBuffEffect(new RedEffect())).setName("Bleed")
+		addAction(new PutDot(180, 2).setBuffEffect(new BleedingEffect()))
+			.setName("Bleed")
 			.setAnim(new SlashDown01());
 		
 		setColor(0.7f, 0.6f, 0.2f, 1);

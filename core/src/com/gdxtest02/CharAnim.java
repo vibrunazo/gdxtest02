@@ -132,14 +132,18 @@ public class CharAnim {
 		Char c = renderer.getOwner();
 		Char t = c.getTarget();
 		
-//		HitEffect e = new HitEffect(0.3f);
-//		t.getAnimRenderer().addCharEffect(e);
 		t.setGetHit();
-//		renderer.addCharEffect(new HitEffect());
-//		e.setPosition(t.getPosX(), t.getPosY() + 70f);
-//		renderer.addEffect("hit", t.getPosX(), t.getPosY() + 70f);
+	}
+	
+	/**Create a hit effect on the target
+	 * 
+	 * @param e the Effect to show as a hit effect
+	 */
+	protected void createHitEffect(Effect e) {
+		Char c = renderer.getOwner();
+		Char t = c.getTarget();
 		
-//		log("hit created");
+		t.setGetHit(e);
 	}
 
 	public String getName() {

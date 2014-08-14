@@ -393,6 +393,12 @@ public class AnimRenderer {
 		if (effecttype.equals("fire")) {
 			return Gdx.files.internal("effects/fire03.p");
 		}
+		else if (effecttype.equals("blood")) {
+			return Gdx.files.internal("effects/blood01.p");
+		} 
+		else if (effecttype.equals("bleed")) {
+			return Gdx.files.internal("effects/bleeding01.p");
+		} 
 		else if (effecttype.equals("green")) {
 			return Gdx.files.internal("effects/green02.p");
 		} 
