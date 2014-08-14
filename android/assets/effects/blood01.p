@@ -82,9 +82,9 @@ timelineCount: 1
 timeline0: 0.0
 - Angle - 
 active: true
-lowMin: -90.0
-lowMax: -90.0
-highMin: -30.0
+lowMin: 270.0
+lowMax: 270.0
+highMin: 210.0
 highMax: 90.0
 relative: false
 scalingCount: 2
@@ -95,10 +95,10 @@ timeline0: 0.0
 timeline1: 0.9794521
 - Rotation - 
 active: true
-lowMin: 125.0
-lowMax: 125.0
-highMin: 30.0
-highMax: 30.0
+lowMin: -125.0
+lowMax: -125.0
+highMin: -30.0
+highMax: -30.0
 relative: false
 scalingCount: 2
 scaling0: 0.0

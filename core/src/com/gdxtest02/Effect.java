@@ -23,7 +23,7 @@ public class Effect  {
 	protected boolean hasStarted;
 	protected boolean hasFinished;
 	protected boolean isLoop;
-	private Char attachedChar;
+	protected Char attachedChar;
 	private Buff attachedBuff;
 	private float offsetx = 0;
 	private float offsety = 0;
