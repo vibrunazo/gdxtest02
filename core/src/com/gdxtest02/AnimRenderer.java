@@ -256,6 +256,7 @@ public class AnimRenderer {
 		slotsToChangeColor.add(skeleton.findSlot("arm_R"));
 		slotsToChangeColor.add(skeleton.findSlot("forearm_R"));
 		slotsToChangeColor.add(skeleton.findSlot("hand_R"));
+		slotsToChangeColor.add(skeleton.findSlot("data/tail01"));
 	}
 
 	public void draw(PolygonSpriteBatch batch, float x, float y) {
