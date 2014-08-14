@@ -14,7 +14,6 @@ public abstract class Buff {
 	protected String name;
 	protected float power;
 	protected int duration;
-	protected float power02;
 	private Array<Effect> effects;
 	protected Char target;
 	/**final x position of the effect, after random change
@@ -41,7 +40,6 @@ public abstract class Buff {
 	
 	private int DEFAULT_POWER = 200;
 	private int DEFAULT_DURATION = 2;
-	private int DEFAULT_POWER02 = 50;
 	private String DEFAULT_NAME = "Buff";
 
 	
@@ -52,30 +50,22 @@ public abstract class Buff {
 	public Buff() {
 		setPower(DEFAULT_POWER);
 		setDuration(DEFAULT_DURATION);
-		setPower02(DEFAULT_POWER02);
 		ini();
 	}
 	
 	public Buff(float power) {
 		setPower(power);
 		setDuration(DEFAULT_DURATION);
-		setPower02(DEFAULT_POWER02);
 		ini();
 	}
 	
 	public Buff(float power, int duration) {
 		setPower(power);
 		setDuration(duration);
-		setPower02(DEFAULT_POWER02);
 		ini();
 	}
 	
-	public Buff(float power, int duration, float power02) {
-		setPower(power);
-		setDuration(duration);
-		setPower02(power02);
-		ini();
-	}
+	
 	
 	/**initialization
 	 * 
@@ -115,10 +105,6 @@ public abstract class Buff {
 		return this;
 	}
 	
-	public Buff setPower02(float power02) {
-		this.power02 = power02;
-		return this;
-	}
 
 	/**
 	 * @return the name
@@ -157,10 +143,6 @@ public abstract class Buff {
 		return power;
 	}
 	
-	public float getPower02() {
-		return power02;
-	}
-
 	public void draw(SpriteBatch batch, float delta) {
 		if (!visible ) return;
 //		effect.setPosition(target.getPosX(), target.getPosY() + 50);
