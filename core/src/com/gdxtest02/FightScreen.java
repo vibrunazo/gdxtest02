@@ -229,12 +229,12 @@ public class FightScreen implements Screen {
 	private void endAnimState() {
 		pausetime = 0;
 		ui.setAnimTime(0);
+		applyDamages(); 
 		if (isFightOver()) {
 			endFight();
 		}
 		else {
 			fightstate = "go";
-			applyDamages(); 
 		}
 		
 		
