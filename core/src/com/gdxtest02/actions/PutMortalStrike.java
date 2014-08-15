@@ -19,7 +19,7 @@ public class PutMortalStrike extends PutBuffAction {
 	protected void go(Char self, Char target) {
 		Buff b = getNewBuffInstance();
 		target.addBuff(b.setName("Resist Buff"));
-		target.incHp(-power, self, getReflect(), this.getTypeList());
+		target.incHp(-power02, self, getReflect(), this.getTypeList());
 		
 	}
 
@@ -27,17 +27,17 @@ public class PutMortalStrike extends PutBuffAction {
 	public void ini() {
 		setName("Put Resist Buff");
 		setAnim(new Punch01());
-		setBuff(new MortalStrike(power, duration, power02));
+		setBuff(new MortalStrike(power, duration));
 //		setReflect(true);
 	}
 	
 	public float getDmgAfterRounds(int rounds) {
-		return power;
+		return power02;
 	}
 	 	
 	public void update() {
 		
-				setDescription("Deals " + power + " damage and reduces healing by " + power + " for " + getDuration() + 
+				setDescription("Deals " + power02 + " damage and reduces healing by " + power + " for " + getDuration() + 
 						"sec.");			
 		}
 
