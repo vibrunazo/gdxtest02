@@ -6,6 +6,8 @@ public class CharSkin {
 	private Color baseColor;
 	private String hands;
 	private String tailtype;
+	private float tailscaley = 1f;
+	private float tailscalex = 1f;
 	
 	public CharSkin() {
 		
@@ -51,6 +53,29 @@ public class CharSkin {
 	 */
 	public void setTailtype(String tailtype) {
 		this.tailtype = tailtype;
+	}
+
+	/**
+	 * @return the tailscalex
+	 */
+	public float getTailscalex() {
+		return tailscalex;
+	}
+
+	/**
+	 * @param tailscalex the tailscalex to set
+	 * @param tailscaley the tailscaley to set
+	 */
+	public void setTailscale(float tailscalex, float tailscaley) {
+		this.tailscalex = tailscalex;
+		this.tailscaley = tailscaley;
+	}
+
+	/**
+	 * @return the tailscaley
+	 */
+	public float getTailscaley() {
+		return tailscaley;
 	}
 
 }

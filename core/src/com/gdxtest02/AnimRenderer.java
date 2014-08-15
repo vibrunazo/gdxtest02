@@ -230,9 +230,18 @@ public class AnimRenderer {
 		}
 		if (slot.equals("tail")) {
 			setAttachmentFromSkin("tail", skin);
+			loadBoneScaleFromChar("tail");
 			
 		}
 		
+	}
+
+	private void loadBoneScaleFromChar(String bonetype) {
+		bonetype = bonetype.toLowerCase();
+		if (bonetype.equals("tail")) {
+			Bone b = skeleton.findBone("tail01");
+			b.setScale(charSkinData.getTailscalex(), charSkinData.getTailscaley());
+		}
 	}
 
 	/**Will take the Attachment from this Skin, and set it to the

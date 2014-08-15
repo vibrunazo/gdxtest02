@@ -21,6 +21,7 @@ public class Pasu extends Char {
 		
 		setColor(0.5f, 0.35f, 0.05f, 1);
 		setBodyPart("tail", "tail_normal");
+		getAnimData().setTailscale(2f, 1.5f);
 
 	}
 
