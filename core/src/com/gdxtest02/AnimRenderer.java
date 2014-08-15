@@ -239,7 +239,8 @@ public class AnimRenderer {
 	private void loadBoneScaleFromChar(String bonetype) {
 		bonetype = bonetype.toLowerCase();
 		if (bonetype.equals("tail")) {
-			Bone b = skeleton.findBone("tail01");
+			Bone b = skeleton.findBone("tailbase");
+//			Util.log("loadBoneScale, bnames: " + skeleton.getBones());
 			b.setScale(charSkinData.getTailscalex(), charSkinData.getTailscaley());
 		}
 	}
