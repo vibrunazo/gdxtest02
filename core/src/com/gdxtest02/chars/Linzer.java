@@ -26,6 +26,7 @@ public class Linzer extends Char {
 		
 		setColor(0.7f, 0.6f, 0.2f, 1);
 		setBodyPart("hands", "hands_scythe");
+		setBodyPart("tail", "tail_normal");
 
 	}
 

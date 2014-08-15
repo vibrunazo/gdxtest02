@@ -24,6 +24,7 @@ import com.gdxtest02.anims.Castup01;
 import com.gdxtest02.anims.Punch01;
 import com.gdxtest02.anims.PunchRight01;
 import com.gdxtest02.anims.Stand01;
+import com.gdxtest02.util.Util;
 
 import static com.gdxtest02.GdxTest02.VIRTUAL_WIDTH;
 
@@ -206,13 +207,17 @@ public class AnimRenderer {
 	 */
 	private void loadBodypartsFromCharSkin() {
 		loadSlot("hands", charSkinData.getHands());
+		loadSlot("tail", charSkinData.getTailtype());
 	}
 
 	/**loads a slot part into a specific slot
 	 * example, loading scythe claws into the hands slot
 	 * 
 	 * @param slot
-	 * @param skinname
+	 * @param skinname the name of the Skin in Spine that 
+	 * contains the required parts, this Skin name needs
+	 * to be the same name of the part the Char calls when
+	 * setting its body part
 	 */
 	private void loadSlot(String slot, String skinname) {
 		if (skinname == null) return;
@@ -221,6 +226,10 @@ public class AnimRenderer {
 		if (slot.equals("hands")) {
 			setAttachmentFromSkin("hand_L", skin);
 			setAttachmentFromSkin("hand_R", skin);
+			
+		}
+		if (slot.equals("tail")) {
+			setAttachmentFromSkin("tail", skin);
 			
 		}
 		
@@ -239,9 +248,16 @@ public class AnimRenderer {
 		Attachment a = attachments.get(0);
 		Skin dskin = skeleton.getSkin();
 		Array<String> names = new Array<String>();
-		dskin.findNamesForSlot(i, names);
-		String aname = names.get(0);
-		dskin.addAttachment(i, aname, a);
+		skin.findNamesForSlot(i, names);
+		String aname;
+		if (names.size > 0)	{
+			aname = names.get(0);
+			dskin.addAttachment(i, aname, a);
+		}
+		else {
+			Util.log("animrend setatt, cannot find attachment for slotname: " + slotName + " skin: " + skin.getName());
+		}
+			
 	}
 
 	private void setBaseColorSlots() {
@@ -256,7 +272,7 @@ public class AnimRenderer {
 		slotsToChangeColor.add(skeleton.findSlot("arm_R"));
 		slotsToChangeColor.add(skeleton.findSlot("forearm_R"));
 		slotsToChangeColor.add(skeleton.findSlot("hand_R"));
-		slotsToChangeColor.add(skeleton.findSlot("data/tail01"));
+		slotsToChangeColor.add(skeleton.findSlot("tail"));
 	}
 
 	public void draw(PolygonSpriteBatch batch, float x, float y) {

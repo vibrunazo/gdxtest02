@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 public class CharSkin {
 	private Color baseColor;
 	private String hands;
+	private String tailtype;
 	
 	public CharSkin() {
 		
@@ -36,6 +37,20 @@ public class CharSkin {
 	 */
 	public void setHands(String hands) {
 		this.hands = hands;
+	}
+
+	/**
+	 * @return the tailtype
+	 */
+	public String getTailtype() {
+		return tailtype;
+	}
+
+	/**
+	 * @param tailtype the tailtype to set
+	 */
+	public void setTailtype(String tailtype) {
+		this.tailtype = tailtype;
 	}
 
 }

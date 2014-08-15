@@ -20,6 +20,7 @@ public class Pasu extends Char {
 			.setAnim(new PunchRight01());
 		
 		setColor(0.5f, 0.35f, 0.05f, 1);
+		setBodyPart("tail", "tail_normal");
 
 	}
 

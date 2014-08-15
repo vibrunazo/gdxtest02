@@ -34,9 +34,9 @@ public class TestChar02 extends Char {
 		editDefaultResists("fire", 2);
 		editDefaultResists("normal", 1);
 
-		setTex("ball02yell.png");
 		
 		setColor(0.1f, 1f, 0f, 1);
+		setBodyPart("tail", "tail_normal");
 		
 		Array<Integer> skillList = new Array<Integer>();
 		skillList.add(3);
