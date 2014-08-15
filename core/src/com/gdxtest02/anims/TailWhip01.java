@@ -4,14 +4,14 @@ import com.esotericsoftware.spine.Animation;
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.CharAnim;
 
-public class PunchRight01 extends CharAnim {
+public class TailWhip01 extends CharAnim {
 
 	private Animation punchAnimation;
 	private int hits;
 
-	public PunchRight01() {
+	public TailWhip01() {
 		super();
-		name = "punchright01";
+		name = "tailwhip01";
 	}
 
 	@Override
