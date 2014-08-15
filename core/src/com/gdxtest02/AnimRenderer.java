@@ -483,5 +483,16 @@ public class AnimRenderer {
 		return owner;
 	}
 
+	/**Reset all animations, to use when the char is just created
+	 * to make sure everything is clear
+	 * 
+	 */
+	public void reset() {
+		removeProjectile();
+		setAnimToDefault();
+		animeffects = new Array<Effect>();
+		chareffects = new Array<Effect>();
+	}
+
 }
 

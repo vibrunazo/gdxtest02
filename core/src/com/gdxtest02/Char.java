@@ -122,6 +122,7 @@ public class Char implements Cloneable {
 		updateAllActions();
 		getAnimRenderer().removeProjectile();
 		getAnimRenderer().setAnimToDefault();
+		getAnimRenderer().reset();
 //		setAnim(getDefaultAnimName());
 		Util.log("resetStats, defaultResists: " + defaultResists.toString() + 
 				" actualResists: " + actualResists.toString());
