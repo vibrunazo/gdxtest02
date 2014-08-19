@@ -59,6 +59,7 @@ public class Char implements Cloneable {
 	private Balance balance;
 	private Char target;
 	private boolean canoverheal;
+	private boolean control;
 
 	private float buffPwMultiplier;
 	private float levelMultiplier;
@@ -119,6 +120,7 @@ public class Char implements Cloneable {
 		newbuffs = new Array<Buff>();
 		spikes = 0;
 		buffPwMultiplier = 1;
+		control = true;
 		updateAllActions();
 		getAnimRenderer().removeProjectile();
 		getAnimRenderer().setAnimToDefault();
@@ -223,6 +225,7 @@ public class Char implements Cloneable {
 	public void applyBuffs() {
 
 		updateAllActions();
+		control = true;
 		spikes = 0;
 		actualResists.clear();
 		actualResists.putAll(defaultResists);
@@ -845,6 +848,14 @@ public class Char implements Cloneable {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public boolean getControl() {
+		return control;
+	}
+
+	public void setControl(boolean control) {
+		this.control = control;
 	}
 
 }

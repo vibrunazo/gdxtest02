@@ -275,7 +275,16 @@ public class FightScreen implements Screen {
 			p2.setActiveActionId(p2.getAiSkill(round));	
 		}
 		
+		if (p1.getControl() == false){
+			p1.setActiveActionId(0);
+		}
+		
+		if (p2.getControl() == false){
+			p2.setActiveActionId(0);
+		}
+				
 		Action actionp1 = p1.getActiveAction();
+		
 		Action actionp2 = p2.getActiveAction();
 		
 		if (!areActionsLegal(actionp1, actionp2)) return;
