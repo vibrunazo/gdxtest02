@@ -6,7 +6,9 @@ import com.gdxtest02.actions.Dmg;
 import com.gdxtest02.actions.Drain;
 import com.gdxtest02.actions.Heal;
 import com.gdxtest02.actions.PutDot;
+import com.gdxtest02.actions.PutStun;
 import com.gdxtest02.anims.PunchRight01;
+import com.gdxtest02.buffs.Stun;
 
 public class TestChar05 extends Char {
 	
@@ -15,7 +17,8 @@ public class TestChar05 extends Char {
 		
 		float ratio = 0.47619048f;
 		setName("c5");
-		addAction(new Dmg(50*ratio)).setName("test1");
+		//addAction(new Dmg(50*ratio)).setName("test1");
+		addAction(new PutStun(2, 5)).setName("stun");
 		addAction(new Dmg(100*ratio, 4)).setName("test2");
 		addAction(new Dmg(200*ratio, 3)).setName("test3");
 		addAction(new Dmg(400*ratio, 3)).setName("test4")

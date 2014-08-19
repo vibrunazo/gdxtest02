@@ -28,7 +28,7 @@ public class PutMortalStrike extends PutBuffAction {
 		setName("Put Resist Buff");
 		setAnim(new Punch01());
 		setBuff(new MortalStrike(power, duration));
-//		setReflect(true);
+		setReflect(true);
 	}
 	
 	public float getDmgAfterRounds(int rounds) {
