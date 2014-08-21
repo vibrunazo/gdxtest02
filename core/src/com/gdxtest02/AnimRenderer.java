@@ -208,6 +208,7 @@ public class AnimRenderer {
 	private void loadBodypartsFromCharSkin() {
 		loadSlot("hands", charSkinData.getHands());
 		loadSlot("tail", charSkinData.getTailtype());
+		loadSlot("mouth", charSkinData.getMouthtype());
 	}
 
 	/**loads a slot part into a specific slot
@@ -226,16 +227,22 @@ public class AnimRenderer {
 		if (slot.equals("hands")) {
 			setAttachmentFromSkin("hand_L", skin);
 			setAttachmentFromSkin("hand_R", skin);
-			
 		}
 		if (slot.equals("tail")) {
 			setAttachmentFromSkin("tail", skin);
 			loadBoneScaleFromChar("tail");
-			
 		}
-		
+		if (slot.equals("mouth")) {
+			setAttachmentFromSkin("mouth", skin);
+			setAttachmentFromSkin("teeth", skin);
+		}
+
 	}
 
+	/**Takes a bone and scales it to match the rest of the Char
+	 * This is needed for bones that are rescaled by its animations
+	 * @param bonetype
+	 */
 	private void loadBoneScaleFromChar(String bonetype) {
 		bonetype = bonetype.toLowerCase();
 		if (bonetype.equals("tail")) {
@@ -306,18 +313,6 @@ public class AnimRenderer {
 	}
 
 	public void drawEffects(PolygonSpriteBatch batch) {
-//		log("drawpart, owner: " + owner + " ae: " + animeffects + " ce: " +
-//	chareffects + " p: " + projectiles);
-//		for (ParticleEffect p : animparticleeffects) {
-//			p.update(delta);
-//			p.draw(batch);
-//		}
-//		
-//		for (ParticleEffect p : charparticleeffects) {
-//			p.update(delta);
-//			p.draw(batch);
-//		}
-		
 		for (Buff b : owner.getBuffs()) {
 			b.draw(batch, delta);
 		}

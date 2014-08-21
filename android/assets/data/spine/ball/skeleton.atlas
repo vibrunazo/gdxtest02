@@ -1,6 +1,6 @@
 
 skeleton.png
-size: 947,977
+size: 1022,977
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -20,21 +20,21 @@ data/balleyes01
   index: -1
 data/eyelid01
   rotate: false
-  xy: 599, 730
+  xy: 599, 796
   size: 256, 128
   orig: 256, 256
   offset: 0, 128
   index: -1
 data/eyelid02
   rotate: false
-  xy: 599, 628
+  xy: 341, 619
   size: 250, 100
   orig: 256, 256
   offset: 3, 156
   index: -1
 data/eyelid03
   rotate: false
-  xy: 322, 509
+  xy: 593, 612
   size: 238, 80
   orig: 256, 256
   offset: 9, 176
@@ -48,7 +48,7 @@ data/eyelid04
   index: -1
 data/eyelid05
   rotate: false
-  xy: 562, 422
+  xy: 322, 433
   size: 186, 40
   orig: 256, 256
   offset: 35, 216
@@ -61,36 +61,36 @@ data/eyelid06
   offset: 59, 236
   index: -1
 data/loweyelid01
-  rotate: false
-  xy: 341, 591
+  rotate: true
+  xy: 140, 123
   size: 256, 128
   orig: 256, 256
   offset: 0, 0
   index: -1
 data/loweyelid02
   rotate: false
-  xy: 599, 526
+  xy: 599, 694
   size: 250, 100
   orig: 256, 256
   offset: 3, 0
   index: -1
 data/loweyelid03
   rotate: false
-  xy: 322, 427
+  xy: 322, 537
   size: 238, 80
   orig: 256, 256
   offset: 9, 0
   index: -1
 data/loweyelid04
   rotate: false
-  xy: 562, 464
+  xy: 322, 475
   size: 218, 60
   orig: 256, 256
   offset: 19, 0
   index: -1
 data/loweyelid05
   rotate: false
-  xy: 322, 385
+  xy: 322, 391
   size: 186, 40
   orig: 256, 256
   offset: 35, 0
@@ -101,20 +101,6 @@ data/loweyelid06
   size: 138, 20
   orig: 256, 256
   offset: 59, 0
-  index: -1
-data/mouth04
-  rotate: true
-  xy: 140, 57
-  size: 322, 66
-  orig: 322, 66
-  offset: 0, 0
-  index: -1
-data/mouth05
-  rotate: false
-  xy: 599, 860
-  size: 304, 117
-  orig: 304, 117
-  offset: 0, 0
   index: -1
 data/mouth08
   rotate: false
@@ -131,15 +117,15 @@ data/scythe01
   offset: 13, 33
   index: -1
 data/tail01
-  rotate: true
-  xy: 208, 42
+  rotate: false
+  xy: 599, 926
   size: 337, 51
   orig: 403, 61
   offset: 33, 5
   index: -1
 data/tooth01
-  rotate: false
-  xy: 905, 893
+  rotate: true
+  xy: 938, 935
   size: 42, 84
   orig: 42, 84
   offset: 0, 0

@@ -24,6 +24,7 @@ public class Diras extends Char {
 		.setAnimEffect(new IceEffect());
 		
 		setColor(0.3f, 0.5f, 0.9f, 1);
+		setBodyPart("mouth", "mouth_normal");
 
 	}
 

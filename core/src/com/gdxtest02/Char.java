@@ -683,6 +683,9 @@ public class Char implements Cloneable {
 		if (part.equals("tail")) {
 			skin.setTailtype(name);
 		}
+		if (part.equals("mouth")) {
+			skin.setMouthtype(name);
+		}
 	}
 
 	/**returns true if the char is flipped horizontally, false otherwise
