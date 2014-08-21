@@ -4,6 +4,7 @@ import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.Char;
 import com.gdxtest02.actions.Dmg;
 import com.gdxtest02.actions.Drain;
+import com.gdxtest02.anims.Bite01;
 import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.PunchRight01;
 import com.gdxtest02.effects.IceEffect;
@@ -16,7 +17,7 @@ public class Diras extends Char {
 		
 		setName("Diras");
 		
-		addAction(new Dmg(100)).setName("Bite");
+		addAction(new Dmg(100)).setName("Bite").setAnim(new Bite01());
 		addAction(new Dmg(200, 2)).setName("Frost Bolt").setReflect(false)
 		.setAnim(new Cast01()
 		.setProjectile(new Projectile02()))
