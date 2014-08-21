@@ -564,9 +564,18 @@ public class Char implements Cloneable {
 	 */
 	public void levelUp() {
 		level++;
+		updateStatsFromLevel();
+		Util.log(name + " leveled up, level: " + level + " pmult: " + levelMultiplier);
+	}
+
+	/**Update all stats from the player current level
+	 * 
+	 * Use this when the player levels up (or down) to update its stats
+	 * 
+	 */
+	public void updateStatsFromLevel() {
 		setPowerMultiplier(1f + (level - 1f)*0.1f);
 		unlockSkillsForLevel(level);
-		Util.log(name + " leveled up, level: " + level + " pmult: " + levelMultiplier);
 	}
 
 	private void unlockSkillsForLevel(int level) {
@@ -846,7 +855,9 @@ public class Char implements Cloneable {
 //			Object clone = constructor.newInstance(this.getName());
 			Constructor<? extends Char> constructor = this.getClass().getConstructor();
 			Object clone = constructor.newInstance();
-			return (Char)clone;
+			Char c = (Char)clone;
+			c.setLevel(this.getLevel());
+			return c;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -859,6 +870,21 @@ public class Char implements Cloneable {
 
 	public void setControl(boolean control) {
 		this.control = control;
+	}
+
+	/**
+	 * @return the level
+	 */
+	public int getLevel() {
+		return level;
+	}
+
+	/**
+	 * @param level the level to set
+	 */
+	public void setLevel(int level) {
+		this.level = level;
+		updateStatsFromLevel();
 	}
 
 }

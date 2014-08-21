@@ -332,15 +332,15 @@ public class CharSelectScreenUI {
 	private Char getP2() {
 //		if (gamemode == MODE_STORY) return p2;
 //		return Util.copy(p2);
-//		return p2.getClone();
-		return p2;
+		return p2.getClone();
+//		return p2;
 	}
 
 	private Char getP1() {
 //		if (gamemode == MODE_STORY) return p1;
 //		return Util.copy(p1);
-//		return p1.getClone();
-		return p1;
+		return p1.getClone();
+//		return p1;
 	}
 
 	/**Gets the character with the coresponding id on the char array
