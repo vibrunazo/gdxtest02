@@ -182,7 +182,7 @@ public class AnimRenderer {
 		sd = json.readSkeletonData(Gdx.files.internal(jsonfile));
 		skeleton = new Skeleton(sd);
 
-		skeleton.setSkin("eyes01");
+		skeleton.setSkin("base");
 		loadBodypartsFromCharSkin();
 		
 		
