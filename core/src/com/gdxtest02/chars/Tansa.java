@@ -15,12 +15,13 @@ public class Tansa extends Char {
 
 		setName("Tansa");
 		
-		addAction(new Dmg(100)).setName("Bite").setAnim(new Bite01());
+		addAction(new Dmg(150)).setName("Bite").setAnim(new Bite01());
 		addAction(new Dmg(250, 2)).setName("FireBall")
 			.setAnim(new Cast01());
 		
 		setColor(0.9f, 0.2f, 0.1f, 1);
 		setBodyPart("mouth", "mouth_normal");
+		setBodyPart("teeth", "teeth_01");
 
 	}
 

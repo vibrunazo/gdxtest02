@@ -17,8 +17,8 @@ public class Diras extends Char {
 		
 		setName("Diras");
 		
-		addAction(new Dmg(100)).setName("Bite").setAnim(new Bite01());
-		addAction(new Dmg(200, 2)).setName("Frost Bolt").setReflect(false)
+		addAction(new Dmg(80)).setName("Bite").setAnim(new Bite01());
+		addAction(new Dmg(350, 2)).setName("Frost Bolt").setReflect(false)
 		.setAnim(new Cast01()
 		.setProjectile(new Projectile02()))
 		.setAnimEffect(new IceEffect());
