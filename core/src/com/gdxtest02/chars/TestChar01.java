@@ -16,7 +16,8 @@ public class TestChar01 extends Char {
 			.setAnim(new PunchRight01());
 		addAction(new Drain(240, 4).setName("Death Coil"));
 		
-		setTex("ball02red.png");
+		setBodyPart("arms", "arms_normal");
+		setBodyPart("hands", "hands_normal");
 		
 		setColor(0.2f, 0.2f, 0.8f, 1);
 

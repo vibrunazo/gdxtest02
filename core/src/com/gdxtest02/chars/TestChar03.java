@@ -29,7 +29,8 @@ public class TestChar03 extends Char {
 				.setProjectile(new Projectile02()))
 				.setAnimEffect(new IceEffect());
 				
-		setTex("ball02red.png");
+		setBodyPart("arms", "arms_normal");
+		setBodyPart("hands", "hands_normal");
 		
 		setColor(1, 0.2f, 0.6f, 1);
 		

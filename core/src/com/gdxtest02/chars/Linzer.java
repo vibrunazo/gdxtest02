@@ -28,6 +28,7 @@ public class Linzer extends Char {
 		setBodyPart("hands", "hands_scythe");
 		setBodyPart("tail", "tail_normal");
 		getAnimData().setTailscale(0.8f, 0.5f);
+		setBodyPart("arms", "arms_normal");
 
 	}
 

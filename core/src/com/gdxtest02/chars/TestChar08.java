@@ -27,7 +27,9 @@ public class TestChar08 extends Char {
 		addActionForLevel(2, new Dmg(120*ratio, 1)).setName("e");
 		addActionForLevel(4, new Heal(300*ratio, 3)).setName("f");
 		
-		setTex("ball02yell.png");
+		setBodyPart("arms", "arms_normal");
+		setBodyPart("hands", "hands_normal");
+		
 		setColor(0, 0, 1, 1);
 
 	}

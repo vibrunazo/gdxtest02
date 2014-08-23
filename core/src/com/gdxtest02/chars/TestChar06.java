@@ -25,7 +25,8 @@ public class TestChar06 extends Char {
 //		addAction(new Heal(300, 1).setName("test2"));
 //		addAction(new Drain(100, 1).setName("test3"));
 		
-		setTex("ball02red.png");
+		setBodyPart("arms", "arms_normal");
+		setBodyPart("hands", "hands_normal");
 		
 		setColor(0.8f, 0f, 1f, 1);
 

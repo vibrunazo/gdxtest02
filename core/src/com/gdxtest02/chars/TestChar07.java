@@ -17,7 +17,8 @@ public class TestChar07 extends Char {
 		addAction(new PutDot(1000, 3, 2)).setName("Holy Hand Grenade");
 		addAction(new PutHot(500, 3, 2)).setName("Just a Flesh Wound");
 		
-		setTex("ball02red.png");
+		setBodyPart("arms", "arms_normal");
+		setBodyPart("hands", "hands_normal");
 		
 		setColor(0.15f, 0.15f, 0.15f, 1);
 	}

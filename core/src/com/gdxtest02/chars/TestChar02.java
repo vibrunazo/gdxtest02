@@ -37,6 +37,8 @@ public class TestChar02 extends Char {
 		
 		setColor(0.1f, 1f, 0f, 1);
 		setBodyPart("tail", "tail_normal");
+		setBodyPart("arms", "arms_normal");
+		setBodyPart("hands", "hands_normal");
 		
 		Array<Integer> skillList = new Array<Integer>();
 		skillList.add(3);

@@ -210,6 +210,7 @@ public class AnimRenderer {
 		loadSlot("tail", charSkinData.getTailtype());
 		loadSlot("mouth", charSkinData.getMouthtype());
 		loadSlot("teeth", charSkinData.getTeethtype());
+		loadSlot("arms", charSkinData.getArmstype());
 	}
 
 	/**loads a slot part into a specific slot
@@ -238,6 +239,12 @@ public class AnimRenderer {
 		}
 		if (slot.equals("teeth")) {
 			setAttachmentFromSkin("teeth", skin);
+		}
+		if (slot.equals("arms")) {
+			setAttachmentFromSkin("arm_L", skin);
+			setAttachmentFromSkin("arm_R", skin);
+			setAttachmentFromSkin("forearm_L", skin);
+			setAttachmentFromSkin("forearm_R", skin);
 		}
 
 	}

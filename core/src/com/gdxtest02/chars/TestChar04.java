@@ -32,8 +32,8 @@ public class TestChar04 extends Char {
 //		editDefaultResists("fire", 2);
 //		editDefaultResists("normal", 1);
 		
-		
-		setTex("ball02yell.png");
+		setBodyPart("arms", "arms_normal");
+		setBodyPart("hands", "hands_normal");
 		
 		setColor(1, 1f, 0f, 1);
 

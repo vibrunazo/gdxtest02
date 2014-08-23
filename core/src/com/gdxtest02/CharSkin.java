@@ -8,6 +8,7 @@ public class CharSkin {
 	private String tailtype;
 	private String mouthtype;
 	private String teethtype;
+	private String armstype;
 	private float tailscaley = 1f;
 	private float tailscalex = 1f;
 	
@@ -106,6 +107,20 @@ public class CharSkin {
 	 */
 	public void setTeethtype(String teethtype) {
 		this.teethtype = teethtype;
+	}
+
+	/**
+	 * @return the armstype
+	 */
+	public String getArmstype() {
+		return armstype;
+	}
+
+	/**
+	 * @param armstype the armstype to set
+	 */
+	public void setArmstype(String armstype) {
+		this.armstype = armstype;
 	}
 
 }
