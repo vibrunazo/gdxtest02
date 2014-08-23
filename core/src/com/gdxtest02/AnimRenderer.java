@@ -239,6 +239,7 @@ public class AnimRenderer {
 		}
 		if (slot.equals("teeth")) {
 			setAttachmentFromSkin("teeth", skin);
+			setAttachmentFromSkin("teeth2", skin);
 		}
 		if (slot.equals("arms")) {
 			setAttachmentFromSkin("arm_L", skin);

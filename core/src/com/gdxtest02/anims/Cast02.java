@@ -50,8 +50,8 @@ public class Cast02 extends CharAnim {
 		
 		animation.apply(skeleton, lastTime, animationTime, false, null);
 		if (animationTime < 0.8f) {
-			x = skeleton.findBone("mouth").getWorldX();
-			y = skeleton.findBone("mouth").getWorldY() + 10;
+			x = skeleton.findBone("lip_up").getWorldX();
+			y = ( skeleton.findBone("lip_up").getWorldY() + skeleton.findBone("lip_down").getWorldY() ) / 2;
 		}
 		else {
 //			int flip = 1;

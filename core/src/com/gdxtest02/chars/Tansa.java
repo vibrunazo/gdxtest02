@@ -22,7 +22,7 @@ public class Tansa extends Char {
 		
 		setColor(0.9f, 0.2f, 0.1f, 1);
 		setBodyPart("mouth", "mouth_normal");
-		setBodyPart("teeth", "teeth_01");
+		setBodyPart("teeth", "teeth_02");
 
 	}
 
