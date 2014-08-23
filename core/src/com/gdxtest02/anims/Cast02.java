@@ -8,7 +8,10 @@ import com.gdxtest02.Projectile;
 import com.gdxtest02.projectiles.Projectile01;
 import com.gdxtest02.util.Util;
 
-public class Cast01 extends CharAnim {
+/**Casts from mouth
+ *
+ */
+public class Cast02 extends CharAnim {
 
 	private Animation animation;
 	private Effect effect;
@@ -17,13 +20,13 @@ public class Cast01 extends CharAnim {
 	private Projectile p;
 	private boolean projcreated = false;
 
-	public Cast01() {
+	public Cast02() {
 		super();
 		name = "cast01";
 		
 	}
 	
-	public Cast01 setProjectile(Projectile projectile) {
+	public Cast02 setProjectile(Projectile projectile) {
 		p = projectile;
 		return this;
 	}
@@ -47,8 +50,8 @@ public class Cast01 extends CharAnim {
 		
 		animation.apply(skeleton, lastTime, animationTime, false, null);
 		if (animationTime < 0.8f) {
-			x = skeleton.findBone("hand_R").getWorldX();
-			y = skeleton.findBone("hand_R").getWorldY() + 10;
+			x = skeleton.findBone("mouth").getWorldX();
+			y = skeleton.findBone("mouth").getWorldY() + 10;
 		}
 		else {
 //			int flip = 1;

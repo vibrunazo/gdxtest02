@@ -17,6 +17,9 @@ public class Bob extends Char {
 			.setAnim(new PunchRight01());
 		addAction(new Drain(300, 4)).setName("Absorb");
 		
+		setBodyPart("arms", "arms_normal");
+		setBodyPart("hands", "hands_normal");
+		
 		setColor(0.3f, 0.1f, 0.7f, 1);
 
 	}
