@@ -4,10 +4,12 @@ import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.Char;
 import com.gdxtest02.actions.Dmg;
 import com.gdxtest02.actions.Drain;
+import com.gdxtest02.actions.Neutral;
 import com.gdxtest02.anims.Bite01;
 import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.Cast02;
 import com.gdxtest02.anims.PunchRight01;
+import com.gdxtest02.anims.Taunt02;
 import com.gdxtest02.effects.IceEffect;
 import com.gdxtest02.projectiles.Projectile02;
 
@@ -23,6 +25,8 @@ public class Diras extends Char {
 		.setAnim(new Cast02()
 		.setProjectile(new Projectile02()))
 		.setAnimEffect(new IceEffect());
+		addAction(new Neutral()).setName("Taunt")
+		.setAnim(new Taunt02());
 		
 		setColor(0.3f, 0.5f, 0.9f, 1);
 		setBodyPart("mouth", "mouth_normal");

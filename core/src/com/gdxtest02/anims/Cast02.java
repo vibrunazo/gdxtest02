@@ -14,7 +14,6 @@ import com.gdxtest02.util.Util;
 public class Cast02 extends CharAnim {
 
 	private Animation animation;
-	private Effect effect;
 	private float x;
 	private float y;
 	private Projectile p;
@@ -34,10 +33,7 @@ public class Cast02 extends CharAnim {
 	protected void ini() {
 		
 		animation = sd.findAnimation(name);
-		effect = addAnimEffect();
-		effect.setDuration(1500);
 		projcreated = false;
-		Util.log("ini charanim: " + name + " effect: " + effect + " etype: " + effecttype);
 		
 	}
 
@@ -49,15 +45,11 @@ public class Cast02 extends CharAnim {
 		super.draw();
 		
 		animation.apply(skeleton, lastTime, animationTime, false, null);
-		if (animationTime < 0.8f) {
+		if (animationTime < 0.7f) {
 			x = skeleton.findBone("lip_up").getWorldX();
 			y = ( skeleton.findBone("lip_up").getWorldY() + skeleton.findBone("lip_down").getWorldY() ) / 2;
 		}
 		else {
-//			int flip = 1;
-//			if (skeleton.getFlipX()) flip = -1;
-//			x += delta*800*flip;
-			
 			
 			if (projcreated == false) {
 				projcreated = true;
@@ -68,10 +60,6 @@ public class Cast02 extends CharAnim {
 			}
 		}
 		
-//		log("animtime: " + animationTime + " anim: " + animation + " name: "
-//		+ animation.getName() + " dur: " + animation.getDuration());
-		
-		effect.setPosition(x, y);
 		
 		if (animationTime > animation.getDuration()) {
 			end();
