@@ -26,7 +26,7 @@ public class LevelScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
 		ui = new LevelScreenUI();
-		p1 = p1 = game.getGameState().getPlayer();
+		p1 = game.getGameState().getPlayer();
 //		ui.setupUi(this);
 
 	}
