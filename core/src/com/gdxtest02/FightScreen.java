@@ -266,6 +266,9 @@ public class FightScreen implements Screen {
 		updateUi();
 	}
 
+	/**Tell both players to act and show their casting animations
+	 * 
+	 */
 	private void castSkills() {
 		//preparing
 		if (p1control == CONTROL_AI){
@@ -292,13 +295,14 @@ public class FightScreen implements Screen {
 		setAnimStateP1();
 		pausetime = PAUSE_TIME;
 		updateUi();
+		
+		actActions();
 	}
 	
-	/**Applies damages to both chars
-	 * picks the actions both used and tell them to do their thing
+	/** picks the actions both used and tell them to do their thing
 	 * 
 	 */
-	private void applyDamages() {
+	private void actActions() {
 		
 		
 		int actionidp1 = p1.getActiveActionId();
@@ -319,6 +323,12 @@ public class FightScreen implements Screen {
 		if (actionp1 != null) actionp1.act(p1, p2);
 		if (actionp2 != null) actionp2.act(p2, p1);
 		
+	}
+
+	/**Applies damages to both chars
+	 * 
+	 */
+	public void applyDamages() {
 		p1.updateCooldowns();p2.updateCooldowns();
 		// actually applies the damage done this round by all players
 		p1.applyDmg(); p2.applyDmg();
