@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.gdxtest02.anims.Die01;
 import com.gdxtest02.anims.GetHit01;
 import com.gdxtest02.anims.PunchRight01;
 import com.gdxtest02.effects.ExplosionEffect;
@@ -852,7 +853,8 @@ public class Char implements Cloneable {
 		getAnimRenderer().addCharEffect(e);
 		// only shows GetHit anim if not casting, so it never gets interrupted
 		if (!isUsingDefaultAnim()) return; 
-		getAnimRenderer().setAnim(new GetHit01());
+		if (amIGoingToDie()) getAnimRenderer().setAnim(new Die01()); 
+		else getAnimRenderer().setAnim(new GetHit01());
 	}
 	
 	public Char getClone() {
@@ -891,6 +893,19 @@ public class Char implements Cloneable {
 	public void setLevel(int level) {
 		this.level = level;
 		updateStatsFromLevel();
+	}
+	
+	/**returns true if the Char will die this round, false otherwise
+	 * 
+	 * damages are calculated when skills act(), but are only applied later with
+	 * applyDamages(), call this one method between them to predict whether the
+	 * Char will die by the time damages are applied
+	 * 
+	 * @return
+	 */
+	public boolean amIGoingToDie() {
+		if (Math.abs(dmg) >= hp) return true;
+		else return false;
 	}
 
 }
