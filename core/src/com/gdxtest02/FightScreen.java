@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.chars.TestChar01;
 import com.gdxtest02.chars.TestChar02;
 import com.gdxtest02.gamestate.LevelState;
@@ -55,6 +56,7 @@ public class FightScreen implements Screen {
 	private String a1name;
 	private String a2name;
 	private Char winner;
+	private Array<Integer> animationOrder;
 
 	public FightScreen(GdxTest02 game) {
 		this(game, new TestChar01(), new TestChar02());
@@ -98,6 +100,8 @@ public class FightScreen implements Screen {
 		
 		ui = new FightScreenUI(game, this);
 		ui.setupUi();
+		
+		animationOrder = new Array<Integer>(); 
 		
 		logPlayerDescriptions();
 		updateUi();
@@ -179,22 +183,35 @@ public class FightScreen implements Screen {
 //				" isp1default: " + p1.isUsingDefaultAnim() +
 //				" anim: " + p1.getAnimName() + " danim: " + p1.getDefaultAnimName());
 		if (fightstate.contains("anim")) {
-			updateAnimTime();
-			if (fightstate.contains("p1") && p1.isUsingDefaultAnim()) {
-				// if p1 just ended it's attack anim and is back to default
-				// then start p2 anim
-//				log("p1 using default anim");
-				setAnimStateP2();
-			}
-			
-			if (fightstate.contains("p2") && p2.isUsingDefaultAnim()) {
-				// if p2 just ended it's attack anim and is back to default
-				// then end the anim state
-//				log("p2 using default anim");
-				endAnimState(); // will also check if the fight is over
-				if (isFightOver()) return; // if it is over, stop everything
-				ui.resetActiveActions();
-			}
+			updateAnimations();
+		}
+	}
+
+	public void updateAnimations() {
+		updateAnimTime();
+		if (getPlayerWhoIsPlayingCurrentAnimation().isUsingDefaultAnim()) {
+			// if there's some anim left to play
+			// then play it
+			setAnimStateFromOrder();
+		}
+		if (animationOrder.size == 0) {
+			// if there is no anim left to play
+			// then end the anim state
+			endAnimState(); // will also check if the fight is over
+			if (isFightOver()) return; // if it is over, stop everything
+			ui.resetActiveActions();
+		}
+	}
+	
+	/**Sets the current anim state to either "anim p1"
+	 * or "anim p2" depending on the animationOrder
+	 * 
+	 */
+	private void setAnimStateFromOrder() {
+		if (animationOrder.size > 0) {
+			fightstate = "anim p" + animationOrder.get(0); 
+			getPlayer(animationOrder.get(0)).setAnimToActiveAction();
+			animationOrder.removeIndex(0);
 		}
 	}
 	
@@ -236,9 +253,6 @@ public class FightScreen implements Screen {
 		else {
 			fightstate = "go";
 		}
-		
-		
-//		ui.resetActiveActions();
 	}
 
 
@@ -292,19 +306,39 @@ public class FightScreen implements Screen {
 		
 		if (!areActionsLegal(actionp1, actionp2)) return;
 		
-		setAnimStateP1();
+		actActions();
+		
+		playAnimations();
+		
+	}
+
+	/**Starts playing the casting animations for both players
+	 * 
+	 */
+	public void playAnimations() {
+		animationOrder.clear();
+		// if p2 is going to die this round
+		// then p2 animation goes first
+		// else, p1 always goes first
+		if (p2.amIGoingToDie()) {
+			animationOrder.add(2);
+			animationOrder.add(1);
+		}
+		else {
+			animationOrder.add(1);
+			animationOrder.add(2);
+		}
+		
+		setAnimStateFromOrder();
+//		setAnimStateP1();
 		pausetime = PAUSE_TIME;
 		updateUi();
-		
-		actActions();
 	}
 	
 	/** picks the actions both used and tell them to do their thing
 	 * 
 	 */
 	private void actActions() {
-		
-		
 		int actionidp1 = p1.getActiveActionId();
 		int actionidp2 = p2.getActiveActionId();
 		
@@ -504,7 +538,6 @@ public class FightScreen implements Screen {
 
 
 	/**Returns the Char object for player 1 or 2
-	 * @param gameScreenUI TODO
 	 * @param player 1 or 2
 	 * @return Char p1 or p2
 	 */
@@ -512,6 +545,19 @@ public class FightScreen implements Screen {
 		if (player == 1) return p1;
 		if (player == 2) return p2;
 		return null;
+	}
+	
+	private Char getPlayer(String player) {
+		return getPlayer(Integer.parseInt(player));
+	}
+	
+	/**Assumes fightstate is in the format "anim p1" or "anim p2",
+	 * reads the last char to get the player from that number
+	 * 
+	 * @return can return null
+	 */
+	private Char getPlayerWhoIsPlayingCurrentAnimation() {
+		return getPlayer(fightstate.substring(6, 7));
 	}
 
 
