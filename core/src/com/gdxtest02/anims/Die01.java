@@ -26,9 +26,9 @@ public class Die01 extends CharAnim {
 	public void draw() {
 		super.draw();
 		animation.apply(skeleton, lastTime, animationTime, false, null);
-		if (animationTime > animation.getDuration()) {
-			end();
-		}
+//		if (animationTime > animation.getDuration()) {
+//			end();
+//		}
 	}
 
 }
