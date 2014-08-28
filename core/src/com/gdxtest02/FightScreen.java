@@ -25,6 +25,7 @@ public class FightScreen implements Screen {
 	public static final int CONTROL_AI = 0;
 	public static final int CONTROL_HUMAN = 1;
 	private static final float PAUSE_TIME = 4;
+	private static final float DEATH_TIME = 2;
 	
 	
 
@@ -182,13 +183,20 @@ public class FightScreen implements Screen {
 //		log("UpdateLogic, fightstate: " + fightstate +
 //				" isp1default: " + p1.isUsingDefaultAnim() +
 //				" anim: " + p1.getAnimName() + " danim: " + p1.getDefaultAnimName());
-		if (fightstate.contains("anim")) {
+		if (fightstate.startsWith("anim")) {
 			updateAnimations();
 		}
 	}
 
 	public void updateAnimations() {
 		updateAnimTime();
+		if (!fightstate.startsWith("anim p")) {
+			// if it's not a player animation ("anim p1", or "anim p2")
+			// could be a death anim
+//			endFight();
+			return;
+		}
+		// else, if it is a player animation
 		if (getPlayerWhoIsPlayingCurrentAnimation().isUsingDefaultAnim()) {
 			// if there's some anim left to play
 			// then play it
@@ -246,15 +254,26 @@ public class FightScreen implements Screen {
 	private void endAnimState() {
 		pausetime = 0;
 		ui.setAnimTime(0);
-		applyDamages(); 
+		if (!isFightOver()) applyDamages(); 
 		if (isFightOver()) {
-			endFight();
+			if (fightstate.equals("anim death")) endFight();
+			else {
+				setFinalDeathAnim();
+				pausetime = DEATH_TIME;
+			}
 		}
 		else {
 			fightstate = "go";
 		}
 	}
 
+
+	/**Sets the fightstate to showing the final death anim
+	 * 
+	 */
+	private void setFinalDeathAnim() {
+		fightstate = "anim death";
+	}
 
 	/**this is where the attacks actually happen,
 	 * when both actions are selected, 
