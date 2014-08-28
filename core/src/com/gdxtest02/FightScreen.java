@@ -291,6 +291,7 @@ public class FightScreen implements Screen {
 	public void go() {
 		if (fightstate.equals("paused")) return;
 		if (fightstate.contains("anim")) {
+			checkForDeaths();
 			endAnimState();
 //			return;
 		}
@@ -303,6 +304,15 @@ public class FightScreen implements Screen {
 		}
 		
 		updateUi();
+	}
+
+	/**Check if any player died, and tell them to play
+	 * their death Anim if so
+	 * 
+	 */
+	private void checkForDeaths() {
+		if (p1.amIGoingToDie()) p1.playDeathAnim();
+		if (p2.amIGoingToDie()) p2.playDeathAnim();
 	}
 
 	/**Tell both players to act and show their casting animations

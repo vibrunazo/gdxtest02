@@ -852,13 +852,19 @@ public class Char implements Cloneable {
 	 */
 	public void setGetHit(Effect e) {
 		getAnimRenderer().addCharEffect(e);
-		if (amIGoingToDie()) getAnimRenderer().setAnim(new Die01()); 
+		if (amIGoingToDie()) {
+			playDeathAnim(); 
+		}
 		else {
 			// only shows GetHit anim if not casting, so it never gets interrupted
 			if (!isUsingDefaultAnim()) return; 
 			getAnimRenderer().setAnim(new GetHit01());
 		}
 		
+	}
+
+	public void playDeathAnim() {
+		getAnimRenderer().setAnim(new Die01());
 	}
 	
 	public Char getClone() {
