@@ -198,17 +198,21 @@ public class FightScreen implements Screen {
 		}
 		// else, if it is a player animation
 		if (getPlayerWhoIsPlayingCurrentAnimation().isUsingDefaultAnim()) {
-			// if there's some anim left to play
-			// then play it
+			// if the current player finished its anim
+
+			if (animationOrder.size == 0) {
+				// if there is no anim left to play
+				// then end the anim state
+				endAnimState(); // will also check if the fight is over
+				if (isFightOver()) return; // if it is over, stop everything
+				ui.resetActiveActions();
+			}
+			
+			// if there are any anims left to play, play it
+			// and remove it from the animationOrder
 			setAnimStateFromOrder();
 		}
-		if (animationOrder.size == 0) {
-			// if there is no anim left to play
-			// then end the anim state
-			endAnimState(); // will also check if the fight is over
-			if (isFightOver()) return; // if it is over, stop everything
-			ui.resetActiveActions();
-		}
+		
 	}
 	
 	/**Sets the current anim state to either "anim p1"
@@ -220,6 +224,7 @@ public class FightScreen implements Screen {
 			fightstate = "anim p" + animationOrder.get(0); 
 			getPlayer(animationOrder.get(0)).setAnimToActiveAction();
 			animationOrder.removeIndex(0);
+			pausetime = PAUSE_TIME;
 		}
 	}
 	
@@ -240,7 +245,7 @@ public class FightScreen implements Screen {
 		pausetime -= delta;
 		pausetime = Math.max(pausetime, 0);
 		ui.setAnimTime((int)Math.ceil(pausetime));
-		if (pausetime <= 0) {
+		if (pausetime <= 0 && animationOrder.size == 0) {
 			endAnimState();
 		}
 	}
@@ -248,6 +253,7 @@ public class FightScreen implements Screen {
 	/**ends the anim state, and sets it to the go state, ready waiting for next input
 	 * this happens either when anims finished playing, or when they're interrupted
 	 * by player input
+	 * 
 	 * should only play when BOTH anims end
 	 * 
 	 */

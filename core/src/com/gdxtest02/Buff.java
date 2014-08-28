@@ -153,17 +153,23 @@ public abstract class Buff {
 		}
 	}
 
+	/**Should this Buff show up on screen?
+	 * @return
+	 */
 	public boolean isVisible() {
 		return visible;
 	}
 
-	public void setVisible(boolean visible) {
+	/**Sets if the Buff should show up or not
+	 * @param visible
+	 */
+	public void setVisibility(boolean visible) {
 		this.visible = visible;
 	}
 
 	public void setTarget(Char target) {
 		this.target = target;
-		visible = true;
+//		visible = true;
 		for (Effect effect : effects) {
 			effect.setAttachedChar(target);
 			effect.start();

@@ -236,6 +236,7 @@ public class Char implements Cloneable {
 
 		// loop through all buffs and make their do their thing
 		for (Buff buff : buffs) {
+			buff.setVisibility(true);
 			buff.act(this);
 			//			buff.setVisible(true);
 			buff.incDuration(-1);
