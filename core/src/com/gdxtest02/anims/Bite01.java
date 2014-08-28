@@ -14,13 +14,13 @@ public class Bite01 extends CharAnim {
 	public Bite01() {
 		super();
 		name = "bite01";
-		
 	}
 	
 	@Override
 	protected void ini() {
 		punchAnimation = sd.findAnimation(name);
 		hits = 0;
+		getOwner().setIsattackanim(true);
 	}
 
 	/* (non-Javadoc)
@@ -37,6 +37,7 @@ public class Bite01 extends CharAnim {
 		if (animationTime > 0.55 & hits == 0) {
 			hits++;
 			
+			getOwner().setIsattackanim(false);
 			createHitEffect(new BloodEffect());
 		}
 	}

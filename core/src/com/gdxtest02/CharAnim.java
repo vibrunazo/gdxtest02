@@ -163,4 +163,11 @@ public class CharAnim {
 	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
+	
+	/**
+	 * @return the Char who is performing this Anim
+	 */
+	public Char getOwner() {
+		return renderer.getOwner();
+	}
 }

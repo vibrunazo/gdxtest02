@@ -23,6 +23,7 @@ public class SlashDown01 extends CharAnim {
 	protected void ini() {
 		punchAnimation = sd.findAnimation(name);
 		hits = 0;
+		getOwner().setIsattackanim(true);
 	}
 
 	/* (non-Javadoc)
@@ -38,6 +39,7 @@ public class SlashDown01 extends CharAnim {
 		
 		if (animationTime > 0.55 & hits == 0) {
 			hits++;
+			getOwner().setIsattackanim(false);
 			
 			createHitEffect(new BloodEffect());
 		}

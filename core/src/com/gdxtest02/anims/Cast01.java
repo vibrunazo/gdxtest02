@@ -20,7 +20,6 @@ public class Cast01 extends CharAnim {
 	public Cast01() {
 		super();
 		name = "cast01";
-		
 	}
 	
 	public Cast01 setProjectile(Projectile projectile) {
@@ -34,6 +33,7 @@ public class Cast01 extends CharAnim {
 		effect = addAnimEffect();
 		effect.setDuration(1500);
 		projcreated = false;
+		getOwner().setIsattackanim(true);
 		Util.log("ini charanim: " + name + " effect: " + effect + " etype: " + effecttype);
 		
 	}
@@ -57,6 +57,7 @@ public class Cast01 extends CharAnim {
 			
 			
 			if (projcreated == false) {
+				getOwner().setIsattackanim(false);
 				projcreated = true;
 				if (p == null) p = new Projectile01();
 				addProjectile(x, y, p);

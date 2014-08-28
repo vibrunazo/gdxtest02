@@ -61,6 +61,10 @@ public class Char implements Cloneable {
 	private Char target;
 	private boolean canoverheal;
 	private boolean control;
+	/**True if the Char is on an attack phase of an AtatckAnimation,
+	 * False otherwise 
+	 */
+	private boolean isattackanim;
 
 	private float buffPwMultiplier;
 	private float levelMultiplier;
@@ -122,6 +126,7 @@ public class Char implements Cloneable {
 		spikes = 0;
 		buffPwMultiplier = 1;
 		control = true;
+		setIsattackanim(false);
 		updateAllActions();
 		getAnimRenderer().removeProjectile();
 		getAnimRenderer().setAnimToDefault();
@@ -857,7 +862,7 @@ public class Char implements Cloneable {
 		}
 		else {
 			// only shows GetHit anim if not casting, so it never gets interrupted
-			if (!isUsingDefaultAnim()) return; 
+			if (isIsattackanim()) return; 
 			getAnimRenderer().setAnim(new GetHit01());
 		}
 		
@@ -916,6 +921,20 @@ public class Char implements Cloneable {
 	public boolean amIGoingToDie() {
 		if (Math.abs(dmg) >= hp) return true;
 		else return false;
+	}
+
+	/**
+	 * @return the isattackanim
+	 */
+	public boolean isIsattackanim() {
+		return isattackanim;
+	}
+
+	/**
+	 * @param isattackanim the isattackanim to set
+	 */
+	public void setIsattackanim(boolean isattackanim) {
+		this.isattackanim = isattackanim;
 	}
 
 }

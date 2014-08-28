@@ -26,6 +26,8 @@ public class Castup01 extends CharAnim {
 		
 		effect2 = addAnimEffect();
 		effect2.setDuration(1500);
+		
+		getOwner().setIsattackanim(true);
 	}
 	
 	/* (non-Javadoc)
@@ -46,6 +48,7 @@ public class Castup01 extends CharAnim {
 		animation.apply(skeleton, lastTime, animationTime, false, null);
 		
 		if (animationTime > animation.getDuration()) {
+			getOwner().setIsattackanim(false);
 			end();
 		}
 	}

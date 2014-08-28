@@ -22,7 +22,6 @@ public class Cast02 extends CharAnim {
 	public Cast02() {
 		super();
 		name = "cast01";
-		
 	}
 	
 	public Cast02 setProjectile(Projectile projectile) {
@@ -34,7 +33,7 @@ public class Cast02 extends CharAnim {
 		
 		animation = sd.findAnimation(name);
 		projcreated = false;
-		
+		getOwner().setIsattackanim(true);
 	}
 
 	/* (non-Javadoc)
@@ -52,6 +51,7 @@ public class Cast02 extends CharAnim {
 		else {
 			
 			if (projcreated == false) {
+				getOwner().setIsattackanim(false);
 				projcreated = true;
 				if (p == null) p = new Projectile01();
 				addProjectile(x, y, p);

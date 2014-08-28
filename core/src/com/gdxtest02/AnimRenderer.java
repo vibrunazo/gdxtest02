@@ -114,6 +114,7 @@ public class AnimRenderer {
 	 * @param anim
 	 */
 	public void setAnim(CharAnim anim, Effect effect) {
+		if (owner != null) owner.setIsattackanim(false);
 		// reset particles when changing anim
 		animeffects = new Array<Effect>();
 		if (anim == null || anim.getName().equals("")) {
