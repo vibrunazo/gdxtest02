@@ -16,7 +16,6 @@ public class Dot extends Buff {
 		getEffect().setOffset(0, -30);
 		getEffect().setScale(0.8f);
 	}
-	private Array<String> type;
 
 	@Override
 	public void act(Char self) {

@@ -217,6 +217,24 @@ public class Char implements Cloneable {
 		buff.setTarget(this);
 		buffs.add(buff);
 	}
+	
+	public void removeBuff(Buff buff) {
+		buff.setTarget(this);
+		buffs.removeValue(buff, true);
+	}
+	
+	public void removeBuffType(String type){
+        if (buffs == null){
+        	Array<Buff> buffs = new Array<Buff>();
+        }
+        for (Buff buff : buffs){
+        	if (buff.getType().contains(type, true)){
+        		buffs.removeValue(buff, true);
+        	}
+        }
+        
+        	
+	}
 
 	/**Buffs do whatever they do when this is called.
 	 * Should be called by the game when it's time for buffs to take effect

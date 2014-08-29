@@ -17,6 +17,8 @@ public abstract class Buff {
 	protected int duration;
 	private Array<Effect> effects;
 	protected Char target;
+	protected Array<String> type;
+
 	/**final x position of the effect, after random change
 	 * 
 	 */
@@ -136,6 +138,20 @@ public abstract class Buff {
 		this.duration = duration;
 		return this;
 	}
+	
+	public Array<String> getType(){
+	    if (type == null){
+	    	type.add("normal");
+	    }
+		return type;
+	}
+	
+	public void addType(String bufftype){
+		if (type == null){
+			Array<String> type = new Array<String>();
+		}
+		type.add(bufftype);
+	}
 
 	/**
 	 * @return the power
@@ -244,5 +260,5 @@ public abstract class Buff {
 		this.effectRandomDeltaOffset = effectRandomDeltaOffset;
 	}
 	
-
+	
 }
