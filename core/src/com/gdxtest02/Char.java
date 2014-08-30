@@ -65,6 +65,7 @@ public class Char implements Cloneable {
 	 * False otherwise 
 	 */
 	private boolean isattackanim;
+	private boolean isdeathanim;
 
 	private float buffPwMultiplier;
 	private float levelMultiplier;
@@ -127,6 +128,7 @@ public class Char implements Cloneable {
 		buffPwMultiplier = 1;
 		control = true;
 		setIsattackanim(false);
+		setIsdeathanim(false);
 		updateAllActions();
 		getAnimRenderer().removeProjectile();
 		getAnimRenderer().setAnimToDefault();
@@ -869,6 +871,8 @@ public class Char implements Cloneable {
 	}
 
 	public void playDeathAnim() {
+		if (isPlayingDeathAnim()) return;
+		setIsdeathanim(true);
 		getAnimRenderer().setAnim(new Die01());
 	}
 	
@@ -935,6 +939,20 @@ public class Char implements Cloneable {
 	 */
 	public void setIsattackanim(boolean isattackanim) {
 		this.isattackanim = isattackanim;
+	}
+
+	/**
+	 * @return the isdeathanim
+	 */
+	public boolean isPlayingDeathAnim() {
+		return isdeathanim;
+	}
+
+	/**
+	 * @param isdeathanim the isdeathanim to set
+	 */
+	public void setIsdeathanim(boolean isdeathanim) {
+		this.isdeathanim = isdeathanim;
 	}
 
 }

@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.chars.TestChar01;
 import com.gdxtest02.chars.TestChar02;
 import com.gdxtest02.gamestate.LevelState;
+import com.gdxtest02.util.Util;
 
 import static com.gdxtest02.gamestate.LevelState.*;
 
@@ -264,6 +265,7 @@ public class FightScreen implements Screen {
 		if (isFightOver()) {
 			if (fightstate.equals("anim death")) endFight();
 			else {
+				checkForDeaths();
 				setFinalDeathAnim();
 				pausetime = DEATH_TIME;
 			}
@@ -291,7 +293,7 @@ public class FightScreen implements Screen {
 	public void go() {
 		if (fightstate.equals("paused")) return;
 		if (fightstate.contains("anim")) {
-			checkForDeaths();
+//			checkForDeaths();
 			endAnimState();
 //			return;
 		}
