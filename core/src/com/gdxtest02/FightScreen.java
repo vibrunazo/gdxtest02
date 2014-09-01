@@ -391,8 +391,8 @@ public class FightScreen implements Screen {
 		
 		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
 		
-		if (actionp1 != null) actionp1.act(p1, p2);
-		if (actionp2 != null) actionp2.act(p2, p1);
+		p1.act();
+		p2.act();
 		
 	}
 
