@@ -222,22 +222,22 @@ public class Char implements Cloneable {
 		buff.setTarget(this);
 		buffs.removeValue(buff, true);
 	}
-	
+
 	public void removeBuffType(Array<String> type){
-        if (buffs == null){
-        	Array<Buff> buffs = new Array<Buff>();
-        }
-        for (Buff buff : buffs){
-        	for (String types:type){
-        	
-        		if (buff.getType().contains(types, true)){
-        			buffs.removeValue(buff, true);
-        			
-        	}
-        	}
-        }
-        
-        	
+		if (buffs == null){
+			return;
+		}
+		for (Buff buff : buffs){
+			for (String types:type){
+				
+				if (buff.getType().contains(types, true)){
+					buffs.removeValue(buff, true);
+
+				}
+			}
+		}
+
+
 	}
 
 	/**Buffs do whatever they do when this is called.
