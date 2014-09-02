@@ -21,7 +21,7 @@ public class TestChar05 extends Char {
 		//addAction(new Dmg(50*ratio)).setName("test1");
 		addAction(new PutStun(2, 5)).setName("stun");
 		//addAction(new Dmg(100*ratio, 4)).setName("test2");
-		addAction(new Dispel(0)).setName("dispel");
+		addAction(new Dispel(0)).setName("dispel").addType(new String[] {"fire", "11"});;
 		addAction(new Dmg(200*ratio, 3)).setName("test3");
 		addAction(new Dmg(400*ratio, 3)).setName("test4")
 				.setAnim(new PunchRight01());

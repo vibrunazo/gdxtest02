@@ -141,6 +141,7 @@ public abstract class Buff {
 	
 	public Array<String> getType(){
 	    if (type == null){
+	    	Array<String> type = new Array<String>();
 	    	type.add("normal");
 	    }
 		return type;

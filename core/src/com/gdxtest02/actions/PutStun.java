@@ -26,6 +26,7 @@ public class PutStun extends PutBuffAction {
 		setName("Put Stun");
 		setAnim(new Cast01());
 		setBuff(new Stun(duration));;
+		
 	}
 	
 	public void update() {

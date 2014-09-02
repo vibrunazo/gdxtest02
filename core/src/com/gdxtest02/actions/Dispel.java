@@ -17,7 +17,7 @@ public class Dispel extends Action implements Cloneable {
 
 	@Override
 	protected void go(Char self, Char target) {
-	self.removeBuffType("fire");
+	self.removeBuffType(this.getTypeList());
 	}
 	
 	
