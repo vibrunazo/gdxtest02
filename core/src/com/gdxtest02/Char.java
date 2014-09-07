@@ -223,20 +223,26 @@ public class Char implements Cloneable {
 		buffs.removeValue(buff, true);
 	}
 
-	public void removeBuffType(Array<String> type){
+	public void removeBuffType(Array<String> types){
 		if (buffs == null){
 			return;
 		}
+		// list of buffs that will be removed
+		// this is done because you can't remove the items in the middle of a loop
+		Array<Buff> toremove = new Array<Buff>();
 		for (Buff buff : buffs){
-			for (String types:type){
-				
-				if (buff.getType().contains(types, true)){
-					buffs.removeValue(buff, true);
-
+			buff.getType();
+			for (String type:types){
+				if (buff.getType().contains(type, true)){
+					toremove.add(buff);
 				}
 			}
+			
 		}
-
+		// remove buffs from the list of buffs to be removed
+		for (Buff buff : toremove) {
+			buffs.removeValue(buff, true);
+		}
 
 	}
 

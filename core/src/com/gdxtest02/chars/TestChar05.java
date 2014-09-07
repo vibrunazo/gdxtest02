@@ -2,7 +2,8 @@ package com.gdxtest02.chars;
 
 import com.gdxtest02.AnimRenderer;
 import com.gdxtest02.Char;
-import com.gdxtest02.actions.Dispel;
+import com.gdxtest02.actions.DispelSelfByType;
+import com.gdxtest02.actions.DispelTargetByType;
 import com.gdxtest02.actions.Dmg;
 import com.gdxtest02.actions.Drain;
 import com.gdxtest02.actions.Heal;
@@ -21,7 +22,7 @@ public class TestChar05 extends Char {
 		//addAction(new Dmg(50*ratio)).setName("test1");
 		addAction(new PutStun(2, 5)).setName("stun");
 		//addAction(new Dmg(100*ratio, 4)).setName("test2");
-		addAction(new Dispel(0)).setName("dispel").addType(new String[] {"fire", "11"});;
+		addAction(new DispelSelfByType(0)).setName("dispel").addType(new String[] {"fire", "heal", "normal"});;
 		addAction(new Dmg(200*ratio, 0)).setName("test3");
 		addAction(new Dmg(400*ratio, 3)).setName("test4")
 				.setAnim(new PunchRight01());
