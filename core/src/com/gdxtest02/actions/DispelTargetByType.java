@@ -20,7 +20,7 @@ public class DispelTargetByType extends Action implements Cloneable {
 			String s = getTypeList().get(x);
 			if( sec == null){
 				sec = s;	
-				setDescription("remove effects of the following type: " + sec );
+				setDescription("remove effects of the following type: " + sec + "from the target");
 				/**if there is only one resist type
 				 * "resist by" is written instead of
 				 *  "resists by"
@@ -28,7 +28,7 @@ public class DispelTargetByType extends Action implements Cloneable {
 			}
 			else{			
 				sec = sec+", " + s;
-				setDescription("remove effects of the following types: " + sec);
+				setDescription("remove effects of the following types: " + sec + "from the target");
 			}
 			
 		}
