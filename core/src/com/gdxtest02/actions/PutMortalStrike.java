@@ -18,14 +18,14 @@ public class PutMortalStrike extends PutBuffAction {
 	@Override
 	protected void go(Char self, Char target) {
 		Buff b = getNewBuffInstance();
-		target.addBuff(b.setName("Resist Buff"));
+		target.addBuff(b.setName("Mortal Strike"));
 		target.incHp(-power02, self, getReflect(), this.getTypeList());
 		
 	}
 
 	@Override
 	public void ini() {
-		setName("Put Resist Buff");
+		setName("Put Mortal Strike");
 		setAnim(new Punch01());
 		setBuff(new MortalStrike(power, duration));
 		setReflect(true);
