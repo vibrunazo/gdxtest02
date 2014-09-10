@@ -233,6 +233,7 @@ public class FightScreenUI extends UIBuilder {
 				
 				if (getSelectedActionForPlayer(1) != 0 && getSelectedActionForPlayer(2) != 0) {
 					screen.go();
+					uncheckAllButtonsFromGroup(1);uncheckAllButtonsFromGroup(2);
 				}
 			}
 

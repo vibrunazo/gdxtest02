@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Array;
 import com.gdxtest02.chars.TestChar01;
 import com.gdxtest02.chars.TestChar02;
 import com.gdxtest02.gamestate.LevelState;
+import com.gdxtest02.util.Util;
 
 import static com.gdxtest02.gamestate.LevelState.*;
 
@@ -197,14 +198,14 @@ public class FightScreen implements Screen {
 			return;
 		}
 		// else, if it is a player animation
-		if (getPlayerWhoIsPlayingCurrentAnimation().isUsingDefaultAnim()) {
+		Char p = getPlayerWhoIsPlayingCurrentAnimation();
+		if (p.isUsingDefaultAnim()
+				|| p.isPlayingDeathAnim()) {
 			// if the current player finished its anim
 
-			if (animationOrder.size == 0) {
-				// if there is no anim left to play
-				// then end the anim state
-				endAnimState(); // will also check if the fight is over
+			if (animationOrder.size == 0 || p.isPlayingDeathAnim()) {
 				if (isFightOver()) return; // if it is over, stop everything
+				endAnimState();
 				ui.resetActiveActions();
 			}
 			
@@ -228,16 +229,6 @@ public class FightScreen implements Screen {
 		}
 	}
 	
-	private void setAnimStateP1() {
-		fightstate = "anim p1";
-		p1.setAnimToActiveAction();
-	}
-	
-	private void setAnimStateP2() {
-		fightstate = "anim p2";
-		p2.setAnimToActiveAction();
-	}
-
 	/**When either one of both anims are updated
 	 * 
 	 */
@@ -264,6 +255,7 @@ public class FightScreen implements Screen {
 		if (isFightOver()) {
 			if (fightstate.equals("anim death")) endFight();
 			else {
+				checkForDeaths();
 				setFinalDeathAnim();
 				pausetime = DEATH_TIME;
 			}
@@ -291,19 +283,25 @@ public class FightScreen implements Screen {
 	public void go() {
 		if (fightstate.equals("paused")) return;
 		if (fightstate.contains("anim")) {
-			checkForDeaths();
-			endAnimState();
-//			return;
+			skipAnimState();
 		}
 		if (!isFightOver()) {
 			ui.setActiveActionsForPlayers();
 			castSkills();
 		}
-		else {
-			endFight();
-		}
 		
 		updateUi();
+		
+		if (isFightOver()) {
+			endFight();
+		}
+	}
+
+	/**Skips the animation state
+	 * 
+	 */
+	public void skipAnimState() {
+		endAnimState();
 	}
 
 	/**Check if any player died, and tell them to play
@@ -389,8 +387,8 @@ public class FightScreen implements Screen {
 		
 		// each player uses their skill, this won't do actual damage, but record how much dmg they want to do this round
 		
-		if (actionp1 != null) actionp1.act(p1, p2);
-		if (actionp2 != null) actionp2.act(p2, p1);
+		p1.act();
+		p2.act();
 		
 	}
 
@@ -503,7 +501,7 @@ public class FightScreen implements Screen {
 //		return 1;
 //	}
 
-	/**Update UI elements
+	/**Update UI elements, log player stats to the screen
 	 * 
 	 */
 	private void updateUi() {
@@ -527,13 +525,6 @@ public class FightScreen implements Screen {
 
 	private void logPlayerStats(Char c) {
 		ui.logToConsole("Player " + c.getName() + ": " + c.getHp() + "/" + c.getMaxhp() + "hp. Buffs: " + c.printBuffs());
-	}
-
-	/**Logs text to Gdx.app.log()
-	 * @param text
-	 */
-	private void log(String text) {
-		Gdx.app.log("gdxtest", text);
 	}
 
 	@Override

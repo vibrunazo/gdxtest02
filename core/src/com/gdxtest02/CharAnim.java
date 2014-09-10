@@ -120,7 +120,7 @@ public class CharAnim {
 //		if (renderer.getNumProj() > 0) return null;
 		if (p == null) p = new Projectile02();
 		p.setPos(x, y);
-		p.setEffecttype(getNewEffect());
+//		p.setEffecttype(getNewEffect());
 		renderer.createProjectile(p);
 		return p;
 	}

@@ -53,7 +53,12 @@ public class Cast02 extends CharAnim {
 			if (projcreated == false) {
 				getOwner().setIsattackanim(false);
 				projcreated = true;
-				if (p == null) p = new Projectile01();
+				if (p == null) {
+					p = new Projectile01();
+				}
+				else {
+					p = p.getClone();
+				}
 				addProjectile(x, y, p);
 //				p.setSpeedx(800);
 				p.setFlipX(skeleton.getFlipX()) ;

@@ -25,7 +25,6 @@ public class Projectile {
 	private Char source;
 	private Char target;
 	private AnimRenderer renderer;
-	private Effect effecttype;
 	protected Effect effect;
 	private boolean flipX;
 	private int flipXFactor;
@@ -122,14 +121,6 @@ public class Projectile {
 //		log("proj draw, skel: " + skeleton);
 	}
 
-	public Effect getEffecttype() {
-		return effecttype;
-	}
-
-	public void setEffecttype(Effect effecttype) {
-		this.effecttype = effecttype;
-	}
-
 	public float getSpeedx() {
 		return speedx;
 	}
@@ -166,6 +157,17 @@ public class Projectile {
 	private void setFlipXFactor() {
 		if (flipX) flipXFactor = -1;
 		else flipXFactor = 1;
+	}
+	
+	public Projectile getClone() {
+		Projectile c = new Projectile();
+		c.setDuration(getDuration());
+		c.setFlipX(this.flipX);
+		c.setSource(getSource());
+		c.setTarget(getTarget());
+		c.setSpeedx(speedx);
+		c.setSpeedy(speedy);
+		return c;
 	}
 
 }

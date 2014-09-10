@@ -65,6 +65,8 @@ public class Char implements Cloneable {
 	 * False otherwise 
 	 */
 	private boolean isattackanim;
+	private boolean isdeathanim;
+	private boolean actedthisround;
 
 	private float buffPwMultiplier;
 	private float levelMultiplier;
@@ -127,6 +129,7 @@ public class Char implements Cloneable {
 		buffPwMultiplier = 1;
 		control = true;
 		setIsattackanim(false);
+		setIsdeathanim(false);
 		updateAllActions();
 		getAnimRenderer().removeProjectile();
 		getAnimRenderer().setAnimToDefault();
@@ -394,6 +397,7 @@ public class Char implements Cloneable {
 	public int applyDmg() {
 		int delta = dmg; // sets current damage to a temporary value
 		dmg = 0; // then reset the current damage
+		setActedThisRound(false);
 		if (delta < 0) {
 			if (-delta < hp) {
 				return hp += delta;
@@ -897,6 +901,9 @@ public class Char implements Cloneable {
 	}
 
 	public void playDeathAnim() {
+		
+		if (isPlayingDeathAnim()) return;
+		setIsdeathanim(true);
 		getAnimRenderer().setAnim(new Die01());
 	}
 	
@@ -947,7 +954,7 @@ public class Char implements Cloneable {
 	 * @return
 	 */
 	public boolean amIGoingToDie() {
-		if (Math.abs(dmg) >= hp) return true;
+		if (Math.abs(dmg) >= hp && getActedthisround() || hp == 0) return true;
 		else return false;
 	}
 
@@ -963,6 +970,39 @@ public class Char implements Cloneable {
 	 */
 	public void setIsattackanim(boolean isattackanim) {
 		this.isattackanim = isattackanim;
+	}
+
+	/**
+	 * @return the isdeathanim
+	 */
+	public boolean isPlayingDeathAnim() {
+		return isdeathanim;
+	}
+
+	/**
+	 * @param isdeathanim the isdeathanim to set
+	 */
+	public void setIsdeathanim(boolean isdeathanim) {
+		this.isdeathanim = isdeathanim;
+	}
+
+	public void setActedThisRound(boolean b) {
+		actedthisround = b;
+	}
+
+	/**
+	 * @return the actedthisround
+	 */
+	public boolean getActedthisround() {
+		return actedthisround;
+	}
+
+	public void act() {
+		setActedThisRound(true);
+		Action action = getActiveAction();
+		if (action != null) {
+			action.act(this, target);
+		}
 	}
 
 }
