@@ -5,6 +5,7 @@ import static com.gdxtest02.gamestate.GameState.MODE_STORY;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.gdxtest02.chars.Bob;
+import com.gdxtest02.chars.Goala;
 import com.gdxtest02.chars.Linzer;
 import com.gdxtest02.chars.Pasu;
 import com.gdxtest02.chars.Tansa;
@@ -32,6 +33,7 @@ public class CharBuilder {
 	public static final int CHAR_03 = 3;
 	public static final int CHAR_04 = 4;
 	public static final int CHAR_05 = 5;
+	public static final int CHAR_06 = 6;
 	
 	public static final int TEST_CHAR_01 = 6661;
 	public static final int TEST_CHAR_02 = 6662;
@@ -50,6 +52,7 @@ public class CharBuilder {
 		case CHAR_03: c = new Diras();break;
 		case CHAR_04: c = new Linzer();break;
 		case CHAR_05: c = new Pasu();break;
+		case CHAR_06: c = new Goala();break;
 		case TEST_CHAR_01: c = new TestChar01();break;
 		case TEST_CHAR_02: c = new TestChar02();break;
 		case TEST_CHAR_03: c = new TestChar03();break;
@@ -107,6 +110,7 @@ public class CharBuilder {
 		chars.add(build(CHAR_03, 2));
 		chars.add(build(CHAR_04, 2));
 		chars.add(build(CHAR_05, 2));
+		chars.add(build(CHAR_06, 2));
 		return chars;
 	}
 }

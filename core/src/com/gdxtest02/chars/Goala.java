@@ -10,26 +10,31 @@ import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.Cast02;
 import com.gdxtest02.anims.PunchRight01;
 import com.gdxtest02.anims.Taunt02;
+import com.gdxtest02.effects.BlueEffect;
+import com.gdxtest02.effects.FireEffect;
 import com.gdxtest02.effects.IceEffect;
 import com.gdxtest02.projectiles.Projectile02;
+import com.gdxtest02.projectiles.ProjectileBlue01;
 
-public class Diras extends Char {
+public class Goala extends Char {
 	
-	public Diras() {
+	public Goala() {
 		super();
 		
-		setName("Diras");
+		setName("Goala");
 		
-		addAction(new Dmg(80)).setName("Bite").setAnim(new Bite01());
-		addAction(new Dmg(350, 2)).setName("Frost Bolt").setReflect(false)
+		addAction(new Dmg(120)).setName("Bite").setAnim(new Bite01());
+		addAction(new Dmg(150, 1)).setName("Water Bolt").setReflect(false)
 		.setAnim(new Cast02()
-		.setProjectile(new Projectile02()))
-		.setAnimEffect(new IceEffect());
+		.setProjectile(new ProjectileBlue01()))
+		.setAnimEffect(new BlueEffect());
 		addAction(new Neutral()).setName("Taunt")
 		.setAnim(new Taunt02());
 		
-		setColor(0.6f, 0.7f, 0.9f, 1);
+		setColor(0.2f, 0.3f, 0.8f, 1);
 		setBodyPart("mouth", "mouth_normal");
+		setBodyPart("arms", "arms_normal");
+		setBodyPart("hands", "hands_normal");
 
 	}
 
