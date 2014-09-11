@@ -1,5 +1,7 @@
 package com.gdxtest02;
 
+import java.lang.reflect.Constructor;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -160,14 +162,23 @@ public class Projectile {
 	}
 	
 	public Projectile getClone() {
-		Projectile c = new Projectile();
-		c.setDuration(getDuration());
-		c.setFlipX(this.flipX);
-		c.setSource(getSource());
-		c.setTarget(getTarget());
-		c.setSpeedx(speedx);
-		c.setSpeedy(speedy);
-		return c;
+		try {
+			Constructor<? extends Projectile> constructor = this.getClass().getConstructor();
+			Object clone = constructor.newInstance();
+			Projectile c = (Projectile)clone;
+			
+			c.setDuration(getDuration());
+			c.setFlipX(this.flipX);
+			c.setSource(getSource());
+			c.setTarget(getTarget());
+			c.setSpeedx(speedx);
+			c.setSpeedy(speedy);
+			
+			return c;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
