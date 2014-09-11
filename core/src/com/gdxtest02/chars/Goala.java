@@ -25,7 +25,7 @@ public class Goala extends Char {
 		
 		addAction(new Dmg(120)).setName("Bite").setAnim(new Bite01());
 		addAction(new Dmg(150, 1)).setName("Water Bolt").setReflect(false)
-		.setAnim(new Cast02()
+		.setAnim(new Cast01()
 		.setProjectile(new ProjectileBlue01()))
 		.setAnimEffect(new BlueEffect());
 		addAction(new Neutral()).setName("Taunt")
