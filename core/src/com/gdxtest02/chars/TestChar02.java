@@ -32,7 +32,7 @@ public class TestChar02 extends Char {
 		addAction(new PutSpikes(300, 0, 5)).setName("Flame Shield");
 //		actions.add(new PutHot(100, 5, 5).setName("Rejuv"));
 		editDefaultResists("fire", 2);
-		editDefaultResists("normal", 1);
+		editDefaultResists("normal", 0);
 
 		
 		setColor(0.1f, 1f, 0f, 1);

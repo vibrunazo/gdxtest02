@@ -224,11 +224,22 @@ public class Char implements Cloneable {
 	 */
 	public void addBuff(Buff buff) {
 		buff.setTarget(this);
+	
+		for (String type:buff.getType()){
+			  if (actualResists.get(type)== null){
+				  if(actualResists.get("all") == 0)
+					  return;
+			  }
+			  else
+				  if (actualResists.get(type) == 0)
+					  return;
+		}
 		buffs.add(buff);
+		
 	}
 	
 	public void removeBuff(Buff buff) {
-		buff.setTarget(this);
+		buff.setTarget(this);	
 		buffs.removeValue(buff, true);
 	}
 
