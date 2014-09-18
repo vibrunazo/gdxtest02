@@ -87,4 +87,11 @@ public class PutBuffAction extends Action {
 		
 	}
 
+	/**
+	 * @return the buffdummy
+	 */
+	public Buff getBuffdummy() {
+		return buffdummy;
+	}
+
 }

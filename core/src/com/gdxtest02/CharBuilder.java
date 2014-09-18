@@ -72,9 +72,7 @@ public class CharBuilder {
 	
 	public static Char build(int name, int level) {
 		Char c = build(name);
-		for (int i = 0; i < level; i++) {
-			c.levelUp();
-		}
+		c.setLevel(level);
 		return c;
 	}
 	

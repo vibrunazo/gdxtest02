@@ -11,6 +11,7 @@ import com.gdxtest02.anims.Cast01;
 import com.gdxtest02.anims.PunchRight01;
 import com.gdxtest02.anims.TailWhip01;
 import com.gdxtest02.anims.Taunt01;
+import com.gdxtest02.buffs.BuffResist;
 
 public class Neshaga extends Char {
 	
@@ -26,8 +27,10 @@ public class Neshaga extends Char {
 		PutResistBuff a = new PutResistBuff(0.9f, 5, 5);
 		a.setName("rock");
 		a.addBuffType((new String[] {"fire", "normal"}));
-		a.addType(new String[] {"rock"});
 		addAction(a);
+		BuffResist b = (BuffResist) a.getBuffdummy();
+		b.addType("rock");
+		a.setBuff(b);
 		
 		
 		setColor(0.9f, 0.8f, 0.8f, 1);
