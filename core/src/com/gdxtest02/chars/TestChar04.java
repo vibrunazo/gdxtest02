@@ -22,12 +22,12 @@ public class TestChar04 extends Char {
 		//addAction(new Dmg(200*ratio, 1)).setName("meh");
 		PutResistBuff b = new PutResistBuff(0.5f ,5, 5);
 		b.setName("resist power");
-//		b.addType("buff");
+		b.addType(new String[] {"satan", "fire"});
 		b.addBuffType((new String[] {"falcon", "satan", "fire", "normal"}));
 		addAction(b);
 		//addAction(new PutDot(50*ratio, 0, 6)).setName("a dot");
 		addAction(new PutMortalStrike(50, 0, 6, 50)).setName("MS");
-		addAction(new PutHot(30*ratio, 3, 6)).setName("a hot");
+		addAction(new PutHot(30*ratio, 3, 6)).setName("a hot").addType((new String[] {"falcon", "satan", "fire", "normal"}));
 //		actions.add(new Dmg(400, 3).setName("hihihi"));
 //		editDefaultResists("fire", 2);
 //		editDefaultResists("normal", 1);

@@ -28,12 +28,13 @@ public class Goala extends Char {
 			.addType(new String[] {"normal", "melee"});
 //		addAction(new Dmg(150, 1))
 //		addAction(new DispelTargetByType(0)).setName("dispel").addType(new String[] {"fire", "heal", "normal"});;
-		addAction(new DispelTargetByType(2))
+		addAction(new DispelTargetByType(3))
 		.setName("Water Bolt").setReflect(false)
 		.setAnim(new Cast01()
 		.setProjectile(new ProjectileBlue01()))
 		.setAnimEffect(new BlueEffect())
-		.addType(new String[] {"rock", "fire"});
+		.addType(new String[] {"fire", "rock"});
+		
 		addAction(new Neutral()).setName("Taunt")
 		.setAnim(new Taunt02());
 		

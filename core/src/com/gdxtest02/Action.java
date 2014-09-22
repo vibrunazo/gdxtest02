@@ -40,6 +40,11 @@ public abstract class Action {
 //		ini();
 	}
 	
+	public Action(int cooldown) {
+		this.cooldown = cooldown;
+//		ini();
+	}
+	
 	public Action(float value, int cooldown, int duration) {
 		power = (float) /*Math.ceil*/(value);
 		basepower = power;

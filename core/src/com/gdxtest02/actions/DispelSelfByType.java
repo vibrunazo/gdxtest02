@@ -44,7 +44,7 @@ public class DispelSelfByType extends Action implements Cloneable {
 		super();
 	}
 	
-	public DispelSelfByType( int cooldown) {
+	public DispelSelfByType(int cooldown) {
 		super(cooldown);
 	}
 	
