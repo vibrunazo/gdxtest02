@@ -49,7 +49,10 @@ public abstract class Buff {
 	private static int id = 0;
 	private int thisid = 0;
 	private boolean visible = false;
+	private boolean isonfirstround = true;
 	
+	
+
 	public Buff() {
 		setPower(DEFAULT_POWER);
 		setDuration(DEFAULT_DURATION);
@@ -265,6 +268,20 @@ public abstract class Buff {
 	 */
 	public void setEffectRandomDeltaOffset(float effectRandomDeltaOffset) {
 		this.effectRandomDeltaOffset = effectRandomDeltaOffset;
+	}
+	
+	/**
+	 * @return the isonfirstround
+	 */
+	public boolean getIsonfirstround() {
+		return isonfirstround;
+	}
+
+	/**
+	 * @param isonfirstround the isonfirstround to set
+	 */
+	public void setIsonfirstround(boolean isonfirstround) {
+		this.isonfirstround = isonfirstround;
 	}
 	
 	
