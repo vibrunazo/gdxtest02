@@ -25,9 +25,9 @@ public class Neshaga extends Char {
 		.setAnim(new PunchRight01());
 		
 		PutResistBuff a = new PutResistBuff(0.9f, 5, 5);
-		a.setName("rock");
 		a.addBuffType((new String[] {"fire", "normal"}));
 		addAction(a);
+		a.setName("rock");
 		BuffResist b = (BuffResist) a.getBuffdummy();
 		b.addType("rock");
 		a.setBuff(b);
