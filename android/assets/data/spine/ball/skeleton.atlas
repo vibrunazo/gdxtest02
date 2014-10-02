@@ -1,132 +1,145 @@
 
 skeleton.png
-size: 1022,977
+size: 1024,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 data/ballbase01
   rotate: false
-  xy: 2, 381
+  xy: 341, 743
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 data/balleyes01
   rotate: false
-  xy: 341, 721
+  xy: 599, 743
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
+data/cannon01
+  rotate: false
+  xy: 166, 300
+  size: 200, 101
+  orig: 200, 101
+  offset: 0, 0
+  index: -1
 data/eyelid01
   rotate: false
-  xy: 599, 796
-  size: 256, 128
-  orig: 256, 256
-  offset: 0, 128
-  index: -1
-data/eyelid02
-  rotate: false
-  xy: 341, 619
-  size: 250, 100
-  orig: 256, 256
-  offset: 3, 156
-  index: -1
-data/eyelid03
-  rotate: false
-  xy: 593, 612
-  size: 238, 80
-  orig: 256, 256
-  offset: 9, 176
-  index: -1
-data/eyelid04
-  rotate: true
-  xy: 260, 419
-  size: 218, 60
-  orig: 256, 256
-  offset: 19, 196
-  index: -1
-data/eyelid05
-  rotate: false
-  xy: 322, 433
-  size: 186, 40
-  orig: 256, 256
-  offset: 35, 216
-  index: -1
-data/eyelid06
-  rotate: false
-  xy: 2, 24
-  size: 138, 20
-  orig: 256, 256
-  offset: 59, 236
-  index: -1
-data/loweyelid01
-  rotate: true
-  xy: 140, 123
-  size: 256, 128
+  xy: 166, 403
+  size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-data/loweyelid02
+data/eyelid02
   rotate: false
-  xy: 599, 694
-  size: 250, 100
+  xy: 424, 422
+  size: 256, 256
   orig: 256, 256
-  offset: 3, 0
+  offset: 0, 0
   index: -1
-data/loweyelid03
-  rotate: false
-  xy: 322, 537
-  size: 238, 80
-  orig: 256, 256
-  offset: 9, 0
-  index: -1
-data/loweyelid04
-  rotate: false
-  xy: 322, 475
-  size: 218, 60
-  orig: 256, 256
-  offset: 19, 0
-  index: -1
-data/loweyelid05
-  rotate: false
-  xy: 322, 391
-  size: 186, 40
-  orig: 256, 256
-  offset: 35, 0
-  index: -1
-data/loweyelid06
+data/eyelid03
   rotate: false
   xy: 2, 2
-  size: 138, 20
+  size: 256, 256
   orig: 256, 256
-  offset: 59, 0
+  offset: 0, 0
+  index: -1
+data/eyelid04
+  rotate: false
+  xy: 682, 422
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+data/eyelid05
+  rotate: false
+  xy: 260, 42
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+data/eyelid06
+  rotate: false
+  xy: 518, 164
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
   index: -1
 data/mouth08
   rotate: false
-  xy: 2, 639
+  xy: 2, 661
   size: 337, 338
   orig: 337, 338
   offset: 0, 0
   index: -1
 data/scythe01
   rotate: false
-  xy: 2, 46
-  size: 136, 333
+  xy: 2, 260
+  size: 162, 399
   orig: 162, 399
-  offset: 13, 33
+  offset: 0, 0
   index: -1
 data/tail01
   rotate: false
-  xy: 599, 926
-  size: 337, 51
+  xy: 341, 680
+  size: 403, 61
   orig: 403, 61
-  offset: 33, 5
+  offset: 0, 0
   index: -1
 data/tooth01
-  rotate: true
-  xy: 938, 935
+  rotate: false
+  xy: 857, 915
   size: 42, 84
   orig: 42, 84
+  offset: 0, 0
+  index: -1
+
+skeleton2.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+data/loweyelid01
+  rotate: false
+  xy: 2, 518
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+data/loweyelid02
+  rotate: false
+  xy: 2, 260
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+data/loweyelid03
+  rotate: false
+  xy: 260, 518
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+data/loweyelid04
+  rotate: false
+  xy: 2, 2
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+data/loweyelid05
+  rotate: false
+  xy: 260, 260
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+data/loweyelid06
+  rotate: false
+  xy: 518, 518
+  size: 256, 256
+  orig: 256, 256
   offset: 0, 0
   index: -1

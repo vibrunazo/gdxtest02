@@ -40,7 +40,7 @@ public class Goala extends Char {
 		
 		setColor(0.2f, 0.3f, 0.8f, 1);
 		setBodyPart("mouth", "mouth_normal");
-		setBodyPart("arms", "arms_normal");
+		setBodyPart("arms", "arms_cannon");
 //		setBodyPart("hands", "hands_normal");
 
 	}
