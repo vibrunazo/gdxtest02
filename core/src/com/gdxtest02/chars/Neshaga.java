@@ -17,7 +17,7 @@ public class Neshaga extends Char {
 	
 	public Neshaga() {
 		super();
-
+       
 		setName("Neshaga");
 		
 		addAction(new Dmg(120)).setName("Punch");
@@ -31,7 +31,7 @@ public class Neshaga extends Char {
 		BuffResist b = (BuffResist) a.getBuffdummy();
 		b.addType("rock");
 		a.setBuff(b);
-		
+		addPassiveBuff(b);
 		
 		setColor(0.9f, 0.8f, 0.8f, 1);
 		setBodyPart("arms", "arms_normal");

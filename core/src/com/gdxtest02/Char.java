@@ -57,6 +57,11 @@ public class Char implements Cloneable {
 	 * so they don't make effect when first applied, only 1 round later
 	 */
 	private Array<Buff> newbuffs;
+	
+	/**List of buffs to be added at the beginning of the match, 
+	 * these will be moved to the main buffs list at the start of the first round
+	 */
+	private Array<Buff> passivebuffs;
 	private Balance balance;
 	private Char target;
 	private boolean canoverheal;
@@ -104,8 +109,11 @@ public class Char implements Cloneable {
 		level = 1;
 		levelMultiplier = 1;
 		buffPwMultiplier = 1;
+		passivebuffs = new Array<Buff>();
 
 		resetStats();
+	
+	
 	}
 	
 	/**Reloads textures and assets
@@ -118,12 +126,14 @@ public class Char implements Cloneable {
 	 * 
 	 */
 	public void resetStats() {
+		
 		this.hp = maxhp;
 		this.activeAction = 0;
 		dmg = 0;
 		actualResists.clear();
 		actualResists.putAll(defaultResists);
 		buffs = new Array<Buff>();
+		buffs.addAll(passivebuffs);
 		newbuffs = new Array<Buff>();
 		spikes = 0;
 		buffPwMultiplier = 1;
@@ -235,6 +245,14 @@ public class Char implements Cloneable {
 					  return;
 		}
 		buffs.add(buff);
+		
+	}
+	
+	
+	
+	public void addPassiveBuff(Buff buff){
+		buff.setTarget(this);
+		passivebuffs.add(buff);
 		
 	}
 	
@@ -1016,5 +1034,7 @@ public class Char implements Cloneable {
 			action.act(this, target);
 		}
 	}
+	
+	
 
 }
